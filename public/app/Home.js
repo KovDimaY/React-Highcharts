@@ -169,7 +169,19 @@ class Home extends Component {
 		return(
 			<div>
 
-                <Header />
+                <div className="masthead">
+                <h3 className="text-muted">Project name</h3>
+                    <nav>
+                      <ul className="nav nav-justified">
+                        <li className="active"><a href="/">Home</a></li>
+                        <li><a href="/line">Line Chart</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Downloads</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                      </ul>
+                    </nav>
+                  </div>
 
 				<h3>Bar:</h3>
 

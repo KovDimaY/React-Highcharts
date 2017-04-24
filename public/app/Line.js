@@ -175,8 +175,8 @@ class Line extends Component {
                   <ul className="nav nav-justified">
                     <li><a href="/">Home</a></li>
                     <li className="active"><a href="/line">Line Chart</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Downloads</a></li>
+                    <li><a href="#">Bar Chart</a></li>
+                    <li><a href="#">Pie Chart</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
                   </ul>
