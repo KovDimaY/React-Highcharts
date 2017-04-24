@@ -3,11 +3,13 @@ var path = require('path')
 
 module.exports = {
     entry: {
-        app: './public/app/App.js'
+        home: './public/app/Home.js',
+        line: './public/app/Line.js'
     },
     output:{
-        filename: 'public/build/bundle.js',
-        sourceMapFilename: 'public/build/bundle.map'
+        path: path.join(__dirname, "public/build"),
+        filename: "[name].entry.js",
+        sourceMapFilename: 'bundle.map'
     },
     devtool: '#source-map',
     module: {
