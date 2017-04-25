@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET line page. */
 router.get('/', function(req, res, next) {
-  res.render('line', { title: 'React Line Chart' });
+  res.render('gauge', { title: 'React Gauge Chart' });
 });
 
 module.exports = router;

@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET line page. */
+/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('line', { title: 'React Line Chart' });
+  res.render('pie', { title: 'React Pie Chart' });
 });
 
 module.exports = router;

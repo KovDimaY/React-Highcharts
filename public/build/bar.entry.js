@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 192);
+/******/ 	return __webpack_require__(__webpack_require__.s = 187);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22437,326 +22437,11 @@ var BarChart = function (_React$Component) {
 exports.default = BarChart;
 
 /***/ }),
-/* 183 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(32);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _highcharts = __webpack_require__(181);
-
-var _highcharts2 = _interopRequireDefault(_highcharts);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var LineChart = function (_React$Component) {
-    _inherits(LineChart, _React$Component);
-
-    function LineChart() {
-        _classCallCheck(this, LineChart);
-
-        return _possibleConstructorReturn(this, (LineChart.__proto__ || Object.getPrototypeOf(LineChart)).apply(this, arguments));
-    }
-
-    _createClass(LineChart, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.chart = new _highcharts2.default[this.props.type || "Chart"](this.refs.chart, this.props.options);
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            this.chart.destroy();
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-
-            var lineStyle = {
-                width: '60%'
-            };
-
-            return _react2.default.createElement('div', { ref: 'chart', style: lineStyle });
-        }
-    }]);
-
-    return LineChart;
-}(_react2.default.Component);
-
-exports.default = LineChart;
-
-/***/ }),
-/* 184 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(32);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _highcharts = __webpack_require__(181);
-
-var _highcharts2 = _interopRequireDefault(_highcharts);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var LiveChart = function (_React$Component) {
-    _inherits(LiveChart, _React$Component);
-
-    function LiveChart() {
-        _classCallCheck(this, LiveChart);
-
-        return _possibleConstructorReturn(this, (LiveChart.__proto__ || Object.getPrototypeOf(LiveChart)).apply(this, arguments));
-    }
-
-    _createClass(LiveChart, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.chart = new _highcharts2.default[this.props.type || "Chart"](this.refs.chart, this.props.options);
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            this.chart.destroy();
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-
-            var barStyle = {
-                width: '80%'
-            };
-
-            return _react2.default.createElement('div', { ref: 'chart', style: barStyle });
-        }
-    }]);
-
-    return LiveChart;
-}(_react2.default.Component);
-
-exports.default = LiveChart;
-
-/***/ }),
-/* 185 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(32);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _highcharts = __webpack_require__(181);
-
-var _highcharts2 = _interopRequireDefault(_highcharts);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var PieChart = function (_React$Component) {
-    _inherits(PieChart, _React$Component);
-
-    function PieChart(props) {
-        _classCallCheck(this, PieChart);
-
-        var _this = _possibleConstructorReturn(this, (PieChart.__proto__ || Object.getPrototypeOf(PieChart)).call(this, props));
-
-        _this.chart = undefined;
-        return _this;
-    }
-
-    _createClass(PieChart, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.chart = new _highcharts2.default[this.props.type || "Chart"](chart, title, yAxis, plotOptions, series);
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            this.chart.destroy();
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-
-            var barStyle = {
-                width: '80%'
-            };
-
-            return _react2.default.createElement('div', { ref: 'chart', style: barStyle });
-        }
-    }]);
-
-    return PieChart;
-}(_react2.default.Component);
-
-exports.default = PieChart;
-
-/***/ }),
-/* 186 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(32);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Header = function (_React$Component) {
-	_inherits(Header, _React$Component);
-
-	function Header() {
-		_classCallCheck(this, Header);
-
-		return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
-	}
-
-	_createClass(Header, [{
-		key: "render",
-		value: function render() {
-			return _react2.default.createElement(
-				"div",
-				{ className: "masthead" },
-				_react2.default.createElement(
-					"h3",
-					{ className: "text-muted" },
-					"Project name"
-				),
-				_react2.default.createElement(
-					"nav",
-					null,
-					_react2.default.createElement(
-						"ul",
-						{ className: "nav nav-justified" },
-						_react2.default.createElement(
-							"li",
-							{ className: "active" },
-							_react2.default.createElement(
-								"a",
-								{ href: "/" },
-								"Home"
-							)
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							_react2.default.createElement(
-								"a",
-								{ href: "/line" },
-								"Line Chart"
-							)
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							_react2.default.createElement(
-								"a",
-								{ href: "#" },
-								"Services"
-							)
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							_react2.default.createElement(
-								"a",
-								{ href: "#" },
-								"Downloads"
-							)
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							_react2.default.createElement(
-								"a",
-								{ href: "#" },
-								"About"
-							)
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							_react2.default.createElement(
-								"a",
-								{ href: "#" },
-								"Contact"
-							)
-						)
-					)
-				)
-			);
-		}
-	}]);
-
-	return Header;
-}(_react2.default.Component);
-
-exports.default = Header;
-
-/***/ }),
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22772,25 +22457,9 @@ var _reactDom = __webpack_require__(81);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _header = __webpack_require__(186);
-
-var _header2 = _interopRequireDefault(_header);
-
 var _barChart = __webpack_require__(182);
 
 var _barChart2 = _interopRequireDefault(_barChart);
-
-var _lineChart = __webpack_require__(183);
-
-var _lineChart2 = _interopRequireDefault(_lineChart);
-
-var _liveChart = __webpack_require__(184);
-
-var _liveChart2 = _interopRequireDefault(_liveChart);
-
-var _pieChart = __webpack_require__(185);
-
-var _pieChart2 = _interopRequireDefault(_pieChart);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22827,131 +22496,16 @@ var barOptions = {
     }]
 };
 
-var lineOptions = {
-    chart: {
-        type: 'line'
-    },
-    title: {
-        text: 'Monthly Average Temperature'
-    },
-    subtitle: {
-        text: 'Source: WorldClimate.com'
-    },
-    xAxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    },
-    yAxis: {
-        title: {
-            text: 'Temperature (°C)'
-        }
-    },
-    plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: false
-        }
-    },
-    series: [{
-        name: 'Tokyo',
-        data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-    }, {
-        name: 'London',
-        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-    }]
-};
+var Bar = function (_Component) {
+    _inherits(Bar, _Component);
 
-var liveOptions = {
-    chart: {
-        events: {
-            load: function load() {
+    function Bar() {
+        _classCallCheck(this, Bar);
 
-                // set up the updating of the chart each second
-                var series = this.series[0];
-                setInterval(function () {
-                    var x = new Date().getTime(),
-                        // current time
-                    y = Math.round(Math.random() * 100);
-                    series.addPoint([x, y], true, true);
-                }, 1000);
-            }
-        }
-    },
-
-    rangeSelector: {
-        buttons: [{
-            count: 1,
-            type: 'minute',
-            text: '1M'
-        }, {
-            count: 5,
-            type: 'minute',
-            text: '5M'
-        }, {
-            type: 'all',
-            text: 'All'
-        }],
-        inputEnabled: false,
-        selected: 0
-    },
-
-    title: {
-        text: 'Live random data'
-    },
-
-    exporting: {
-        enabled: false
-    },
-
-    series: [{
-        name: 'Random data',
-        data: function () {
-            // generate an array of random data
-            var data = [],
-                time = new Date().getTime(),
-                i;
-
-            for (i = -999; i <= 0; i += 1) {
-                data.push([time + i * 1000, Math.round(Math.random() * 100)]);
-            }
-            return data;
-        }()
-    }]
-};
-
-var pieData = [{
-    name: "Firefox",
-    y: 6
-}, {
-    name: "MSIE",
-    y: 4
-}, {
-    name: "Safari",
-    y: 4
-}, {
-    name: "Opera",
-    y: 1
-}, {
-    name: "Chrome",
-    y: 7
-}];
-
-var Home = function (_Component) {
-    _inherits(Home, _Component);
-
-    function Home(props) {
-        _classCallCheck(this, Home);
-
-        var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
-
-        _this.state = {
-            pieData: pieData
-        };
-        return _this;
+        return _possibleConstructorReturn(this, (Bar.__proto__ || Object.getPrototypeOf(Bar)).apply(this, arguments));
     }
 
-    _createClass(Home, [{
+    _createClass(Bar, [{
         key: 'render',
         value: function render() {
 
@@ -22974,7 +22528,7 @@ var Home = function (_Component) {
                             { className: 'nav nav-justified' },
                             _react2.default.createElement(
                                 'li',
-                                { className: 'active' },
+                                null,
                                 _react2.default.createElement(
                                     'a',
                                     { href: '/' },
@@ -22992,7 +22546,7 @@ var Home = function (_Component) {
                             ),
                             _react2.default.createElement(
                                 'li',
-                                null,
+                                { className: 'active' },
                                 _react2.default.createElement(
                                     'a',
                                     { href: '/bar' },
@@ -23056,27 +22610,16 @@ var Home = function (_Component) {
                         )
                     )
                 ),
-                _react2.default.createElement(
-                    'h3',
-                    null,
-                    'Bar:'
-                ),
                 _react2.default.createElement(_barChart2.default, { container: 'bar-chart', options: barOptions }),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement(_liveChart2.default, { container: 'live-chart', options: liveOptions })
+                _react2.default.createElement('br', null)
             );
         }
     }]);
 
-    return Home;
+    return Bar;
 }(_react.Component);
 
-_reactDom2.default.render(_react2.default.createElement(Home, null), document.getElementById('home'));
+_reactDom2.default.render(_react2.default.createElement(Bar, null), document.getElementById('bar'));
 
 /***/ })
 /******/ ]);

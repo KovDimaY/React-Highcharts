@@ -175,10 +175,13 @@ class Home extends Component {
                       <ul className="nav nav-justified">
                         <li className="active"><a href="/">Home</a></li>
                         <li><a href="/line">Line Chart</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Downloads</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="/bar">Bar Chart</a></li>
+                        <li><a href="/pie">Pie Chart</a></li>
+                        <li><a href="/bubble">Bubble Chart</a></li>
+                        <li><a href="/scatter">3D Scatter Chart</a></li>
+                        <li><a href="/gauge">Gauge Chart</a></li>
+                        <li><a href="/box">Box Plot</a></li>
+                        <li><a href="/clock">Clock</a></li>                      
                       </ul>
                     </nav>
                   </div>

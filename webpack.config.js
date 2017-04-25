@@ -4,7 +4,14 @@ var path = require('path')
 module.exports = {
     entry: {
         home: './public/app/Home.js',
-        line: './public/app/Line.js'
+        line: './public/app/Line.js',
+        bar: './public/app/Bar.js',
+        pie: './public/app/Pie.js',
+        bubble: './public/app/Bubble.js',
+        scatter: './public/app/Scatter.js',
+        gauge: './public/app/Gauge.js',
+        box: './public/app/Box.js',
+        clock: './public/app/Clock.js'
     },
     output:{
         path: path.join(__dirname, "public/build"),
