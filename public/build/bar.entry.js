@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 187);
+/******/ 	return __webpack_require__(__webpack_require__.s = 190);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22424,7 +22424,8 @@ var BarChart = function (_React$Component) {
         value: function render() {
 
             var barStyle = {
-                width: '40%'
+                width: '50%',
+                height: '600px'
             };
 
             return _react2.default.createElement('div', { ref: 'chart', style: barStyle });
@@ -22441,7 +22442,10 @@ exports.default = BarChart;
 /* 184 */,
 /* 185 */,
 /* 186 */,
-/* 187 */
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

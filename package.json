@@ -12,6 +12,7 @@
     "ejs": "~2.5.6",
     "express": "~4.15.2",
     "highcharts": "^5.0.10",
+    "highcharts-more": "^0.1.2",
     "morgan": "~1.8.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

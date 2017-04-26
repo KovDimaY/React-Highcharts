@@ -1,9 +1,9 @@
 import React from 'react'
 import Highcharts from 'highcharts';
 
-export default class BarChart extends React.Component {
-	
-	componentDidMount() {
+export default class BubbleChart extends React.Component {
+    
+    componentDidMount() {
         this.chart = new Highcharts[this.props.type || "Chart"](
             this.refs.chart,
             this.props.options
@@ -16,13 +16,13 @@ export default class BarChart extends React.Component {
 
     render() {
 
-    	const barStyle = {
-			width: '50%',
+        const bubbleStyle = {
+            width: '50%',
             height: '600px'
-		};
+        };
 
         return (
-            <div ref="chart" style={ barStyle }></div>
+            <div ref="chart" style={ bubbleStyle }></div>
         )
     }
 }

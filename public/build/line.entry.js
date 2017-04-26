@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 193);
+/******/ 	return __webpack_require__(__webpack_require__.s = 196);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22424,7 +22424,8 @@ var BarChart = function (_React$Component) {
         value: function render() {
 
             var barStyle = {
-                width: '40%'
+                width: '50%',
+                height: '600px'
             };
 
             return _react2.default.createElement('div', { ref: 'chart', style: barStyle });
@@ -22489,7 +22490,8 @@ var LineChart = function (_React$Component) {
         value: function render() {
 
             var lineStyle = {
-                width: '60%'
+                width: '50%',
+                height: '600px'
             };
 
             return _react2.default.createElement('div', { ref: 'chart', style: lineStyle });
@@ -22757,7 +22759,10 @@ exports.default = Header;
 /* 190 */,
 /* 191 */,
 /* 192 */,
-/* 193 */
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23056,11 +23061,6 @@ var Line = function (_Component) {
                             )
                         )
                     )
-                ),
-                _react2.default.createElement(
-                    'h3',
-                    null,
-                    'Line:'
                 ),
                 _react2.default.createElement(_lineChart2.default, { container: 'line-chart', options: lineOptions }),
                 _react2.default.createElement('br', null),

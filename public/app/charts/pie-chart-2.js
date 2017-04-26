@@ -1,7 +1,7 @@
 import React from 'react'
 import Highcharts from 'highcharts';
 
-export default class BarChart extends React.Component {
+export default class PieChart extends React.Component {
 	
 	componentDidMount() {
         this.chart = new Highcharts[this.props.type || "Chart"](
@@ -16,13 +16,13 @@ export default class BarChart extends React.Component {
 
     render() {
 
-    	const barStyle = {
+    	const pieStyle = {
 			width: '50%',
             height: '600px'
 		};
 
         return (
-            <div ref="chart" style={ barStyle }></div>
+            <div ref="chart" style={ pieStyle }></div>
         )
     }
 }

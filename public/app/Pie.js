@@ -1,6 +1,57 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
+import PieChart from './charts/pie-chart-2'
+
+
+const pieOptions = {
+    chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Browser market shares January, 2015 to May, 2015'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'Microsoft IE',
+                y: 56.33
+            }, {
+                name: 'Chrome',
+                y: 24.03,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Firefox',
+                y: 10.38
+            }, {
+                name: 'Safari',
+                y: 4.77
+            }, {
+                name: 'Opera',
+                y: 0.91
+            }]
+        }]
+};
+
+
 class Pie extends Component {
 
 	render() {
@@ -25,7 +76,7 @@ class Pie extends Component {
                 </nav>
               </div>
 
-              <h1>Here will be Pie Chart</h1>
+              <PieChart container={'pie-chart'} options={pieOptions}/><br/>
 
 			</div>
 		)
