@@ -48,8 +48,8 @@ export default class ScatterChart extends React.Component {
     render() {
 
         const scatterStyle = {
-            width: '50%',
-            height: '600px'
+            width: '75%',
+            height: '500px'
         };
 
         return (
