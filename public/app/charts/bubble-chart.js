@@ -17,7 +17,8 @@ export default class BubbleChart extends React.Component {
     render() {
 
         const bubbleStyle = {
-            width: '75%',
+            marginLeft: '15%',
+            width: '70%',
             height: '500px'
         };
 

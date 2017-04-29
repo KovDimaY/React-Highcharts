@@ -17,7 +17,8 @@ export default class BarChart extends React.Component {
     render() {
 
     	const barStyle = {
-			width: '75%',
+			marginLeft: '15%',
+            width: '70%',
             height: '500px'
 		};
 

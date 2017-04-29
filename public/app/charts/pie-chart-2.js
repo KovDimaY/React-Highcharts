@@ -17,7 +17,8 @@ export default class PieChart extends React.Component {
     render() {
 
     	const pieStyle = {
-			width: '75%',
+			marginLeft: '15%',
+            width: '70%',
             height: '500px'
 		};
 

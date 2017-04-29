@@ -1,13 +1,12 @@
 import React from 'react'
 import Highcharts from 'highcharts';
 
-export default class GaugeChart extends React.Component {
+export default class BoxPlot extends React.Component {
 	
 	componentDidMount() {
         this.chart = new Highcharts[this.props.type || "Chart"](
             this.refs.chart,
-            this.props.options,
-            this.props.function
+            this.props.options
         );
     }
 
@@ -17,14 +16,14 @@ export default class GaugeChart extends React.Component {
 
     render() {
 
-    	const gaugeStyle = {
+    	const BoxPlotStyle = {
 			marginLeft: '15%',
             width: '70%',
             height: '500px'
 		};
 
         return (
-            <div ref="chart" style={ gaugeStyle }></div>
+            <div ref="chart" style={ BoxPlotStyle }></div>
         )
     }
 }

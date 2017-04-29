@@ -32725,7 +32725,8 @@ var ScatterChart = function (_React$Component) {
         value: function render() {
 
             var scatterStyle = {
-                width: '75%',
+                marginLeft: '15%',
+                width: '70%',
                 height: '500px'
             };
 

@@ -216,7 +216,9 @@ class Clock extends Component {
                 </nav>
               </div>
 
-              <ClockChart container={'clock'} options={clockOptions} function={move}/><br/>
+              
+            <ClockChart container={'clock'} options={clockOptions} function={move}/>
+              
 
             </div>
         )

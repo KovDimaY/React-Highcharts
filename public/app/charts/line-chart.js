@@ -17,7 +17,8 @@ export default class LineChart extends React.Component {
     render() {
 
         const lineStyle = {
-            width: '75%',
+            marginLeft: '15%',
+            width: '70%',
             height: '500px'
         };
 

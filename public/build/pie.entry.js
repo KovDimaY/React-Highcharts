@@ -22431,7 +22431,8 @@ var PieChart = function (_React$Component) {
         value: function render() {
 
             var pieStyle = {
-                width: '75%',
+                marginLeft: '15%',
+                width: '70%',
                 height: '500px'
             };
 

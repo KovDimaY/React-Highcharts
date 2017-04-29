@@ -18,12 +18,15 @@ export default class Clock extends React.Component {
     render() {
 
     	const clockStyle = {
-			width: '75%',
+            marginLeft: '15%',
+			width: '70%',
             height: '500px'
 		};
 
         return (
+            
             <div ref="chart" style={ clockStyle }></div>
+            
         )
     }
 }

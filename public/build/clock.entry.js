@@ -22775,8 +22775,7 @@ var Clock = function (_Component) {
                         )
                     )
                 ),
-                _react2.default.createElement(_clock2.default, { container: 'clock', options: clockOptions, 'function': move }),
-                _react2.default.createElement('br', null)
+                _react2.default.createElement(_clock2.default, { container: 'clock', options: clockOptions, 'function': move })
             );
         }
     }]);
@@ -22844,7 +22843,8 @@ var Clock = function (_React$Component) {
         value: function render() {
 
             var clockStyle = {
-                width: '75%',
+                marginLeft: '15%',
+                width: '70%',
                 height: '500px'
             };
 

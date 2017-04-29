@@ -22802,7 +22802,8 @@ var GaugeChart = function (_React$Component) {
         value: function render() {
 
             var gaugeStyle = {
-                width: '75%',
+                marginLeft: '15%',
+                width: '70%',
                 height: '500px'
             };
 

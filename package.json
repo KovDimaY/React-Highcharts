@@ -13,6 +13,7 @@
     "express": "~4.15.2",
     "highcharts": "^5.0.10",
     "highcharts-3d": "^0.1.2",
+    "highcharts-exporting": "^0.1.2",
     "highcharts-more": "^0.1.2",
     "highcharts-solid-gauge": "^0.1.2",
     "jquery": "^3.2.1",
