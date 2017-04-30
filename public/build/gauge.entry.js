@@ -22660,7 +22660,7 @@ function moveSpeed(chart) {
         // Speed
         var point, newVal, inc;
 
-        console.log(chart);
+        console.log(chart.yAxis);
 
         if (chart) {
             point = chart.series[0].points[0];

@@ -32684,37 +32684,7 @@ var ScatterChart = function (_React$Component) {
     _createClass(ScatterChart, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            this.chart = new _highcharts2.default[this.props.type || "Chart"](this.refs.chart, this.props.options);
-
-            // Add mouse events for rotation
-            (0, _jquery2.default)(this.chart.container).on('mousedown.hc touchstart.hc', function (eStart) {
-                eStart = chart.pointer.normalize(eStart);
-
-                var posX = eStart.pageX,
-                    posY = eStart.pageY,
-                    alpha = chart.options.chart.options3d.alpha,
-                    beta = chart.options.chart.options3d.beta,
-                    newAlpha,
-                    newBeta,
-                    sensitivity = 5; // lower is more sensitive
-
-                (0, _jquery2.default)(document).on({
-                    'mousemove.hc touchdrag.hc': function mousemoveHcTouchdragHc(e) {
-                        // Run beta
-                        newBeta = beta + (posX - e.pageX) / sensitivity;
-                        chart.options.chart.options3d.beta = newBeta;
-
-                        // Run alpha
-                        newAlpha = alpha + (e.pageY - posY) / sensitivity;
-                        chart.options.chart.options3d.alpha = newAlpha;
-
-                        chart.redraw(false);
-                    },
-                    'mouseup touchend': function mouseupTouchend() {
-                        (0, _jquery2.default)(document).off('.hc');
-                    }
-                });
-            });
+            this.chart = new _highcharts2.default[this.props.type || "Chart"](this.refs.chart, this.props.options, this.props.function);
         }
     }, {
         key: 'componentWillUnmount',
@@ -32917,6 +32887,38 @@ var scatterOptions = {
     }]
 };
 
+function move(chart) {
+    // Add mouse events for rotation
+    (0, _jquery2.default)(chart.container).on('mousedown.hc touchstart.hc', function (eStart) {
+        eStart = chart.pointer.normalize(eStart);
+
+        var posX = eStart.pageX,
+            posY = eStart.pageY,
+            alpha = chart.options.chart.options3d.alpha,
+            beta = chart.options.chart.options3d.beta,
+            newAlpha,
+            newBeta,
+            sensitivity = 5; // lower is more sensitive
+
+        (0, _jquery2.default)(document).on({
+            'mousemove.hc touchdrag.hc': function mousemoveHcTouchdragHc(e) {
+                // Run beta
+                newBeta = beta + (posX - e.pageX) / sensitivity;
+                chart.options.chart.options3d.beta = newBeta;
+
+                // Run alpha
+                newAlpha = alpha + (e.pageY - posY) / sensitivity;
+                chart.options.chart.options3d.alpha = newAlpha;
+
+                chart.redraw(false);
+            },
+            'mouseup touchend': function mouseupTouchend() {
+                (0, _jquery2.default)(document).off('.hc');
+            }
+        });
+    });
+};
+
 var Scatter = function (_Component) {
     _inherits(Scatter, _Component);
 
@@ -33031,7 +33033,7 @@ var Scatter = function (_Component) {
                         )
                     )
                 ),
-                _react2.default.createElement(_scatterChart2.default, { container: 'scatter-chart', options: scatterOptions }),
+                _react2.default.createElement(_scatterChart2.default, { container: 'scatter-chart', options: scatterOptions, 'function': move }),
                 _react2.default.createElement('br', null)
             );
         }
