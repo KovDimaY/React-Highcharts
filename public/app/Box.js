@@ -90,7 +90,7 @@ class Box extends Component {
             <div>
 
                 <div className="masthead">
-                <h3 className="text-muted">Project name</h3>
+                <h3 className="text-muted">React Highcharts Practice</h3>
                 <nav>
                   <ul className="nav nav-justified">
                     <li><a href="/">Home</a></li>
