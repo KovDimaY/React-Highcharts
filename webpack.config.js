@@ -9,7 +9,7 @@ module.exports = {
         pie: './public/app/Pie.js',
         bubble: './public/app/Bubble.js',
         scatter: './public/app/Scatter.js',
-        gauge: './public/app/Gauge.js',
+        gauge: './public/app/Gauge2.js',
         box: './public/app/Box.js',
         clock: './public/app/Clock.js'
     },
