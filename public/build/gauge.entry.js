@@ -22497,9 +22497,9 @@ var _highchartsSolidGauge = __webpack_require__(194);
 
 var _highchartsSolidGauge2 = _interopRequireDefault(_highchartsSolidGauge);
 
-var _gaugeSpeed = __webpack_require__(204);
+var _gaugeSpeedometer = __webpack_require__(205);
 
-var _gaugeSpeed2 = _interopRequireDefault(_gaugeSpeed);
+var _gaugeSpeedometer2 = _interopRequireDefault(_gaugeSpeedometer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22509,10 +22509,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 (0, _highchartsMore2.default)(_highcharts2.default);
 (0, _highchartsSolidGauge2.default)(_highcharts2.default);
-
-//import GaugeSpeed from './charts/gauge-speed'
 
 var speedOptions = {
     chart: {
@@ -22538,13 +22538,27 @@ var speedOptions = {
         enabled: false
     },
 
-    yAxis: {
-        min: 0,
-        max: 200,
+    // the value axis
+    yAxis: _defineProperty({
+        stops: [[0.1, '#55BF3B'], // green
+        [0.5, '#DDDF0D'], // yellow
+        [0.9, '#DF5353'] // red
+        ],
+        lineWidth: 0,
+        minorTickInterval: null,
+        tickAmount: 2,
         title: {
-            text: 'Speed'
-        }
-    },
+            y: -70
+        },
+        labels: {
+            y: 16
+        },
+        min: 0,
+        max: 200
+    }, 'title', {
+        text: 'Speed',
+        style: { "font-size": "20px" }
+    }),
 
     credits: {
         enabled: false
@@ -22552,9 +22566,9 @@ var speedOptions = {
 
     series: [{
         name: 'Speed',
-        data: [80],
+        data: [190],
         dataLabels: {
-            format: '<div style="text-align:center"><span style="font-size:25px;color:' + (_highcharts2.default.theme && _highcharts2.default.theme.contrastTextColor || 'black') + '">{y}</span><br/>' + '<span style="font-size:12px;color:silver">km/h</span></div>'
+            format: '<div style="text-align:center"><span style="font-size:48px;color:' + (_highcharts2.default.theme && _highcharts2.default.theme.contrastTextColor || 'black') + '">{y}</span><br/>' + '<span style="font-size:16px;color:silver">km/h</span></div>'
         },
         tooltip: {
             valueSuffix: ' km/h'
@@ -22606,19 +22620,32 @@ var rpmOptions = {
         }
     },
 
-    yAxis: {
-        min: 0,
-        max: 5,
+    yAxis: _defineProperty({
+        stops: [[0.1, '#55BF3B'], // green
+        [0.5, '#DDDF0D'], // yellow
+        [0.9, '#DF5353'] // red
+        ],
+        lineWidth: 0,
+        minorTickInterval: null,
+        tickAmount: 2,
         title: {
-            text: 'RPM'
-        }
-    },
+            y: -70
+        },
+        labels: {
+            y: 16
+        },
+        min: 0,
+        max: 5
+    }, 'title', {
+        text: 'RPM',
+        style: { "font-size": "20px" }
+    }),
 
     series: [{
         name: 'RPM',
         data: [1],
         dataLabels: {
-            format: '<div style="text-align:center"><span style="font-size:25px;color:' + (_highcharts2.default.theme && _highcharts2.default.theme.contrastTextColor || 'black') + '">{y:.1f}</span><br/>' + '<span style="font-size:12px;color:silver">* 1000 / min</span></div>'
+            format: '<div style="text-align:center"><span style="font-size:48px;color:' + (_highcharts2.default.theme && _highcharts2.default.theme.contrastTextColor || 'black') + '">{y:.1f}</span><br/>' + '<span style="font-size:16px;color:silver">* 1000 / min</span></div>'
         },
         tooltip: {
             valueSuffix: ' revolutions/min'
@@ -22655,8 +22682,6 @@ function moveRPM(chart) {
     setInterval(function () {
         // Speed
         var point, newVal, inc;
-
-        console.log(chart);
 
         // RPM
         if (chart) {
@@ -22787,10 +22812,18 @@ var Gauge = function (_Component) {
                         )
                     )
                 ),
-                _react2.default.createElement(_gaugeSpeed2.default, { container: 'speed-chart', options: speedOptions, 'function': moveSpeed }),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement(_gaugeSpeed2.default, { container: 'rpm-chart', options: rpmOptions, 'function': moveRPM }),
-                _react2.default.createElement('br', null)
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-lg-6' },
+                    _react2.default.createElement(_gaugeSpeedometer2.default, { container: 'speed-chart', options: speedOptions, 'function': moveSpeed }),
+                    _react2.default.createElement('br', null)
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-lg-6' },
+                    _react2.default.createElement(_gaugeSpeedometer2.default, { container: 'rpm-chart', options: rpmOptions, 'function': moveRPM }),
+                    _react2.default.createElement('br', null)
+                )
             );
         }
     }]);
@@ -22805,7 +22838,8 @@ _reactDom2.default.render(_react2.default.createElement(Gauge, null), document.g
 /* 201 */,
 /* 202 */,
 /* 203 */,
-/* 204 */
+/* 204 */,
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22833,16 +22867,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var GaugeSpeed = function (_React$Component) {
-    _inherits(GaugeSpeed, _React$Component);
+var GaugeSpeedometer = function (_React$Component) {
+    _inherits(GaugeSpeedometer, _React$Component);
 
-    function GaugeSpeed() {
-        _classCallCheck(this, GaugeSpeed);
+    function GaugeSpeedometer() {
+        _classCallCheck(this, GaugeSpeedometer);
 
-        return _possibleConstructorReturn(this, (GaugeSpeed.__proto__ || Object.getPrototypeOf(GaugeSpeed)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (GaugeSpeedometer.__proto__ || Object.getPrototypeOf(GaugeSpeedometer)).apply(this, arguments));
     }
 
-    _createClass(GaugeSpeed, [{
+    _createClass(GaugeSpeedometer, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
             this.chart = new _highcharts2.default[this.props.type || "Chart"](this.refs.chart, this.props.options, this.props.function);
@@ -22856,20 +22890,14 @@ var GaugeSpeed = function (_React$Component) {
         key: 'render',
         value: function render() {
 
-            var gaugeStyle = {
-                marginLeft: '15%',
-                width: '70%',
-                height: '500px'
-            };
-
-            return _react2.default.createElement('div', { ref: 'chart', style: gaugeStyle });
+            return _react2.default.createElement('div', { ref: 'chart' });
         }
     }]);
 
-    return GaugeSpeed;
+    return GaugeSpeedometer;
 }(_react2.default.Component);
 
-exports.default = GaugeSpeed;
+exports.default = GaugeSpeedometer;
 
 /***/ })
 /******/ ]);

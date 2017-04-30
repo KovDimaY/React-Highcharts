@@ -8,8 +8,7 @@ HighchartsMore(Highcharts)
 HighchartsGauge(Highcharts)
 
 
-import GaugeSpeed from './charts/gauge-speed'
-//import GaugeSpeed from './charts/gauge-speed'
+import GaugeSpeed from './charts/gauge-speedometer'
 
 const speedOptions = {
     chart: {
@@ -35,11 +34,27 @@ const speedOptions = {
         enabled: false
     },
 
+    // the value axis
     yAxis: {
+        stops: [
+            [0.1, '#55BF3B'], // green
+            [0.5, '#DDDF0D'], // yellow
+            [0.9, '#DF5353'] // red
+        ],
+        lineWidth: 0,
+        minorTickInterval: null,
+        tickAmount: 2,
+        title: {
+            y: -70
+        },
+        labels: {
+            y: 16
+        },
         min: 0,
         max: 200,
         title: {
-            text: 'Speed'
+            text: 'Speed',
+            style: { "font-size": "20px"}
         }
     },
 
@@ -49,11 +64,11 @@ const speedOptions = {
 
     series: [{
         name: 'Speed',
-        data: [80],
+        data: [190],
         dataLabels: {
-            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+            format: '<div style="text-align:center"><span style="font-size:48px;color:' +
                 ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-                   '<span style="font-size:12px;color:silver">km/h</span></div>'
+                   '<span style="font-size:16px;color:silver">km/h</span></div>'
         },
         tooltip: {
             valueSuffix: ' km/h'
@@ -106,10 +121,25 @@ const rpmOptions = {
     },
 
     yAxis: {
+        stops: [
+            [0.1, '#55BF3B'], // green
+            [0.5, '#DDDF0D'], // yellow
+            [0.9, '#DF5353'] // red
+        ],
+        lineWidth: 0,
+        minorTickInterval: null,
+        tickAmount: 2,
+        title: {
+            y: -70
+        },
+        labels: {
+            y: 16
+        },
         min: 0,
         max: 5,
         title: {
-            text: 'RPM'
+            text: 'RPM',
+            style: { "font-size": "20px"}
         }
     },
 
@@ -117,9 +147,9 @@ const rpmOptions = {
         name: 'RPM',
         data: [1],
         dataLabels: {
-            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+            format: '<div style="text-align:center"><span style="font-size:48px;color:' +
                 ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}</span><br/>' +
-                   '<span style="font-size:12px;color:silver">* 1000 / min</span></div>'
+                   '<span style="font-size:16px;color:silver">* 1000 / min</span></div>'
         },
         tooltip: {
             valueSuffix: ' revolutions/min'
@@ -161,9 +191,7 @@ function moveRPM(chart) {
             var point,
                 newVal,
                 inc;
-
-            console.log(chart);
-
+    
             // RPM
             if (chart) {
                 point = chart.series[0].points[0];
@@ -206,8 +234,12 @@ class Gauge extends Component {
                 </nav>
               </div>
 
+              <div className="col-lg-6">
               <GaugeSpeed container={'speed-chart'} options={speedOptions} function={moveSpeed}/><br/>
+              </div>
+              <div className="col-lg-6">
               <GaugeSpeed container={'rpm-chart'} options={rpmOptions} function={moveRPM}/><br/>
+              </div>
 
             </div>
         )
