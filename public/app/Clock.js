@@ -6,6 +6,7 @@ import HighchartsMore from 'highcharts-more'
 HighchartsMore(Highcharts)
 
 import ClockChart from './charts/clock'
+import Footer from './partials/footer' 
 
 var now = getNow();
 
@@ -217,7 +218,9 @@ class Clock extends Component {
               </div>
 
               
-            <ClockChart container={'clock'} options={clockOptions} function={move}/>
+                <ClockChart container={'clock'} options={clockOptions} function={move}/>
+
+                <Footer />
               
 
             </div>

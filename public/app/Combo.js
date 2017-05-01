@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import Highcharts from 'highcharts'
 
 import BoxPlot from './charts/combo-chart'
+import Footer from './partials/footer' 
 
 
 const comboOptions = {
@@ -94,6 +95,8 @@ class Combo extends Component {
               </div>
 
               <BoxPlot container={'combo-chart'} options={comboOptions}/><br/>
+
+              <Footer />
 
             </div>
         )

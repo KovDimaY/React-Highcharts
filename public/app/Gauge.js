@@ -9,6 +9,7 @@ HighchartsGauge(Highcharts)
 
 
 import GaugeChart from './charts/gauge-chart'
+import Footer from './partials/footer' 
 
 const gaugeOptions = {
     chart: {
@@ -180,6 +181,8 @@ class Gauge extends Component {
               </div>
 
               <GaugeChart container={'gauge-chart'} options={gaugeOptions} function={callback}/><br/>
+
+              <Footer />
 
             </div>
         )

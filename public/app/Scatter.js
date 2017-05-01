@@ -6,6 +6,7 @@ import Highcharts3d from 'highcharts-3d'
 Highcharts3d(Highcharts)
 
 import ScatterChart from './charts/scatter-chart'
+import Footer from './partials/footer' 
 
 // Give the points a 3D feel by adding a radial gradient
 Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function (color) {
@@ -137,6 +138,8 @@ class Scatter extends Component {
               </div>
 
               <ScatterChart container={'scatter-chart'} options={scatterOptions} function={move}/><br/>
+
+              <Footer />
 
             </div>
         )

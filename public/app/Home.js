@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
+import Footer from './partials/footer' 
+
 class Home extends Component {
 
 	render() {
+
+        const chartStyle = {
+            //marginLeft: '5%',
+            width: '90%'
+        };
 
 		return(
 			<div>
@@ -49,6 +56,7 @@ class Home extends Component {
                   <div id="charts-info" className="row">
                     <div className="col-lg-4">
                       <h2>Line Chart</h2>
+                      <img src={"images/charts/line-chart.png"} alt="Line Chart" style={ chartStyle }/>
                       <p>A line chart or line graph is a type of chart which displays information as a series of 
                           data points called 'markers' connected by straight line segments. It is a basic type of 
                           chart common in many fields. It is similar to a scatter plot except that the measurement 
@@ -59,6 +67,7 @@ class Home extends Component {
                     </div>
                     <div className="col-lg-4">
                       <h2>Bar Chart</h2>
+                      <img src={"images/charts/bar-chart.png"} alt="Bar Chart" style={ chartStyle }/>
                       <p>A bar chart or bar graph is a chart or graph that presents grouped data with rectangular bars with 
                           lengths proportional to the values that they represent. 
                           The bars can be plotted vertically or horizontally. 
@@ -71,17 +80,15 @@ class Home extends Component {
                    </div>
                     <div className="col-lg-4">
                       <h2>Pie Chart</h2>
+                      <img src={"images/charts/pie-chart.JPG"} alt="Pie Chart" style={ chartStyle }/>
                       <p>A pie chart (or a circle chart) is a circular statistical graphic which is divided
                           into slices to illustrate numerical proportion. In a pie chart, the arc length of 
                           each slice (and consequently its central angle and area), is proportional to the quantity 
-                          it represents. While it is named for its resemblance to a pie which has been sliced, 
-                          there are variations on the way it can be presented. The earliest known pie chart is generally 
-                          credited to William Playfair's Statistical Breviary of 1801.<br/> <br/> 
+                          it represents.<br/> <br/> 
                           Pie charts are very widely used in the business world and the mass media.
                           However, they have been criticized, and many experts recommend avoiding them, 
                           pointing out that research has shown it is difficult to compare different sections 
-                          of a given pie chart, or to compare data across different pie charts. Pie charts can be 
-                          replaced in most cases by other plots such as the bar chart, box plot or dot plots.</p>
+                          of a given pie chart, or to compare data across different pie charts.</p>
                       <p><a className="btn btn-default" href="https://en.wikipedia.org/wiki/Pie_chart" role="button">View details &raquo;</a></p>
                     </div>
                   </div>
@@ -89,6 +96,7 @@ class Home extends Component {
                   <div className="row">
                     <div className="col-lg-4">
                       <h2>Bubble Chart</h2>
+                      <img src={"images/charts/bubble-chart.png"} alt="Bubble Chart" style={ chartStyle }/>
                       <p className="text-danger">Notice that <a href="https://www.npmjs.com/package/highcharts-more">highcharts-more</a>  module
                         is required for this kind of charts!</p>
                       <p>A bubble chart is a type of chart that displays three dimensions of data. 
@@ -105,6 +113,7 @@ class Home extends Component {
                     </div>
                     <div className="col-lg-4">
                       <h2>Scatter Plot</h2>
+                      <img src={"images/charts/scatter-plot.png"} alt="Scatter Plot" style={ chartStyle }/>
                       <p className="text-danger">Notice that <a href="https://www.npmjs.com/package/highcharts-3d">highcharts-3d</a> module 
                         is required for 3D version of this chart!</p>
                       <p>A scatter plot (also called a scatter graph, scatter chart, scattergram, or scatter diagram)
@@ -117,13 +126,23 @@ class Home extends Component {
                    </div>
                     <div className="col-lg-4">
                       <h2>Gauge Chart</h2>
+                      <img src={"images/charts/gauge-chart.png"} alt="Gauge Chart" style={ chartStyle }/>
+                      <p className="text-danger">Notice that <a href="https://www.npmjs.com/package/highcharts-more">highcharts-more</a> and 
+                      <a href="https://www.npmjs.com/package/highcharts-solid-gauge"> highcharts-solid-gauge</a> modules 
+                        are required for this charts!</p>
                       <p>Gauge charts, also known as dial charts or speedometer charts, 
-                        use needles to show information as a reading on a dial.<br/> <br/> 
+                        use needles to show information as a reading on a dial. It consists of a gauge axis 
+                        (which contains the data range, color ranges, and intervals markers), 
+                        needles, and a center pivot point.<br/> <br/> 
                         Gauge charts are useful for comparing values between a small number of variables either 
-                        by using multiple needles on the same gauge or by using multiple gauges.</p>
-                      <p><a className="btn btn-default" href="https://goo.gl/kd9ceD" role="button">View details &raquo;</a></p>
+                        by using multiple needles on the same gauge or by using multiple gauges. On a gauge chart, 
+                        the value for each needle is read against the colored data range or chart axis. 
+                        This chart type is often used in executive dashboard reports to show key business indicators.</p>
+                      <p><a className="btn btn-default" href="https://en.wikipedia.org/wiki/Speedometer" role="button">View details &raquo;</a></p>
                     </div>
                   </div>
+
+                  <Footer />
 
 			</div>
 		)

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import BarChart from './charts/bar-chart'
+import Footer from './partials/footer' 
 
 
 const barOptions = {
@@ -57,6 +58,8 @@ class Bar extends Component {
               </div>
 
               <BarChart container={'bar-chart'} options={barOptions}/><br/>
+
+              <Footer />
 
 			</div>
 		)

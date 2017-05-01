@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 199);
+/******/ 	return __webpack_require__(__webpack_require__.s = 200);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -21984,14 +21984,95 @@ module.exports = traverseAllChildren;
 /* 189 */,
 /* 190 */,
 /* 191 */,
-/* 192 */,
+/* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(50);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Footer = function (_React$Component) {
+	_inherits(Footer, _React$Component);
+
+	function Footer() {
+		_classCallCheck(this, Footer);
+
+		return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));
+	}
+
+	_createClass(Footer, [{
+		key: "render",
+		value: function render() {
+			return _react2.default.createElement(
+				"footer",
+				null,
+				_react2.default.createElement(
+					"div",
+					{ className: "content-padding" },
+					_react2.default.createElement(
+						"div",
+						{ className: "footer-content" },
+						_react2.default.createElement(
+							"p",
+							null,
+							"Copyright \xA9 Dmytro Kovalenko ;)"
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "social-media-icons" },
+							_react2.default.createElement(
+								"a",
+								{ href: "https://www.facebook.com/dmytro.kovalenko.1004", className: "footer-facebook" },
+								_react2.default.createElement("i", { className: "fa fa-facebook" })
+							),
+							_react2.default.createElement(
+								"a",
+								{ href: "https://www.vk.com/id11545172", className: "footer-vk" },
+								_react2.default.createElement("i", { className: "fa fa-vk" })
+							),
+							_react2.default.createElement(
+								"a",
+								{ href: "https://www.linkedin.com/in/kovalenkodmytro", className: "footer-linkedin" },
+								_react2.default.createElement("i", { className: "fa fa-linkedin" })
+							)
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return Footer;
+}(_react2.default.Component);
+
+exports.default = Footer;
+
+/***/ }),
 /* 193 */,
 /* 194 */,
 /* 195 */,
 /* 196 */,
 /* 197 */,
 /* 198 */,
-/* 199 */
+/* 199 */,
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22006,6 +22087,10 @@ var _react2 = _interopRequireDefault(_react);
 var _reactDom = __webpack_require__(81);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _footer = __webpack_require__(192);
+
+var _footer2 = _interopRequireDefault(_footer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22027,6 +22112,11 @@ var Home = function (_Component) {
   _createClass(Home, [{
     key: 'render',
     value: function render() {
+
+      var chartStyle = {
+        //marginLeft: '5%',
+        width: '90%'
+      };
 
       return _react2.default.createElement(
         'div',
@@ -22189,6 +22279,7 @@ var Home = function (_Component) {
               null,
               'Line Chart'
             ),
+            _react2.default.createElement('img', { src: "images/charts/line-chart.png", alt: 'Line Chart', style: chartStyle }),
             _react2.default.createElement(
               'p',
               null,
@@ -22216,6 +22307,7 @@ var Home = function (_Component) {
               null,
               'Bar Chart'
             ),
+            _react2.default.createElement('img', { src: "images/charts/bar-chart.png", alt: 'Bar Chart', style: chartStyle }),
             _react2.default.createElement(
               'p',
               null,
@@ -22243,14 +22335,15 @@ var Home = function (_Component) {
               null,
               'Pie Chart'
             ),
+            _react2.default.createElement('img', { src: "images/charts/pie-chart.JPG", alt: 'Pie Chart', style: chartStyle }),
             _react2.default.createElement(
               'p',
               null,
-              'A pie chart (or a circle chart) is a circular statistical graphic which is divided into slices to illustrate numerical proportion. In a pie chart, the arc length of each slice (and consequently its central angle and area), is proportional to the quantity it represents. While it is named for its resemblance to a pie which has been sliced, there are variations on the way it can be presented. The earliest known pie chart is generally credited to William Playfair\'s Statistical Breviary of 1801.',
+              'A pie chart (or a circle chart) is a circular statistical graphic which is divided into slices to illustrate numerical proportion. In a pie chart, the arc length of each slice (and consequently its central angle and area), is proportional to the quantity it represents.',
               _react2.default.createElement('br', null),
               ' ',
               _react2.default.createElement('br', null),
-              'Pie charts are very widely used in the business world and the mass media. However, they have been criticized, and many experts recommend avoiding them, pointing out that research has shown it is difficult to compare different sections of a given pie chart, or to compare data across different pie charts. Pie charts can be replaced in most cases by other plots such as the bar chart, box plot or dot plots.'
+              'Pie charts are very widely used in the business world and the mass media. However, they have been criticized, and many experts recommend avoiding them, pointing out that research has shown it is difficult to compare different sections of a given pie chart, or to compare data across different pie charts.'
             ),
             _react2.default.createElement(
               'p',
@@ -22274,6 +22367,7 @@ var Home = function (_Component) {
               null,
               'Bubble Chart'
             ),
+            _react2.default.createElement('img', { src: "images/charts/bubble-chart.png", alt: 'Bubble Chart', style: chartStyle }),
             _react2.default.createElement(
               'p',
               { className: 'text-danger' },
@@ -22312,6 +22406,7 @@ var Home = function (_Component) {
               null,
               'Scatter Plot'
             ),
+            _react2.default.createElement('img', { src: "images/charts/scatter-plot.png", alt: 'Scatter Plot', style: chartStyle }),
             _react2.default.createElement(
               'p',
               { className: 'text-danger' },
@@ -22346,26 +22441,45 @@ var Home = function (_Component) {
               null,
               'Gauge Chart'
             ),
+            _react2.default.createElement('img', { src: "images/charts/gauge-chart.png", alt: 'Gauge Chart', style: chartStyle }),
+            _react2.default.createElement(
+              'p',
+              { className: 'text-danger' },
+              'Notice that ',
+              _react2.default.createElement(
+                'a',
+                { href: 'https://www.npmjs.com/package/highcharts-more' },
+                'highcharts-more'
+              ),
+              ' and',
+              _react2.default.createElement(
+                'a',
+                { href: 'https://www.npmjs.com/package/highcharts-solid-gauge' },
+                ' highcharts-solid-gauge'
+              ),
+              ' modules are required for this charts!'
+            ),
             _react2.default.createElement(
               'p',
               null,
-              'Gauge charts, also known as dial charts or speedometer charts, use needles to show information as a reading on a dial.',
+              'Gauge charts, also known as dial charts or speedometer charts, use needles to show information as a reading on a dial. It consists of a gauge axis (which contains the data range, color ranges, and intervals markers), needles, and a center pivot point.',
               _react2.default.createElement('br', null),
               ' ',
               _react2.default.createElement('br', null),
-              'Gauge charts are useful for comparing values between a small number of variables either by using multiple needles on the same gauge or by using multiple gauges.'
+              'Gauge charts are useful for comparing values between a small number of variables either by using multiple needles on the same gauge or by using multiple gauges. On a gauge chart, the value for each needle is read against the colored data range or chart axis. This chart type is often used in executive dashboard reports to show key business indicators.'
             ),
             _react2.default.createElement(
               'p',
               null,
               _react2.default.createElement(
                 'a',
-                { className: 'btn btn-default', href: 'https://goo.gl/kd9ceD', role: 'button' },
+                { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Speedometer', role: 'button' },
                 'View details \xBB'
               )
             )
           )
-        )
+        ),
+        _react2.default.createElement(_footer2.default, null)
       );
     }
   }]);

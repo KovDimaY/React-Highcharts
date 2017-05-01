@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import PieChart from './charts/pie-chart-2'
+import Footer from './partials/footer' 
 
 
 const pieOptions = {
@@ -77,6 +78,8 @@ class Pie extends Component {
               </div>
 
               <PieChart container={'pie-chart'} options={pieOptions}/><br/>
+
+              <Footer />
 
 			</div>
 		)

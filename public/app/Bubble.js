@@ -5,6 +5,7 @@ import HighchartsMore from 'highcharts-more'
 HighchartsMore(Highcharts)
 
 import BubbleChart from './charts/bubble-chart'
+import Footer from './partials/footer' 
 
 
 const bubbleOptions = {
@@ -108,6 +109,8 @@ class Bubble extends Component {
               </div>
 
               <BubbleChart container={'bubble-chart'} options={bubbleOptions}/><br/>
+
+              <Footer />
 
       </div>
     )

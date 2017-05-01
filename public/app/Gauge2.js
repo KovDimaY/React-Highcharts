@@ -9,6 +9,7 @@ HighchartsGauge(Highcharts)
 
 
 import GaugeSpeed from './charts/gauge-speedometer'
+import Footer from './partials/footer' 
 
 const speedOptions = {
     chart: {
@@ -220,28 +221,32 @@ class Gauge extends Component {
             <div>
 
                 <div className="masthead">
-                <h3 className="text-muted">React Highcharts Practice</h3>
-                <nav>
-                  <ul className="nav nav-justified">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/line">Line Chart</a></li>
-                    <li><a href="/bar">Bar Chart</a></li>
-                    <li><a href="/pie">Pie Chart</a></li>
-                    <li><a href="/bubble">Bubble Chart</a></li>
-                    <li><a href="/scatter">3D Scatter</a></li>
-                    <li className="active"><a href="/gauge">Gauge Chart</a></li>
-                    <li><a href="/combo">Combination</a></li>
-                    <li><a href="/clock">Clock</a></li>   
-                  </ul>
-                </nav>
+                    <h3 className="text-muted">React Highcharts Practice</h3>
+                    <nav>
+                      <ul className="nav nav-justified">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/line">Line Chart</a></li>
+                        <li><a href="/bar">Bar Chart</a></li>
+                        <li><a href="/pie">Pie Chart</a></li>
+                        <li><a href="/bubble">Bubble Chart</a></li>
+                        <li><a href="/scatter">3D Scatter</a></li>
+                        <li className="active"><a href="/gauge">Gauge Chart</a></li>
+                        <li><a href="/combo">Combination</a></li>
+                        <li><a href="/clock">Clock</a></li>   
+                      </ul>
+                    </nav>
+                </div>
+
+              <div className="row">
+                  <div className="col-lg-6">
+                  <GaugeSpeed container={'speed-chart'} options={speedOptions} function={moveSpeed}/><br/>
+                  </div>
+                  <div className="col-lg-6">
+                  <GaugeSpeed container={'rpm-chart'} options={rpmOptions} function={moveRPM}/><br/>
+                  </div>
               </div>
 
-              <div className="col-lg-6">
-              <GaugeSpeed container={'speed-chart'} options={speedOptions} function={moveSpeed}/><br/>
-              </div>
-              <div className="col-lg-6">
-              <GaugeSpeed container={'rpm-chart'} options={rpmOptions} function={moveRPM}/><br/>
-              </div>
+              <Footer />
 
             </div>
         )

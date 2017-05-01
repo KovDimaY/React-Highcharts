@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import LineChart from './charts/line-chart'
+import Footer from './partials/footer' 
 
 
 const lineOptions = {
@@ -65,6 +66,8 @@ class Line extends Component {
                   </div>
 
 				<LineChart container={'line-chart'} options={lineOptions}/>
+
+                <Footer />
 
 
 			</div>
