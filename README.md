@@ -1,6 +1,25 @@
 # React-Highcharts
 This project was created to practice my knowledge of React.js and to integrate highcharts as react components in application with Express.js back-end.
 
+### Content
+There are several Highcharts converted from pure Javascript to React.js components:
+1. Line Chart
+2. Bar Chart
+3. Pie Chart
+4. Bubble Chart
+5. Scatter chart
+6. Gauge Chart
+
+Also there is a combination of charts implemented on the same plane and cool clock  created on base of the gauge chart. Later I will try to implement possibility of modification of the data that is used by charts.
+
+### Screenshots
+![screenshot 1](https://cloud.githubusercontent.com/assets/26466644/25593089/86dabf66-2ebb-11e7-87ea-8703c913024f.png)
+![screenshot 2](https://cloud.githubusercontent.com/assets/26466644/25593093/88d33a50-2ebb-11e7-8695-976ef01c6bc2.png)
+![screenshot 3](https://cloud.githubusercontent.com/assets/26466644/25593096/8b2b9fe0-2ebb-11e7-9ced-760bc0fa1f5e.png)
+
+
+
+
 ## React + Express little tutorial
 1. Create folder for your project<br>
 
