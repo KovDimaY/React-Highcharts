@@ -12,7 +12,7 @@ var pie = require('./routes/pie');
 var bubble = require('./routes/bubble');
 var scatter = require('./routes/scatter');
 var gauge = require('./routes/gauge');
-var box = require('./routes/box');
+var combo = require('./routes/combo');
 var clock = require('./routes/clock');
 
 var app = express();
@@ -36,7 +36,7 @@ app.use('/pie', pie);
 app.use('/bubble', bubble);
 app.use('/scatter', scatter);
 app.use('/gauge', gauge);
-app.use('/box', box);
+app.use('/combo', combo);
 app.use('/clock', clock);
 
 

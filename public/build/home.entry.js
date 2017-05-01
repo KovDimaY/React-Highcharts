@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 200);
+/******/ 	return __webpack_require__(__webpack_require__.s = 199);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -21991,8 +21991,7 @@ module.exports = traverseAllChildren;
 /* 196 */,
 /* 197 */,
 /* 198 */,
-/* 199 */,
-/* 200 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22097,7 +22096,7 @@ var Home = function (_Component) {
                 _react2.default.createElement(
                   'a',
                   { href: '/scatter' },
-                  '3D Scatter Chart'
+                  '3D Scatter'
                 )
               ),
               _react2.default.createElement(
@@ -22114,8 +22113,8 @@ var Home = function (_Component) {
                 null,
                 _react2.default.createElement(
                   'a',
-                  { href: '/box' },
-                  'Box Plot'
+                  { href: '/combo' },
+                  'Combination'
                 )
               ),
               _react2.default.createElement(

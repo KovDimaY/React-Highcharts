@@ -166,7 +166,7 @@ function moveSpeed(chart) {
                 newVal,
                 inc;
 
-            console.log(chart.yAxis);
+            //console.log(chart.yAxis);
 
             if (chart) {
                 point = chart.series[0].points[0];
@@ -192,6 +192,7 @@ function moveRPM(chart) {
                 newVal,
                 inc;
     
+            console.log(this);
             // RPM
             if (chart) {
                 point = chart.series[0].points[0];
@@ -203,6 +204,7 @@ function moveRPM(chart) {
                 }
 
                 point.update(newVal);
+                this.forceUpdate();
             }
 
         }, 2000);
@@ -226,9 +228,9 @@ class Gauge extends Component {
                     <li><a href="/bar">Bar Chart</a></li>
                     <li><a href="/pie">Pie Chart</a></li>
                     <li><a href="/bubble">Bubble Chart</a></li>
-                    <li><a href="/scatter">3D Scatter Chart</a></li>
+                    <li><a href="/scatter">3D Scatter</a></li>
                     <li className="active"><a href="/gauge">Gauge Chart</a></li>
-                    <li><a href="/box">Box Plot</a></li>
+                    <li><a href="/combo">Combination</a></li>
                     <li><a href="/clock">Clock</a></li>   
                   </ul>
                 </nav>

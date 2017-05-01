@@ -10,7 +10,7 @@ module.exports = {
         bubble: './public/app/Bubble.js',
         scatter: './public/app/Scatter.js',
         gauge: './public/app/Gauge2.js',
-        box: './public/app/Box.js',
+        combo: './public/app/Combo.js',
         clock: './public/app/Clock.js'
     },
     output:{

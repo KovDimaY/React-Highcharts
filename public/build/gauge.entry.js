@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 199);
+/******/ 	return __webpack_require__(__webpack_require__.s = 198);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22439,13 +22439,72 @@ d[f?"xAxis":"yAxis"].push({axis:a,value:a.translate(f?Math.PI-Math.atan2(k,g):Ma
 /* 185 */,
 /* 186 */,
 /* 187 */,
-/* 188 */,
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(50);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _highcharts = __webpack_require__(82);
+
+var _highcharts2 = _interopRequireDefault(_highcharts);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var GaugeSpeedometer = function (_React$Component) {
+    _inherits(GaugeSpeedometer, _React$Component);
+
+    function GaugeSpeedometer() {
+        _classCallCheck(this, GaugeSpeedometer);
+
+        return _possibleConstructorReturn(this, (GaugeSpeedometer.__proto__ || Object.getPrototypeOf(GaugeSpeedometer)).apply(this, arguments));
+    }
+
+    _createClass(GaugeSpeedometer, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.chart = new _highcharts2.default[this.props.type || "Chart"](this.refs.chart, this.props.options, this.props.function);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            this.chart.destroy();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            return _react2.default.createElement('div', { ref: 'chart' });
+        }
+    }]);
+
+    return GaugeSpeedometer;
+}(_react2.default.Component);
+
+exports.default = GaugeSpeedometer;
+
+/***/ }),
 /* 189 */,
 /* 190 */,
 /* 191 */,
 /* 192 */,
-/* 193 */,
-/* 194 */
+/* 193 */
 /***/ (function(module, exports) {
 
 /*
@@ -22465,11 +22524,11 @@ r:k,innerR:m,start:o,end:j,fill:n};a.startR=k;if(d){if(a=m.d,d.animate(m),a)m.d=
 
 
 /***/ }),
+/* 194 */,
 /* 195 */,
 /* 196 */,
 /* 197 */,
-/* 198 */,
-/* 199 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22493,11 +22552,11 @@ var _highchartsMore = __webpack_require__(182);
 
 var _highchartsMore2 = _interopRequireDefault(_highchartsMore);
 
-var _highchartsSolidGauge = __webpack_require__(194);
+var _highchartsSolidGauge = __webpack_require__(193);
 
 var _highchartsSolidGauge2 = _interopRequireDefault(_highchartsSolidGauge);
 
-var _gaugeSpeedometer = __webpack_require__(205);
+var _gaugeSpeedometer = __webpack_require__(188);
 
 var _gaugeSpeedometer2 = _interopRequireDefault(_gaugeSpeedometer);
 
@@ -22660,7 +22719,7 @@ function moveSpeed(chart) {
         // Speed
         var point, newVal, inc;
 
-        console.log(chart.yAxis);
+        //console.log(chart.yAxis);
 
         if (chart) {
             point = chart.series[0].points[0];
@@ -22683,6 +22742,7 @@ function moveRPM(chart) {
         // Speed
         var point, newVal, inc;
 
+        console.log(this);
         // RPM
         if (chart) {
             point = chart.series[0].points[0];
@@ -22694,6 +22754,7 @@ function moveRPM(chart) {
             }
 
             point.update(newVal);
+            this.forceUpdate();
         }
     }, 2000);
 };
@@ -22779,7 +22840,7 @@ var Gauge = function (_Component) {
                                 _react2.default.createElement(
                                     'a',
                                     { href: '/scatter' },
-                                    '3D Scatter Chart'
+                                    '3D Scatter'
                                 )
                             ),
                             _react2.default.createElement(
@@ -22796,8 +22857,8 @@ var Gauge = function (_Component) {
                                 null,
                                 _react2.default.createElement(
                                     'a',
-                                    { href: '/box' },
-                                    'Box Plot'
+                                    { href: '/combo' },
+                                    'Combination'
                                 )
                             ),
                             _react2.default.createElement(
@@ -22832,72 +22893,6 @@ var Gauge = function (_Component) {
 }(_react.Component);
 
 _reactDom2.default.render(_react2.default.createElement(Gauge, null), document.getElementById('gauge'));
-
-/***/ }),
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(50);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _highcharts = __webpack_require__(82);
-
-var _highcharts2 = _interopRequireDefault(_highcharts);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var GaugeSpeedometer = function (_React$Component) {
-    _inherits(GaugeSpeedometer, _React$Component);
-
-    function GaugeSpeedometer() {
-        _classCallCheck(this, GaugeSpeedometer);
-
-        return _possibleConstructorReturn(this, (GaugeSpeedometer.__proto__ || Object.getPrototypeOf(GaugeSpeedometer)).apply(this, arguments));
-    }
-
-    _createClass(GaugeSpeedometer, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.chart = new _highcharts2.default[this.props.type || "Chart"](this.refs.chart, this.props.options, this.props.function);
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            this.chart.destroy();
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-
-            return _react2.default.createElement('div', { ref: 'chart' });
-        }
-    }]);
-
-    return GaugeSpeedometer;
-}(_react2.default.Component);
-
-exports.default = GaugeSpeedometer;
 
 /***/ })
 /******/ ]);

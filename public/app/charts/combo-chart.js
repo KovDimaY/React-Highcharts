@@ -16,14 +16,14 @@ export default class BoxPlot extends React.Component {
 
     render() {
 
-    	const BoxPlotStyle = {
+    	const ComboStyle = {
 			marginLeft: '15%',
             width: '70%',
             height: '500px'
 		};
 
         return (
-            <div ref="chart" style={ BoxPlotStyle }></div>
+            <div ref="chart" style={ ComboStyle }></div>
         )
     }
 }

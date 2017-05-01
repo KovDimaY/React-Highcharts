@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 198);
+/******/ 	return __webpack_require__(__webpack_require__.s = 196);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22437,8 +22437,7 @@ d[f?"xAxis":"yAxis"].push({axis:a,value:a.translate(f?Math.PI-Math.atan2(k,g):Ma
 /* 183 */,
 /* 184 */,
 /* 185 */,
-/* 186 */,
-/* 187 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22505,6 +22504,7 @@ var Clock = function (_React$Component) {
 exports.default = Clock;
 
 /***/ }),
+/* 187 */,
 /* 188 */,
 /* 189 */,
 /* 190 */,
@@ -22513,9 +22513,7 @@ exports.default = Clock;
 /* 193 */,
 /* 194 */,
 /* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22539,7 +22537,7 @@ var _highchartsMore = __webpack_require__(182);
 
 var _highchartsMore2 = _interopRequireDefault(_highchartsMore);
 
-var _clock = __webpack_require__(187);
+var _clock = __webpack_require__(186);
 
 var _clock2 = _interopRequireDefault(_clock);
 
@@ -22810,7 +22808,7 @@ var Clock = function (_Component) {
                                 _react2.default.createElement(
                                     'a',
                                     { href: '/scatter' },
-                                    '3D Scatter Chart'
+                                    '3D Scatter'
                                 )
                             ),
                             _react2.default.createElement(
@@ -22827,8 +22825,8 @@ var Clock = function (_Component) {
                                 null,
                                 _react2.default.createElement(
                                     'a',
-                                    { href: '/box' },
-                                    'Box Plot'
+                                    { href: '/combo' },
+                                    'Combination'
                                 )
                             ),
                             _react2.default.createElement(

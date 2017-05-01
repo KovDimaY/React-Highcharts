@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 202);
+/******/ 	return __webpack_require__(__webpack_require__.s = 201);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22457,8 +22457,7 @@ exports.default = PieChart;
 /* 198 */,
 /* 199 */,
 /* 200 */,
-/* 201 */,
-/* 202 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22614,7 +22613,7 @@ var Pie = function (_Component) {
                                 _react2.default.createElement(
                                     'a',
                                     { href: '/scatter' },
-                                    '3D Scatter Chart'
+                                    '3D Scatter'
                                 )
                             ),
                             _react2.default.createElement(
@@ -22631,8 +22630,8 @@ var Pie = function (_Component) {
                                 null,
                                 _react2.default.createElement(
                                     'a',
-                                    { href: '/box' },
-                                    'Box Plot'
+                                    { href: '/combo' },
+                                    'Combination'
                                 )
                             ),
                             _react2.default.createElement(

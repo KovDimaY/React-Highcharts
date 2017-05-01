@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 195);
+/******/ 	return __webpack_require__(__webpack_require__.s = 194);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22450,8 +22450,7 @@ exports.default = BarChart;
 /* 191 */,
 /* 192 */,
 /* 193 */,
-/* 194 */,
-/* 195 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22587,7 +22586,7 @@ var Bar = function (_Component) {
                                 _react2.default.createElement(
                                     'a',
                                     { href: '/scatter' },
-                                    '3D Scatter Chart'
+                                    '3D Scatter'
                                 )
                             ),
                             _react2.default.createElement(
@@ -22604,8 +22603,8 @@ var Bar = function (_Component) {
                                 null,
                                 _react2.default.createElement(
                                     'a',
-                                    { href: '/box' },
-                                    'Box Plot'
+                                    { href: '/combo' },
+                                    'Combination'
                                 )
                             ),
                             _react2.default.createElement(

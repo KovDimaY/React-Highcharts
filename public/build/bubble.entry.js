@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 197);
+/******/ 	return __webpack_require__(__webpack_require__.s = 195);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22436,8 +22436,7 @@ d[f?"xAxis":"yAxis"].push({axis:a,value:a.translate(f?Math.PI-Math.atan2(k,g):Ma
 /***/ }),
 /* 183 */,
 /* 184 */,
-/* 185 */,
-/* 186 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22504,6 +22503,7 @@ var BubbleChart = function (_React$Component) {
 exports.default = BubbleChart;
 
 /***/ }),
+/* 186 */,
 /* 187 */,
 /* 188 */,
 /* 189 */,
@@ -22512,9 +22512,7 @@ exports.default = BubbleChart;
 /* 192 */,
 /* 193 */,
 /* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22538,7 +22536,7 @@ var _highchartsMore = __webpack_require__(182);
 
 var _highchartsMore2 = _interopRequireDefault(_highchartsMore);
 
-var _bubbleChart = __webpack_require__(186);
+var _bubbleChart = __webpack_require__(185);
 
 var _bubbleChart2 = _interopRequireDefault(_bubbleChart);
 
@@ -22672,7 +22670,7 @@ var Bubble = function (_Component) {
                                 _react2.default.createElement(
                                     'a',
                                     { href: '/scatter' },
-                                    '3D Scatter Chart'
+                                    '3D Scatter'
                                 )
                             ),
                             _react2.default.createElement(
@@ -22689,8 +22687,8 @@ var Bubble = function (_Component) {
                                 null,
                                 _react2.default.createElement(
                                     'a',
-                                    { href: '/box' },
-                                    'Box Plot'
+                                    { href: '/combo' },
+                                    'Combination'
                                 )
                             ),
                             _react2.default.createElement(

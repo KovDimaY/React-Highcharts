@@ -99,9 +99,9 @@ class Bubble extends Component {
                     <li><a href="/bar">Bar Chart</a></li>
                     <li><a href="/pie">Pie Chart</a></li>
                     <li className="active"><a href="/bubble">Bubble Chart</a></li>
-                    <li><a href="/scatter">3D Scatter Chart</a></li>
+                    <li><a href="/scatter">3D Scatter</a></li>
                     <li><a href="/gauge">Gauge Chart</a></li>
-                    <li><a href="/box">Box Plot</a></li>
+                    <li><a href="/combo">Combination</a></li>
                     <li><a href="/clock">Clock</a></li>    
                   </ul>
                 </nav>
