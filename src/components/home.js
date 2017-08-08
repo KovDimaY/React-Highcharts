@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class Home extends Component {
 
 	render() {
-    const chartStyle = {
+		const chartStyle = {
         //marginLeft: '5%',
         width: '90%'
     };
@@ -137,9 +137,6 @@ export default class Home extends Component {
                       <p><a className="btn btn-default" href="https://en.wikipedia.org/wiki/Speedometer" role="button">View details &raquo;</a></p>
                     </div>
                   </div>
-
-                  <Footer />
-
 			</div>
 		)
 	}

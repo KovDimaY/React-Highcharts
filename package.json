@@ -2,8 +2,12 @@
   "name": "highcharts-test",
   "version": "0.0.0",
   "private": true,
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall" : "webpack -p",
+    "start": "node server.js"
   },
   "dependencies": {
     "axios": "0.15.3",
