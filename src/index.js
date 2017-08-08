@@ -9,6 +9,9 @@ import reduxThunk from 'redux-thunk';
 // Components import
 import routes from './routes';
 
+// Style import
+import '../styles/index.scss';
+
 ReactDOM.render(
   <Provider>
     <Router history={browserHistory} routes={routes} />
