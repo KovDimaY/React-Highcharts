@@ -6,14 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var line = require('./routes/line');
-var bar = require('./routes/bar');
-var pie = require('./routes/pie');
-var bubble = require('./routes/bubble');
-var scatter = require('./routes/scatter');
-var gauge = require('./routes/gauge');
-var combo = require('./routes/combo');
-var clock = require('./routes/clock');
 
 var app = express();
 
@@ -29,15 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/line', line);
-app.use('/bar', bar);
-app.use('/pie', pie);
-app.use('/bubble', bubble);
-app.use('/scatter', scatter);
-app.use('/gauge', gauge);
-app.use('/combo', combo);
-app.use('/clock', clock);
+app.use('*', index);
 
 
 // catch 404 and forward to error handler
