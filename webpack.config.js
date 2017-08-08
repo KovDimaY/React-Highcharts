@@ -1,26 +1,45 @@
-var webpack = require('webpack')
-var path = require('path')
+const webpack = require('webpack');
 
 module.exports = {
-    entry: {
-        app: './public/app/index.js',
+    entry: [
+        './src/index.js'
+    ],
+    output: {
+        path: __dirname,
+        publicPath: '/',
+        filename: 'bundle.js'
     },
-    output:{
-        path: path.join(__dirname, "public/build"),
-        filename: "[name].entry.js",
-        sourceMapFilename: 'bundle.map'
-    },
-    devtool: '#source-map',
     module: {
-       loaders: [
-           {
-               test: /\.jsx?$/,
-               exclude: /(node_modules|bower_components)/,
-               loader: 'babel-loader',
-               query:{
-                   presets: ['react','es2015']
-               }
-           }
-       ]
-    }
-}﻿
+        loaders: [
+            {
+                exclude: /node_modules/,
+                loader: 'babel',
+                query: {
+                    presets: ['react', 'es2015', 'stage-1']
+                },
+            },
+            {
+                test: /\.scss$/,
+                loaders: ['style', 'css', 'sass']
+            },
+            {
+                test: /\.(gif|png|jpg)$/,
+                loader: 'url-loader?limit-200000'
+            }
+        ]
+    },
+    resolve: {
+        extensions: ['', '.js', '.jsx']
+    },
+    devServer: {
+        historyApiFallback: true,
+        contentBase: './'
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+          'process.env': {
+            'NODE_ENV': JSON.stringify('production')
+          }
+        })
+    ]
+};
