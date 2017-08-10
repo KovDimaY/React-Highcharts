@@ -27387,7 +27387,8 @@
 	exports.default = _react2.default.createElement(
 	  _reactRouter.Router,
 	  { path: '/', component: _app2.default },
-	  _react2.default.createElement(_reactRouter.IndexRoute, { component: _home2.default })
+	  _react2.default.createElement(_reactRouter.IndexRoute, { component: _home2.default }),
+	  _react2.default.createElement(_reactRouter.Router, { path: '*', component: _home2.default })
 	);
 
 /***/ },
@@ -27406,6 +27407,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _header = __webpack_require__(266);
+
+	var _header2 = _interopRequireDefault(_header);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27416,7 +27421,8 @@
 
 
 	// Components import
-	// import Header from './header.js'
+
+
 	// import Footer from './footer.js'
 
 	// Layout component
@@ -27435,6 +27441,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'app' },
+	        _react2.default.createElement(_header2.default, { location: this.props.location.pathname }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'container' },
@@ -27493,104 +27500,6 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'masthead' },
-	          _react2.default.createElement(
-	            'h3',
-	            { className: 'text-muted' },
-	            'React Highcharts Practice'
-	          ),
-	          _react2.default.createElement(
-	            'nav',
-	            null,
-	            _react2.default.createElement(
-	              'ul',
-	              { className: 'nav nav-justified' },
-	              _react2.default.createElement(
-	                'li',
-	                { className: 'active' },
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '/' },
-	                  'Home'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '/line' },
-	                  'Line Chart'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '/bar' },
-	                  'Bar Chart'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '/pie' },
-	                  'Pie Chart'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '/bubble' },
-	                  'Bubble Chart'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '/scatter' },
-	                  '3D Scatter'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '/gauge' },
-	                  'Gauge Chart'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '/combo' },
-	                  'Combination'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '/clock' },
-	                  'Clock'
-	                )
-	              )
-	            )
-	          )
-	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'jumbotron' },
@@ -28211,6 +28120,173 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 266 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // Node modules import
+
+
+	// This component is a simple header for the page
+	var Header = function (_Component) {
+	  _inherits(Header, _Component);
+
+	  function Header() {
+	    _classCallCheck(this, Header);
+
+	    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+	  }
+
+	  _createClass(Header, [{
+	    key: "makeActiveBasedOnPath",
+	    value: function makeActiveBasedOnPath(path) {
+	      if (this.props.location === path) {
+	        return "active";
+	      }
+	      return "";
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var path = {
+	        home: "/",
+	        line: "/line",
+	        bar: "/bar",
+	        pie: "/pie",
+	        bubble: "/bubble",
+	        scatter: "/scatter",
+	        gauge: "/gauge",
+	        combo: "/combo",
+	        clock: "/clock"
+	      };
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "header" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "masthead" },
+	          _react2.default.createElement(
+	            "h3",
+	            { className: "text-muted" },
+	            "React Highcharts Practice"
+	          ),
+	          _react2.default.createElement(
+	            "nav",
+	            null,
+	            _react2.default.createElement(
+	              "ul",
+	              { className: "nav nav-justified" },
+	              _react2.default.createElement(
+	                "li",
+	                { className: this.makeActiveBasedOnPath(path.home) },
+	                _react2.default.createElement(
+	                  "a",
+	                  { href: path.home },
+	                  "Home"
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "li",
+	                { className: this.makeActiveBasedOnPath(path.line) },
+	                _react2.default.createElement(
+	                  "a",
+	                  { href: path.line },
+	                  "Line Chart"
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "li",
+	                { className: this.makeActiveBasedOnPath(path.bar) },
+	                _react2.default.createElement(
+	                  "a",
+	                  { href: path.bar },
+	                  "Bar Chart"
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "li",
+	                { className: this.makeActiveBasedOnPath(path.pie) },
+	                _react2.default.createElement(
+	                  "a",
+	                  { href: path.pie },
+	                  "Pie Chart"
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "li",
+	                { className: this.makeActiveBasedOnPath(path.bubble) },
+	                _react2.default.createElement(
+	                  "a",
+	                  { href: path.bubble },
+	                  "Bubble Chart"
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "li",
+	                { className: this.makeActiveBasedOnPath(path.scatter) },
+	                _react2.default.createElement(
+	                  "a",
+	                  { href: path.scatter },
+	                  "3D Scatter"
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "li",
+	                { className: this.makeActiveBasedOnPath(path.gauge) },
+	                _react2.default.createElement(
+	                  "a",
+	                  { href: path.gauge },
+	                  "Gauge Chart"
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "li",
+	                { className: this.makeActiveBasedOnPath(path.combo) },
+	                _react2.default.createElement(
+	                  "a",
+	                  { href: path.combo },
+	                  "Combination"
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "li",
+	                { className: this.makeActiveBasedOnPath(path.clock) },
+	                _react2.default.createElement(
+	                  "a",
+	                  { href: path.clock },
+	                  "Clock"
+	                )
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Header;
+	}(_react.Component);
+
+	exports.default = Header;
 
 /***/ }
 /******/ ]);

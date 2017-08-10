@@ -1,0 +1,65 @@
+// Node modules import
+import React, { Component } from 'react';
+
+// This component is a simple header for the page
+export default class Header extends Component {
+
+  makeActiveBasedOnPath(path) {
+    if (this.props.location === path) {
+      return "active";
+    }
+    return "";
+  }
+
+  render() {
+    const path = {
+      home: "/",
+      line: "/line",
+      bar: "/bar",
+      pie: "/pie",
+      bubble: "/bubble",
+      scatter: "/scatter",
+      gauge: "/gauge",
+      combo: "/combo",
+      clock: "/clock"
+    }
+    return (
+      <div className='header'>
+        <div className="masthead">
+          <h3 className="text-muted">React Highcharts Practice</h3>
+          <nav>
+            <ul className="nav nav-justified">
+              <li className={this.makeActiveBasedOnPath(path.home)}>
+                <a href={path.home}>Home</a>
+              </li>
+              <li className={this.makeActiveBasedOnPath(path.line)}>
+                <a href={path.line}>Line Chart</a>
+              </li>
+              <li className={this.makeActiveBasedOnPath(path.bar)}>
+                <a href={path.bar}>Bar Chart</a>
+              </li>
+              <li className={this.makeActiveBasedOnPath(path.pie)}>
+                <a href={path.pie}>Pie Chart</a>
+              </li>
+              <li className={this.makeActiveBasedOnPath(path.bubble)}>
+                <a href={path.bubble}>Bubble Chart</a>
+              </li>
+              <li className={this.makeActiveBasedOnPath(path.scatter)}>
+                <a href={path.scatter}>3D Scatter</a>
+              </li>
+              <li className={this.makeActiveBasedOnPath(path.gauge)}>
+                <a href={path.gauge}>Gauge Chart</a>
+              </li>
+              <li className={this.makeActiveBasedOnPath(path.combo)}>
+                <a href={path.combo}>Combination</a>
+              </li>
+              <li className={this.makeActiveBasedOnPath(path.clock)}>
+                <a href={path.clock}>Clock</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    )
+  }
+}

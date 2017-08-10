@@ -13,5 +13,6 @@ import Home from './components/home';
 export default (
   <Router path='/' component={App}>
     <IndexRoute component={Home} />
+    <Router path='*' component={Home} />
   </Router>
 );
