@@ -52,7 +52,7 @@ const pieOptions = {
 };
 
 
-export default class Bar extends Component {
+export default class Pie extends Component {
 
 	render() {
 		return(

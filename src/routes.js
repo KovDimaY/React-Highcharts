@@ -8,6 +8,7 @@ import Home from './components/home';
 import Line from './components/charts/line';
 import Bar from './components/charts/bar';
 import Pie from './components/charts/pie';
+import Bubble from './components/charts/bubble';
 
 // Routes definition
 export default (
@@ -16,6 +17,7 @@ export default (
     <Router path='/line' component={Line} />
     <Router path='/bar' component={Bar} />
     <Router path='/pie' component={Pie} />
+    <Router path='/bubble' component={Bubble} />
     <Router path='*' component={Home} />
   </Router>
 );
