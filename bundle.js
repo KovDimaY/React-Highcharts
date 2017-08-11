@@ -27397,13 +27397,13 @@
 
 	var _gauge2 = _interopRequireDefault(_gauge);
 
+	var _combo = __webpack_require__(279);
+
+	var _combo2 = _interopRequireDefault(_combo);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// Routes definition
-
-
-	// Components import
-	// Node modules import
 	exports.default = _react2.default.createElement(
 	  _reactRouter.Router,
 	  { path: '/', component: _app2.default },
@@ -27414,8 +27414,12 @@
 	  _react2.default.createElement(_reactRouter.Router, { path: '/bubble', component: _bubble2.default }),
 	  _react2.default.createElement(_reactRouter.Router, { path: '/scatter', component: _scatter2.default }),
 	  _react2.default.createElement(_reactRouter.Router, { path: '/gauge', component: _gauge2.default }),
+	  _react2.default.createElement(_reactRouter.Router, { path: '/combo', component: _combo2.default }),
 	  _react2.default.createElement(_reactRouter.Router, { path: '*', component: _home2.default })
 	);
+
+	// Components import
+	// Node modules import
 
 /***/ },
 /* 260 */
@@ -40036,6 +40040,130 @@
 	r=Math.max(f.startAngleRad,f.endAngleRad);"none"===p&&(p=b.color||a.color||"none");"none"!==p&&(b.color=p);k=Math.max(q-h,Math.min(r+h,k));!1===c.wrap&&(k=Math.max(q,Math.min(r,k)));q=Math.min(k,a.thresholdAngleRad);k=Math.max(k,a.thresholdAngleRad);k-q>2*Math.PI&&(k=q+2*Math.PI);b.shapeArgs=n={x:d[0],y:d[1],r:m,innerR:n,start:q,end:k,rounded:c.rounded};b.startR=m;g?(b=n.d,g.animate(e.extend({fill:p},n)),b&&(n.d=b)):(b.graphic=t.arc(n).addClass(b.getClassName(),!0).attr({fill:p,"sweep-flag":0}).add(a.group),
 	"square"!==c.linecap&&b.graphic.attr({"stroke-linecap":"round","stroke-linejoin":"round"}),b.graphic.attr({stroke:c.borderColor||"none","stroke-width":c.borderWidth||0}))})},animate:function(a){a||(this.startAngleRad=this.thresholdAngleRad,e.seriesTypes.pie.prototype.animate.call(this,a))}})})(l)});
 
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(29);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _highcharts = __webpack_require__(265);
+
+	var _highcharts2 = _interopRequireDefault(_highcharts);
+
+	var _chartAbstract = __webpack_require__(264);
+
+	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var comboOptions = {
+	    title: {
+	        text: 'Combination chart'
+	    },
+	    xAxis: {
+	        categories: ['Apples', 'Oranges', 'Pears', 'Bananas', 'Plums']
+	    },
+	    labels: {
+	        items: [{
+	            html: 'Total fruit consumption',
+	            style: {
+	                left: '50px',
+	                top: '18px',
+	                color: _highcharts2.default.theme && _highcharts2.default.theme.textColor || 'black'
+	            }
+	        }]
+	    },
+	    series: [{
+	        type: 'column',
+	        name: 'Jane',
+	        data: [3, 2, 1, 3, 4]
+	    }, {
+	        type: 'column',
+	        name: 'John',
+	        data: [2, 3, 5, 7, 6]
+	    }, {
+	        type: 'column',
+	        name: 'Joe',
+	        data: [4, 3, 3, 9, 0]
+	    }, {
+	        type: 'spline',
+	        name: 'Average',
+	        data: [3, 2.67, 3, 6.33, 3.33],
+	        marker: {
+	            lineWidth: 2,
+	            lineColor: _highcharts2.default.getOptions().colors[3],
+	            fillColor: 'white'
+	        }
+	    }, {
+	        type: 'pie',
+	        name: 'Total consumption',
+	        data: [{
+	            name: 'Jane',
+	            y: 13,
+	            color: _highcharts2.default.getOptions().colors[0] // Jane's color
+	        }, {
+	            name: 'John',
+	            y: 23,
+	            color: _highcharts2.default.getOptions().colors[1] // John's color
+	        }, {
+	            name: 'Joe',
+	            y: 19,
+	            color: _highcharts2.default.getOptions().colors[2] // Joe's color
+	        }],
+	        center: [100, 80],
+	        size: 100,
+	        showInLegend: false,
+	        dataLabels: {
+	            enabled: false
+	        }
+	    }]
+	};
+
+	var Combo = function (_Component) {
+	    _inherits(Combo, _Component);
+
+	    function Combo() {
+	        _classCallCheck(this, Combo);
+
+	        return _possibleConstructorReturn(this, (Combo.__proto__ || Object.getPrototypeOf(Combo)).apply(this, arguments));
+	    }
+
+	    _createClass(Combo, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_chartAbstract2.default, { container: 'combo-chart', options: comboOptions })
+	            );
+	        }
+	    }]);
+
+	    return Combo;
+	}(_react.Component);
+
+	exports.default = Combo;
 
 /***/ }
 /******/ ]);
