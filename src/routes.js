@@ -12,6 +12,7 @@ import Bubble from './components/charts/bubble';
 import Scattering from './components/charts/scatter';
 import Gauge from './components/charts/gauge';
 import Combo from './components/charts/combo';
+import Clock from './components/charts/clock';
 
 // Routes definition
 export default (
@@ -24,6 +25,7 @@ export default (
     <Router path='/scatter' component={Scattering} />
     <Router path='/gauge' component={Gauge} />
     <Router path='/combo' component={Combo} />
+    <Router path='/clock' component={Clock} />
     <Router path='*' component={Home} />
   </Router>
 );

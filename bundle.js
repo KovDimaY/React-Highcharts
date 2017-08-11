@@ -27401,9 +27401,17 @@
 
 	var _combo2 = _interopRequireDefault(_combo);
 
+	var _clock = __webpack_require__(280);
+
+	var _clock2 = _interopRequireDefault(_clock);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// Routes definition
+
+
+	// Components import
+	// Node modules import
 	exports.default = _react2.default.createElement(
 	  _reactRouter.Router,
 	  { path: '/', component: _app2.default },
@@ -27415,11 +27423,9 @@
 	  _react2.default.createElement(_reactRouter.Router, { path: '/scatter', component: _scatter2.default }),
 	  _react2.default.createElement(_reactRouter.Router, { path: '/gauge', component: _gauge2.default }),
 	  _react2.default.createElement(_reactRouter.Router, { path: '/combo', component: _combo2.default }),
+	  _react2.default.createElement(_reactRouter.Router, { path: '/clock', component: _clock2.default }),
 	  _react2.default.createElement(_reactRouter.Router, { path: '*', component: _home2.default })
 	);
-
-	// Components import
-	// Node modules import
 
 /***/ },
 /* 260 */
@@ -40164,6 +40170,243 @@
 	}(_react.Component);
 
 	exports.default = Combo;
+
+/***/ },
+/* 280 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(29);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _highcharts = __webpack_require__(265);
+
+	var _highcharts2 = _interopRequireDefault(_highcharts);
+
+	var _chartAbstract = __webpack_require__(264);
+
+	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var now = getNow();
+
+	/**
+	 * Get the current time
+	 */
+	function getNow() {
+	    var now = new Date();
+
+	    return {
+	        hours: now.getHours() + now.getMinutes() / 60,
+	        minutes: now.getMinutes() * 12 / 60 + now.getSeconds() * 12 / 3600,
+	        seconds: now.getSeconds() * 12 / 60
+	    };
+	}
+
+	/**
+	 * Pad numbers
+	 */
+	function pad(number, length) {
+	    // Create an array of the remaining length + 1 and join it with 0's
+	    return new Array((length || 2) + 1 - String(number).length).join(0) + number;
+	}
+
+	// Move
+	function move(chart) {
+	    setInterval(function () {
+
+	        now = getNow();
+
+	        if (chart.axes) {
+	            // not destroyed
+	            var hour = chart.get('hour'),
+	                minute = chart.get('minute'),
+	                second = chart.get('second'),
+
+	            // run animation unless we're wrapping around from 59 to 0
+	            animation = now.seconds === 0 ? false : {
+	                easing: 'easeOutBounce'
+	            };
+
+	            // Cache the tooltip text
+	            chart.tooltipText = pad(Math.floor(now.hours), 2) + ':' + pad(Math.floor(now.minutes * 5), 2) + ':' + pad(now.seconds * 5, 2);
+
+	            hour.update(now.hours, true, animation);
+	            minute.update(now.minutes, true, animation);
+	            second.update(now.seconds, true, animation);
+	        }
+	    }, 1000);
+	};
+
+	/**
+	 * Easing function from https://github.com/danro/easing-js/blob/master/easing.js
+	 */
+	Math.easeOutBounce = function (pos) {
+	    if (pos < 1 / 2.75) {
+	        return 7.5625 * pos * pos;
+	    }
+	    if (pos < 2 / 2.75) {
+	        return 7.5625 * (pos -= 1.5 / 2.75) * pos + 0.75;
+	    }
+	    if (pos < 2.5 / 2.75) {
+	        return 7.5625 * (pos -= 2.25 / 2.75) * pos + 0.9375;
+	    }
+	    return 7.5625 * (pos -= 2.625 / 2.75) * pos + 0.984375;
+	};
+
+	var clockOptions = {
+	    chart: {
+	        type: 'gauge',
+	        plotBackgroundColor: null,
+	        plotBackgroundImage: null,
+	        plotBorderWidth: 0,
+	        plotShadow: false,
+	        height: 500
+	    },
+
+	    credits: {
+	        enabled: false
+	    },
+
+	    title: {
+	        text: 'The Highcharts clock'
+	    },
+
+	    pane: {
+	        background: [{
+	            // default background
+	        }, {
+	            // reflex for supported browsers
+	            backgroundColor: _highcharts2.default.svg ? {
+	                radialGradient: {
+	                    cx: 0.5,
+	                    cy: -0.4,
+	                    r: 1.9
+	                },
+	                stops: [[0.5, 'rgba(255, 255, 255, 0.2)'], [0.5, 'rgba(200, 200, 200, 0.2)']]
+	            } : null
+	        }]
+	    },
+
+	    yAxis: {
+	        labels: {
+	            distance: -35,
+	            style: { "color": "black", "cursor": "default", "fontSize": "24px", "font-weight": "bold" }
+	        },
+	        min: 0,
+	        max: 12,
+	        lineWidth: 0,
+	        showFirstLabel: false,
+
+	        minorTickInterval: 'auto',
+	        minorTickWidth: 2,
+	        minorTickLength: 5,
+	        minorTickPosition: 'inside',
+	        minorGridLineWidth: 0,
+	        minorTickColor: '#666',
+
+	        tickInterval: 1,
+	        tickWidth: 3,
+	        tickPosition: 'inside',
+	        tickLength: 10,
+	        tickColor: '#666',
+	        title: {
+	            text: 'Powered by<br/>Highcharts<br/>& Dmytro Kovalenko ;)',
+	            style: {
+	                color: '#BBB',
+	                fontWeight: 'normal',
+	                fontSize: '12px',
+	                lineHeight: '14px'
+	            },
+	            y: 10
+	        }
+	    },
+
+	    tooltip: {
+	        enabled: false
+	    },
+
+	    series: [{
+	        data: [{
+	            id: 'hour',
+	            y: now.hours,
+	            dial: {
+	                radius: '60%',
+	                baseWidth: 12,
+	                baseLength: '50%',
+	                rearLength: '10%',
+	                backgroundColor: "black"
+	            }
+	        }, {
+	            id: 'minute',
+	            y: now.minutes,
+	            dial: {
+	                radius: '95%',
+	                baseWidth: 10,
+	                baseLength: '50%',
+	                rearLength: '10%',
+	                backgroundColor: "black"
+	            }
+	        }, {
+	            id: 'second',
+	            y: now.seconds,
+	            dial: {
+	                radius: '100%',
+	                baseWidth: 2,
+	                rearLength: '20%'
+	            }
+	        }],
+	        animation: false,
+	        dataLabels: {
+	            enabled: false
+	        }
+	    }]
+
+	};
+
+	var Line = function (_Component) {
+	    _inherits(Line, _Component);
+
+	    function Line() {
+	        _classCallCheck(this, Line);
+
+	        return _possibleConstructorReturn(this, (Line.__proto__ || Object.getPrototypeOf(Line)).apply(this, arguments));
+	    }
+
+	    _createClass(Line, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_chartAbstract2.default, { container: 'clock', options: clockOptions, 'function': move })
+	            );
+	        }
+	    }]);
+
+	    return Line;
+	}(_react.Component);
+
+	exports.default = Line;
 
 /***/ }
 /******/ ]);
