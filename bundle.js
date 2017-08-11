@@ -27393,9 +27393,17 @@
 
 	var _scatter2 = _interopRequireDefault(_scatter);
 
+	var _gauge = __webpack_require__(277);
+
+	var _gauge2 = _interopRequireDefault(_gauge);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// Routes definition
+
+
+	// Components import
+	// Node modules import
 	exports.default = _react2.default.createElement(
 	  _reactRouter.Router,
 	  { path: '/', component: _app2.default },
@@ -27405,11 +27413,9 @@
 	  _react2.default.createElement(_reactRouter.Router, { path: '/pie', component: _pie2.default }),
 	  _react2.default.createElement(_reactRouter.Router, { path: '/bubble', component: _bubble2.default }),
 	  _react2.default.createElement(_reactRouter.Router, { path: '/scatter', component: _scatter2.default }),
+	  _react2.default.createElement(_reactRouter.Router, { path: '/gauge', component: _gauge2.default }),
 	  _react2.default.createElement(_reactRouter.Router, { path: '*', component: _home2.default })
 	);
-
-	// Components import
-	// Node modules import
 
 /***/ },
 /* 260 */
@@ -28076,6 +28082,10 @@
 
 	var _highcharts3d2 = _interopRequireDefault(_highcharts3d);
 
+	var _solidGauge = __webpack_require__(278);
+
+	var _solidGauge2 = _interopRequireDefault(_solidGauge);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28086,6 +28096,7 @@
 
 	(0, _highchartsMore2.default)(_highcharts2.default);
 	(0, _highcharts3d2.default)(_highcharts2.default);
+	(0, _solidGauge2.default)(_highcharts2.default);
 
 	var Chart = function (_Component) {
 	    _inherits(Chart, _Component);
@@ -39744,6 +39755,286 @@
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
+
+
+/***/ },
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(29);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _highcharts = __webpack_require__(265);
+
+	var _highcharts2 = _interopRequireDefault(_highcharts);
+
+	var _chartAbstract = __webpack_require__(264);
+
+	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	// Moves left chart
+	function moveSpeed(chart) {
+
+	    // Bring life to the dials
+	    setInterval(function () {
+	        // Speed
+	        var point, newVal, inc;
+
+	        //console.log(chart.yAxis);
+
+	        if (chart) {
+	            point = chart.series[0].points[0];
+	            inc = Math.round((Math.random() - 0.5) * 100);
+	            newVal = point.y + inc;
+
+	            if (newVal < 0 || newVal > 200) {
+	                newVal = point.y - inc;
+	            }
+
+	            point.update(newVal);
+	        }
+	    }, 2000);
+	};
+
+	// Moves right chart
+	function moveRPM(chart) {
+
+	    // Bring life to the dials
+	    setInterval(function () {
+	        // Speed
+	        var point, newVal, inc;
+
+	        console.log(this);
+	        // RPM
+	        if (chart) {
+	            point = chart.series[0].points[0];
+	            inc = Math.random() - 0.5;
+	            newVal = point.y + inc;
+
+	            if (newVal < 0 || newVal > 5) {
+	                newVal = point.y - inc;
+	            }
+
+	            point.update(newVal);
+	            this.forceUpdate();
+	        }
+	    }, 2000);
+	};
+
+	var speedOptions = {
+	    chart: {
+	        type: 'solidgauge'
+	    },
+
+	    title: null,
+
+	    pane: {
+	        center: ['50%', '85%'],
+	        size: '140%',
+	        startAngle: -90,
+	        endAngle: 90,
+	        background: {
+	            backgroundColor: _highcharts2.default.theme && _highcharts2.default.theme.background2 || '#EEE',
+	            innerRadius: '60%',
+	            outerRadius: '100%',
+	            shape: 'arc'
+	        }
+	    },
+
+	    tooltip: {
+	        enabled: false
+	    },
+
+	    // the value axis
+	    yAxis: _defineProperty({
+	        stops: [[0.1, '#55BF3B'], // green
+	        [0.5, '#DDDF0D'], // yellow
+	        [0.9, '#DF5353'] // red
+	        ],
+	        lineWidth: 0,
+	        minorTickInterval: null,
+	        tickAmount: 2,
+	        title: {
+	            y: -70
+	        },
+	        labels: {
+	            y: 16
+	        },
+	        min: 0,
+	        max: 200
+	    }, 'title', {
+	        text: 'Speed',
+	        style: { "font-size": "20px" }
+	    }),
+
+	    credits: {
+	        enabled: false
+	    },
+
+	    series: [{
+	        name: 'Speed',
+	        data: [190],
+	        dataLabels: {
+	            format: '<div style="text-align:center"><span style="font-size:48px;color:' + (_highcharts2.default.theme && _highcharts2.default.theme.contrastTextColor || 'black') + '">{y}</span><br/>' + '<span style="font-size:16px;color:silver">km/h</span></div>'
+	        },
+	        tooltip: {
+	            valueSuffix: ' km/h'
+	        }
+	    }],
+
+	    plotOptions: {
+	        solidgauge: {
+	            dataLabels: {
+	                y: 5,
+	                borderWidth: 0,
+	                useHTML: true
+	            }
+	        }
+	    }
+	};
+
+	var rpmOptions = {
+	    chart: {
+	        type: 'solidgauge'
+	    },
+
+	    title: null,
+
+	    pane: {
+	        center: ['50%', '85%'],
+	        size: '140%',
+	        startAngle: -90,
+	        endAngle: 90,
+	        background: {
+	            backgroundColor: _highcharts2.default.theme && _highcharts2.default.theme.background2 || '#EEE',
+	            innerRadius: '60%',
+	            outerRadius: '100%',
+	            shape: 'arc'
+	        }
+	    },
+
+	    tooltip: {
+	        enabled: false
+	    },
+
+	    plotOptions: {
+	        solidgauge: {
+	            dataLabels: {
+	                y: 5,
+	                borderWidth: 0,
+	                useHTML: true
+	            }
+	        }
+	    },
+
+	    yAxis: _defineProperty({
+	        stops: [[0.1, '#55BF3B'], // green
+	        [0.5, '#DDDF0D'], // yellow
+	        [0.9, '#DF5353'] // red
+	        ],
+	        lineWidth: 0,
+	        minorTickInterval: null,
+	        tickAmount: 2,
+	        title: {
+	            y: -70
+	        },
+	        labels: {
+	            y: 16
+	        },
+	        min: 0,
+	        max: 5
+	    }, 'title', {
+	        text: 'RPM',
+	        style: { "font-size": "20px" }
+	    }),
+
+	    series: [{
+	        name: 'RPM',
+	        data: [1],
+	        dataLabels: {
+	            format: '<div style="text-align:center"><span style="font-size:48px;color:' + (_highcharts2.default.theme && _highcharts2.default.theme.contrastTextColor || 'black') + '">{y:.1f}</span><br/>' + '<span style="font-size:16px;color:silver">* 1000 / min</span></div>'
+	        },
+	        tooltip: {
+	            valueSuffix: ' revolutions/min'
+	        }
+	    }]
+	};
+
+	var Gauge = function (_Component) {
+	    _inherits(Gauge, _Component);
+
+	    function Gauge() {
+	        _classCallCheck(this, Gauge);
+
+	        return _possibleConstructorReturn(this, (Gauge.__proto__ || Object.getPrototypeOf(Gauge)).apply(this, arguments));
+	    }
+
+	    _createClass(Gauge, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'row' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'col-sm-6' },
+	                    _react2.default.createElement(_chartAbstract2.default, { container: 'speed-chart', options: speedOptions, 'function': moveSpeed })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'col-sm-6' },
+	                    _react2.default.createElement(_chartAbstract2.default, { container: 'rpm-chart', options: rpmOptions, 'function': moveRPM })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Gauge;
+	}(_react.Component);
+
+	exports.default = Gauge;
+
+/***/ },
+/* 278 */
+/***/ function(module, exports) {
+
+	/*
+	  Highcharts JS v5.0.14 (2017-07-28)
+	 Solid angular gauge module
+
+	 (c) 2010-2017 Torstein Honsi
+
+	 License: www.highcharts.com/license
+	*/
+	(function(l){"object"===typeof module&&module.exports?module.exports=l:l(Highcharts)})(function(l){(function(e){var l=e.pInt,u=e.pick,m=e.each,r=e.isNumber,w=e.wrap,v;w(e.Renderer.prototype.symbols,"arc",function(a,f,d,c,e,b){a=a(f,d,c,e,b);b.rounded&&(c=((b.r||c)-b.innerR)/2,b=["A",c,c,0,1,1,a[12],a[13]],a.splice.apply(a,[a.length-1,0].concat(["A",c,c,0,1,1,a[1],a[2]])),a.splice.apply(a,[11,3].concat(b)));return a});v={initDataClasses:function(a){var f=this.chart,d,c=0,t=this.options;this.dataClasses=
+	d=[];m(a.dataClasses,function(b,h){b=e.merge(b);d.push(b);b.color||("category"===t.dataClassColor?(h=f.options.colors,b.color=h[c++],c===h.length&&(c=0)):b.color=e.color(t.minColor).tweenTo(e.color(t.maxColor),h/(a.dataClasses.length-1)))})},initStops:function(a){this.stops=a.stops||[[0,this.options.minColor],[1,this.options.maxColor]];m(this.stops,function(a){a.color=e.color(a[1])})},toColor:function(a,f){var d=this.stops,c,e,b=this.dataClasses,h,g;if(b)for(g=b.length;g--;){if(h=b[g],c=h.from,d=
+	h.to,(void 0===c||a>=c)&&(void 0===d||a<=d)){e=h.color;f&&(f.dataClass=g);break}}else{this.isLog&&(a=this.val2lin(a));a=1-(this.max-a)/(this.max-this.min);for(g=d.length;g--&&!(a>d[g][0]););c=d[g]||d[g+1];d=d[g+1]||c;a=1-(d[0]-a)/(d[0]-c[0]||1);e=c.color.tweenTo(d.color,a)}return e}};e.seriesType("solidgauge","gauge",{colorByPoint:!0},{translate:function(){var a=this.yAxis;e.extend(a,v);!a.dataClasses&&a.options.dataClasses&&a.initDataClasses(a.options);a.initStops(a.options);e.seriesTypes.gauge.prototype.translate.call(this)},
+	drawPoints:function(){var a=this,f=a.yAxis,d=f.center,c=a.options,t=a.chart.renderer,b=c.overshoot,h=r(b)?b/180*Math.PI:0,g;r(c.threshold)&&(g=f.startAngleRad+f.translate(c.threshold,null,null,null,!0));this.thresholdAngleRad=u(g,f.startAngleRad);m(a.points,function(b){var g=b.graphic,k=f.startAngleRad+f.translate(b.y,null,null,null,!0),m=l(u(b.options.radius,c.radius,100))*d[2]/200,n=l(u(b.options.innerRadius,c.innerRadius,60))*d[2]/200,p=f.toColor(b.y,b),q=Math.min(f.startAngleRad,f.endAngleRad),
+	r=Math.max(f.startAngleRad,f.endAngleRad);"none"===p&&(p=b.color||a.color||"none");"none"!==p&&(b.color=p);k=Math.max(q-h,Math.min(r+h,k));!1===c.wrap&&(k=Math.max(q,Math.min(r,k)));q=Math.min(k,a.thresholdAngleRad);k=Math.max(k,a.thresholdAngleRad);k-q>2*Math.PI&&(k=q+2*Math.PI);b.shapeArgs=n={x:d[0],y:d[1],r:m,innerR:n,start:q,end:k,rounded:c.rounded};b.startR=m;g?(b=n.d,g.animate(e.extend({fill:p},n)),b&&(n.d=b)):(b.graphic=t.arc(n).addClass(b.getClassName(),!0).attr({fill:p,"sweep-flag":0}).add(a.group),
+	"square"!==c.linecap&&b.graphic.attr({"stroke-linecap":"round","stroke-linejoin":"round"}),b.graphic.attr({stroke:c.borderColor||"none","stroke-width":c.borderWidth||0}))})},animate:function(a){a||(this.startAngleRad=this.thresholdAngleRad,e.seriesTypes.pie.prototype.animate.call(this,a))}})})(l)});
 
 
 /***/ }
