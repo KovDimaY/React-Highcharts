@@ -9,6 +9,7 @@ import Line from './components/charts/line';
 import Bar from './components/charts/bar';
 import Pie from './components/charts/pie';
 import Bubble from './components/charts/bubble';
+import Scattering from './components/charts/scatter';
 
 // Routes definition
 export default (
@@ -18,6 +19,7 @@ export default (
     <Router path='/bar' component={Bar} />
     <Router path='/pie' component={Pie} />
     <Router path='/bubble' component={Bubble} />
+    <Router path='/scatter' component={Scattering} />
     <Router path='*' component={Home} />
   </Router>
 );
