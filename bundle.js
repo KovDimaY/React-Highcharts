@@ -75,7 +75,7 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	__webpack_require__(266);
+	__webpack_require__(267);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27377,25 +27377,29 @@
 
 	var _line2 = _interopRequireDefault(_line);
 
-	var _bar = __webpack_require__(270);
+	var _bar = __webpack_require__(266);
 
 	var _bar2 = _interopRequireDefault(_bar);
+
+	var _pie = __webpack_require__(271);
+
+	var _pie2 = _interopRequireDefault(_pie);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// Routes definition
-
-
-	// Components import
-	// Node modules import
 	exports.default = _react2.default.createElement(
 	  _reactRouter.Router,
 	  { path: '/', component: _app2.default },
 	  _react2.default.createElement(_reactRouter.IndexRoute, { component: _home2.default }),
 	  _react2.default.createElement(_reactRouter.Router, { path: '/line', component: _line2.default }),
 	  _react2.default.createElement(_reactRouter.Router, { path: '/bar', component: _bar2.default }),
+	  _react2.default.createElement(_reactRouter.Router, { path: '/pie', component: _pie2.default }),
 	  _react2.default.createElement(_reactRouter.Router, { path: '*', component: _home2.default })
 	);
+
+	// Components import
+	// Node modules import
 
 /***/ },
 /* 260 */
@@ -28507,13 +28511,97 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(29);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _chartAbstract = __webpack_require__(264);
+
+	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var barOptions = {
+	    title: {
+	        text: 'Fruit Consumption'
+	    },
+	    xAxis: {
+	        categories: ['Apples', 'Bananas', 'Oranges', 'Grapes']
+	    },
+	    yAxis: {
+	        title: {
+	            text: 'Fruit eaten'
+	        }
+	    },
+	    chart: {
+	        type: 'bar'
+	    },
+	    series: [{
+	        name: 'Dima',
+	        data: [1, 3, 4, 3]
+	    }, {
+	        name: 'Tanya',
+	        data: [5, 7, 3, 1]
+	    }, {
+	        name: 'Masha',
+	        data: [3, 5, 6, 4]
+	    }]
+	};
+
+	var Bar = function (_Component) {
+	    _inherits(Bar, _Component);
+
+	    function Bar() {
+	        _classCallCheck(this, Bar);
+
+	        return _possibleConstructorReturn(this, (Bar.__proto__ || Object.getPrototypeOf(Bar)).apply(this, arguments));
+	    }
+
+	    _createClass(Bar, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_chartAbstract2.default, { container: 'bar-chart', options: barOptions })
+	            );
+	        }
+	    }]);
+
+	    return Bar;
+	}(_react.Component);
+
+	exports.default = Bar;
+
+/***/ },
+/* 267 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(267);
+	var content = __webpack_require__(268);
 	if (typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(269)(content, {});
+	var update = __webpack_require__(270)(content, {});
 	if (content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if (false) {
@@ -28532,10 +28620,10 @@
 	}
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(268)();
+	exports = module.exports = __webpack_require__(269)();
 	// imports
 
 
@@ -28546,7 +28634,7 @@
 
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports) {
 
 	/*
@@ -28602,7 +28690,7 @@
 
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -28854,7 +28942,7 @@
 
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28885,30 +28973,50 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var barOptions = {
+	var pieOptions = {
+	    chart: {
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        type: 'pie'
+	    },
 	    title: {
-	        text: 'Fruit Consumption'
+	        text: 'Browser market shares January, 2015 to May, 2015'
 	    },
-	    xAxis: {
-	        categories: ['Apples', 'Bananas', 'Oranges', 'Grapes']
+	    tooltip: {
+	        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
 	    },
-	    yAxis: {
-	        title: {
-	            text: 'Fruit eaten'
+	    plotOptions: {
+	        pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: false
+	            },
+	            showInLegend: true
 	        }
 	    },
-	    chart: {
-	        type: 'bar'
-	    },
 	    series: [{
-	        name: 'Dima',
-	        data: [1, 3, 4, 3]
-	    }, {
-	        name: 'Tanya',
-	        data: [5, 7, 3, 1]
-	    }, {
-	        name: 'Masha',
-	        data: [3, 5, 6, 4]
+	        name: 'Brands',
+	        colorByPoint: true,
+	        data: [{
+	            name: 'Microsoft IE',
+	            y: 56.33
+	        }, {
+	            name: 'Chrome',
+	            y: 24.03,
+	            sliced: true,
+	            selected: true
+	        }, {
+	            name: 'Firefox',
+	            y: 10.38
+	        }, {
+	            name: 'Safari',
+	            y: 4.77
+	        }, {
+	            name: 'Opera',
+	            y: 0.91
+	        }]
 	    }]
 	};
 
@@ -28927,7 +29035,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_chartAbstract2.default, { container: 'bar-chart', options: barOptions })
+	                _react2.default.createElement(_chartAbstract2.default, { container: 'pie-chart', options: pieOptions })
 	            );
 	        }
 	    }]);
