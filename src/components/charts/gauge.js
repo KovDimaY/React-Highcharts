@@ -41,7 +41,6 @@ function moveRPM(chart) {
                 newVal,
                 inc;
 
-            console.log(this);
             // RPM
             if (chart) {
                 point = chart.series[0].points[0];
@@ -53,7 +52,6 @@ function moveRPM(chart) {
                 }
 
                 point.update(newVal);
-                this.forceUpdate();
             }
 
         }, 2000);

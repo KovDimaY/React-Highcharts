@@ -60,4 +60,9 @@
   footer .footer-linkedin:hover i {
   	color: #0077b5;
   }
+
+  @import 'header';
+  @import 'footer';
+  @import 'content';
+  @import 'not-found';
 }
