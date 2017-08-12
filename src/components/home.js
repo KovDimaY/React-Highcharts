@@ -3,11 +3,6 @@ import React, { Component } from 'react'
 export default class Home extends Component {
 
 	render() {
-		const chartStyle = {
-        //marginLeft: '5%',
-        width: '90%'
-    };
-
 		return(
 			<div className="home-page">
           <div className="jumbotron">
@@ -34,7 +29,7 @@ export default class Home extends Component {
           <div id="charts-info" className="row">
             <div className="col-sm-4">
               <h2>Line Chart</h2>
-              <img src={"images/charts/line-chart.png"} alt="Line Chart" style={ chartStyle }/>
+              <img src={"images/charts/line-chart.png"} alt="Line Chart"/>
               <p>A line chart or line graph is a type of chart which displays information as a series of
                   data points called 'markers' connected by straight line segments. It is a basic type of
                   chart common in many fields. It is similar to a scatter plot except that the measurement
@@ -45,7 +40,7 @@ export default class Home extends Component {
             </div>
             <div className="col-sm-4">
               <h2>Bar Chart</h2>
-              <img src={"images/charts/bar-chart.png"} alt="Bar Chart" style={ chartStyle }/>
+              <img src={"images/charts/bar-chart.png"} alt="Bar Chart"/>
               <p>A bar chart or bar graph is a chart or graph that presents grouped data with rectangular bars with
                   lengths proportional to the values that they represent.
                   The bars can be plotted vertically or horizontally.
@@ -58,7 +53,7 @@ export default class Home extends Component {
            </div>
             <div className="col-sm-4">
               <h2>Pie Chart</h2>
-              <img src={"images/charts/pie-chart.JPG"} alt="Pie Chart" style={ chartStyle }/>
+              <img src={"images/charts/pie-chart.JPG"} alt="Pie Chart"/>
               <p>A pie chart (or a circle chart) is a circular statistical graphic which is divided
                   into slices to illustrate numerical proportion. In a pie chart, the arc length of
                   each slice (and consequently its central angle and area), is proportional to the quantity
@@ -74,7 +69,7 @@ export default class Home extends Component {
           <div className="row">
             <div className="col-sm-4">
               <h2>Bubble Chart</h2>
-              <img src={"images/charts/bubble-chart.png"} alt="Bubble Chart" style={ chartStyle }/>
+              <img src={"images/charts/bubble-chart.png"} alt="Bubble Chart"/>
               <p className="text-danger">Notice that <a href="https://www.npmjs.com/package/highcharts-more">highcharts-more</a>  module
                 is required for this kind of charts!</p>
               <p>A bubble chart is a type of chart that displays three dimensions of data.
@@ -91,7 +86,7 @@ export default class Home extends Component {
             </div>
             <div className="col-sm-4">
               <h2>Scatter Plot</h2>
-              <img src={"images/charts/scatter-plot.png"} alt="Scatter Plot" style={ chartStyle }/>
+              <img src={"images/charts/scatter-plot.png"} alt="Scatter Plot"/>
               <p className="text-danger">Notice that <a href="https://www.npmjs.com/package/highcharts-3d">highcharts-3d</a> module
                 is required for 3D version of this chart!</p>
               <p>A scatter plot (also called a scatter graph, scatter chart, scattergram, or scatter diagram)
@@ -104,7 +99,7 @@ export default class Home extends Component {
            </div>
             <div className="col-sm-4">
               <h2>Gauge Chart</h2>
-              <img src={"images/charts/gauge-chart.png"} alt="Gauge Chart" style={ chartStyle }/>
+              <img src={"images/charts/gauge-chart.png"} alt="Gauge Chart"/>
               <p className="text-danger">Notice that <a href="https://www.npmjs.com/package/highcharts-more">highcharts-more</a> and
               <a href="https://www.npmjs.com/package/highcharts-solid-gauge"> highcharts-solid-gauge</a> modules
                 are required for this charts!</p>

@@ -75,7 +75,7 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	__webpack_require__(277);
+	__webpack_require__(280);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27369,39 +27369,39 @@
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _home = __webpack_require__(262);
+	var _home = __webpack_require__(263);
 
 	var _home2 = _interopRequireDefault(_home);
 
-	var _line = __webpack_require__(263);
+	var _line = __webpack_require__(264);
 
 	var _line2 = _interopRequireDefault(_line);
 
-	var _bar = __webpack_require__(269);
+	var _bar = __webpack_require__(272);
 
 	var _bar2 = _interopRequireDefault(_bar);
 
-	var _pie = __webpack_require__(270);
+	var _pie = __webpack_require__(273);
 
 	var _pie2 = _interopRequireDefault(_pie);
 
-	var _bubble = __webpack_require__(271);
+	var _bubble = __webpack_require__(274);
 
 	var _bubble2 = _interopRequireDefault(_bubble);
 
-	var _scatter = __webpack_require__(272);
+	var _scatter = __webpack_require__(275);
 
 	var _scatter2 = _interopRequireDefault(_scatter);
 
-	var _gauge = __webpack_require__(274);
+	var _gauge = __webpack_require__(277);
 
 	var _gauge2 = _interopRequireDefault(_gauge);
 
-	var _combo = __webpack_require__(275);
+	var _combo = __webpack_require__(278);
 
 	var _combo2 = _interopRequireDefault(_combo);
 
-	var _clock = __webpack_require__(276);
+	var _clock = __webpack_require__(279);
 
 	var _clock2 = _interopRequireDefault(_clock);
 
@@ -27447,7 +27447,7 @@
 
 	var _header2 = _interopRequireDefault(_header);
 
-	var _footer = __webpack_require__(281);
+	var _footer = __webpack_require__(262);
 
 	var _footer2 = _interopRequireDefault(_footer);
 
@@ -27666,7 +27666,88 @@
 /* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // Node modules import
+
+
+	var Footer = function (_Component) {
+	  _inherits(Footer, _Component);
+
+	  function Footer() {
+	    _classCallCheck(this, Footer);
+
+	    return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));
+	  }
+
+	  _createClass(Footer, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "footer",
+	        null,
+	        _react2.default.createElement(
+	          "div",
+	          { className: "content-padding" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "footer-content" },
+	            _react2.default.createElement(
+	              "p",
+	              null,
+	              "Copyright \xA9 Dmytro Kovalenko ;)"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "social-media-icons" },
+	              _react2.default.createElement(
+	                "a",
+	                { href: "https://www.facebook.com/dmytro.kovalenko.1004", className: "footer-facebook" },
+	                _react2.default.createElement("i", { className: "fa fa-facebook" })
+	              ),
+	              _react2.default.createElement(
+	                "a",
+	                { href: "https://www.vk.com/id11545172", className: "footer-vk" },
+	                _react2.default.createElement("i", { className: "fa fa-vk" })
+	              ),
+	              _react2.default.createElement(
+	                "a",
+	                { href: "https://www.linkedin.com/in/kovalenkodmytro", className: "footer-linkedin" },
+	                _react2.default.createElement("i", { className: "fa fa-linkedin" })
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Footer;
+	}(_react.Component);
+
+	exports.default = Footer;
+
+/***/ },
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -27696,245 +27777,240 @@
 	  }
 
 	  _createClass(Home, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
-	      var chartStyle = {
-	        //marginLeft: '5%',
-	        width: '90%'
-	      };
-
 	      return _react2.default.createElement(
-	        'div',
-	        { className: 'home-page' },
+	        "div",
+	        { className: "home-page" },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'jumbotron' },
+	          "div",
+	          { className: "jumbotron" },
 	          _react2.default.createElement(
-	            'h1',
+	            "h1",
 	            null,
-	            'Highcharts are Cool!'
+	            "Highcharts are Cool!"
 	          ),
-	          _react2.default.createElement('br', null),
+	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
-	            'p',
+	            "p",
 	            null,
 	            _react2.default.createElement(
-	              'a',
-	              { href: 'https://www.highcharts.com/' },
-	              'Highcharts'
+	              "a",
+	              { href: "https://www.highcharts.com/" },
+	              "Highcharts"
 	            ),
-	            ' is a charting library written in pure JavaScript, offering an easy way of adding interactive charts to your web site or web application. Highcharts currently supports line, spline, area, areaspline, column, bar, pie, scatter, angular gauges, arearange, areasplinerange, columnrange, bubble, box plot, error bars, funnel, waterfall and polar chart types.'
+	            " is a charting library written in pure JavaScript, offering an easy way of adding interactive charts to your web site or web application. Highcharts currently supports line, spline, area, areaspline, column, bar, pie, scatter, angular gauges, arearange, areasplinerange, columnrange, bubble, box plot, error bars, funnel, waterfall and polar chart types."
 	          ),
-	          _react2.default.createElement('br', null),
+	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
-	            'p',
+	            "p",
 	            null,
-	            'It works in all modern mobile and desktop browsers including the iPhone/iPad and Internet Explorer from version 6. On iOS and Android, multitouch support provides a seamless user experience. Standard browsers use SVG for the graphics rendering. In legacy Internet Explorer graphics are drawn using VML.'
+	            "It works in all modern mobile and desktop browsers including the iPhone/iPad and Internet Explorer from version 6. On iOS and Android, multitouch support provides a seamless user experience. Standard browsers use SVG for the graphics rendering. In legacy Internet Explorer graphics are drawn using VML."
 	          ),
-	          _react2.default.createElement('br', null),
+	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
-	            'p',
+	            "p",
 	            null,
-	            'Here I tried to use some of the most important and popular charts as React.js components. Also in this application I used the concept of',
+	            "Here I tried to use some of the most important and popular charts as React.js components. Also in this application I used the concept of",
 	            _react2.default.createElement(
-	              'a',
-	              { href: 'https://webpack.github.io/docs/multiple-entry-points.html' },
-	              ' multiple entry points '
+	              "a",
+	              { href: "https://webpack.github.io/docs/multiple-entry-points.html" },
+	              " multiple entry points "
 	            ),
-	            'in my webpack config for the first time. So this app helped me to learn a lot of new stuff! Hope it will also help somebody else. :)'
+	            "in my webpack config for the first time. So this app helped me to learn a lot of new stuff! Hope it will also help somebody else. :)"
 	          ),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement('br', null),
+	          _react2.default.createElement("br", null),
+	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
-	            'a',
-	            { className: 'btn btn-lg btn-success', href: '#charts-info', role: 'button' },
-	            'Read More About Charts'
+	            "a",
+	            { className: "btn btn-lg btn-success", href: "#charts-info", role: "button" },
+	            "Read More About Charts"
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { id: 'charts-info', className: 'row' },
+	          "div",
+	          { id: "charts-info", className: "row" },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'col-sm-4' },
+	            "div",
+	            { className: "col-sm-4" },
 	            _react2.default.createElement(
-	              'h2',
+	              "h2",
 	              null,
-	              'Line Chart'
+	              "Line Chart"
 	            ),
-	            _react2.default.createElement('img', { src: "images/charts/line-chart.png", alt: 'Line Chart', style: chartStyle }),
+	            _react2.default.createElement("img", { src: "images/charts/line-chart.png", alt: "Line Chart" }),
 	            _react2.default.createElement(
-	              'p',
+	              "p",
 	              null,
-	              'A line chart or line graph is a type of chart which displays information as a series of data points called \'markers\' connected by straight line segments. It is a basic type of chart common in many fields. It is similar to a scatter plot except that the measurement points are ordered (typically by their x-axis value) and joined with straight line segments.',
-	              _react2.default.createElement('br', null),
-	              ' ',
-	              _react2.default.createElement('br', null),
-	              'A line chart is often used to visualize a trend in data over intervals of time \u2013 a time series \u2013 thus the line is often drawn chronologically. In these cases they are known as run charts.'
+	              "A line chart or line graph is a type of chart which displays information as a series of data points called 'markers' connected by straight line segments. It is a basic type of chart common in many fields. It is similar to a scatter plot except that the measurement points are ordered (typically by their x-axis value) and joined with straight line segments.",
+	              _react2.default.createElement("br", null),
+	              " ",
+	              _react2.default.createElement("br", null),
+	              "A line chart is often used to visualize a trend in data over intervals of time \u2013 a time series \u2013 thus the line is often drawn chronologically. In these cases they are known as run charts."
 	            ),
 	            _react2.default.createElement(
-	              'a',
-	              { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Line_chart', role: 'button' },
-	              'View details \xBB'
+	              "a",
+	              { className: "btn btn-default", href: "https://en.wikipedia.org/wiki/Line_chart", role: "button" },
+	              "View details \xBB"
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'col-sm-4' },
+	            "div",
+	            { className: "col-sm-4" },
 	            _react2.default.createElement(
-	              'h2',
+	              "h2",
 	              null,
-	              'Bar Chart'
+	              "Bar Chart"
 	            ),
-	            _react2.default.createElement('img', { src: "images/charts/bar-chart.png", alt: 'Bar Chart', style: chartStyle }),
+	            _react2.default.createElement("img", { src: "images/charts/bar-chart.png", alt: "Bar Chart" }),
 	            _react2.default.createElement(
-	              'p',
+	              "p",
 	              null,
-	              'A bar chart or bar graph is a chart or graph that presents grouped data with rectangular bars with lengths proportional to the values that they represent. The bars can be plotted vertically or horizontally. A vertical bar chart is sometimes called a Line graph.',
-	              _react2.default.createElement('br', null),
-	              '  ',
-	              _react2.default.createElement('br', null),
-	              'A bar graph is a chart that uses either horizontal or vertical bars to show comparisons among categories. One axis of the chart shows the specific categories being compared, and the other axis represents a discrete value. Some bar graphs present bars clustered in groups of more than one.'
+	              "A bar chart or bar graph is a chart or graph that presents grouped data with rectangular bars with lengths proportional to the values that they represent. The bars can be plotted vertically or horizontally. A vertical bar chart is sometimes called a Line graph.",
+	              _react2.default.createElement("br", null),
+	              "  ",
+	              _react2.default.createElement("br", null),
+	              "A bar graph is a chart that uses either horizontal or vertical bars to show comparisons among categories. One axis of the chart shows the specific categories being compared, and the other axis represents a discrete value. Some bar graphs present bars clustered in groups of more than one."
 	            ),
 	            _react2.default.createElement(
-	              'a',
-	              { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Bar_chart', role: 'button' },
-	              'View details \xBB'
+	              "a",
+	              { className: "btn btn-default", href: "https://en.wikipedia.org/wiki/Bar_chart", role: "button" },
+	              "View details \xBB"
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'col-sm-4' },
+	            "div",
+	            { className: "col-sm-4" },
 	            _react2.default.createElement(
-	              'h2',
+	              "h2",
 	              null,
-	              'Pie Chart'
+	              "Pie Chart"
 	            ),
-	            _react2.default.createElement('img', { src: "images/charts/pie-chart.JPG", alt: 'Pie Chart', style: chartStyle }),
+	            _react2.default.createElement("img", { src: "images/charts/pie-chart.JPG", alt: "Pie Chart" }),
 	            _react2.default.createElement(
-	              'p',
+	              "p",
 	              null,
-	              'A pie chart (or a circle chart) is a circular statistical graphic which is divided into slices to illustrate numerical proportion. In a pie chart, the arc length of each slice (and consequently its central angle and area), is proportional to the quantity it represents.',
-	              _react2.default.createElement('br', null),
-	              ' ',
-	              _react2.default.createElement('br', null),
-	              'Pie charts are very widely used in the business world and the mass media. However, they have been criticized, and many experts recommend avoiding them, pointing out that research has shown it is difficult to compare different sections of a given pie chart, or to compare data across different pie charts.'
+	              "A pie chart (or a circle chart) is a circular statistical graphic which is divided into slices to illustrate numerical proportion. In a pie chart, the arc length of each slice (and consequently its central angle and area), is proportional to the quantity it represents.",
+	              _react2.default.createElement("br", null),
+	              " ",
+	              _react2.default.createElement("br", null),
+	              "Pie charts are very widely used in the business world and the mass media. However, they have been criticized, and many experts recommend avoiding them, pointing out that research has shown it is difficult to compare different sections of a given pie chart, or to compare data across different pie charts."
 	            ),
 	            _react2.default.createElement(
-	              'a',
-	              { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Pie_chart', role: 'button' },
-	              'View details \xBB'
+	              "a",
+	              { className: "btn btn-default", href: "https://en.wikipedia.org/wiki/Pie_chart", role: "button" },
+	              "View details \xBB"
 	            )
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
+	          "div",
+	          { className: "row" },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'col-sm-4' },
+	            "div",
+	            { className: "col-sm-4" },
 	            _react2.default.createElement(
-	              'h2',
+	              "h2",
 	              null,
-	              'Bubble Chart'
+	              "Bubble Chart"
 	            ),
-	            _react2.default.createElement('img', { src: "images/charts/bubble-chart.png", alt: 'Bubble Chart', style: chartStyle }),
+	            _react2.default.createElement("img", { src: "images/charts/bubble-chart.png", alt: "Bubble Chart" }),
 	            _react2.default.createElement(
-	              'p',
-	              { className: 'text-danger' },
-	              'Notice that ',
+	              "p",
+	              { className: "text-danger" },
+	              "Notice that ",
 	              _react2.default.createElement(
-	                'a',
-	                { href: 'https://www.npmjs.com/package/highcharts-more' },
-	                'highcharts-more'
+	                "a",
+	                { href: "https://www.npmjs.com/package/highcharts-more" },
+	                "highcharts-more"
 	              ),
-	              '  module is required for this kind of charts!'
+	              "  module is required for this kind of charts!"
 	            ),
 	            _react2.default.createElement(
-	              'p',
+	              "p",
 	              null,
-	              'A bubble chart is a type of chart that displays three dimensions of data. Each entity with its triplet (v1, v2, v3) of associated data is plotted as a disk that expresses two of the vi values through the disk\'s xy location and the third through its size. Bubble charts can facilitate the understanding of social, economical, medical, and other scientific relationships.',
-	              _react2.default.createElement('br', null),
-	              ' ',
-	              _react2.default.createElement('br', null),
-	              'Bubble charts can be considered a variation of the scatter plot, in which the data points are replaced with bubbles. As the documentation for Microsoft Office explains, "You can use a bubble chart instead of a scatter chart if your data has three data series that each contain a set of values. The sizes of the bubbles are determined by the values in the third data series."'
+	              "A bubble chart is a type of chart that displays three dimensions of data. Each entity with its triplet (v1, v2, v3) of associated data is plotted as a disk that expresses two of the vi values through the disk's xy location and the third through its size. Bubble charts can facilitate the understanding of social, economical, medical, and other scientific relationships.",
+	              _react2.default.createElement("br", null),
+	              " ",
+	              _react2.default.createElement("br", null),
+	              "Bubble charts can be considered a variation of the scatter plot, in which the data points are replaced with bubbles. As the documentation for Microsoft Office explains, \"You can use a bubble chart instead of a scatter chart if your data has three data series that each contain a set of values. The sizes of the bubbles are determined by the values in the third data series.\""
 	            ),
 	            _react2.default.createElement(
-	              'a',
-	              { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Bubble_chart', role: 'button' },
-	              'View details \xBB'
+	              "a",
+	              { className: "btn btn-default", href: "https://en.wikipedia.org/wiki/Bubble_chart", role: "button" },
+	              "View details \xBB"
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'col-sm-4' },
+	            "div",
+	            { className: "col-sm-4" },
 	            _react2.default.createElement(
-	              'h2',
+	              "h2",
 	              null,
-	              'Scatter Plot'
+	              "Scatter Plot"
 	            ),
-	            _react2.default.createElement('img', { src: "images/charts/scatter-plot.png", alt: 'Scatter Plot', style: chartStyle }),
+	            _react2.default.createElement("img", { src: "images/charts/scatter-plot.png", alt: "Scatter Plot" }),
 	            _react2.default.createElement(
-	              'p',
-	              { className: 'text-danger' },
-	              'Notice that ',
+	              "p",
+	              { className: "text-danger" },
+	              "Notice that ",
 	              _react2.default.createElement(
-	                'a',
-	                { href: 'https://www.npmjs.com/package/highcharts-3d' },
-	                'highcharts-3d'
+	                "a",
+	                { href: "https://www.npmjs.com/package/highcharts-3d" },
+	                "highcharts-3d"
 	              ),
-	              ' module is required for 3D version of this chart!'
+	              " module is required for 3D version of this chart!"
 	            ),
 	            _react2.default.createElement(
-	              'p',
+	              "p",
 	              null,
-	              'A scatter plot (also called a scatter graph, scatter chart, scattergram, or scatter diagram) is a type of plot or mathematical diagram using Cartesian coordinates to display values for typically two variables for a set of data. If the points are color-coded, one additional variable can be displayed. The data is displayed as a collection of points, each having the value of one variable determining the position on the horizontal axis and the value of the other variable determining the position on the vertical axis.'
+	              "A scatter plot (also called a scatter graph, scatter chart, scattergram, or scatter diagram) is a type of plot or mathematical diagram using Cartesian coordinates to display values for typically two variables for a set of data. If the points are color-coded, one additional variable can be displayed. The data is displayed as a collection of points, each having the value of one variable determining the position on the horizontal axis and the value of the other variable determining the position on the vertical axis."
 	            ),
 	            _react2.default.createElement(
-	              'a',
-	              { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Scatter_plot', role: 'button' },
-	              'View details \xBB'
+	              "a",
+	              { className: "btn btn-default", href: "https://en.wikipedia.org/wiki/Scatter_plot", role: "button" },
+	              "View details \xBB"
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'col-sm-4' },
+	            "div",
+	            { className: "col-sm-4" },
 	            _react2.default.createElement(
-	              'h2',
+	              "h2",
 	              null,
-	              'Gauge Chart'
+	              "Gauge Chart"
 	            ),
-	            _react2.default.createElement('img', { src: "images/charts/gauge-chart.png", alt: 'Gauge Chart', style: chartStyle }),
+	            _react2.default.createElement("img", { src: "images/charts/gauge-chart.png", alt: "Gauge Chart" }),
 	            _react2.default.createElement(
-	              'p',
-	              { className: 'text-danger' },
-	              'Notice that ',
+	              "p",
+	              { className: "text-danger" },
+	              "Notice that ",
 	              _react2.default.createElement(
-	                'a',
-	                { href: 'https://www.npmjs.com/package/highcharts-more' },
-	                'highcharts-more'
+	                "a",
+	                { href: "https://www.npmjs.com/package/highcharts-more" },
+	                "highcharts-more"
 	              ),
-	              ' and',
+	              " and",
 	              _react2.default.createElement(
-	                'a',
-	                { href: 'https://www.npmjs.com/package/highcharts-solid-gauge' },
-	                ' highcharts-solid-gauge'
+	                "a",
+	                { href: "https://www.npmjs.com/package/highcharts-solid-gauge" },
+	                " highcharts-solid-gauge"
 	              ),
-	              ' modules are required for this charts!'
+	              " modules are required for this charts!"
 	            ),
 	            _react2.default.createElement(
-	              'p',
+	              "p",
 	              null,
-	              'Gauge charts, also known as dial charts or speedometer charts, use needles to show information as a reading on a dial. It consists of a gauge axis (which contains the data range, color ranges, and intervals markers), needles, and a center pivot point.',
-	              _react2.default.createElement('br', null),
-	              ' ',
-	              _react2.default.createElement('br', null),
-	              'Gauge charts are useful for comparing values between a small number of variables either by using multiple needles on the same gauge or by using multiple gauges. On a gauge chart, the value for each needle is read against the colored data range or chart axis. This chart type is often used in executive dashboard reports to show key business indicators.'
+	              "Gauge charts, also known as dial charts or speedometer charts, use needles to show information as a reading on a dial. It consists of a gauge axis (which contains the data range, color ranges, and intervals markers), needles, and a center pivot point.",
+	              _react2.default.createElement("br", null),
+	              " ",
+	              _react2.default.createElement("br", null),
+	              "Gauge charts are useful for comparing values between a small number of variables either by using multiple needles on the same gauge or by using multiple gauges. On a gauge chart, the value for each needle is read against the colored data range or chart axis. This chart type is often used in executive dashboard reports to show key business indicators."
 	            ),
 	            _react2.default.createElement(
-	              'a',
-	              { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Speedometer', role: 'button' },
-	              'View details \xBB'
+	              "a",
+	              { className: "btn btn-default", href: "https://en.wikipedia.org/wiki/Speedometer", role: "button" },
+	              "View details \xBB"
 	            )
 	          )
 	        )
@@ -27948,7 +28024,7 @@
 	exports.default = Home;
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27967,9 +28043,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _chartAbstract = __webpack_require__(264);
+	var _chartAbstract = __webpack_require__(265);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
+
+	var _defaultOptions = __webpack_require__(271);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27979,57 +28057,77 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var lineOptions = {
-	    chart: {
-	        type: 'line'
-	    },
-	    title: {
-	        text: 'Monthly Average Temperature'
-	    },
-	    subtitle: {
-	        text: 'Source: WorldClimate.com'
-	    },
-	    xAxis: {
-	        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-	    },
-	    yAxis: {
-	        title: {
-	            text: 'Temperature (°C)'
-	        }
-	    },
-	    plotOptions: {
-	        line: {
-	            dataLabels: {
-	                enabled: true
-	            },
-	            enableMouseTracking: false
-	        }
-	    },
-	    series: [{
-	        name: 'Tokyo',
-	        data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-	    }, {
-	        name: 'London',
-	        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-	    }]
-	};
-
 	var Line = function (_Component) {
 	    _inherits(Line, _Component);
 
-	    function Line() {
+	    function Line(props) {
 	        _classCallCheck(this, Line);
 
-	        return _possibleConstructorReturn(this, (Line.__proto__ || Object.getPrototypeOf(Line)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (Line.__proto__ || Object.getPrototypeOf(Line)).call(this, props));
+
+	        _this.state = {
+	            options: _defaultOptions.lineOptions
+	        };
+	        return _this;
 	    }
 
 	    _createClass(Line, [{
+	        key: 'randomConfiguration',
+	        value: function randomConfiguration() {
+	            this.setState({ options: {
+	                    title: {
+	                        text: 'Fruit Consumption'
+	                    },
+	                    xAxis: {
+	                        categories: ['Apples', 'Bananas', 'Oranges', 'Grapes']
+	                    },
+	                    yAxis: {
+	                        title: {
+	                            text: 'Fruit eaten'
+	                        }
+	                    },
+	                    chart: {
+	                        type: 'bar'
+	                    },
+	                    series: [{
+	                        name: 'Dima',
+	                        data: [1, 3, 4, 3]
+	                    }, {
+	                        name: 'Tanya',
+	                        data: [5, 7, 3, 1]
+	                    }, {
+	                        name: 'Masha',
+	                        data: [3, 5, 6, 4]
+	                    }]
+	                } });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                null,
-	                _react2.default.createElement(_chartAbstract2.default, { container: 'line-chart', options: lineOptions })
+	                { className: 'line-page' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col-sm-4' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            {
+	                                type: 'button',
+	                                className: 'btn btn-success',
+	                                onClick: this.randomConfiguration.bind(this) },
+	                            'Success'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col-sm-8' },
+	                        _react2.default.createElement(_chartAbstract2.default, { container: 'line-chart', options: this.state.options })
+	                    )
+	                )
 	            );
 	        }
 	    }]);
@@ -28040,7 +28138,7 @@
 	exports.default = Line;
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28055,19 +28153,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _highcharts = __webpack_require__(265);
+	var _highcharts = __webpack_require__(266);
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _highchartsMore = __webpack_require__(266);
+	var _highchartsMore = __webpack_require__(268);
 
 	var _highchartsMore2 = _interopRequireDefault(_highchartsMore);
 
-	var _highcharts3d = __webpack_require__(267);
+	var _highcharts3d = __webpack_require__(269);
 
 	var _highcharts3d2 = _interopRequireDefault(_highcharts3d);
 
-	var _solidGauge = __webpack_require__(268);
+	var _solidGauge = __webpack_require__(270);
 
 	var _solidGauge2 = _interopRequireDefault(_solidGauge);
 
@@ -28098,6 +28196,11 @@
 	            this.chart = new _highcharts2.default[this.props.type || "Chart"](this.refs.chart, this.props.options, this.props.function);
 	        }
 	    }, {
+	        key: 'componentWillUpdate',
+	        value: function componentWillUpdate(nextProps, nextState) {
+	            this.chart = new _highcharts2.default[nextProps.type || "Chart"](this.refs.chart, nextProps.options, nextProps.function);
+	        }
+	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
 	            this.chart.destroy();
@@ -28105,7 +28208,7 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement('div', { ref: 'chart' });
+	            return _react2.default.createElement('div', { ref: 'chart', className: this.props.container });
 	        }
 	    }]);
 
@@ -28115,7 +28218,7 @@
 	exports.default = Chart;
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports) {
 
 	/*
@@ -28523,7 +28626,8 @@
 
 
 /***/ },
-/* 266 */
+/* 267 */,
+/* 268 */
 /***/ function(module, exports) {
 
 	/*
@@ -28596,7 +28700,7 @@
 
 
 /***/ },
-/* 267 */
+/* 269 */
 /***/ function(module, exports) {
 
 	/*
@@ -28677,7 +28781,7 @@
 
 
 /***/ },
-/* 268 */
+/* 270 */
 /***/ function(module, exports) {
 
 	/*
@@ -28697,7 +28801,51 @@
 
 
 /***/ },
-/* 269 */
+/* 271 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var lineOptions = exports.lineOptions = {
+	    chart: {
+	        type: 'line'
+	    },
+	    title: {
+	        text: 'Monthly Average Temperature'
+	    },
+	    subtitle: {
+	        text: 'Source: WorldClimate.com'
+	    },
+	    xAxis: {
+	        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	    },
+	    yAxis: {
+	        title: {
+	            text: 'Temperature (°C)'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: true
+	            },
+	            enableMouseTracking: false
+	        }
+	    },
+	    series: [{
+	        name: 'Tokyo',
+	        data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+	    }, {
+	        name: 'London',
+	        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+	    }]
+	};
+
+/***/ },
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28716,7 +28864,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _chartAbstract = __webpack_require__(264);
+	var _chartAbstract = __webpack_require__(265);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
@@ -28781,7 +28929,7 @@
 	exports.default = Bar;
 
 /***/ },
-/* 270 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28800,7 +28948,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _chartAbstract = __webpack_require__(264);
+	var _chartAbstract = __webpack_require__(265);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
@@ -28885,7 +29033,7 @@
 	exports.default = Pie;
 
 /***/ },
-/* 271 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28904,11 +29052,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _highcharts = __webpack_require__(265);
+	var _highcharts = __webpack_require__(266);
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _chartAbstract = __webpack_require__(264);
+	var _chartAbstract = __webpack_require__(265);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
@@ -28985,7 +29133,7 @@
 	exports.default = Bubble;
 
 /***/ },
-/* 272 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29004,15 +29152,15 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _highcharts = __webpack_require__(265);
+	var _highcharts = __webpack_require__(266);
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _jquery = __webpack_require__(273);
+	var _jquery = __webpack_require__(276);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _chartAbstract = __webpack_require__(264);
+	var _chartAbstract = __webpack_require__(265);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
@@ -29152,7 +29300,7 @@
 	exports.default = Scattering;
 
 /***/ },
-/* 273 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -39411,7 +39559,7 @@
 
 
 /***/ },
-/* 274 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39430,11 +39578,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _highcharts = __webpack_require__(265);
+	var _highcharts = __webpack_require__(266);
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _chartAbstract = __webpack_require__(264);
+	var _chartAbstract = __webpack_require__(265);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
@@ -39669,7 +39817,7 @@
 	exports.default = Gauge;
 
 /***/ },
-/* 275 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39688,11 +39836,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _highcharts = __webpack_require__(265);
+	var _highcharts = __webpack_require__(266);
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _chartAbstract = __webpack_require__(264);
+	var _chartAbstract = __webpack_require__(265);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
@@ -39793,7 +39941,7 @@
 	exports.default = Combo;
 
 /***/ },
-/* 276 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39812,11 +39960,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _highcharts = __webpack_require__(265);
+	var _highcharts = __webpack_require__(266);
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _chartAbstract = __webpack_require__(264);
+	var _chartAbstract = __webpack_require__(265);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
@@ -40030,7 +40178,7 @@
 	exports.default = Line;
 
 /***/ },
-/* 277 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40038,10 +40186,10 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(278);
+	var content = __webpack_require__(281);
 	if (typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(279)(content, {});
+	var update = __webpack_require__(283)(content, {});
 	if (content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if (false) {
@@ -40060,21 +40208,77 @@
 	}
 
 /***/ },
-/* 278 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(280)();
+	exports = module.exports = __webpack_require__(282)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".app body {\n  padding: 50px;\n  padding-left: 100px;\n  padding-right: 100px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif; }\n\n.app p {\n  text-indent: 20px;\n  text-align: justify; }\n\n.app .header {\n  width: 90%;\n  margin: auto; }\n\n.app footer {\n  margin-top: 50px; }\n\n.app footer::before {\n  content: \"\";\n  display: block;\n  width: 90%;\n  margin-bottom: 20px;\n  border-top: 1px solid #dedede;\n  margin-left: auto;\n  margin-right: auto; }\n\n.app footer p {\n  float: left;\n  color: #999;\n  letter-spacing: 0.3px;\n  font-size: 14px;\n  padding-bottom: 20px;\n  margin-left: 10%; }\n\n.app footer .social-media-icons {\n  float: right;\n  margin-right: 10%; }\n\n.app footer .social-media-icons i {\n  font-size: 24px;\n  color: #999;\n  transition: 0.5s ease-in-out; }\n\n.app footer .social-media-icons a {\n  margin-right: 20px; }\n\n.app footer .footer-facebook:hover i {\n  color: #3b5998; }\n\n.app footer .footer-vk:hover i {\n  color: #000000; }\n\n.app footer .footer-linkedin:hover i {\n  color: #0077b5; }\n\n.app .home-page h2 {\n  text-align: center; }\n\n.app .home-page img {\n  margin-bottom: 20px;\n  margin-left: 5%; }\n", ""]);
+	exports.push([module.id, ".app body {\n  padding: 50px;\n  padding-left: 100px;\n  padding-right: 100px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif; }\n\n.app p {\n  text-indent: 20px;\n  text-align: justify; }\n\n.app .header {\n  width: 90%;\n  margin: auto; }\n\n.app footer {\n  margin-top: 50px; }\n\n.app footer::before {\n  content: \"\";\n  display: block;\n  width: 90%;\n  margin-bottom: 20px;\n  border-top: 1px solid #dedede;\n  margin-left: auto;\n  margin-right: auto; }\n\n.app footer p {\n  float: left;\n  color: #999;\n  letter-spacing: 0.3px;\n  font-size: 14px;\n  padding-bottom: 20px;\n  margin-left: 10%; }\n\n.app footer .social-media-icons {\n  float: right;\n  margin-right: 10%; }\n\n.app footer .social-media-icons i {\n  font-size: 24px;\n  color: #999;\n  transition: 0.5s ease-in-out; }\n\n.app footer .social-media-icons a {\n  margin-right: 20px; }\n\n.app footer .footer-facebook:hover i {\n  color: #3b5998; }\n\n.app footer .footer-vk:hover i {\n  color: #000000; }\n\n.app footer .footer-linkedin:hover i {\n  color: #0077b5; }\n\n.app .home-page h2 {\n  text-align: center; }\n\n.app .home-page img {\n  margin-bottom: 20px;\n  margin-left: 5%;\n  width: 90%; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 279 */
+/* 282 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -40324,143 +40528,6 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
-
-/***/ },
-/* 280 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-
-/***/ },
-/* 281 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // Node modules import
-
-
-	var Footer = function (_Component) {
-	  _inherits(Footer, _Component);
-
-	  function Footer() {
-	    _classCallCheck(this, Footer);
-
-	    return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));
-	  }
-
-	  _createClass(Footer, [{
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "footer",
-	        null,
-	        _react2.default.createElement(
-	          "div",
-	          { className: "content-padding" },
-	          _react2.default.createElement(
-	            "div",
-	            { className: "footer-content" },
-	            _react2.default.createElement(
-	              "p",
-	              null,
-	              "Copyright \xA9 Dmytro Kovalenko ;)"
-	            ),
-	            _react2.default.createElement(
-	              "div",
-	              { className: "social-media-icons" },
-	              _react2.default.createElement(
-	                "a",
-	                { href: "https://www.facebook.com/dmytro.kovalenko.1004", className: "footer-facebook" },
-	                _react2.default.createElement("i", { className: "fa fa-facebook" })
-	              ),
-	              _react2.default.createElement(
-	                "a",
-	                { href: "https://www.vk.com/id11545172", className: "footer-vk" },
-	                _react2.default.createElement("i", { className: "fa fa-vk" })
-	              ),
-	              _react2.default.createElement(
-	                "a",
-	                { href: "https://www.linkedin.com/in/kovalenkodmytro", className: "footer-linkedin" },
-	                _react2.default.createElement("i", { className: "fa fa-linkedin" })
-	              )
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Footer;
-	}(_react.Component);
-
-	exports.default = Footer;
 
 /***/ }
 /******/ ]);
