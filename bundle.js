@@ -27581,7 +27581,7 @@
 	                _react2.default.createElement(
 	                  "a",
 	                  { href: path.line },
-	                  "Line Chart"
+	                  "Line"
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -27590,7 +27590,7 @@
 	                _react2.default.createElement(
 	                  "a",
 	                  { href: path.bar },
-	                  "Bar Chart"
+	                  "Bar"
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -27599,7 +27599,7 @@
 	                _react2.default.createElement(
 	                  "a",
 	                  { href: path.pie },
-	                  "Pie Chart"
+	                  "Pie"
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -27608,7 +27608,7 @@
 	                _react2.default.createElement(
 	                  "a",
 	                  { href: path.bubble },
-	                  "Bubble Chart"
+	                  "Bubble"
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -27617,7 +27617,7 @@
 	                _react2.default.createElement(
 	                  "a",
 	                  { href: path.scatter },
-	                  "3D Scatter"
+	                  "Scattering"
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -27626,7 +27626,7 @@
 	                _react2.default.createElement(
 	                  "a",
 	                  { href: path.gauge },
-	                  "Gauge Chart"
+	                  "Gauge"
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -40093,7 +40093,7 @@
 
 
 	// module
-	exports.push([module.id, ".app body {\n  padding: 50px;\n  padding-left: 100px;\n  padding-right: 100px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif; }\n\n.app a {\n  color: #00B7FF; }\n\n.app footer {\n  margin-top: 50px; }\n\n.app footer::before {\n  content: \"\";\n  display: block;\n  width: 90%;\n  margin-bottom: 20px;\n  border-top: 1px solid #dedede;\n  margin-left: auto;\n  margin-right: auto; }\n\n.app footer p {\n  float: left;\n  color: #999;\n  letter-spacing: 0.3px;\n  font-size: 14px;\n  padding-bottom: 20px;\n  margin-left: 10%; }\n\n.app footer .social-media-icons {\n  float: right;\n  margin-right: 10%; }\n\n.app footer .social-media-icons i {\n  font-size: 24px;\n  color: #999;\n  transition: 0.5s ease-in-out; }\n\n.app footer .social-media-icons a {\n  margin-right: 20px; }\n\n.app footer .footer-facebook:hover i {\n  color: #3b5998; }\n\n.app footer .footer-vk:hover i {\n  color: #000000; }\n\n.app footer .footer-linkedin:hover i {\n  color: #0077b5; }\n", ""]);
+	exports.push([module.id, ".app body {\n  padding: 50px;\n  padding-left: 100px;\n  padding-right: 100px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif; }\n\n.app a {\n  color: #00B7FF; }\n\n.app footer {\n  margin-top: 50px; }\n\n.app footer::before {\n  content: \"\";\n  display: block;\n  width: 90%;\n  margin-bottom: 20px;\n  border-top: 1px solid #dedede;\n  margin-left: auto;\n  margin-right: auto; }\n\n.app footer p {\n  float: left;\n  color: #999;\n  letter-spacing: 0.3px;\n  font-size: 14px;\n  padding-bottom: 20px;\n  margin-left: 10%; }\n\n.app footer .social-media-icons {\n  float: right;\n  margin-right: 10%; }\n\n.app footer .social-media-icons i {\n  font-size: 24px;\n  color: #999;\n  transition: 0.5s ease-in-out; }\n\n.app footer .social-media-icons a {\n  margin-right: 20px; }\n\n.app footer .footer-facebook:hover i {\n  color: #3b5998; }\n\n.app footer .footer-vk:hover i {\n  color: #000000; }\n\n.app footer .footer-linkedin:hover i {\n  color: #0077b5; }\n\n.app .header {\n  width: 90%;\n  margin: auto; }\n", ""]);
 
 	// exports
 

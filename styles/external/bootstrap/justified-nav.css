@@ -58,10 +58,7 @@ body {
   border-radius: 0 0 5px 5px;
 }
 
-@media (min-width: 768px) {
-  .nav-justified {
-    max-height: 52px;
-  }
+@media (min-width: 790px) {
   .nav-justified > li > a {
     border-right: 1px solid #d5d5d5;
     border-left: 1px solid #fff;
@@ -77,7 +74,7 @@ body {
 }
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 790px) {
   /* Remove the padding we set earlier */
   .masthead,
   .marketing,

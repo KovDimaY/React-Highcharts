@@ -33,22 +33,22 @@ export default class Header extends Component {
                 <a href={path.home}>Home</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.line)}>
-                <a href={path.line}>Line Chart</a>
+                <a href={path.line}>Line</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.bar)}>
-                <a href={path.bar}>Bar Chart</a>
+                <a href={path.bar}>Bar</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.pie)}>
-                <a href={path.pie}>Pie Chart</a>
+                <a href={path.pie}>Pie</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.bubble)}>
-                <a href={path.bubble}>Bubble Chart</a>
+                <a href={path.bubble}>Bubble</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.scatter)}>
-                <a href={path.scatter}>3D Scatter</a>
+                <a href={path.scatter}>Scattering</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.gauge)}>
-                <a href={path.gauge}>Gauge Chart</a>
+                <a href={path.gauge}>Gauge</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.combo)}>
                 <a href={path.combo}>Combination</a>
