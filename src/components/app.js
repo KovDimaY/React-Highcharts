@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 // Components import
 import Header from './header.js'
-// import Footer from './footer.js'
+import Footer from './footer.js'
 
 // Layout component
 export default class App extends Component {
@@ -14,6 +14,7 @@ export default class App extends Component {
         <div className='container'>
           {this.props.children}
         </div>
+        <Footer />
       </div>
     )
   }

@@ -9,7 +9,7 @@ export default class Home extends Component {
     };
 
 		return(
-			<div>
+			<div className="home-page">
           <div className="jumbotron">
             <h1>Highcharts are Cool!</h1><br/>
             <p><a href="https://www.highcharts.com/">Highcharts</a> is a charting library written in pure JavaScript, offering an easy way of adding
@@ -28,11 +28,11 @@ export default class Home extends Component {
                 in my webpack config for the first time. So this app helped me to learn a lot of new stuff!
                 Hope it will also help somebody else. :)</p><br/><br/>
 
-            <p><a className="btn btn-lg btn-success" href="#charts-info" role="button">Read More About Charts</a></p>
+            <a className="btn btn-lg btn-success" href="#charts-info" role="button">Read More About Charts</a>
           </div>
 
           <div id="charts-info" className="row">
-            <div className="col-lg-4">
+            <div className="col-sm-4">
               <h2>Line Chart</h2>
               <img src={"images/charts/line-chart.png"} alt="Line Chart" style={ chartStyle }/>
               <p>A line chart or line graph is a type of chart which displays information as a series of
@@ -41,9 +41,9 @@ export default class Home extends Component {
                   points are ordered (typically by their x-axis value) and joined with straight line segments.<br/> <br/>
                   A line chart is often used to visualize a trend in data over intervals of time – a time series –
                   thus the line is often drawn chronologically. In these cases they are known as run charts.</p>
-              <p><a className="btn btn-default" href="https://en.wikipedia.org/wiki/Line_chart" role="button">View details &raquo;</a></p>
+              <a className="btn btn-default" href="https://en.wikipedia.org/wiki/Line_chart" role="button">View details &raquo;</a>
             </div>
-            <div className="col-lg-4">
+            <div className="col-sm-4">
               <h2>Bar Chart</h2>
               <img src={"images/charts/bar-chart.png"} alt="Bar Chart" style={ chartStyle }/>
               <p>A bar chart or bar graph is a chart or graph that presents grouped data with rectangular bars with
@@ -54,9 +54,9 @@ export default class Home extends Component {
                   bars to show comparisons among categories. One axis of the chart shows the specific
                   categories being compared, and the other axis represents a discrete value.
                   Some bar graphs present bars clustered in groups of more than one.</p>
-               <p><a className="btn btn-default" href="https://en.wikipedia.org/wiki/Bar_chart" role="button">View details &raquo;</a></p>
+               <a className="btn btn-default" href="https://en.wikipedia.org/wiki/Bar_chart" role="button">View details &raquo;</a>
            </div>
-            <div className="col-lg-4">
+            <div className="col-sm-4">
               <h2>Pie Chart</h2>
               <img src={"images/charts/pie-chart.JPG"} alt="Pie Chart" style={ chartStyle }/>
               <p>A pie chart (or a circle chart) is a circular statistical graphic which is divided
@@ -67,12 +67,12 @@ export default class Home extends Component {
                   However, they have been criticized, and many experts recommend avoiding them,
                   pointing out that research has shown it is difficult to compare different sections
                   of a given pie chart, or to compare data across different pie charts.</p>
-              <p><a className="btn btn-default" href="https://en.wikipedia.org/wiki/Pie_chart" role="button">View details &raquo;</a></p>
+              <a className="btn btn-default" href="https://en.wikipedia.org/wiki/Pie_chart" role="button">View details &raquo;</a>
             </div>
           </div>
 
           <div className="row">
-            <div className="col-lg-4">
+            <div className="col-sm-4">
               <h2>Bubble Chart</h2>
               <img src={"images/charts/bubble-chart.png"} alt="Bubble Chart" style={ chartStyle }/>
               <p className="text-danger">Notice that <a href="https://www.npmjs.com/package/highcharts-more">highcharts-more</a>  module
@@ -87,9 +87,9 @@ export default class Home extends Component {
                   "You can use a bubble chart instead of a scatter chart if your data has three data
                   series that each contain a set of values. The sizes of the bubbles are determined
                   by the values in the third data series."</p>
-              <p><a className="btn btn-default" href="https://en.wikipedia.org/wiki/Bubble_chart" role="button">View details &raquo;</a></p>
+              <a className="btn btn-default" href="https://en.wikipedia.org/wiki/Bubble_chart" role="button">View details &raquo;</a>
             </div>
-            <div className="col-lg-4">
+            <div className="col-sm-4">
               <h2>Scatter Plot</h2>
               <img src={"images/charts/scatter-plot.png"} alt="Scatter Plot" style={ chartStyle }/>
               <p className="text-danger">Notice that <a href="https://www.npmjs.com/package/highcharts-3d">highcharts-3d</a> module
@@ -100,9 +100,9 @@ export default class Home extends Component {
                 variable can be displayed. The data is displayed as a collection of points, each having
                 the value of one variable determining the position on the horizontal axis and the value of the
                 other variable determining the position on the vertical axis.</p>
-              <p><a className="btn btn-default" href="https://en.wikipedia.org/wiki/Scatter_plot" role="button">View details &raquo;</a></p>
+              <a className="btn btn-default" href="https://en.wikipedia.org/wiki/Scatter_plot" role="button">View details &raquo;</a>
            </div>
-            <div className="col-lg-4">
+            <div className="col-sm-4">
               <h2>Gauge Chart</h2>
               <img src={"images/charts/gauge-chart.png"} alt="Gauge Chart" style={ chartStyle }/>
               <p className="text-danger">Notice that <a href="https://www.npmjs.com/package/highcharts-more">highcharts-more</a> and
@@ -116,7 +116,7 @@ export default class Home extends Component {
                 by using multiple needles on the same gauge or by using multiple gauges. On a gauge chart,
                 the value for each needle is read against the colored data range or chart axis.
                 This chart type is often used in executive dashboard reports to show key business indicators.</p>
-              <p><a className="btn btn-default" href="https://en.wikipedia.org/wiki/Speedometer" role="button">View details &raquo;</a></p>
+              <a className="btn btn-default" href="https://en.wikipedia.org/wiki/Speedometer" role="button">View details &raquo;</a>
             </div>
           </div>
 			</div>

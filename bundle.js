@@ -27447,6 +27447,10 @@
 
 	var _header2 = _interopRequireDefault(_header);
 
+	var _footer = __webpack_require__(281);
+
+	var _footer2 = _interopRequireDefault(_footer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27458,8 +27462,6 @@
 
 	// Components import
 
-
-	// import Footer from './footer.js'
 
 	// Layout component
 	var App = function (_Component) {
@@ -27482,7 +27484,8 @@
 	          'div',
 	          { className: 'container' },
 	          this.props.children
-	        )
+	        ),
+	        _react2.default.createElement(_footer2.default, null)
 	      );
 	    }
 	  }]);
@@ -27702,7 +27705,7 @@
 
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'home-page' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'jumbotron' },
@@ -27743,13 +27746,9 @@
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
-	            'p',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              { className: 'btn btn-lg btn-success', href: '#charts-info', role: 'button' },
-	              'Read More About Charts'
-	            )
+	            'a',
+	            { className: 'btn btn-lg btn-success', href: '#charts-info', role: 'button' },
+	            'Read More About Charts'
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -27757,7 +27756,7 @@
 	          { id: 'charts-info', className: 'row' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-lg-4' },
+	            { className: 'col-sm-4' },
 	            _react2.default.createElement(
 	              'h2',
 	              null,
@@ -27774,18 +27773,14 @@
 	              'A line chart is often used to visualize a trend in data over intervals of time \u2013 a time series \u2013 thus the line is often drawn chronologically. In these cases they are known as run charts.'
 	            ),
 	            _react2.default.createElement(
-	              'p',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Line_chart', role: 'button' },
-	                'View details \xBB'
-	              )
+	              'a',
+	              { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Line_chart', role: 'button' },
+	              'View details \xBB'
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-lg-4' },
+	            { className: 'col-sm-4' },
 	            _react2.default.createElement(
 	              'h2',
 	              null,
@@ -27802,18 +27797,14 @@
 	              'A bar graph is a chart that uses either horizontal or vertical bars to show comparisons among categories. One axis of the chart shows the specific categories being compared, and the other axis represents a discrete value. Some bar graphs present bars clustered in groups of more than one.'
 	            ),
 	            _react2.default.createElement(
-	              'p',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Bar_chart', role: 'button' },
-	                'View details \xBB'
-	              )
+	              'a',
+	              { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Bar_chart', role: 'button' },
+	              'View details \xBB'
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-lg-4' },
+	            { className: 'col-sm-4' },
 	            _react2.default.createElement(
 	              'h2',
 	              null,
@@ -27830,13 +27821,9 @@
 	              'Pie charts are very widely used in the business world and the mass media. However, they have been criticized, and many experts recommend avoiding them, pointing out that research has shown it is difficult to compare different sections of a given pie chart, or to compare data across different pie charts.'
 	            ),
 	            _react2.default.createElement(
-	              'p',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Pie_chart', role: 'button' },
-	                'View details \xBB'
-	              )
+	              'a',
+	              { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Pie_chart', role: 'button' },
+	              'View details \xBB'
 	            )
 	          )
 	        ),
@@ -27845,7 +27832,7 @@
 	          { className: 'row' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-lg-4' },
+	            { className: 'col-sm-4' },
 	            _react2.default.createElement(
 	              'h2',
 	              null,
@@ -27873,18 +27860,14 @@
 	              'Bubble charts can be considered a variation of the scatter plot, in which the data points are replaced with bubbles. As the documentation for Microsoft Office explains, "You can use a bubble chart instead of a scatter chart if your data has three data series that each contain a set of values. The sizes of the bubbles are determined by the values in the third data series."'
 	            ),
 	            _react2.default.createElement(
-	              'p',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Bubble_chart', role: 'button' },
-	                'View details \xBB'
-	              )
+	              'a',
+	              { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Bubble_chart', role: 'button' },
+	              'View details \xBB'
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-lg-4' },
+	            { className: 'col-sm-4' },
 	            _react2.default.createElement(
 	              'h2',
 	              null,
@@ -27908,18 +27891,14 @@
 	              'A scatter plot (also called a scatter graph, scatter chart, scattergram, or scatter diagram) is a type of plot or mathematical diagram using Cartesian coordinates to display values for typically two variables for a set of data. If the points are color-coded, one additional variable can be displayed. The data is displayed as a collection of points, each having the value of one variable determining the position on the horizontal axis and the value of the other variable determining the position on the vertical axis.'
 	            ),
 	            _react2.default.createElement(
-	              'p',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Scatter_plot', role: 'button' },
-	                'View details \xBB'
-	              )
+	              'a',
+	              { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Scatter_plot', role: 'button' },
+	              'View details \xBB'
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-lg-4' },
+	            { className: 'col-sm-4' },
 	            _react2.default.createElement(
 	              'h2',
 	              null,
@@ -27953,13 +27932,9 @@
 	              'Gauge charts are useful for comparing values between a small number of variables either by using multiple needles on the same gauge or by using multiple gauges. On a gauge chart, the value for each needle is read against the colored data range or chart axis. This chart type is often used in executive dashboard reports to show key business indicators.'
 	            ),
 	            _react2.default.createElement(
-	              'p',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Speedometer', role: 'button' },
-	                'View details \xBB'
-	              )
+	              'a',
+	              { className: 'btn btn-default', href: 'https://en.wikipedia.org/wiki/Speedometer', role: 'button' },
+	              'View details \xBB'
 	            )
 	          )
 	        )
@@ -40093,7 +40068,7 @@
 
 
 	// module
-	exports.push([module.id, ".app body {\n  padding: 50px;\n  padding-left: 100px;\n  padding-right: 100px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif; }\n\n.app a {\n  color: #00B7FF; }\n\n.app footer {\n  margin-top: 50px; }\n\n.app footer::before {\n  content: \"\";\n  display: block;\n  width: 90%;\n  margin-bottom: 20px;\n  border-top: 1px solid #dedede;\n  margin-left: auto;\n  margin-right: auto; }\n\n.app footer p {\n  float: left;\n  color: #999;\n  letter-spacing: 0.3px;\n  font-size: 14px;\n  padding-bottom: 20px;\n  margin-left: 10%; }\n\n.app footer .social-media-icons {\n  float: right;\n  margin-right: 10%; }\n\n.app footer .social-media-icons i {\n  font-size: 24px;\n  color: #999;\n  transition: 0.5s ease-in-out; }\n\n.app footer .social-media-icons a {\n  margin-right: 20px; }\n\n.app footer .footer-facebook:hover i {\n  color: #3b5998; }\n\n.app footer .footer-vk:hover i {\n  color: #000000; }\n\n.app footer .footer-linkedin:hover i {\n  color: #0077b5; }\n\n.app .header {\n  width: 90%;\n  margin: auto; }\n", ""]);
+	exports.push([module.id, ".app body {\n  padding: 50px;\n  padding-left: 100px;\n  padding-right: 100px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif; }\n\n.app p {\n  text-indent: 20px;\n  text-align: justify; }\n\n.app .header {\n  width: 90%;\n  margin: auto; }\n\n.app footer {\n  margin-top: 50px; }\n\n.app footer::before {\n  content: \"\";\n  display: block;\n  width: 90%;\n  margin-bottom: 20px;\n  border-top: 1px solid #dedede;\n  margin-left: auto;\n  margin-right: auto; }\n\n.app footer p {\n  float: left;\n  color: #999;\n  letter-spacing: 0.3px;\n  font-size: 14px;\n  padding-bottom: 20px;\n  margin-left: 10%; }\n\n.app footer .social-media-icons {\n  float: right;\n  margin-right: 10%; }\n\n.app footer .social-media-icons i {\n  font-size: 24px;\n  color: #999;\n  transition: 0.5s ease-in-out; }\n\n.app footer .social-media-icons a {\n  margin-right: 20px; }\n\n.app footer .footer-facebook:hover i {\n  color: #3b5998; }\n\n.app footer .footer-vk:hover i {\n  color: #000000; }\n\n.app footer .footer-linkedin:hover i {\n  color: #0077b5; }\n\n.app .home-page h2 {\n  text-align: center; }\n\n.app .home-page img {\n  margin-bottom: 20px;\n  margin-left: 5%; }\n", ""]);
 
 	// exports
 
@@ -40405,6 +40380,87 @@
 		return list;
 	};
 
+
+/***/ },
+/* 281 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // Node modules import
+
+
+	var Footer = function (_Component) {
+	  _inherits(Footer, _Component);
+
+	  function Footer() {
+	    _classCallCheck(this, Footer);
+
+	    return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));
+	  }
+
+	  _createClass(Footer, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "footer",
+	        null,
+	        _react2.default.createElement(
+	          "div",
+	          { className: "content-padding" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "footer-content" },
+	            _react2.default.createElement(
+	              "p",
+	              null,
+	              "Copyright \xA9 Dmytro Kovalenko ;)"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "social-media-icons" },
+	              _react2.default.createElement(
+	                "a",
+	                { href: "https://www.facebook.com/dmytro.kovalenko.1004", className: "footer-facebook" },
+	                _react2.default.createElement("i", { className: "fa fa-facebook" })
+	              ),
+	              _react2.default.createElement(
+	                "a",
+	                { href: "https://www.vk.com/id11545172", className: "footer-vk" },
+	                _react2.default.createElement("i", { className: "fa fa-vk" })
+	              ),
+	              _react2.default.createElement(
+	                "a",
+	                { href: "https://www.linkedin.com/in/kovalenkodmytro", className: "footer-linkedin" },
+	                _react2.default.createElement("i", { className: "fa fa-linkedin" })
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Footer;
+	}(_react.Component);
+
+	exports.default = Footer;
 
 /***/ }
 /******/ ]);
