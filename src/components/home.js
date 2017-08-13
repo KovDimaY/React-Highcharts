@@ -6,24 +6,24 @@ export default class Home extends Component {
 		return(
 			<div className="home-page">
           <div className="jumbotron">
-            <h1>Highcharts are Cool!</h1><br/>
+            <h1>Highcharts are Cool!</h1>
             <p><a href="https://www.highcharts.com/">Highcharts</a> is a charting library written in pure JavaScript, offering an easy way of adding
                 interactive charts to your web site or web application. Highcharts currently supports line,
                 spline, area, areaspline, column, bar, pie, scatter, angular gauges, arearange, areasplinerange,
-                columnrange, bubble, box plot, error bars, funnel, waterfall and polar chart types.</p><br/>
+                columnrange, bubble, box plot, error bars, funnel, waterfall and polar chart types.</p>
 
             <p>It works in all modern mobile and desktop browsers including the iPhone/iPad
                 and Internet Explorer from version 6. On iOS and Android, multitouch support
                 provides a seamless user experience. Standard browsers use SVG for the graphics rendering.
-                In legacy Internet Explorer graphics are drawn using VML.</p><br/>
+                In legacy Internet Explorer graphics are drawn using VML.</p>
 
             <p>Here I tried to use some of the most important and popular charts as React.js components.
                 Also in this application I used the concept of
                 <a href="https://webpack.github.io/docs/multiple-entry-points.html"> multiple entry points </a>
                 in my webpack config for the first time. So this app helped me to learn a lot of new stuff!
-                Hope it will also help somebody else. :)</p><br/><br/>
+                Hope it will also help somebody else. :)</p>
 
-            <a className="btn btn-lg btn-success" href="#charts-info" role="button">Read More About Charts</a>
+							<a className="btn btn-lg btn-success read-more" href="#charts-info" role="button">Read More About Charts</a>
           </div>
 
           <div id="charts-info" className="row">

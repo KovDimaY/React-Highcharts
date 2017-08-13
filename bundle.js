@@ -75,7 +75,7 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	__webpack_require__(280);
+	__webpack_require__(279);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27377,31 +27377,31 @@
 
 	var _line2 = _interopRequireDefault(_line);
 
-	var _bar = __webpack_require__(272);
+	var _bar = __webpack_require__(271);
 
 	var _bar2 = _interopRequireDefault(_bar);
 
-	var _pie = __webpack_require__(273);
+	var _pie = __webpack_require__(272);
 
 	var _pie2 = _interopRequireDefault(_pie);
 
-	var _bubble = __webpack_require__(274);
+	var _bubble = __webpack_require__(273);
 
 	var _bubble2 = _interopRequireDefault(_bubble);
 
-	var _scatter = __webpack_require__(275);
+	var _scatter = __webpack_require__(274);
 
 	var _scatter2 = _interopRequireDefault(_scatter);
 
-	var _gauge = __webpack_require__(277);
+	var _gauge = __webpack_require__(276);
 
 	var _gauge2 = _interopRequireDefault(_gauge);
 
-	var _combo = __webpack_require__(278);
+	var _combo = __webpack_require__(277);
 
 	var _combo2 = _interopRequireDefault(_combo);
 
-	var _clock = __webpack_require__(279);
+	var _clock = __webpack_require__(278);
 
 	var _clock2 = _interopRequireDefault(_clock);
 
@@ -27790,7 +27790,6 @@
 	            null,
 	            "Highcharts are Cool!"
 	          ),
-	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
 	            "p",
 	            null,
@@ -27801,13 +27800,11 @@
 	            ),
 	            " is a charting library written in pure JavaScript, offering an easy way of adding interactive charts to your web site or web application. Highcharts currently supports line, spline, area, areaspline, column, bar, pie, scatter, angular gauges, arearange, areasplinerange, columnrange, bubble, box plot, error bars, funnel, waterfall and polar chart types."
 	          ),
-	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
 	            "p",
 	            null,
 	            "It works in all modern mobile and desktop browsers including the iPhone/iPad and Internet Explorer from version 6. On iOS and Android, multitouch support provides a seamless user experience. Standard browsers use SVG for the graphics rendering. In legacy Internet Explorer graphics are drawn using VML."
 	          ),
-	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
 	            "p",
 	            null,
@@ -27819,11 +27816,9 @@
 	            ),
 	            "in my webpack config for the first time. So this app helped me to learn a lot of new stuff! Hope it will also help somebody else. :)"
 	          ),
-	          _react2.default.createElement("br", null),
-	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
 	            "a",
-	            { className: "btn btn-lg btn-success", href: "#charts-info", role: "button" },
+	            { className: "btn btn-lg btn-success read-more", href: "#charts-info", role: "button" },
 	            "Read More About Charts"
 	          )
 	        ),
@@ -28030,7 +28025,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -28047,7 +28042,7 @@
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
-	var _defaultOptions = __webpack_require__(271);
+	var _defaultOptions = __webpack_require__(270);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28058,81 +28053,175 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Line = function (_Component) {
-	    _inherits(Line, _Component);
+	  _inherits(Line, _Component);
 
-	    function Line(props) {
-	        _classCallCheck(this, Line);
+	  function Line(props) {
+	    _classCallCheck(this, Line);
 
-	        var _this = _possibleConstructorReturn(this, (Line.__proto__ || Object.getPrototypeOf(Line)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Line.__proto__ || Object.getPrototypeOf(Line)).call(this, props));
 
-	        _this.state = {
-	            options: _defaultOptions.lineOptions
-	        };
-	        return _this;
+	    _this.state = {
+	      options: _defaultOptions.lineOptions
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Line, [{
+	    key: 'randomConfiguration',
+	    value: function randomConfiguration() {
+	      this.setState({ options: {
+	          title: {
+	            text: 'Fruit Consumption'
+	          },
+	          xAxis: {
+	            categories: ['Apples', 'Bananas', 'Oranges', 'Grapes']
+	          },
+	          yAxis: {
+	            title: {
+	              text: 'Fruit eaten'
+	            }
+	          },
+	          chart: {
+	            type: 'bar'
+	          },
+	          series: [{
+	            name: 'Dima',
+	            data: [1, 3, 4, 3]
+	          }, {
+	            name: 'Tanya',
+	            data: [5, 7, 3, 1]
+	          }, {
+	            name: 'Masha',
+	            data: [3, 5, 6, 4]
+	          }]
+	        } });
 	    }
+	  }, {
+	    key: 'clickHandler',
+	    value: function clickHandler(input) {
+	      console.log(input.target);
+	    }
+	  }, {
+	    key: 'renderChartOptions',
+	    value: function renderChartOptions() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'dropdown' },
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn btn-default dropdown-toggle', type: 'button', 'data-toggle': 'dropdown' },
+	          'Tutorials',
+	          _react2.default.createElement('span', { className: 'caret' })
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'dropdown-menu' },
+	          _react2.default.createElement(
+	            'li',
+	            { className: 'dropdown-header' },
+	            'Random Data'
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { onClick: this.clickHandler },
+	              'HTML'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { onClick: this.clickHandler },
+	              'CSS'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { onClick: this.clickHandler },
+	              'JavaScript'
+	            )
+	          ),
+	          _react2.default.createElement('li', { className: 'divider' }),
+	          _react2.default.createElement(
+	            'li',
+	            { className: 'dropdown-header' },
+	            'Functions Visualization'
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { onClick: this.clickHandler },
+	              'About Us'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { onClick: this.clickHandler },
+	              'About Us'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { onClick: this.clickHandler },
+	              'About Us'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'line-page' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-sm-4' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Configurations:'
+	            ),
+	            this.renderChartOptions(),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                type: 'button',
+	                className: 'btn btn-success',
+	                onClick: this.randomConfiguration.bind(this) },
+	              'Success'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-sm-8' },
+	            _react2.default.createElement(_chartAbstract2.default, { container: 'line-chart', options: this.state.options })
+	          )
+	        )
+	      );
+	    }
+	  }]);
 
-	    _createClass(Line, [{
-	        key: 'randomConfiguration',
-	        value: function randomConfiguration() {
-	            this.setState({ options: {
-	                    title: {
-	                        text: 'Fruit Consumption'
-	                    },
-	                    xAxis: {
-	                        categories: ['Apples', 'Bananas', 'Oranges', 'Grapes']
-	                    },
-	                    yAxis: {
-	                        title: {
-	                            text: 'Fruit eaten'
-	                        }
-	                    },
-	                    chart: {
-	                        type: 'bar'
-	                    },
-	                    series: [{
-	                        name: 'Dima',
-	                        data: [1, 3, 4, 3]
-	                    }, {
-	                        name: 'Tanya',
-	                        data: [5, 7, 3, 1]
-	                    }, {
-	                        name: 'Masha',
-	                        data: [3, 5, 6, 4]
-	                    }]
-	                } });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'line-page' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'row' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'col-sm-4' },
-	                        _react2.default.createElement(
-	                            'button',
-	                            {
-	                                type: 'button',
-	                                className: 'btn btn-success',
-	                                onClick: this.randomConfiguration.bind(this) },
-	                            'Success'
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'col-sm-8' },
-	                        _react2.default.createElement(_chartAbstract2.default, { container: 'line-chart', options: this.state.options })
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-
-	    return Line;
+	  return Line;
 	}(_react.Component);
 
 	exports.default = Line;
@@ -28157,15 +28246,15 @@
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _highchartsMore = __webpack_require__(268);
+	var _highchartsMore = __webpack_require__(267);
 
 	var _highchartsMore2 = _interopRequireDefault(_highchartsMore);
 
-	var _highcharts3d = __webpack_require__(269);
+	var _highcharts3d = __webpack_require__(268);
 
 	var _highcharts3d2 = _interopRequireDefault(_highcharts3d);
 
-	var _solidGauge = __webpack_require__(270);
+	var _solidGauge = __webpack_require__(269);
 
 	var _solidGauge2 = _interopRequireDefault(_solidGauge);
 
@@ -28626,8 +28715,7 @@
 
 
 /***/ },
-/* 267 */,
-/* 268 */
+/* 267 */
 /***/ function(module, exports) {
 
 	/*
@@ -28700,7 +28788,7 @@
 
 
 /***/ },
-/* 269 */
+/* 268 */
 /***/ function(module, exports) {
 
 	/*
@@ -28781,7 +28869,7 @@
 
 
 /***/ },
-/* 270 */
+/* 269 */
 /***/ function(module, exports) {
 
 	/*
@@ -28801,7 +28889,7 @@
 
 
 /***/ },
-/* 271 */
+/* 270 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28845,7 +28933,7 @@
 	};
 
 /***/ },
-/* 272 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28929,7 +29017,7 @@
 	exports.default = Bar;
 
 /***/ },
-/* 273 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29033,7 +29121,7 @@
 	exports.default = Pie;
 
 /***/ },
-/* 274 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29133,7 +29221,7 @@
 	exports.default = Bubble;
 
 /***/ },
-/* 275 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29156,7 +29244,7 @@
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _jquery = __webpack_require__(276);
+	var _jquery = __webpack_require__(275);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -29300,7 +29388,7 @@
 	exports.default = Scattering;
 
 /***/ },
-/* 276 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -39559,7 +39647,7 @@
 
 
 /***/ },
-/* 277 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39817,7 +39905,7 @@
 	exports.default = Gauge;
 
 /***/ },
-/* 278 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39941,7 +40029,7 @@
 	exports.default = Combo;
 
 /***/ },
-/* 279 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40178,7 +40266,7 @@
 	exports.default = Line;
 
 /***/ },
-/* 280 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40186,10 +40274,10 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(281);
+	var content = __webpack_require__(280);
 	if (typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(283)(content, {});
+	var update = __webpack_require__(282)(content, {});
 	if (content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if (false) {
@@ -40208,21 +40296,21 @@
 	}
 
 /***/ },
-/* 281 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(282)();
+	exports = module.exports = __webpack_require__(281)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".app body {\n  padding: 50px;\n  padding-left: 100px;\n  padding-right: 100px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif; }\n\n.app p {\n  text-indent: 20px;\n  text-align: justify; }\n\n.app .header {\n  width: 90%;\n  margin: auto; }\n\n.app footer {\n  margin-top: 50px; }\n\n.app footer::before {\n  content: \"\";\n  display: block;\n  width: 90%;\n  margin-bottom: 20px;\n  border-top: 1px solid #dedede;\n  margin-left: auto;\n  margin-right: auto; }\n\n.app footer p {\n  float: left;\n  color: #999;\n  letter-spacing: 0.3px;\n  font-size: 14px;\n  padding-bottom: 20px;\n  margin-left: 10%; }\n\n.app footer .social-media-icons {\n  float: right;\n  margin-right: 10%; }\n\n.app footer .social-media-icons i {\n  font-size: 24px;\n  color: #999;\n  transition: 0.5s ease-in-out; }\n\n.app footer .social-media-icons a {\n  margin-right: 20px; }\n\n.app footer .footer-facebook:hover i {\n  color: #3b5998; }\n\n.app footer .footer-vk:hover i {\n  color: #000000; }\n\n.app footer .footer-linkedin:hover i {\n  color: #0077b5; }\n\n.app .home-page h2 {\n  text-align: center; }\n\n.app .home-page img {\n  margin-bottom: 20px;\n  margin-left: 5%;\n  width: 90%; }\n", ""]);
+	exports.push([module.id, ".app body {\n  padding-bottom: 50px;\n  padding-top: 20px;\n  padding-left: 100px;\n  padding-right: 100px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif; }\n\n.app p {\n  text-indent: 20px;\n  text-align: justify; }\n\n.app .header {\n  width: 90%;\n  margin: auto; }\n\n.app footer {\n  margin-top: 50px; }\n\n.app footer::before {\n  content: \"\";\n  display: block;\n  width: 90%;\n  margin-bottom: 20px;\n  border-top: 1px solid #dedede;\n  margin-left: auto;\n  margin-right: auto; }\n\n.app footer p {\n  float: left;\n  color: #999;\n  letter-spacing: 0.3px;\n  font-size: 14px;\n  padding-bottom: 20px;\n  margin-left: 10%; }\n\n.app footer .social-media-icons {\n  float: right;\n  margin-right: 10%; }\n\n.app footer .social-media-icons i {\n  font-size: 24px;\n  color: #999;\n  transition: 0.5s ease-in-out; }\n\n.app footer .social-media-icons a {\n  margin-right: 20px; }\n\n.app footer .footer-facebook:hover i {\n  color: #3b5998; }\n\n.app footer .footer-vk:hover i {\n  color: #000000; }\n\n.app footer .footer-linkedin:hover i {\n  color: #0077b5; }\n\n.app .home-page .read-more {\n  margin-top: 30px; }\n\n.app .home-page h2 {\n  text-align: center; }\n\n.app .home-page img {\n  margin-bottom: 20px;\n  margin-left: 5%;\n  width: 90%; }\n\n.app .home-page h1 {\n  margin-top: -10px;\n  margin-bottom: 30px; }\n\n.app .line-page h3 {\n  color: red; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 282 */
+/* 281 */
 /***/ function(module, exports) {
 
 	/*
@@ -40278,7 +40366,7 @@
 
 
 /***/ },
-/* 283 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
