@@ -28052,6 +28052,12 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var modes = {
+	  pureRandom: "Pure Random",
+	  polinomials: "Polinomial Functions",
+	  trigonometric: "Trigonometric Functions"
+	};
+
 	var Line = function (_Component) {
 	  _inherits(Line, _Component);
 
@@ -28061,14 +28067,24 @@
 	    var _this = _possibleConstructorReturn(this, (Line.__proto__ || Object.getPrototypeOf(Line)).call(this, props));
 
 	    _this.state = {
-	      options: _defaultOptions.lineOptions
+	      options: _defaultOptions.lineOptions,
+	      currentMode: modes.pureRandom,
+	      configurations: {
+	        pureRandom: {
+	          tooltip: false,
+	          zoom: true,
+	          legend: true,
+	          title: true
+
+	        }
+	      }
 	    };
 	    return _this;
 	  }
 
 	  _createClass(Line, [{
-	    key: 'randomConfiguration',
-	    value: function randomConfiguration() {
+	    key: 'applyConfiguration',
+	    value: function applyConfiguration() {
 	      this.setState({ options: {
 	          title: {
 	            text: 'Fruit Consumption'
@@ -28102,15 +28118,15 @@
 	      console.log(input.target);
 	    }
 	  }, {
-	    key: 'renderChartOptions',
-	    value: function renderChartOptions() {
+	    key: 'renderOptionsDropdown',
+	    value: function renderOptionsDropdown() {
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'dropdown' },
 	        _react2.default.createElement(
 	          'button',
-	          { className: 'btn btn-default dropdown-toggle', type: 'button', 'data-toggle': 'dropdown' },
-	          'Tutorials',
+	          { className: 'btn btn-primary dropdown-toggle', type: 'button', 'data-toggle': 'dropdown' },
+	          'Configurations',
 	          _react2.default.createElement('span', { className: 'caret' })
 	        ),
 	        _react2.default.createElement(
@@ -28127,7 +28143,7 @@
 	            _react2.default.createElement(
 	              'a',
 	              { onClick: this.clickHandler },
-	              'HTML'
+	              modes.pureRandom
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -28160,7 +28176,7 @@
 	            _react2.default.createElement(
 	              'a',
 	              { onClick: this.clickHandler },
-	              'About Us'
+	              modes.polinomials
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -28169,7 +28185,7 @@
 	            _react2.default.createElement(
 	              'a',
 	              { onClick: this.clickHandler },
-	              'About Us'
+	              modes.trigonometric
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -28185,6 +28201,22 @@
 	      );
 	    }
 	  }, {
+	    key: 'renderConfigurationsArea',
+	    value: function renderConfigurationsArea() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'configuration-area' },
+	        _react2.default.createElement(
+	          'button',
+	          {
+	            type: 'button',
+	            className: 'btn btn-success apply-button',
+	            onClick: this.applyConfiguration.bind(this) },
+	          'Apply'
+	        )
+	      );
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -28196,24 +28228,12 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'col-sm-4' },
-	            _react2.default.createElement(
-	              'h3',
-	              null,
-	              'Configurations:'
-	            ),
-	            this.renderChartOptions(),
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                type: 'button',
-	                className: 'btn btn-success',
-	                onClick: this.randomConfiguration.bind(this) },
-	              'Success'
-	            )
+	            this.renderOptionsDropdown(),
+	            this.renderConfigurationsArea()
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-sm-8' },
+	            { className: 'col-sm-8 chart-area' },
 	            _react2.default.createElement(_chartAbstract2.default, { container: 'line-chart', options: this.state.options })
 	          )
 	        )
@@ -40304,7 +40324,7 @@
 
 
 	// module
-	exports.push([module.id, ".app body {\n  padding-bottom: 50px;\n  padding-top: 20px;\n  padding-left: 100px;\n  padding-right: 100px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif; }\n\n.app p {\n  text-indent: 20px;\n  text-align: justify; }\n\n.app .header {\n  width: 90%;\n  margin: auto; }\n\n.app footer {\n  margin-top: 50px; }\n\n.app footer::before {\n  content: \"\";\n  display: block;\n  width: 90%;\n  margin-bottom: 20px;\n  border-top: 1px solid #dedede;\n  margin-left: auto;\n  margin-right: auto; }\n\n.app footer p {\n  float: left;\n  color: #999;\n  letter-spacing: 0.3px;\n  font-size: 14px;\n  padding-bottom: 20px;\n  margin-left: 10%; }\n\n.app footer .social-media-icons {\n  float: right;\n  margin-right: 10%; }\n\n.app footer .social-media-icons i {\n  font-size: 24px;\n  color: #999;\n  transition: 0.5s ease-in-out; }\n\n.app footer .social-media-icons a {\n  margin-right: 20px; }\n\n.app footer .footer-facebook:hover i {\n  color: #3b5998; }\n\n.app footer .footer-vk:hover i {\n  color: #000000; }\n\n.app footer .footer-linkedin:hover i {\n  color: #0077b5; }\n\n.app .home-page .read-more {\n  margin-top: 30px; }\n\n.app .home-page h2 {\n  text-align: center; }\n\n.app .home-page img {\n  margin-bottom: 20px;\n  margin-left: 5%;\n  width: 90%; }\n\n.app .home-page h1 {\n  margin-top: -10px;\n  margin-bottom: 30px; }\n\n.app .line-page h3 {\n  color: red; }\n", ""]);
+	exports.push([module.id, ".app body {\n  padding-bottom: 50px;\n  padding-top: 20px;\n  padding-left: 100px;\n  padding-right: 100px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif; }\n\n.app p {\n  text-indent: 20px;\n  text-align: justify; }\n\n.app .header {\n  width: 90%;\n  margin: auto; }\n\n.app footer {\n  margin-top: 50px; }\n\n.app footer::before {\n  content: \"\";\n  display: block;\n  width: 90%;\n  margin-bottom: 20px;\n  border-top: 1px solid #dedede;\n  margin-left: auto;\n  margin-right: auto; }\n\n.app footer p {\n  float: left;\n  color: #999;\n  letter-spacing: 0.3px;\n  font-size: 14px;\n  padding-bottom: 20px;\n  margin-left: 10%; }\n\n.app footer .social-media-icons {\n  float: right;\n  margin-right: 10%; }\n\n.app footer .social-media-icons i {\n  font-size: 24px;\n  color: #999;\n  transition: 0.5s ease-in-out; }\n\n.app footer .social-media-icons a {\n  margin-right: 20px; }\n\n.app footer .footer-facebook:hover i {\n  color: #3b5998; }\n\n.app footer .footer-vk:hover i {\n  color: #000000; }\n\n.app footer .footer-linkedin:hover i {\n  color: #0077b5; }\n\n.app .home-page .read-more {\n  margin-top: 30px; }\n\n.app .home-page h2 {\n  text-align: center; }\n\n.app .home-page img {\n  margin-bottom: 20px;\n  margin-left: 5%;\n  width: 90%; }\n\n.app .home-page h1 {\n  margin-top: -10px;\n  margin-bottom: 30px; }\n\n.app .line-page {\n  margin-top: 30px; }\n  .app .line-page .dropdown {\n    margin-bottom: 20px; }\n    .app .line-page .dropdown .btn {\n      width: 80%;\n      margin-left: 10%; }\n    .app .line-page .dropdown .dropdown-menu {\n      width: 90%;\n      margin-left: 5%;\n      text-align: center; }\n      .app .line-page .dropdown .dropdown-menu li {\n        cursor: pointer; }\n  .app .line-page .configuration-area {\n    background-color: #f2f2f2;\n    height: 348px;\n    border: 1px solid rgba(128, 128, 128, 0.5); }\n    .app .line-page .configuration-area .apply-button {\n      position: absolute;\n      bottom: 30px;\n      left: 0;\n      width: 40%;\n      margin-left: 30%; }\n  .app .line-page .chart-area {\n    border: 1px solid rgba(128, 128, 128, 0.5); }\n  .app .line-page h3 {\n    text-align: center; }\n", ""]);
 
 	// exports
 

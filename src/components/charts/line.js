@@ -5,17 +5,32 @@ import Chart from './chart-abstract'
 
 import { lineOptions } from '../../constants/default-options'
 
+const modes = {
+  pureRandom: "Pure Random",
+  polinomials: "Polinomial Functions",
+  trigonometric: "Trigonometric Functions"
+}
 
 export default class Line extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      options: lineOptions
+      options: lineOptions,
+      currentMode: modes.pureRandom,
+      configurations: {
+        pureRandom: {
+          tooltip: false,
+          zoom: true,
+          legend: true,
+          title: true,
+
+        }
+      }
     }
   }
 
-  randomConfiguration() {
+  applyConfiguration() {
     this.setState({ options: {
         title: {
             text: 'Fruit Consumption'
@@ -48,22 +63,36 @@ export default class Line extends Component {
     console.log(input.target)
   }
 
-  renderChartOptions() {
+  renderOptionsDropdown() {
     return (
       <div className="dropdown">
-        <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
+        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Configurations
         <span className="caret"></span></button>
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
-          <li><a onClick={this.clickHandler}>HTML</a></li>
+          <li><a onClick={this.clickHandler}>{modes.pureRandom}</a></li>
           <li><a onClick={this.clickHandler}>CSS</a></li>
           <li><a onClick={this.clickHandler}>JavaScript</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Functions Visualization</li>
-          <li><a onClick={this.clickHandler}>About Us</a></li>
-          <li><a onClick={this.clickHandler}>About Us</a></li>
+          <li><a onClick={this.clickHandler}>{modes.polinomials}</a></li>
+          <li><a onClick={this.clickHandler}>{modes.trigonometric}</a></li>
           <li><a onClick={this.clickHandler}>About Us</a></li>
         </ul>
+      </div>
+    )
+  }
+
+  renderConfigurationsArea() {
+    return (
+      <div className="configuration-area">
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.applyConfiguration.bind(this)}>
+          Apply
+        </button>
       </div>
     )
   }
@@ -73,16 +102,10 @@ export default class Line extends Component {
 			<div className="line-page">
         <div className="row">
           <div className="col-sm-4">
-            <h3>Configurations:</h3>
-            {this.renderChartOptions()}
-            <button
-              type="button"
-              className="btn btn-success"
-              onClick={this.randomConfiguration.bind(this)}>
-              Success
-            </button>
+            {this.renderOptionsDropdown()}
+            {this.renderConfigurationsArea()}
           </div>
-          <div className="col-sm-8">
+          <div className="col-sm-8 chart-area">
             <Chart container={'line-chart'} options={this.state.options}/>
           </div>
         </div>
