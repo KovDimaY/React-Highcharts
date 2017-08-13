@@ -75,7 +75,7 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	__webpack_require__(279);
+	__webpack_require__(278);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27377,31 +27377,31 @@
 
 	var _line2 = _interopRequireDefault(_line);
 
-	var _bar = __webpack_require__(271);
+	var _bar = __webpack_require__(265);
 
 	var _bar2 = _interopRequireDefault(_bar);
 
-	var _pie = __webpack_require__(272);
+	var _pie = __webpack_require__(271);
 
 	var _pie2 = _interopRequireDefault(_pie);
 
-	var _bubble = __webpack_require__(273);
+	var _bubble = __webpack_require__(272);
 
 	var _bubble2 = _interopRequireDefault(_bubble);
 
-	var _scatter = __webpack_require__(274);
+	var _scatter = __webpack_require__(273);
 
 	var _scatter2 = _interopRequireDefault(_scatter);
 
-	var _gauge = __webpack_require__(276);
+	var _gauge = __webpack_require__(275);
 
 	var _gauge2 = _interopRequireDefault(_gauge);
 
-	var _combo = __webpack_require__(277);
+	var _combo = __webpack_require__(276);
 
 	var _combo2 = _interopRequireDefault(_combo);
 
-	var _clock = __webpack_require__(278);
+	var _clock = __webpack_require__(277);
 
 	var _clock2 = _interopRequireDefault(_clock);
 
@@ -28038,11 +28038,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _chartAbstract = __webpack_require__(265);
+	var _chartAbstract = __webpack_require__(266);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
-	var _defaultOptions = __webpack_require__(270);
+	var _defaultOptions = __webpack_require__(282);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28079,6 +28079,10 @@
 	        }
 	      }
 	    };
+
+	    _this.clickHandler = _this.clickHandler.bind(_this);
+	    _this.applyConfiguration = _this.applyConfiguration.bind(_this);
+	    _this.onChange = _this.onChange.bind(_this);
 	    return _this;
 	  }
 
@@ -28115,7 +28119,8 @@
 	  }, {
 	    key: 'clickHandler',
 	    value: function clickHandler(input) {
-	      console.log(input.target);
+	      var mode = input.target.innerHTML;
+	      this.setState({ currentMode: mode });
 	    }
 	  }, {
 	    key: 'renderOptionsDropdown',
@@ -28201,24 +28206,95 @@
 	      );
 	    }
 	  }, {
-	    key: 'renderConfigurationsArea',
-	    value: function renderConfigurationsArea() {
+	    key: 'onChange',
+	    value: function onChange(event) {
+	      var configurations = this.state.configurations;
+
+	      if (configurations.pureRandom.zoom) {
+	        configurations.pureRandom.zoom = false;
+	      } else {
+	        configurations.pureRandom.zoom = true;
+	      }
+	      this.setState({ configurations: configurations });
+	    }
+	  }, {
+	    key: 'renderPureRandomMode',
+	    value: function renderPureRandomMode() {
+	      var pureRandom = this.state.configurations.pureRandom;
+
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'configuration-area' },
+	        { className: 'pure-random' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'checkbox' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            _react2.default.createElement('input', { type: 'checkbox', value: '' }),
+	            'Show Title'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'checkbox' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            _react2.default.createElement('input', { type: 'checkbox', value: '' }),
+	            'Show Legend'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'checkbox' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            _react2.default.createElement('input', { type: 'checkbox', value: '' }),
+	            'Enable Tooltip'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'checkbox' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            _react2.default.createElement('input', { type: 'checkbox', value: '', checked: pureRandom.zoom, onChange: this.onChange }),
+	            'Enable Zoom'
+	          )
+	        ),
 	        _react2.default.createElement(
 	          'button',
 	          {
 	            type: 'button',
 	            className: 'btn btn-success apply-button',
-	            onClick: this.applyConfiguration.bind(this) },
+	            onClick: this.applyConfiguration },
 	          'Apply'
 	        )
 	      );
 	    }
 	  }, {
+	    key: 'renderConfigurationsArea',
+	    value: function renderConfigurationsArea() {
+	      var currentMode = this.state.currentMode;
+
+	      switch (currentMode) {
+	        case modes.pureRandom:
+	          {
+	            return this.renderPureRandomMode();
+	          }
+	        default:
+	          {
+	            return null;
+	          }
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      console.log("state: ", this.state);
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'line-page' },
@@ -28229,7 +28305,11 @@
 	            'div',
 	            { className: 'col-sm-4' },
 	            this.renderOptionsDropdown(),
-	            this.renderConfigurationsArea()
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'configuration-area' },
+	              this.renderConfigurationsArea()
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -28262,19 +28342,103 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _highcharts = __webpack_require__(266);
+	var _reactDom = __webpack_require__(29);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _chartAbstract = __webpack_require__(266);
+
+	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var barOptions = {
+	    title: {
+	        text: 'Fruit Consumption'
+	    },
+	    xAxis: {
+	        categories: ['Apples', 'Bananas', 'Oranges', 'Grapes']
+	    },
+	    yAxis: {
+	        title: {
+	            text: 'Fruit eaten'
+	        }
+	    },
+	    chart: {
+	        type: 'bar'
+	    },
+	    series: [{
+	        name: 'Dima',
+	        data: [1, 3, 4, 3]
+	    }, {
+	        name: 'Tanya',
+	        data: [5, 7, 3, 1]
+	    }, {
+	        name: 'Masha',
+	        data: [3, 5, 6, 4]
+	    }]
+	};
+
+	var Bar = function (_Component) {
+	    _inherits(Bar, _Component);
+
+	    function Bar() {
+	        _classCallCheck(this, Bar);
+
+	        return _possibleConstructorReturn(this, (Bar.__proto__ || Object.getPrototypeOf(Bar)).apply(this, arguments));
+	    }
+
+	    _createClass(Bar, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_chartAbstract2.default, { container: 'bar-chart', options: barOptions })
+	            );
+	        }
+	    }]);
+
+	    return Bar;
+	}(_react.Component);
+
+	exports.default = Bar;
+
+/***/ },
+/* 266 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _highcharts = __webpack_require__(267);
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _highchartsMore = __webpack_require__(267);
+	var _highchartsMore = __webpack_require__(268);
 
 	var _highchartsMore2 = _interopRequireDefault(_highchartsMore);
 
-	var _highcharts3d = __webpack_require__(268);
+	var _highcharts3d = __webpack_require__(269);
 
 	var _highcharts3d2 = _interopRequireDefault(_highcharts3d);
 
-	var _solidGauge = __webpack_require__(269);
+	var _solidGauge = __webpack_require__(270);
 
 	var _solidGauge2 = _interopRequireDefault(_solidGauge);
 
@@ -28327,7 +28491,7 @@
 	exports.default = Chart;
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports) {
 
 	/*
@@ -28735,7 +28899,7 @@
 
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports) {
 
 	/*
@@ -28808,7 +28972,7 @@
 
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports) {
 
 	/*
@@ -28889,7 +29053,7 @@
 
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports) {
 
 	/*
@@ -28907,50 +29071,6 @@
 	r=Math.max(f.startAngleRad,f.endAngleRad);"none"===p&&(p=b.color||a.color||"none");"none"!==p&&(b.color=p);k=Math.max(q-h,Math.min(r+h,k));!1===c.wrap&&(k=Math.max(q,Math.min(r,k)));q=Math.min(k,a.thresholdAngleRad);k=Math.max(k,a.thresholdAngleRad);k-q>2*Math.PI&&(k=q+2*Math.PI);b.shapeArgs=n={x:d[0],y:d[1],r:m,innerR:n,start:q,end:k,rounded:c.rounded};b.startR=m;g?(b=n.d,g.animate(e.extend({fill:p},n)),b&&(n.d=b)):(b.graphic=t.arc(n).addClass(b.getClassName(),!0).attr({fill:p,"sweep-flag":0}).add(a.group),
 	"square"!==c.linecap&&b.graphic.attr({"stroke-linecap":"round","stroke-linejoin":"round"}),b.graphic.attr({stroke:c.borderColor||"none","stroke-width":c.borderWidth||0}))})},animate:function(a){a||(this.startAngleRad=this.thresholdAngleRad,e.seriesTypes.pie.prototype.animate.call(this,a))}})})(l)});
 
-
-/***/ },
-/* 270 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	var lineOptions = exports.lineOptions = {
-	    chart: {
-	        type: 'line'
-	    },
-	    title: {
-	        text: 'Monthly Average Temperature'
-	    },
-	    subtitle: {
-	        text: 'Source: WorldClimate.com'
-	    },
-	    xAxis: {
-	        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-	    },
-	    yAxis: {
-	        title: {
-	            text: 'Temperature (°C)'
-	        }
-	    },
-	    plotOptions: {
-	        line: {
-	            dataLabels: {
-	                enabled: true
-	            },
-	            enableMouseTracking: false
-	        }
-	    },
-	    series: [{
-	        name: 'Tokyo',
-	        data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-	    }, {
-	        name: 'London',
-	        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-	    }]
-	};
 
 /***/ },
 /* 271 */
@@ -28972,91 +29092,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _chartAbstract = __webpack_require__(265);
-
-	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var barOptions = {
-	    title: {
-	        text: 'Fruit Consumption'
-	    },
-	    xAxis: {
-	        categories: ['Apples', 'Bananas', 'Oranges', 'Grapes']
-	    },
-	    yAxis: {
-	        title: {
-	            text: 'Fruit eaten'
-	        }
-	    },
-	    chart: {
-	        type: 'bar'
-	    },
-	    series: [{
-	        name: 'Dima',
-	        data: [1, 3, 4, 3]
-	    }, {
-	        name: 'Tanya',
-	        data: [5, 7, 3, 1]
-	    }, {
-	        name: 'Masha',
-	        data: [3, 5, 6, 4]
-	    }]
-	};
-
-	var Bar = function (_Component) {
-	    _inherits(Bar, _Component);
-
-	    function Bar() {
-	        _classCallCheck(this, Bar);
-
-	        return _possibleConstructorReturn(this, (Bar.__proto__ || Object.getPrototypeOf(Bar)).apply(this, arguments));
-	    }
-
-	    _createClass(Bar, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(_chartAbstract2.default, { container: 'bar-chart', options: barOptions })
-	            );
-	        }
-	    }]);
-
-	    return Bar;
-	}(_react.Component);
-
-	exports.default = Bar;
-
-/***/ },
-/* 272 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(29);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _chartAbstract = __webpack_require__(265);
+	var _chartAbstract = __webpack_require__(266);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
@@ -29141,7 +29177,7 @@
 	exports.default = Pie;
 
 /***/ },
-/* 273 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29160,11 +29196,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _highcharts = __webpack_require__(266);
+	var _highcharts = __webpack_require__(267);
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _chartAbstract = __webpack_require__(265);
+	var _chartAbstract = __webpack_require__(266);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
@@ -29241,7 +29277,7 @@
 	exports.default = Bubble;
 
 /***/ },
-/* 274 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29260,15 +29296,15 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _highcharts = __webpack_require__(266);
+	var _highcharts = __webpack_require__(267);
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _jquery = __webpack_require__(275);
+	var _jquery = __webpack_require__(274);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _chartAbstract = __webpack_require__(265);
+	var _chartAbstract = __webpack_require__(266);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
@@ -29408,7 +29444,7 @@
 	exports.default = Scattering;
 
 /***/ },
-/* 275 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -39667,7 +39703,7 @@
 
 
 /***/ },
-/* 276 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39686,11 +39722,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _highcharts = __webpack_require__(266);
+	var _highcharts = __webpack_require__(267);
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _chartAbstract = __webpack_require__(265);
+	var _chartAbstract = __webpack_require__(266);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
@@ -39925,7 +39961,7 @@
 	exports.default = Gauge;
 
 /***/ },
-/* 277 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39944,11 +39980,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _highcharts = __webpack_require__(266);
+	var _highcharts = __webpack_require__(267);
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _chartAbstract = __webpack_require__(265);
+	var _chartAbstract = __webpack_require__(266);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
@@ -40049,7 +40085,7 @@
 	exports.default = Combo;
 
 /***/ },
-/* 278 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40068,11 +40104,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _highcharts = __webpack_require__(266);
+	var _highcharts = __webpack_require__(267);
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _chartAbstract = __webpack_require__(265);
+	var _chartAbstract = __webpack_require__(266);
 
 	var _chartAbstract2 = _interopRequireDefault(_chartAbstract);
 
@@ -40286,7 +40322,7 @@
 	exports.default = Line;
 
 /***/ },
-/* 279 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40294,10 +40330,10 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(280);
+	var content = __webpack_require__(279);
 	if (typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(282)(content, {});
+	var update = __webpack_require__(281)(content, {});
 	if (content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if (false) {
@@ -40316,10 +40352,10 @@
 	}
 
 /***/ },
-/* 280 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(281)();
+	exports = module.exports = __webpack_require__(280)();
 	// imports
 
 
@@ -40330,7 +40366,7 @@
 
 
 /***/ },
-/* 281 */
+/* 280 */
 /***/ function(module, exports) {
 
 	/*
@@ -40386,7 +40422,7 @@
 
 
 /***/ },
-/* 282 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -40636,6 +40672,50 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 282 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var lineOptions = exports.lineOptions = {
+	    chart: {
+	        type: 'line'
+	    },
+	    title: {
+	        text: 'Monthly Average Temperature'
+	    },
+	    subtitle: {
+	        text: 'Source: WorldClimate.com'
+	    },
+	    xAxis: {
+	        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	    },
+	    yAxis: {
+	        title: {
+	            text: 'Temperature (°C)'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: true
+	            },
+	            enableMouseTracking: false
+	        }
+	    },
+	    series: [{
+	        name: 'Tokyo',
+	        data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+	    }, {
+	        name: 'London',
+	        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+	    }]
+	};
 
 /***/ }
 /******/ ]);
