@@ -11,12 +11,20 @@ const modes = {
   trigonometric: "Trigonometric Functions"
 }
 
+const options = {
+  tooltip: "tooltip",
+  zoom: "zoom",
+  legend: "legend",
+  title: "title"
+}
+
 export default class Line extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       options: lineOptions,
+      rerenderChart: false,
       currentMode: modes.pureRandom,
       configurations: {
         pureRandom: {
@@ -24,14 +32,13 @@ export default class Line extends Component {
           zoom: true,
           legend: true,
           title: true,
-
         }
       }
     }
 
     this.clickHandler = this.clickHandler.bind(this)
     this.applyConfiguration = this.applyConfiguration.bind(this)
-    this.onChange = this.onChange.bind(this)
+    this.onCheckBoxChange = this.onCheckBoxChange.bind(this)
   }
 
   applyConfiguration() {
@@ -60,7 +67,9 @@ export default class Line extends Component {
             name: 'Masha',
             data: [3, 5, 6, 4]
         }]
-    } })
+    }, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
   }
 
   clickHandler(input) {
@@ -88,12 +97,13 @@ export default class Line extends Component {
     )
   }
 
-  onChange(event) {
+  onCheckBoxChange(event) {
+    console.log("event from onCheckBoxChange", event.target)
     const { configurations } = this.state;
-    if (configurations.pureRandom.zoom) {
-      configurations.pureRandom.zoom = false;
+    if (configurations.pureRandom[event.target.value]) {
+      configurations.pureRandom[event.target.value] = false;
     } else {
-      configurations.pureRandom.zoom = true;
+      configurations.pureRandom[event.target.value] = true;
     }
     this.setState({ configurations })
   }
@@ -103,16 +113,28 @@ export default class Line extends Component {
     return (
       <div className="pure-random">
         <div className="checkbox">
-          <label><input type="checkbox" value="" />Show Title</label>
+          <label><input type="checkbox"
+                        value={options.title}
+                        checked={pureRandom.title}
+                        onChange={this.onCheckBoxChange}/>Show Title</label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox" value="" />Show Legend</label>
+          <label><input type="checkbox"
+                        value={options.legend}
+                        checked={pureRandom.legend}
+                        onChange={this.onCheckBoxChange}/>Show Legend</label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox" value="" />Enable Tooltip</label>
+          <label><input type="checkbox"
+                        value={options.tooltip}
+                        checked={pureRandom.tooltip}
+                        onChange={this.onCheckBoxChange}/>Enable Tooltip</label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox" value="" checked={pureRandom.zoom} onChange={this.onChange}/>Enable Zoom</label>
+          <label><input type="checkbox"
+                        value={options.zoom}
+                        checked={pureRandom.zoom}
+                        onChange={this.onCheckBoxChange}/>Enable Zoom</label>
         </div>
 
         <button
@@ -149,7 +171,7 @@ export default class Line extends Component {
             </div>
           </div>
           <div className="col-sm-8 chart-area">
-            <Chart container={'line-chart'} options={this.state.options}/>
+            <Chart container={'line-chart'} options={this.state.options} update={this.state.rerenderChart}/>
           </div>
         </div>
 			</div>
