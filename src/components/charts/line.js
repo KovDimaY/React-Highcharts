@@ -15,7 +15,8 @@ const options = {
   tooltip: "tooltip",
   zoom: "zoom",
   legend: "legend",
-  title: "title"
+  title: "title",
+  dataLabels: "dataLabels"
 }
 
 export default class Line extends Component {
@@ -32,47 +33,63 @@ export default class Line extends Component {
           zoom: true,
           legend: true,
           title: true,
+          dataLabels: true,
         }
       }
     }
 
-    this.clickHandler = this.clickHandler.bind(this)
-    this.applyConfiguration = this.applyConfiguration.bind(this)
+    this.dropdownClickHandler = this.dropdownClickHandler.bind(this)
+    this.buildPureRandomConfiguration = this.buildPureRandomConfiguration.bind(this)
     this.onCheckBoxChange = this.onCheckBoxChange.bind(this)
   }
 
-  applyConfiguration() {
-    this.setState({ options: {
+  buildPureRandomConfiguration() {
+    const { pureRandom } = this.state.configurations;
+    const result = {
+        chart: {
+            type: 'line',
+            zoomType: pureRandom.zoom ? 'xy' : null
+        },
         title: {
-            text: 'Fruit Consumption'
+            text: pureRandom.title ? 'Randomly generated data' : null
+        },
+        subtitle: {
+            text: pureRandom.title ? 'This data is not real' : null
         },
         xAxis: {
-            categories: ['Apples', 'Bananas', 'Oranges', 'Grapes']
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        legend: {
+            enabled: pureRandom.legend
         },
         yAxis: {
             title: {
-                text: 'Fruit eaten'
+                text: 'Temperature (°C)'
             }
         },
-        chart: {
-            type: 'bar'
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: pureRandom.dataLabels
+                },
+                enableMouseTracking: pureRandom.tooltip
+            }
         },
         series: [{
-            name: 'Dima',
-            data: [1, 3, 4, 3]
+            name: 'Tokyo',
+            data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
         }, {
-            name: 'Tanya',
-            data: [5, 7, 3, 1]
-        }, {
-            name: 'Masha',
-            data: [3, 5, 6, 4]
+            name: 'London',
+            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
         }]
-    }, rerenderChart: true }, () => {
+    }
+
+    this.setState({ options: result, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
   }
 
-  clickHandler(input) {
+  dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
     this.setState({ currentMode: mode });
   }
@@ -84,21 +101,20 @@ export default class Line extends Component {
         <span className="caret"></span></button>
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
-          <li><a onClick={this.clickHandler}>{modes.pureRandom}</a></li>
-          <li><a onClick={this.clickHandler}>CSS</a></li>
-          <li><a onClick={this.clickHandler}>JavaScript</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>CSS</a></li>
+          <li><a onClick={this.dropdownClickHandler}>JavaScript</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Functions Visualization</li>
-          <li><a onClick={this.clickHandler}>{modes.polinomials}</a></li>
-          <li><a onClick={this.clickHandler}>{modes.trigonometric}</a></li>
-          <li><a onClick={this.clickHandler}>About Us</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.polinomials}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.trigonometric}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>About Us</a></li>
         </ul>
       </div>
     )
   }
 
   onCheckBoxChange(event) {
-    console.log("event from onCheckBoxChange", event.target)
     const { configurations } = this.state;
     if (configurations.pureRandom[event.target.value]) {
       configurations.pureRandom[event.target.value] = false;
@@ -136,11 +152,17 @@ export default class Line extends Component {
                         checked={pureRandom.zoom}
                         onChange={this.onCheckBoxChange}/>Enable Zoom</label>
         </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={options.dataLabels}
+                        checked={pureRandom.dataLabels}
+                        onChange={this.onCheckBoxChange}/>Show Data Labels</label>
+        </div>
 
         <button
           type="button"
           className="btn btn-success apply-button"
-          onClick={this.applyConfiguration}>
+          onClick={this.buildPureRandomConfiguration}>
           Apply
         </button>
       </div>

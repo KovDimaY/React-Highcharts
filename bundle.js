@@ -28062,7 +28062,8 @@
 	  tooltip: "tooltip",
 	  zoom: "zoom",
 	  legend: "legend",
-	  title: "title"
+	  title: "title",
+	  dataLabels: "dataLabels"
 	};
 
 	var Line = function (_Component) {
@@ -28082,54 +28083,71 @@
 	          tooltip: false,
 	          zoom: true,
 	          legend: true,
-	          title: true
+	          title: true,
+	          dataLabels: true
 	        }
 	      }
 	    };
 
-	    _this.clickHandler = _this.clickHandler.bind(_this);
-	    _this.applyConfiguration = _this.applyConfiguration.bind(_this);
+	    _this.dropdownClickHandler = _this.dropdownClickHandler.bind(_this);
+	    _this.buildPureRandomConfiguration = _this.buildPureRandomConfiguration.bind(_this);
 	    _this.onCheckBoxChange = _this.onCheckBoxChange.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(Line, [{
-	    key: 'applyConfiguration',
-	    value: function applyConfiguration() {
+	    key: 'buildPureRandomConfiguration',
+	    value: function buildPureRandomConfiguration() {
 	      var _this2 = this;
 
-	      this.setState({ options: {
+	      var pureRandom = this.state.configurations.pureRandom;
+
+	      var result = {
+	        chart: {
+	          type: 'line',
+	          zoomType: pureRandom.zoom ? 'xy' : null
+	        },
+	        title: {
+	          text: pureRandom.title ? 'Randomly generated data' : null
+	        },
+	        subtitle: {
+	          text: pureRandom.title ? 'This data is not real' : null
+	        },
+	        xAxis: {
+	          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	        },
+	        legend: {
+	          enabled: pureRandom.legend
+	        },
+	        yAxis: {
 	          title: {
-	            text: 'Fruit Consumption'
-	          },
-	          xAxis: {
-	            categories: ['Apples', 'Bananas', 'Oranges', 'Grapes']
-	          },
-	          yAxis: {
-	            title: {
-	              text: 'Fruit eaten'
-	            }
-	          },
-	          chart: {
-	            type: 'bar'
-	          },
-	          series: [{
-	            name: 'Dima',
-	            data: [1, 3, 4, 3]
-	          }, {
-	            name: 'Tanya',
-	            data: [5, 7, 3, 1]
-	          }, {
-	            name: 'Masha',
-	            data: [3, 5, 6, 4]
-	          }]
-	        }, rerenderChart: true }, function () {
+	            text: 'Temperature (°C)'
+	          }
+	        },
+	        plotOptions: {
+	          line: {
+	            dataLabels: {
+	              enabled: pureRandom.dataLabels
+	            },
+	            enableMouseTracking: pureRandom.tooltip
+	          }
+	        },
+	        series: [{
+	          name: 'Tokyo',
+	          data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+	        }, {
+	          name: 'London',
+	          data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+	        }]
+	      };
+
+	      this.setState({ options: result, rerenderChart: true }, function () {
 	        _this2.setState({ rerenderChart: false });
 	      });
 	    }
 	  }, {
-	    key: 'clickHandler',
-	    value: function clickHandler(input) {
+	    key: 'dropdownClickHandler',
+	    value: function dropdownClickHandler(input) {
 	      var mode = input.target.innerHTML;
 	      this.setState({ currentMode: mode });
 	    }
@@ -28158,7 +28176,7 @@
 	            null,
 	            _react2.default.createElement(
 	              'a',
-	              { onClick: this.clickHandler },
+	              { onClick: this.dropdownClickHandler },
 	              modes.pureRandom
 	            )
 	          ),
@@ -28167,7 +28185,7 @@
 	            null,
 	            _react2.default.createElement(
 	              'a',
-	              { onClick: this.clickHandler },
+	              { onClick: this.dropdownClickHandler },
 	              'CSS'
 	            )
 	          ),
@@ -28176,7 +28194,7 @@
 	            null,
 	            _react2.default.createElement(
 	              'a',
-	              { onClick: this.clickHandler },
+	              { onClick: this.dropdownClickHandler },
 	              'JavaScript'
 	            )
 	          ),
@@ -28191,7 +28209,7 @@
 	            null,
 	            _react2.default.createElement(
 	              'a',
-	              { onClick: this.clickHandler },
+	              { onClick: this.dropdownClickHandler },
 	              modes.polinomials
 	            )
 	          ),
@@ -28200,7 +28218,7 @@
 	            null,
 	            _react2.default.createElement(
 	              'a',
-	              { onClick: this.clickHandler },
+	              { onClick: this.dropdownClickHandler },
 	              modes.trigonometric
 	            )
 	          ),
@@ -28209,7 +28227,7 @@
 	            null,
 	            _react2.default.createElement(
 	              'a',
-	              { onClick: this.clickHandler },
+	              { onClick: this.dropdownClickHandler },
 	              'About Us'
 	            )
 	          )
@@ -28219,7 +28237,6 @@
 	  }, {
 	    key: 'onCheckBoxChange',
 	    value: function onCheckBoxChange(event) {
-	      console.log("event from onCheckBoxChange", event.target);
 	      var configurations = this.state.configurations;
 
 	      if (configurations.pureRandom[event.target.value]) {
@@ -28290,11 +28307,24 @@
 	          )
 	        ),
 	        _react2.default.createElement(
+	          'div',
+	          { className: 'checkbox' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            _react2.default.createElement('input', { type: 'checkbox',
+	              value: options.dataLabels,
+	              checked: pureRandom.dataLabels,
+	              onChange: this.onCheckBoxChange }),
+	            'Show Data Labels'
+	          )
+	        ),
+	        _react2.default.createElement(
 	          'button',
 	          {
 	            type: 'button',
 	            className: 'btn btn-success apply-button',
-	            onClick: this.applyConfiguration },
+	            onClick: this.buildPureRandomConfiguration },
 	          'Apply'
 	        )
 	      );
@@ -40433,7 +40463,7 @@
 
 
 	// module
-	exports.push([module.id, ".app body {\n  padding-bottom: 50px;\n  padding-top: 20px;\n  padding-left: 100px;\n  padding-right: 100px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif; }\n\n.app p {\n  text-indent: 20px;\n  text-align: justify; }\n\n.app .header {\n  width: 90%;\n  margin: auto; }\n\n.app footer {\n  margin-top: 50px; }\n\n.app footer::before {\n  content: \"\";\n  display: block;\n  width: 90%;\n  margin-bottom: 20px;\n  border-top: 1px solid #dedede;\n  margin-left: auto;\n  margin-right: auto; }\n\n.app footer p {\n  float: left;\n  color: #999;\n  letter-spacing: 0.3px;\n  font-size: 14px;\n  padding-bottom: 20px;\n  margin-left: 10%; }\n\n.app footer .social-media-icons {\n  float: right;\n  margin-right: 10%; }\n\n.app footer .social-media-icons i {\n  font-size: 24px;\n  color: #999;\n  transition: 0.5s ease-in-out; }\n\n.app footer .social-media-icons a {\n  margin-right: 20px; }\n\n.app footer .footer-facebook:hover i {\n  color: #3b5998; }\n\n.app footer .footer-vk:hover i {\n  color: #000000; }\n\n.app footer .footer-linkedin:hover i {\n  color: #0077b5; }\n\n.app .home-page .read-more {\n  margin-top: 30px; }\n\n.app .home-page h2 {\n  text-align: center; }\n\n.app .home-page img {\n  margin-bottom: 20px;\n  margin-left: 5%;\n  width: 90%; }\n\n.app .home-page h1 {\n  margin-top: -10px;\n  margin-bottom: 30px; }\n\n.app .line-page {\n  margin-top: 30px; }\n  .app .line-page .dropdown {\n    margin-bottom: 20px; }\n    .app .line-page .dropdown .btn {\n      width: 80%;\n      margin-left: 10%; }\n    .app .line-page .dropdown .dropdown-menu {\n      width: 90%;\n      margin-left: 5%;\n      text-align: center; }\n      .app .line-page .dropdown .dropdown-menu li {\n        cursor: pointer; }\n  .app .line-page .configuration-area {\n    background-color: #f2f2f2;\n    height: 348px;\n    border: 1px solid rgba(128, 128, 128, 0.5); }\n    .app .line-page .configuration-area .apply-button {\n      position: absolute;\n      bottom: 30px;\n      left: 0;\n      width: 40%;\n      margin-left: 30%; }\n  .app .line-page .chart-area {\n    border: 1px solid rgba(128, 128, 128, 0.5); }\n  .app .line-page h3 {\n    text-align: center; }\n", ""]);
+	exports.push([module.id, ".app body {\n  padding-bottom: 50px;\n  padding-top: 20px;\n  padding-left: 100px;\n  padding-right: 100px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif; }\n\n.app p {\n  text-indent: 20px;\n  text-align: justify; }\n\n.app .header {\n  width: 90%;\n  margin: auto; }\n\n.app footer {\n  margin-top: 50px; }\n\n.app footer::before {\n  content: \"\";\n  display: block;\n  width: 90%;\n  margin-bottom: 20px;\n  border-top: 1px solid #dedede;\n  margin-left: auto;\n  margin-right: auto; }\n\n.app footer p {\n  float: left;\n  color: #999;\n  letter-spacing: 0.3px;\n  font-size: 14px;\n  padding-bottom: 20px;\n  margin-left: 10%; }\n\n.app footer .social-media-icons {\n  float: right;\n  margin-right: 10%; }\n\n.app footer .social-media-icons i {\n  font-size: 24px;\n  color: #999;\n  transition: 0.5s ease-in-out; }\n\n.app footer .social-media-icons a {\n  margin-right: 20px; }\n\n.app footer .footer-facebook:hover i {\n  color: #3b5998; }\n\n.app footer .footer-vk:hover i {\n  color: #000000; }\n\n.app footer .footer-linkedin:hover i {\n  color: #0077b5; }\n\n.app .home-page .read-more {\n  margin-top: 30px; }\n\n.app .home-page h2 {\n  text-align: center; }\n\n.app .home-page img {\n  margin-bottom: 20px;\n  margin-left: 5%;\n  width: 90%; }\n\n.app .home-page h1 {\n  margin-top: -10px;\n  margin-bottom: 30px; }\n\n.app .line-page {\n  margin-top: 30px; }\n  .app .line-page .dropdown {\n    margin-bottom: 20px; }\n    .app .line-page .dropdown .btn {\n      width: 80%;\n      margin-left: 10%; }\n    .app .line-page .dropdown .dropdown-menu {\n      width: 90%;\n      margin-left: 5%;\n      text-align: center; }\n      .app .line-page .dropdown .dropdown-menu li {\n        cursor: pointer; }\n  .app .line-page .configuration-area {\n    background-color: #f2f2f2;\n    height: 348px;\n    border: 1px solid rgba(128, 128, 128, 0.5); }\n    .app .line-page .configuration-area .apply-button {\n      position: absolute;\n      bottom: 30px;\n      left: 0;\n      width: 40%;\n      margin-left: 30%; }\n  .app .line-page .pure-random {\n    width: 50%;\n    margin-left: 25%;\n    margin-top: 30px; }\n  .app .line-page .chart-area {\n    border: 1px solid rgba(128, 128, 128, 0.5); }\n  .app .line-page h3 {\n    text-align: center; }\n", ""]);
 
 	// exports
 
