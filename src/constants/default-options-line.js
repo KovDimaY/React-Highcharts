@@ -39,3 +39,26 @@ export const pureRandom = {
     },
     series: []
 };
+
+export const polinomials = {
+    title: {
+        text: 'Solar Employment Growth by Sector, 2010-2016'
+    },
+    subtitle: {
+        text: 'Source: thesolarfoundation.com'
+    },
+    yAxis: {
+        title: {
+            text: 'Number of Employees'
+        }
+    },
+    plotOptions: {
+        series: {
+            pointStart: 2010
+        }
+    },
+    series: [{
+        name: 'Installation',
+        data: [[1,2], [2,4], [3,7]]
+    }]
+};

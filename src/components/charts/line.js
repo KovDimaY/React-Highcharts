@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom'
 
 import Chart from './chart-abstract'
 
-import { pureRandom } from '../../constants/default-options-line'
+import {
+  pureRandom,
+  polinomials
+} from '../../constants/default-options-line'
 
 const modes = {
   pureRandom: "Pure Random",
@@ -40,6 +43,20 @@ export default class Line extends Component {
           animation: true,
           yAxisTitle: true,
           markers: true,
+        },
+        polinomials: {
+          min: -10,
+          max: 10,
+          number: 100,
+          linearA: 1,
+          linearB: 1,
+          quadraticA: 1,
+          quadraticB: 1,
+          quadraticC: 1,
+          cubicA: 1,
+          cubicB: 1,
+          cubicC: 1,
+          cubicD: 1
         }
       }
     }
@@ -58,6 +75,13 @@ export default class Line extends Component {
     options.series = this.generateSeriesForPureRandom();
     this.setState({ options }, () => {
       this.updatePureRandomConfiguration();
+    });
+  }
+
+  initPolinomialsMode() {
+    let options = polinomials;
+    this.setState({ options }, () => {
+      this.updatePolinomialsConfiguration();
     });
   }
 
@@ -83,6 +107,51 @@ export default class Line extends Component {
     return result;
   }
 
+  generateSeriesForPolinomials(params) {
+    const {
+      linearA,
+      linearB,
+      quadraticA,
+      quadraticB,
+      quadraticC,
+      cubicA,
+      cubicB,
+      cubicC,
+      cubicD,
+    } = params;
+    let linearData = [];
+    let quadraticData = [];
+    let cubicData = [];
+    const step = (params.max - params.min)/params.number;
+
+    for (let i = 0; i < params.number; i++) {
+      let x = params.min + step * i;
+      let linearY = linearA * x + linearB;
+      let quadraticY = quadraticA * x * x + quadraticB * x + quadraticC;
+      let cubicY = cubicA * x * x * x + cubicB * x * x + cubicC * x + cubicD;
+      linearY = Math.round(linearY * 100) / 100;
+      quadraticY = Math.round(quadraticY * 100) / 100;
+      cubicY = Math.round(cubicY * 100) / 100;
+      x = Math.round(x * 100) / 100;
+      linearData.push([x, linearY]);
+      quadraticData.push([x, quadraticY]);
+      cubicData.push([x, cubicY]);
+    }
+
+    return [{
+      name: 'Linear',
+      data: linearData
+    },
+    {
+      name: 'Quadratic',
+      data: quadraticData
+    },
+    {
+      name: 'Cubic',
+      data: cubicData
+    }];
+  }
+
   updatePureRandomConfiguration() {
     const { pureRandom } = this.state.configurations;
     const { options } = this.state;
@@ -101,11 +170,28 @@ export default class Line extends Component {
     })
   }
 
+  updatePolinomialsConfiguration() {
+    const { polinomials } = this.state.configurations;
+    const { options } = this.state;
+
+    const series = this.generateSeriesForPolinomials(polinomials);
+    options.series = series;
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
   dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
     switch (mode) {
       case modes.pureRandom: {
         this.initPureRandomeMode();
+        break;
+      }
+      case modes.polinomials: {
+        this.initPolinomialsMode();
+        break;
       }
       default: {
         console.log("lalala");
@@ -122,13 +208,13 @@ export default class Line extends Component {
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>CSS</a></li>
-          <li><a onClick={this.dropdownClickHandler}>JavaScript</a></li>
+          <li><a onClick={this.dropdownClickHandler}>??????</a></li>
+          <li><a onClick={this.dropdownClickHandler}>??????</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Functions Visualization</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.polinomials}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.trigonometric}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>About Us</a></li>
+          <li><a onClick={this.dropdownClickHandler}>???????</a></li>
         </ul>
       </div>
     )
