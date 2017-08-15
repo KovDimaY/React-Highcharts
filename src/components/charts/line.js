@@ -75,10 +75,11 @@ export default class Line extends Component {
       }
     }
 
-    this.dropdownClickHandler = this.dropdownClickHandler.bind(this)
-    this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this)
-    this.updatePolinomialsConfiguration = this.updatePolinomialsConfiguration.bind(this)
-    this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this)
+    this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
+    this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this);
+    this.updatePolinomialsConfiguration = this.updatePolinomialsConfiguration.bind(this);
+    this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
+    this.onPolinomialsInputChange = this.onPolinomialsInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -123,6 +124,7 @@ export default class Line extends Component {
   }
 
   generateSeriesForPolinomials(params) {
+    console.log("generateSeriesForPolinomials", params);
     const {
       linearA,
       linearB,
@@ -251,6 +253,12 @@ export default class Line extends Component {
     this.setState({ configurations })
   }
 
+  onPolinomialsInputChange(event) {
+    const { configurations } = this.state;
+    configurations.polinomials[event.target.name] = Number(event.target.value);
+    this.setState({ configurations });
+  }
+
   renderPureRandomModeConfiguration() {
     const { pureRandom } = this.state.configurations;
     return (
@@ -318,114 +326,14 @@ export default class Line extends Component {
     const { polinomials } = this.state.configurations;
     return (
       <div className="polinomials">
-        <div className="row basic-config">
-          <div className="col-md-4">
-            <div className="form-group config-option">
-              <label>Min X</label>
-                <input type="number"
-                       className="form-control"
-                       name={optionsPolinomials.min}
-                       value={polinomials.min}/>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="form-group config-option">
-              <label>Max X</label>
-                <input type="number"
-                       className="form-control"
-                       name={optionsPolinomials.max}
-                       value={polinomials.max}/>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="form-group config-option">
-              <label>Count X</label>
-                <input type="number"
-                       className="form-control"
-                       name={optionsPolinomials.number}
-                       value={polinomials.number}/>
-            </div>
-          </div>
-        </div>
+
+        {this.renderBasicConfigPolinomials(polinomials)}
 
         <h3>Functions:</h3>
 
-        <div className="function-config">
-          <div>
-            <p><i>y</i> = <b>A</b> · <i>x</i> + <b>B</b></p>
-          </div>
-          <div>
-            <span className="coefficient">
-              A = <input type="number"
-                         className="form-control modified"
-                         name={optionsPolinomials.linearA}
-                         value={polinomials.linearA}/>
-            </span>
-            <span className="coefficient">
-              B = <input type="number"
-                         className="form-control modified"
-                         name={optionsPolinomials.linearB}
-                         value={polinomials.linearB}/>
-            </span>
-          </div>
-        </div>
-
-        <div className="function-config">
-          <p><i>y</i> = <b>A</b> · <i>x</i><sup>2</sup> + <b>B</b> · <i>x</i> + <b>C</b></p>
-          <div>
-            <span className="coefficient">
-              A = <input type="number"
-                         className="form-control modified"
-                         name={optionsPolinomials.quadraticA}
-                         value={polinomials.quadraticA}/>
-            </span>
-            <span className="coefficient">
-              B = <input type="number"
-                         className="form-control modified"
-                         name={optionsPolinomials.quadraticB}
-                         value={polinomials.quadraticA}/>
-            </span>
-            <span className="coefficient">
-              C = <input type="number"
-                         className="form-control modified"
-                         name={optionsPolinomials.quadraticC}
-                         value={polinomials.quadraticA}/>
-            </span>
-          </div>
-        </div>
-
-        <div className="function-config">
-          <p><i>y</i> = <b>A</b> · <i>x</i><sup>3</sup> + <b>B</b> · <i>x</i><sup>2</sup> + <b>C</b> · <i>x</i> + <b>D</b></p>
-          <div>
-            <span className="coefficient">
-              A = <input type="number"
-                         className="form-control modified"
-                         name={optionsPolinomials.cubicA}
-                         value={polinomials.cubicA}/>
-            </span>
-            <span className="coefficient">
-              B = <input type="number"
-                         className="form-control modified"
-                         name={optionsPolinomials.cubicB}
-                         value={polinomials.cubicB}/>
-            </span>
-          </div>
-          <div>
-            <span className="coefficient">
-              C = <input type="number"
-                         className="form-control modified"
-                         name={optionsPolinomials.cubicC}
-                         value={polinomials.cubicC}/>
-            </span>
-            <span className="coefficient">
-              D = <input type="number"
-                         className="form-control modified"
-                         name={optionsPolinomials.cubicD}
-                         value={polinomials.cubicD}/>
-            </span>
-          </div>
-        </div>
-
+        {this.renderLinearConfigPolinomials(polinomials)}
+        {this.renderQuadraticConfigPolinomials(polinomials)}
+        {this.renderCubicConfigPolinomials(polinomials)}
 
         <button
           type="button"
@@ -435,6 +343,140 @@ export default class Line extends Component {
         </button>
       </div>
     )
+  }
+
+  renderBasicConfigPolinomials(polinomials) {
+    return (
+      <div className="row basic-config">
+        <div className="col-md-4">
+          <div className="form-group config-option">
+            <label>Min X</label>
+              <input type="number"
+                     className="form-control"
+                     name={optionsPolinomials.min}
+                     value={polinomials.min}
+                     onChange={this.onPolinomialsInputChange}/>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="form-group config-option">
+            <label>Max X</label>
+              <input type="number"
+                     className="form-control"
+                     name={optionsPolinomials.max}
+                     value={polinomials.max}
+                     onChange={this.onPolinomialsInputChange}/>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="form-group config-option">
+            <label>Count X</label>
+              <input type="number"
+                     className="form-control"
+                     name={optionsPolinomials.number}
+                     value={polinomials.number}
+                     onChange={this.onPolinomialsInputChange}/>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderLinearConfigPolinomials(polinomials) {
+    return (
+      <div className="function-config">
+        <div>
+          <p><i>y</i> = <b>A</b> · <i>x</i> + <b>B</b></p>
+        </div>
+        <div>
+          <span className="coefficient">
+            A = <input type="number"
+                       className="form-control modified"
+                       name={optionsPolinomials.linearA}
+                       value={polinomials.linearA}
+                       onChange={this.onPolinomialsInputChange}/>
+          </span>
+          <span className="coefficient">
+            B = <input type="number"
+                       className="form-control modified"
+                       name={optionsPolinomials.linearB}
+                       value={polinomials.linearB}
+                       onChange={this.onPolinomialsInputChange}/>
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  renderQuadraticConfigPolinomials(polinomials) {
+    return (
+      <div className="function-config">
+        <p><i>y</i> = <b>A</b> · <i>x</i><sup>2</sup> + <b>B</b> · <i>x</i> + <b>C</b></p>
+        <div>
+          <span className="coefficient">
+            A = <input type="number"
+                       className="form-control modified"
+                       name={optionsPolinomials.quadraticA}
+                       value={polinomials.quadraticA}
+                       onChange={this.onPolinomialsInputChange}/>
+          </span>
+          <span className="coefficient">
+            B = <input type="number"
+                       className="form-control modified"
+                       name={optionsPolinomials.quadraticB}
+                       value={polinomials.quadraticB}
+                       onChange={this.onPolinomialsInputChange}/>
+          </span>
+          <span className="coefficient">
+            C = <input type="number"
+                       className="form-control modified"
+                       name={optionsPolinomials.quadraticC}
+                       value={polinomials.quadraticC}
+                       onChange={this.onPolinomialsInputChange}/>
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  renderCubicConfigPolinomials(polinomials) {
+    return (
+      <div className="function-config">
+        <p><i>y</i> = <b>A</b> · <i>x</i><sup>3</sup> + <b>B</b> · <i>x</i><sup>2</sup> + <b>C</b> · <i>x</i> + <b>D</b></p>
+        <div>
+          <span className="coefficient">
+            A = <input type="number"
+                       className="form-control modified"
+                       name={optionsPolinomials.cubicA}
+                       value={polinomials.cubicA}
+                       onChange={this.onPolinomialsInputChange}/>
+          </span>
+          <span className="coefficient">
+            B = <input type="number"
+                       className="form-control modified"
+                       name={optionsPolinomials.cubicB}
+                       value={polinomials.cubicB}
+                       onChange={this.onPolinomialsInputChange}/>
+          </span>
+        </div>
+        <div>
+          <span className="coefficient">
+            C = <input type="number"
+                       className="form-control modified"
+                       name={optionsPolinomials.cubicC}
+                       value={polinomials.cubicC}
+                       onChange={this.onPolinomialsInputChange}/>
+          </span>
+          <span className="coefficient">
+            D = <input type="number"
+                       className="form-control modified"
+                       name={optionsPolinomials.cubicD}
+                       value={polinomials.cubicD}
+                       onChange={this.onPolinomialsInputChange}/>
+          </span>
+        </div>
+      </div>
+    );
   }
 
   renderConfigurationsArea() {
