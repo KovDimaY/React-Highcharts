@@ -14,7 +14,7 @@ const modes = {
   trigonometric: "Trigonometric Functions"
 }
 
-const options = {
+const optionsPureRandom = {
   tooltip: "tooltip",
   zoom: "zoom",
   legend: "legend",
@@ -23,6 +23,20 @@ const options = {
   animation: "animation",
   yAxisTitle: "yAxisTitle",
   markers: "markers"
+}
+const optionsPolinomials = {
+  min: "min",
+  max: "max",
+  number: "number",
+  linearA: "linearA",
+  linearB: "linearB",
+  quadraticA: "quadraticA",
+  quadraticB: "quadraticB",
+  quadraticC: "quadraticC",
+  cubicA: "cubicA",
+  cubicB: "cubicB",
+  cubicC: "cubicC",
+  cubicD: "cubicD"
 }
 
 export default class Line extends Component {
@@ -243,49 +257,49 @@ export default class Line extends Component {
       <div className="pure-random">
         <div className="checkbox">
           <label><input type="checkbox"
-                        value={options.title}
+                        value={optionsPureRandom.title}
                         checked={pureRandom.title}
                         onChange={this.onPureRandomCheckBoxChange}/>Show Chart Title</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
-                        value={options.yAxisTitle}
+                        value={optionsPureRandom.yAxisTitle}
                         checked={pureRandom.yAxisTitle}
                         onChange={this.onPureRandomCheckBoxChange}/>Show Y-Axis Title</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
-                        value={options.markers}
+                        value={optionsPureRandom.markers}
                         checked={pureRandom.markers}
                         onChange={this.onPureRandomCheckBoxChange}/>Show Point Markers</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
-                        value={options.dataLabels}
+                        value={optionsPureRandom.dataLabels}
                         checked={pureRandom.dataLabels}
                         onChange={this.onPureRandomCheckBoxChange}/>Show Data Labels</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
-                        value={options.legend}
+                        value={optionsPureRandom.legend}
                         checked={pureRandom.legend}
                         onChange={this.onPureRandomCheckBoxChange}/>Show Legend</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
-                        value={options.tooltip}
+                        value={optionsPureRandom.tooltip}
                         checked={pureRandom.tooltip}
                         onChange={this.onPureRandomCheckBoxChange}/>Enable Tooltip</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
-                        value={options.zoom}
+                        value={optionsPureRandom.zoom}
                         checked={pureRandom.zoom}
                         onChange={this.onPureRandomCheckBoxChange}/>Enable Zoom</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
-                        value={options.animation}
+                        value={optionsPureRandom.animation}
                         checked={pureRandom.animation}
                         onChange={this.onPureRandomCheckBoxChange}/>Enable Animation</label>
         </div>
@@ -308,19 +322,28 @@ export default class Line extends Component {
           <div className="col-md-4">
             <div className="form-group config-option">
               <label>Min X</label>
-              <input type="number" className="form-control" />
+                <input type="number"
+                       className="form-control"
+                       name={optionsPolinomials.min}
+                       value={polinomials.min}/>
             </div>
           </div>
           <div className="col-md-4">
             <div className="form-group config-option">
               <label>Max X</label>
-              <input type="number" className="form-control" />
+                <input type="number"
+                       className="form-control"
+                       name={optionsPolinomials.max}
+                       value={polinomials.max}/>
             </div>
           </div>
           <div className="col-md-4">
             <div className="form-group config-option">
               <label>Count X</label>
-              <input type="number" className="form-control" />
+                <input type="number"
+                       className="form-control"
+                       name={optionsPolinomials.number}
+                       value={polinomials.number}/>
             </div>
           </div>
         </div>
@@ -332,29 +355,74 @@ export default class Line extends Component {
             <p><i>y</i> = <b>A</b> · <i>x</i> + <b>B</b></p>
           </div>
           <div>
-            <span>A = <input type="number" className="form-control modified" /></span>
-            <span className="coefficient">B = <input type="number" className="form-control modified" /></span>
+            <span className="coefficient">
+              A = <input type="number"
+                         className="form-control modified"
+                         name={optionsPolinomials.linearA}
+                         value={polinomials.linearA}/>
+            </span>
+            <span className="coefficient">
+              B = <input type="number"
+                         className="form-control modified"
+                         name={optionsPolinomials.linearB}
+                         value={polinomials.linearB}/>
+            </span>
           </div>
         </div>
 
         <div className="function-config">
           <p><i>y</i> = <b>A</b> · <i>x</i><sup>2</sup> + <b>B</b> · <i>x</i> + <b>C</b></p>
           <div>
-            <span className="coefficient">A = <input type="number" className="form-control modified" /></span>
-            <span className="coefficient">B = <input type="number" className="form-control modified" /></span>
-            <span className="coefficient">C = <input type="number" className="form-control modified" /></span>
+            <span className="coefficient">
+              A = <input type="number"
+                         className="form-control modified"
+                         name={optionsPolinomials.quadraticA}
+                         value={polinomials.quadraticA}/>
+            </span>
+            <span className="coefficient">
+              B = <input type="number"
+                         className="form-control modified"
+                         name={optionsPolinomials.quadraticB}
+                         value={polinomials.quadraticA}/>
+            </span>
+            <span className="coefficient">
+              C = <input type="number"
+                         className="form-control modified"
+                         name={optionsPolinomials.quadraticC}
+                         value={polinomials.quadraticA}/>
+            </span>
           </div>
         </div>
 
         <div className="function-config">
           <p><i>y</i> = <b>A</b> · <i>x</i><sup>3</sup> + <b>B</b> · <i>x</i><sup>2</sup> + <b>C</b> · <i>x</i> + <b>D</b></p>
           <div>
-            <span className="coefficient">A = <input type="number" className="form-control modified" /></span>
-            <span className="coefficient">B = <input type="number" className="form-control modified" /></span>
+            <span className="coefficient">
+              A = <input type="number"
+                         className="form-control modified"
+                         name={optionsPolinomials.cubicA}
+                         value={polinomials.cubicA}/>
+            </span>
+            <span className="coefficient">
+              B = <input type="number"
+                         className="form-control modified"
+                         name={optionsPolinomials.cubicB}
+                         value={polinomials.cubicB}/>
+            </span>
           </div>
           <div>
-            <span className="coefficient">C = <input type="number" className="form-control modified" /></span>
-            <span className="coefficient">D = <input type="number" className="form-control modified" /></span>
+            <span className="coefficient">
+              C = <input type="number"
+                         className="form-control modified"
+                         name={optionsPolinomials.cubicC}
+                         value={polinomials.cubicC}/>
+            </span>
+            <span className="coefficient">
+              D = <input type="number"
+                         className="form-control modified"
+                         name={optionsPolinomials.cubicD}
+                         value={polinomials.cubicD}/>
+            </span>
           </div>
         </div>
 
