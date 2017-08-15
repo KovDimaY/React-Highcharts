@@ -41,6 +41,10 @@ export const pureRandom = {
 };
 
 export const polinomials = {
+    chart: {
+        type: 'line',
+        zoomType: 'xy'
+    },
     title: {
         text: 'Polinomial functions'
     },
@@ -50,6 +54,14 @@ export const polinomials = {
     yAxis: {
         title: {
             text: null
+        }
+    },
+    tooltip: {
+        formatter: function () {
+            return '<b style="color: ' + this.series.color + '">' +
+                    this.series.name + '</b><br>' +
+                   'x = <b>' + this.x + '</b><br>' +
+                   'f(x) = <b>' + this.y + '</b>';
         }
     },
     series: []
