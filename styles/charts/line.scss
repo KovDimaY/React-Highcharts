@@ -20,7 +20,32 @@
   .configuration-area {
     background-color: #f2f2f2;
     height: 348px;
+    overflow:auto;
     border: 1px solid rgba(128, 128, 128, 0.50);
+
+    .polinomials {
+      .basic-config {
+        margin-top: 10px;
+      }
+      .function-config {
+        text-align: center;
+        margin-bottom: 10px;
+        p {
+          margin: 0;
+        }
+      }
+      .apply-button {
+        position: unset;
+        bottom: 30px;
+        left: 0;
+        width: 40%;
+        margin-left: 30%;
+        margin-bottom: 30px;
+      }
+      h3 {
+        text-align: center;
+      }
+    }
 
     .apply-button {
       position: absolute;
@@ -28,6 +53,16 @@
       left: 0;
       width: 40%;
       margin-left: 30%;
+    }
+    .col-md-4 {
+      padding: 0;
+    }
+    .row {
+      margin: 0;
+    }
+    .modified {
+      width: 60px;
+      display: inline-block;
     }
   }
 
@@ -37,11 +72,32 @@
       margin-left: 40px;
       margin-top: 30px;
     }
+    .polinomials {
+      .config-option {
+        text-align: center;
+        width: 60%;
+        margin-left: 20%;
+      }
+      .coefficient {
+        display: block;
+        margin-left: 0;
+      }
+    }
   }
   @media (min-width: 992px) {
     .pure-random {
       margin-left: 80px;
       margin-top: 30px;
+    }
+    .polinomials {
+      .config-option {
+        text-align: center;
+        width: 60%;
+        margin-left: 20%;
+      }
+      .coefficient {
+        display: inline-block;
+      }
     }
   }
   @media (min-width: 1200px) {
@@ -49,8 +105,22 @@
       margin-left: 110px;
       margin-top: 30px;
     }
+    .polinomials {
+      .config-option {
+        text-align: center;
+        width: 60%;
+        margin-left: 20%;
+      }
+      .coefficient {
+        display: inline-block;
+      }
+    }
   }
 
+
+  .coefficient{
+    padding: 15px;
+  }
 
   .chart-area {
     border: 1px solid rgba(128, 128, 128, 0.50);

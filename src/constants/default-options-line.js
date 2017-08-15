@@ -42,23 +42,15 @@ export const pureRandom = {
 
 export const polinomials = {
     title: {
-        text: 'Solar Employment Growth by Sector, 2010-2016'
+        text: 'Polinomial functions'
     },
     subtitle: {
-        text: 'Source: thesolarfoundation.com'
+        text: 'Discrete representation with the given accuracy'
     },
     yAxis: {
         title: {
-            text: 'Number of Employees'
+            text: null
         }
     },
-    plotOptions: {
-        series: {
-            pointStart: 2010
-        }
-    },
-    series: [{
-        name: 'Installation',
-        data: [[1,2], [2,4], [3,7]]
-    }]
+    series: []
 };

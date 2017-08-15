@@ -63,7 +63,8 @@ export default class Line extends Component {
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this)
     this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this)
-    this.onCheckBoxChange = this.onCheckBoxChange.bind(this)
+    this.updatePolinomialsConfiguration = this.updatePolinomialsConfiguration.bind(this)
+    this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this)
   }
 
   componentDidMount() {
@@ -126,13 +127,19 @@ export default class Line extends Component {
 
     for (let i = 0; i < params.number; i++) {
       let x = params.min + step * i;
+
+      // calculate the values for each function
       let linearY = linearA * x + linearB;
       let quadraticY = quadraticA * x * x + quadraticB * x + quadraticC;
       let cubicY = cubicA * x * x * x + cubicB * x * x + cubicC * x + cubicD;
+
+      // making numbers looking nice (2 decimal digits at most)
       linearY = Math.round(linearY * 100) / 100;
       quadraticY = Math.round(quadraticY * 100) / 100;
       cubicY = Math.round(cubicY * 100) / 100;
       x = Math.round(x * 100) / 100;
+
+      // push points iside the data
       linearData.push([x, linearY]);
       quadraticData.push([x, quadraticY]);
       cubicData.push([x, cubicY]);
@@ -220,7 +227,7 @@ export default class Line extends Component {
     )
   }
 
-  onCheckBoxChange(event) {
+  onPureRandomCheckBoxChange(event) {
     const { configurations } = this.state;
     if (configurations.pureRandom[event.target.value]) {
       configurations.pureRandom[event.target.value] = false;
@@ -230,7 +237,7 @@ export default class Line extends Component {
     this.setState({ configurations })
   }
 
-  renderPureRandomMode() {
+  renderPureRandomModeConfiguration() {
     const { pureRandom } = this.state.configurations;
     return (
       <div className="pure-random">
@@ -238,49 +245,49 @@ export default class Line extends Component {
           <label><input type="checkbox"
                         value={options.title}
                         checked={pureRandom.title}
-                        onChange={this.onCheckBoxChange}/>Show Chart Title</label>
+                        onChange={this.onPureRandomCheckBoxChange}/>Show Chart Title</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
                         value={options.yAxisTitle}
                         checked={pureRandom.yAxisTitle}
-                        onChange={this.onCheckBoxChange}/>Show Y-Axis Title</label>
+                        onChange={this.onPureRandomCheckBoxChange}/>Show Y-Axis Title</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
                         value={options.markers}
                         checked={pureRandom.markers}
-                        onChange={this.onCheckBoxChange}/>Show Point Markers</label>
+                        onChange={this.onPureRandomCheckBoxChange}/>Show Point Markers</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
                         value={options.dataLabels}
                         checked={pureRandom.dataLabels}
-                        onChange={this.onCheckBoxChange}/>Show Data Labels</label>
+                        onChange={this.onPureRandomCheckBoxChange}/>Show Data Labels</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
                         value={options.legend}
                         checked={pureRandom.legend}
-                        onChange={this.onCheckBoxChange}/>Show Legend</label>
+                        onChange={this.onPureRandomCheckBoxChange}/>Show Legend</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
                         value={options.tooltip}
                         checked={pureRandom.tooltip}
-                        onChange={this.onCheckBoxChange}/>Enable Tooltip</label>
+                        onChange={this.onPureRandomCheckBoxChange}/>Enable Tooltip</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
                         value={options.zoom}
                         checked={pureRandom.zoom}
-                        onChange={this.onCheckBoxChange}/>Enable Zoom</label>
+                        onChange={this.onPureRandomCheckBoxChange}/>Enable Zoom</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
                         value={options.animation}
                         checked={pureRandom.animation}
-                        onChange={this.onCheckBoxChange}/>Enable Animation</label>
+                        onChange={this.onPureRandomCheckBoxChange}/>Enable Animation</label>
         </div>
 
         <button
@@ -293,11 +300,83 @@ export default class Line extends Component {
     )
   }
 
+  renderPolinomialsModeConfiguration() {
+    const { polinomials } = this.state.configurations;
+    return (
+      <div className="polinomials">
+        <div className="row basic-config">
+          <div className="col-md-4">
+            <div className="form-group config-option">
+              <label>Min X</label>
+              <input type="number" className="form-control" />
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="form-group config-option">
+              <label>Max X</label>
+              <input type="number" className="form-control" />
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="form-group config-option">
+              <label>Count X</label>
+              <input type="number" className="form-control" />
+            </div>
+          </div>
+        </div>
+
+        <h3>Functions:</h3>
+
+        <div className="function-config">
+          <div>
+            <p><i>y</i> = <b>A</b> · <i>x</i> + <b>B</b></p>
+          </div>
+          <div>
+            <span>A = <input type="number" className="form-control modified" /></span>
+            <span className="coefficient">B = <input type="number" className="form-control modified" /></span>
+          </div>
+        </div>
+
+        <div className="function-config">
+          <p><i>y</i> = <b>A</b> · <i>x</i><sup>2</sup> + <b>B</b> · <i>x</i> + <b>C</b></p>
+          <div>
+            <span className="coefficient">A = <input type="number" className="form-control modified" /></span>
+            <span className="coefficient">B = <input type="number" className="form-control modified" /></span>
+            <span className="coefficient">C = <input type="number" className="form-control modified" /></span>
+          </div>
+        </div>
+
+        <div className="function-config">
+          <p><i>y</i> = <b>A</b> · <i>x</i><sup>3</sup> + <b>B</b> · <i>x</i><sup>2</sup> + <b>C</b> · <i>x</i> + <b>D</b></p>
+          <div>
+            <span className="coefficient">A = <input type="number" className="form-control modified" /></span>
+            <span className="coefficient">B = <input type="number" className="form-control modified" /></span>
+          </div>
+          <div>
+            <span className="coefficient">C = <input type="number" className="form-control modified" /></span>
+            <span className="coefficient">D = <input type="number" className="form-control modified" /></span>
+          </div>
+        </div>
+
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updatePolinomialsConfiguration}>
+          Apply
+        </button>
+      </div>
+    )
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
       case modes.pureRandom: {
-        return this.renderPureRandomMode();
+        return this.renderPureRandomModeConfiguration();
+      }
+      case modes.polinomials: {
+        return this.renderPolinomialsModeConfiguration();
       }
       default: {
         return null;
