@@ -31,11 +31,26 @@
     }
   }
 
-  .pure-random {
-    width: 50%;
-    margin-left: 25%;
-    margin-top: 30px;
+  /* Customize pure-random container */
+  @media (min-width: 768px) {
+    .pure-random {
+      margin-left: 40px;
+      margin-top: 30px;
+    }
   }
+  @media (min-width: 992px) {
+    .pure-random {
+      margin-left: 80px;
+      margin-top: 30px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .pure-random {
+      margin-left: 110px;
+      margin-top: 30px;
+    }
+  }
+
 
   .chart-area {
     border: 1px solid rgba(128, 128, 128, 0.50);

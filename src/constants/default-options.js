@@ -1,15 +1,19 @@
 export const lineOptions = {
     chart: {
-        type: 'line'
+        type: 'line',
+        zoomType: 'xy'
     },
     title: {
-        text: 'Monthly Average Temperature'
+        text: 'Randomly generated data'
     },
     subtitle: {
-        text: 'Source: WorldClimate.com'
+        text: 'This data is not real'
     },
     xAxis: {
         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
+    legend: {
+        enabled: true
     },
     yAxis: {
         title: {
@@ -21,7 +25,13 @@ export const lineOptions = {
             dataLabels: {
                 enabled: true
             },
-            enableMouseTracking: false
+            enableMouseTracking: true
+        },
+        series: {
+            animation: true,
+            marker: {
+                enabled: true
+            }
         }
     },
     series: [{

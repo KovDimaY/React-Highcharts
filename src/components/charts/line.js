@@ -16,7 +16,10 @@ const options = {
   zoom: "zoom",
   legend: "legend",
   title: "title",
-  dataLabels: "dataLabels"
+  dataLabels: "dataLabels",
+  animation: "animation",
+  yAxisTitle: "yAxisTitle",
+  markers: "markers"
 }
 
 export default class Line extends Component {
@@ -29,11 +32,14 @@ export default class Line extends Component {
       currentMode: modes.pureRandom,
       configurations: {
         pureRandom: {
-          tooltip: false,
+          tooltip: true,
           zoom: true,
           legend: true,
           title: true,
           dataLabels: true,
+          animation: true,
+          yAxisTitle: true,
+          markers: true,
         }
       }
     }
@@ -45,46 +51,18 @@ export default class Line extends Component {
 
   buildPureRandomConfiguration() {
     const { pureRandom } = this.state.configurations;
-    const result = {
-        chart: {
-            type: 'line',
-            zoomType: pureRandom.zoom ? 'xy' : null
-        },
-        title: {
-            text: pureRandom.title ? 'Randomly generated data' : null
-        },
-        subtitle: {
-            text: pureRandom.title ? 'This data is not real' : null
-        },
-        xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        },
-        legend: {
-            enabled: pureRandom.legend
-        },
-        yAxis: {
-            title: {
-                text: 'Temperature (°C)'
-            }
-        },
-        plotOptions: {
-            line: {
-                dataLabels: {
-                    enabled: pureRandom.dataLabels
-                },
-                enableMouseTracking: pureRandom.tooltip
-            }
-        },
-        series: [{
-            name: 'Tokyo',
-            data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }, {
-            name: 'London',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-        }]
-    }
+    const { options } = this.state;
+    options.chart.zoomType = pureRandom.zoom ? 'xy' : null;
+    options.title.text = pureRandom.title ? 'Randomly generated data' : null;
+    options.subtitle.text = pureRandom.title ? 'Randomly generated data' : null;
+    options.legend.enabled = pureRandom.legend;
+    options.yAxis.title.text = pureRandom.yAxisTitle ? 'Temperature (°C)' : null;
+    options.plotOptions.line.dataLabels.enabled = pureRandom.dataLabels;
+    options.plotOptions.line.enableMouseTracking = pureRandom.tooltip;
+    options.plotOptions.series.animation = pureRandom.animation;
+    options.plotOptions.series.marker.enabled = pureRandom.markers;
 
-    this.setState({ options: result, rerenderChart: true }, () => {
+    this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
   }
@@ -132,7 +110,25 @@ export default class Line extends Component {
           <label><input type="checkbox"
                         value={options.title}
                         checked={pureRandom.title}
-                        onChange={this.onCheckBoxChange}/>Show Title</label>
+                        onChange={this.onCheckBoxChange}/>Show Chart Title</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={options.yAxisTitle}
+                        checked={pureRandom.yAxisTitle}
+                        onChange={this.onCheckBoxChange}/>Show Y-Axis Title</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={options.markers}
+                        checked={pureRandom.markers}
+                        onChange={this.onCheckBoxChange}/>Show Point Markers</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={options.dataLabels}
+                        checked={pureRandom.dataLabels}
+                        onChange={this.onCheckBoxChange}/>Show Data Labels</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
@@ -154,9 +150,9 @@ export default class Line extends Component {
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
-                        value={options.dataLabels}
-                        checked={pureRandom.dataLabels}
-                        onChange={this.onCheckBoxChange}/>Show Data Labels</label>
+                        value={options.animation}
+                        checked={pureRandom.animation}
+                        onChange={this.onCheckBoxChange}/>Enable Animation</label>
         </div>
 
         <button
