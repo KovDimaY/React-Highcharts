@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 import Chart from './chart-abstract'
 
-import { lineOptions } from '../../constants/default-options'
+import { pureRandom } from '../../constants/default-options-line'
 
 const modes = {
   pureRandom: "Pure Random",
@@ -27,7 +27,7 @@ export default class Line extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      options: lineOptions,
+      options: pureRandom,
       rerenderChart: false,
       currentMode: modes.pureRandom,
       configurations: {
@@ -45,18 +45,52 @@ export default class Line extends Component {
     }
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this)
-    this.buildPureRandomConfiguration = this.buildPureRandomConfiguration.bind(this)
+    this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this)
     this.onCheckBoxChange = this.onCheckBoxChange.bind(this)
   }
 
-  buildPureRandomConfiguration() {
+  componentDidMount() {
+    this.initPureRandomeMode();
+  }
+
+  initPureRandomeMode() {
+    let options = pureRandom;
+    options.series = this.generateSeriesForPureRandom();
+    this.setState({ options }, () => {
+      this.updatePureRandomConfiguration();
+    });
+  }
+
+  generateSeriesForPureRandom() {
+    const numberOfSeries = Math.round(Math.random() * 3) + 1;
+    let result = [];
+    for (let i = 0; i < numberOfSeries; i++) {
+      let currentData = [];
+      const currentName = `Random Serie ${i + 1}`
+      const min = Math.random() * 1000 - 500;
+      const max = Math.random() * 1000 + min;
+      for (let j = 0; j < 12; j++) {
+        const randValue = Math.random() * (max - min) + min;
+        const shortValue = Math.round(randValue * 1000) / 1000;
+        currentData.push(shortValue);
+      }
+      result.push({
+        name: currentName,
+        data: currentData
+      });
+    }
+
+    return result;
+  }
+
+  updatePureRandomConfiguration() {
     const { pureRandom } = this.state.configurations;
     const { options } = this.state;
     options.chart.zoomType = pureRandom.zoom ? 'xy' : null;
     options.title.text = pureRandom.title ? 'Randomly generated data' : null;
     options.subtitle.text = pureRandom.title ? 'Randomly generated data' : null;
     options.legend.enabled = pureRandom.legend;
-    options.yAxis.title.text = pureRandom.yAxisTitle ? 'Temperature (°C)' : null;
+    options.yAxis.title.text = pureRandom.yAxisTitle ? 'Random Value (UOM)' : null;
     options.plotOptions.line.dataLabels.enabled = pureRandom.dataLabels;
     options.plotOptions.line.enableMouseTracking = pureRandom.tooltip;
     options.plotOptions.series.animation = pureRandom.animation;
@@ -69,6 +103,14 @@ export default class Line extends Component {
 
   dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
+    switch (mode) {
+      case modes.pureRandom: {
+        this.initPureRandomeMode();
+      }
+      default: {
+        console.log("lalala");
+      }
+    }
     this.setState({ currentMode: mode });
   }
 
@@ -158,7 +200,7 @@ export default class Line extends Component {
         <button
           type="button"
           className="btn btn-success apply-button"
-          onClick={this.buildPureRandomConfiguration}>
+          onClick={this.updatePureRandomConfiguration}>
           Apply
         </button>
       </div>
