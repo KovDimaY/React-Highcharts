@@ -21,7 +21,6 @@ export function generateSeriesForPureRandom() {
 }
 
 export function generateSeriesForPolinomials(params) {
-  console.log("generateSeriesForPolinomials", params);
   const {
     linearA,
     linearB,
@@ -69,5 +68,63 @@ export function generateSeriesForPolinomials(params) {
   {
     name: 'Cubic',
     data: cubicData
+  }];
+}
+
+export function generateSeriesForTrigonometric(params) {
+  const {
+    cosA,
+    cosB,
+    sinA,
+    sinB,
+    tanA,
+    tanB,
+    ctanA,
+    ctanB
+  } = params;
+  let cosData = [];
+  let sinData = [];
+  let tanData = [];
+  let ctanData = [];
+  const step = (params.max - params.min)/params.number;
+
+  for (let i = 0; i < params.number + 1; i++) {
+    let x = params.min + step * i;
+
+    // calculate the values for each function
+    let cosY = cosA * Math.cos(x * cosB);
+    let sinY = sinA * Math.sin(x * sinB);
+    let tanY = tanA * Math.tan(x * tanB);
+    let ctanY = Math.tan(x * ctanB) === 0 ? null : ctanA / Math.tan(x * ctanB);
+
+    // making numbers looking nice (2 decimal digits at most)
+    cosY = Math.round(cosY * 100) / 100;
+    sinY = Math.round(sinY * 100) / 100;
+    tanY = Math.round(tanY * 100) / 100;
+    ctanY = Math.round(ctanY * 100) / 100;
+    x = Math.round(x * 100) / 100;
+
+    // push points iside the data
+    cosData.push([x, cosY]);
+    sinData.push([x, sinY]);
+    tanData.push([x, tanY]);
+    ctanData.push([x, ctanY]);
+  }
+  console.log(cosData)
+  return [{
+    name: 'Cos(x)',
+    data: cosData
+  },
+  {
+    name: 'Sin(x)',
+    data: sinData
+  },
+  {
+    name: 'Tg(x)',
+    data: tanData
+  },
+  {
+    name: 'Ctg(x)',
+    data: ctanData
   }];
 }

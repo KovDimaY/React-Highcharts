@@ -5,7 +5,7 @@ import Chart from './chart-abstract'
 
 import {
   pureRandom,
-  polinomials
+  functions
 } from '../../constants/line/default-options-line'
 
 import {
@@ -17,7 +17,8 @@ import {
 
 import {
   generateSeriesForPureRandom,
-  generateSeriesForPolinomials
+  generateSeriesForPolinomials,
+  generateSeriesForTrigonometric
 } from '../../constants/line/data-helpers'
 
 export default class Line extends Component {
@@ -90,14 +91,14 @@ export default class Line extends Component {
   }
 
   initPolinomialsMode() {
-    let options = polinomials;
+    let options = functions;
     this.setState({ options }, () => {
       this.updatePolinomialsConfiguration();
     });
   }
 
   initTrigonometricMode() {
-    let options = polinomials;
+    let options = functions;
     this.setState({ options }, () => {
       this.updateTrigonometricConfiguration();
     });
@@ -137,7 +138,7 @@ export default class Line extends Component {
     const { trigonometric } = this.state.configurations;
     const { options } = this.state;
 
-    const series = generateSeriesForPureRandom();
+    const series = generateSeriesForTrigonometric(trigonometric);
     options.series = series;
 
     this.setState({ options, rerenderChart: true }, () => {

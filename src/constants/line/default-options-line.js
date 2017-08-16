@@ -40,7 +40,7 @@ export const pureRandom = {
     series: []
 };
 
-export const polinomials = {
+export const functions = {
     chart: {
         type: 'line',
         zoomType: 'xy'
