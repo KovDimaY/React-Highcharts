@@ -29,3 +29,17 @@ export const optionsPolinomials = {
   cubicC: "cubicC",
   cubicD: "cubicD"
 }
+
+export const optionsTrigonometric = {
+  min: "min",
+  max: "max",
+  number: "number",
+  cosA: "cosA",
+  cosB: "cosB",
+  sinA: "sinA",
+  sinB: "sinB",
+  tanA: "tanA",
+  tanB: "tanB",
+  ctanA: "ctanA",
+  ctanB: "ctanB"
+}

@@ -11,7 +11,8 @@ import {
 import {
   modes,
   optionsPureRandom,
-  optionsPolinomials
+  optionsPolinomials,
+  optionsTrigonometric
 } from '../../constants/line/modes-options'
 
 import {
@@ -50,6 +51,19 @@ export default class Line extends Component {
           cubicB: 1,
           cubicC: 1,
           cubicD: 1
+        },
+        trigonometric: {
+          min: -10,
+          max: 10,
+          number: 100,
+          cosA: 1,
+          cosB: 1,
+          sinA: 1,
+          sinB: 1,
+          tanA: 1,
+          tanB: 1,
+          ctanA: 1,
+          ctanB: 1
         }
       }
     }
@@ -57,8 +71,10 @@ export default class Line extends Component {
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this);
     this.updatePolinomialsConfiguration = this.updatePolinomialsConfiguration.bind(this);
+    this.updateTrigonometricConfiguration = this.updateTrigonometricConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
     this.onPolinomialsInputChange = this.onPolinomialsInputChange.bind(this);
+    this.onTrigonometricInputChange = this.onTrigonometricInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -67,7 +83,7 @@ export default class Line extends Component {
 
   initPureRandomeMode() {
     let options = pureRandom;
-    options.series = this.generateSeriesForPureRandom();
+    options.series = generateSeriesForPureRandom();
     this.setState({ options }, () => {
       this.updatePureRandomConfiguration();
     });
@@ -77,6 +93,13 @@ export default class Line extends Component {
     let options = polinomials;
     this.setState({ options }, () => {
       this.updatePolinomialsConfiguration();
+    });
+  }
+
+  initTrigonometricMode() {
+    let options = polinomials;
+    this.setState({ options }, () => {
+      this.updateTrigonometricConfiguration();
     });
   }
 
@@ -102,7 +125,19 @@ export default class Line extends Component {
     const { polinomials } = this.state.configurations;
     const { options } = this.state;
 
-    const series = this.generateSeriesForPolinomials(polinomials);
+    const series = generateSeriesForPolinomials(polinomials);
+    options.series = series;
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
+  updateTrigonometricConfiguration() {
+    const { trigonometric } = this.state.configurations;
+    const { options } = this.state;
+
+    const series = generateSeriesForPureRandom();
     options.series = series;
 
     this.setState({ options, rerenderChart: true }, () => {
@@ -119,6 +154,10 @@ export default class Line extends Component {
       }
       case modes.polinomials: {
         this.initPolinomialsMode();
+        break;
+      }
+      case modes.trigonometric: {
+        this.initTrigonometricMode();
         break;
       }
       default: {
@@ -161,6 +200,12 @@ export default class Line extends Component {
   onPolinomialsInputChange(event) {
     const { configurations } = this.state;
     configurations.polinomials[event.target.name] = Number(event.target.value);
+    this.setState({ configurations });
+  }
+
+  onTrigonometricInputChange(event) {
+    const { configurations } = this.state;
+    configurations.trigonometric[event.target.name] = Number(event.target.value);
     this.setState({ configurations });
   }
 
@@ -230,7 +275,7 @@ export default class Line extends Component {
   renderPolinomialsModeConfiguration() {
     const { polinomials } = this.state.configurations;
     return (
-      <div className="polinomials">
+      <div className="functions">
 
         {this.renderBasicConfigPolinomials(polinomials)}
 
@@ -384,6 +429,105 @@ export default class Line extends Component {
     );
   }
 
+  renderTrigonometricModeConfiguration() {
+    const { trigonometric } = this.state.configurations;
+    return (
+      <div className="functions">
+
+        {this.renderBasicConfigTrigonometric(trigonometric)}
+
+        <h3>Functions:</h3>
+
+        {this.renderConfigTrigonometric("cos", optionsTrigonometric.cosA,
+                                               optionsTrigonometric.cosB,
+                                               trigonometric.cosA,
+                                               trigonometric.cosB)}
+        {this.renderConfigTrigonometric("sin", optionsTrigonometric.sinA,
+                                               optionsTrigonometric.sinB,
+                                               trigonometric.sinA,
+                                               trigonometric.sinB)}
+        {this.renderConfigTrigonometric("tg", optionsTrigonometric.tanA,
+                                              optionsTrigonometric.tanB,
+                                              trigonometric.tanA,
+                                              trigonometric.tanB)}
+        {this.renderConfigTrigonometric("ctg", optionsTrigonometric.ctanA,
+                                               optionsTrigonometric.ctanB,
+                                               trigonometric.ctanA,
+                                               trigonometric.ctanB)}
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updateTrigonometricConfiguration}>
+          Apply
+        </button>
+      </div>
+    )
+  }
+
+  renderBasicConfigTrigonometric(trigonometric) {
+    return (
+      <div className="row basic-config">
+        <div className="col-md-4">
+          <div className="form-group config-option">
+            <label>Min X</label>
+              <input type="number"
+                     className="form-control"
+                     name={optionsTrigonometric.min}
+                     value={trigonometric.min}
+                     onChange={this.onTrigonometricInputChange}/>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="form-group config-option">
+            <label>Max X</label>
+              <input type="number"
+                     className="form-control"
+                     name={optionsTrigonometric.max}
+                     value={trigonometric.max}
+                     onChange={this.onTrigonometricInputChange}/>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="form-group config-option">
+            <label>Count X</label>
+              <input type="number"
+                     className="form-control"
+                     name={optionsTrigonometric.number}
+                     value={trigonometric.number}
+                     onChange={this.onTrigonometricInputChange}/>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderConfigTrigonometric(func, optionsA, optionsB, coefA, coefB) {
+    return (
+      <div className="function-config">
+        <div>
+          <p><i>y</i> = <b>A</b> · <i>{func}</i>(<b>B</b>·<i>x</i>)</p>
+        </div>
+        <div>
+          <span className="coefficient">
+            A = <input type="number"
+                       className="form-control modified"
+                       name={optionsA}
+                       value={coefA}
+                       onChange={this.onTrigonometricInputChange}/>
+          </span>
+          <span className="coefficient">
+            B = <input type="number"
+                       className="form-control modified"
+                       name={optionsB}
+                       value={coefB}
+                       onChange={this.onTrigonometricInputChange}/>
+          </span>
+        </div>
+      </div>
+    );
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -392,6 +536,9 @@ export default class Line extends Component {
       }
       case modes.polinomials: {
         return this.renderPolinomialsModeConfiguration();
+      }
+      case modes.trigonometric: {
+        return this.renderTrigonometricModeConfiguration();
       }
       default: {
         return null;
