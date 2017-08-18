@@ -5,7 +5,8 @@ import Chart from './chart-abstract'
 
 import {
   pureRandom,
-  functions
+  functions,
+  interestingFacts
 } from '../../constants/line/default-options-line'
 
 import {
@@ -104,6 +105,13 @@ export default class Line extends Component {
     });
   }
 
+  initInterestingFactsMode() {
+    let options = interestingFacts;
+    this.setState({ options }, () => {
+      this.updateInterestingInfoConfiguration();
+    });
+  }
+
   updatePureRandomConfiguration() {
     const { pureRandom } = this.state.configurations;
     const { options } = this.state;
@@ -146,6 +154,14 @@ export default class Line extends Component {
     })
   }
 
+  updateInterestingInfoConfiguration() {
+    const { options } = this.state;
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
   dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
     switch (mode) {
@@ -159,6 +175,10 @@ export default class Line extends Component {
       }
       case modes.trigonometric: {
         this.initTrigonometricMode();
+        break;
+      }
+      case modes.interestingFacts: {
+        this.initInterestingFactsMode();
         break;
       }
       default: {
@@ -182,6 +202,10 @@ export default class Line extends Component {
           <li className="dropdown-header">Functions Visualization</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.polinomials}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.trigonometric}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>???????</a></li>
+          <li className="divider"></li>
+          <li className="dropdown-header">Real World Data</li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a></li>
           <li><a onClick={this.dropdownClickHandler}>???????</a></li>
         </ul>
       </div>

@@ -1,7 +1,8 @@
 export const modes = {
   pureRandom: "Pure Random",
   polinomials: "Polinomial Functions",
-  trigonometric: "Trigonometric Functions"
+  trigonometric: "Trigonometric Functions",
+  interestingFacts: "Interesting Facts"
 }
 
 export const optionsPureRandom = {

@@ -110,7 +110,6 @@ export function generateSeriesForTrigonometric(params) {
     tanData.push([x, tanY]);
     ctanData.push([x, ctanY]);
   }
-  console.log(cosData)
   return [{
     name: 'Cos(x)',
     data: cosData
