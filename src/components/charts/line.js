@@ -34,6 +34,7 @@ export default class Line extends Component {
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this);
+    this.updateStockSimulationConfiguration = this.updateStockSimulationConfiguration.bind(this);
     this.updatePolinomialsConfiguration = this.updatePolinomialsConfiguration.bind(this);
     this.updateTrigonometricConfiguration = this.updateTrigonometricConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
@@ -62,7 +63,8 @@ export default class Line extends Component {
 
   initStockSimulationMode() {
     let options = stockSimulation;
-    options.series = generateSeriesForStockSimulation();
+    const { price } = this.state.configurations.stockSimulation;
+    options.series = generateSeriesForStockSimulation(price);
     this.setState({ options }, () => {
       this.updateStockSimulationConfiguration();
     });
@@ -107,9 +109,14 @@ export default class Line extends Component {
     })
   }
 
-  updateStockSimulationConfiguration() {
+  updateStockSimulationConfiguration(event) {
     const { stockSimulation } = this.state.configurations;
     const { options } = this.state;
+    console.log("updateStockSimulationConfiguration start", event)
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
   }
 
   updatePolinomialsConfiguration() {
@@ -146,6 +153,8 @@ export default class Line extends Component {
 
   dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
+    const { configurations } = this.state;
+    configurations.stockSimulation.isRunning = false;
     switch (mode) {
       case modes.pureRandom: {
         this.initPureRandomeMode();
@@ -171,7 +180,7 @@ export default class Line extends Component {
         console.log("lalala");
       }
     }
-    this.setState({ currentMode: mode });
+    this.setState({ currentMode: mode, configurations });
   }
 
   renderOptionsDropdown() {
@@ -357,7 +366,7 @@ export default class Line extends Component {
             <button
               type="button"
               className="btn btn-danger apply-button"
-              onClick={this.updatePureRandomConfiguration}>
+              onClick={this.updateStockSimulationConfiguration}>
               Stop Simulation
             </button>
           )
@@ -366,7 +375,7 @@ export default class Line extends Component {
             <button
               type="button"
               className="btn btn-success apply-button"
-              onClick={this.updatePureRandomConfiguration}>
+              onClick={this.updateStockSimulationConfiguration}>
               Start Simulation
             </button>
           )
