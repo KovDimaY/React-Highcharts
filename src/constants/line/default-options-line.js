@@ -40,6 +40,16 @@ export const pureRandom = {
     series: []
 };
 
+export const stockSimulation = {
+    rangeSelector: {
+        selected: 1
+    },
+    title: {
+        text: 'AAPL Stock Price'
+    },
+    series: []
+}
+
 export const functions = {
     chart: {
         type: 'line',

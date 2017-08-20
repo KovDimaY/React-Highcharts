@@ -25,7 +25,8 @@ export const initialState = {
       name: "Some Very Famous Company",
       price: 1500,
       oscillation: 10,
-      frequency: 1
+      frequency: 1,
+      isRunning: false
     },
     polinomials: {
       min: -10,

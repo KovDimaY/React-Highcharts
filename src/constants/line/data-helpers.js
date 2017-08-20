@@ -21,7 +21,26 @@ export function generateSeriesForPureRandom() {
 }
 
 export function generateSeriesForStockSimulation() {
-  let result = [];
+  let result = [{
+      name: 'AAPL',
+      data: [
+        [1283299200000,35.76],
+        [1283385600000,36.02],
+        [1283472000000,36.97],
+        [1283817600000,36.83],
+        [1283904000000,37.56],
+        [1283990400000,37.58],
+        [1284076800000,37.63],
+        [1284336000000,38.15],
+        [1284422400000,38.29],
+        [1284508800000,38.60],
+        [1284595200000,39.51],
+        [1284681600000,39.34]
+      ],
+      tooltip: {
+          valueDecimals: 2
+      }
+  }];
 
   return result;
 }

@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import Chart from './chart-abstract'
+import Stock from './stock-abstract'
 
 import {
   pureRandom,
+  stockSimulation,
   functions,
   interestingFacts
 } from '../../constants/line/default-options-line'
@@ -59,10 +61,10 @@ export default class Line extends Component {
   }
 
   initStockSimulationMode() {
-    let options = functions;
+    let options = stockSimulation;
     options.series = generateSeriesForStockSimulation();
     this.setState({ options }, () => {
-      this.updatePureRandomConfiguration();
+      this.updateStockSimulationConfiguration();
     });
   }
 
@@ -105,6 +107,11 @@ export default class Line extends Component {
     })
   }
 
+  updateStockSimulationConfiguration() {
+    const { stockSimulation } = this.state.configurations;
+    const { options } = this.state;
+  }
+
   updatePolinomialsConfiguration() {
     const { polinomials } = this.state.configurations;
     const { options } = this.state;
@@ -145,7 +152,7 @@ export default class Line extends Component {
         break;
       }
       case modes.stockSimulation: {
-        console.log(modes.stockSimulation);
+        this.initStockSimulationMode();
         break;
       }
       case modes.polinomials: {
@@ -344,12 +351,26 @@ export default class Line extends Component {
             </div>
           </div>
         </div>
-        <button
-          type="button"
-          className="btn btn-success apply-button"
-          onClick={this.updatePureRandomConfiguration}>
-          Start Simulation
-        </button>
+        {
+          stockSimulation.isRunning ?
+          (
+            <button
+              type="button"
+              className="btn btn-danger apply-button"
+              onClick={this.updatePureRandomConfiguration}>
+              Stop Simulation
+            </button>
+          )
+          :
+          (
+            <button
+              type="button"
+              className="btn btn-success apply-button"
+              onClick={this.updatePureRandomConfiguration}>
+              Start Simulation
+            </button>
+          )
+        }
       </div>
     )
   }
@@ -643,7 +664,20 @@ export default class Line extends Component {
             </div>
           </div>
           <div className="col-sm-8 chart-area">
-            <Chart container={'line-chart'} options={this.state.options} update={this.state.rerenderChart}/>
+            {
+              this.state.currentMode === modes.stockSimulation ?
+              (
+                <Stock container={'line-stock'}
+                       options={this.state.options}
+                       update={this.state.rerenderChart}/>
+              )
+              :
+              (
+                <Chart container={'line-chart'}
+                       options={this.state.options}
+                       update={this.state.rerenderChart}/>
+              )
+            }
           </div>
         </div>
 			</div>
