@@ -19,6 +19,7 @@ import {
 
 import {
   generateSeriesForPureRandom,
+  generateSeriesForStockSimulation,
   generateSeriesForPolinomials,
   generateSeriesForTrigonometric
 } from '../../constants/line/data-helpers'
@@ -41,9 +42,23 @@ export default class Line extends Component {
     this.initPureRandomeMode();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    $(this.refs.priceTooltip).tooltip();
+    $(this.refs.oscilationTooltip).tooltip();
+    $(this.refs.frequencyTooltip).tooltip();
+  }
+
   initPureRandomeMode() {
     let options = pureRandom;
     options.series = generateSeriesForPureRandom();
+    this.setState({ options }, () => {
+      this.updatePureRandomConfiguration();
+    });
+  }
+
+  initStockSimulationMode() {
+    let options = functions;
+    options.series = generateSeriesForStockSimulation();
     this.setState({ options }, () => {
       this.updatePureRandomConfiguration();
     });
@@ -127,6 +142,10 @@ export default class Line extends Component {
         this.initPureRandomeMode();
         break;
       }
+      case modes.stockSimulation: {
+        console.log(modes.stockSimulation);
+        break;
+      }
       case modes.polinomials: {
         this.initPolinomialsMode();
         break;
@@ -154,7 +173,7 @@ export default class Line extends Component {
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>??????</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.stockSimulation}</a></li>
           <li><a onClick={this.dropdownClickHandler}>??????</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Functions Visualization</li>
@@ -250,6 +269,55 @@ export default class Line extends Component {
           className="btn btn-success apply-button"
           onClick={this.updatePureRandomConfiguration}>
           Apply
+        </button>
+      </div>
+    )
+  }
+
+  renderStockSimulationModeConfiguration() {
+    return (
+      <div className="stock-simulation">
+        <div className="form-group">
+          <label>Name of the Stock</label>
+          <input type="text" className="form-control"/>
+        </div>
+        <div className="form-group">
+          <label data-toggle="tooltip"
+                 ref="priceTooltip"
+                 title="This is starting price of the stock in $.">
+            � Start Price
+          </label>
+          <input type="number" className="form-control"/>
+        </div>
+        <div className="row">
+          <div className="col-xs-6">
+            <div className="form-group config-option">
+              <label data-toggle="tooltip"
+                     ref="oscilationTooltip"
+                     title="This number means the maximum difference between the old price and the new one.">
+                     � Oscillation
+              </label>
+              <input type="number"
+                     className="form-control"/>
+            </div>
+          </div>
+          <div className="col-xs-6">
+            <div className="form-group config-option">
+              <label data-toggle="tooltip"
+                     ref="frequencyTooltip"
+                     title="This number means how often (in seconds) the new price will appear.">
+                     � Frequency
+              </label>
+              <input type="number"
+                     className="form-control"/>
+            </div>
+          </div>
+        </div>
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updatePureRandomConfiguration}>
+          Start Simulation
         </button>
       </div>
     )
@@ -516,6 +584,9 @@ export default class Line extends Component {
     switch (currentMode) {
       case modes.pureRandom: {
         return this.renderPureRandomModeConfiguration();
+      }
+      case modes.stockSimulation: {
+        return this.renderStockSimulationModeConfiguration();
       }
       case modes.polinomials: {
         return this.renderPolinomialsModeConfiguration();

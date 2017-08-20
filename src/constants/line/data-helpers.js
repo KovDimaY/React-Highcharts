@@ -20,6 +20,12 @@ export function generateSeriesForPureRandom() {
   return result;
 }
 
+export function generateSeriesForStockSimulation() {
+  let result = [];
+
+  return result;
+}
+
 export function generateSeriesForPolinomials(params) {
   const {
     linearA,

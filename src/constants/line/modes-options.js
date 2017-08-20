@@ -1,5 +1,6 @@
 export const modes = {
   pureRandom: "Pure Random",
+  stockSimulation: "Stock Simulation",
   polinomials: "Polinomial Functions",
   trigonometric: "Trigonometric Functions",
   interestingFacts: "Interesting Facts"
