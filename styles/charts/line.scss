@@ -54,13 +54,10 @@
       width: 90%;
       margin: 5%;
     }
-
     .apply-button {
       position: absolute;
       bottom: 30px;
       left: 0;
-      width: 40%;
-      margin-left: 30%;
     }
     .col-md-4 {
       padding: 0;
@@ -91,6 +88,10 @@
         margin-left: 0;
       }
     }
+    .apply-button {
+      width: 60%;
+      margin-left: 20%;
+    }
   }
   @media (min-width: 992px) {
     .pure-random {
@@ -107,6 +108,10 @@
         display: inline-block;
       }
     }
+    .apply-button {
+      width: 40%;
+      margin-left: 30%;
+    }
   }
   @media (min-width: 1200px) {
     .pure-random {
@@ -122,6 +127,11 @@
       .coefficient {
         display: inline-block;
       }
+    }
+
+    .apply-button {
+      width: 40%;
+      margin-left: 30%;
     }
   }
 
