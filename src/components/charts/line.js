@@ -13,6 +13,7 @@ import {
   modes,
   initialState,
   optionsPureRandom,
+  optionsStockSimulation,
   optionsPolinomials,
   optionsTrigonometric
 } from '../../constants/line/modes-options'
@@ -34,6 +35,7 @@ export default class Line extends Component {
     this.updatePolinomialsConfiguration = this.updatePolinomialsConfiguration.bind(this);
     this.updateTrigonometricConfiguration = this.updateTrigonometricConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
+    this.onStockSimulationInputChange = this.onStockSimulationInputChange.bind(this);
     this.onPolinomialsInputChange = this.onPolinomialsInputChange.bind(this);
     this.onTrigonometricInputChange = this.onTrigonometricInputChange.bind(this);
   }
@@ -199,6 +201,20 @@ export default class Line extends Component {
     this.setState({ configurations })
   }
 
+  onStockSimulationInputChange(event) {
+    const { configurations } = this.state;
+    if (event.target.type === "number") {
+      if (event.target.value <= 0) {
+        configurations.stockSimulation[event.target.name] = 1;
+      } else {
+        configurations.stockSimulation[event.target.name] = Number(event.target.value);
+      }
+    } else {
+      configurations.stockSimulation[event.target.name] = event.target.value;
+    }
+    this.setState({ configurations });
+  }
+
   onPolinomialsInputChange(event) {
     const { configurations } = this.state;
     configurations.polinomials[event.target.name] = Number(event.target.value);
@@ -275,30 +291,42 @@ export default class Line extends Component {
   }
 
   renderStockSimulationModeConfiguration() {
+    const { stockSimulation } = this.state.configurations;
     return (
       <div className="stock-simulation">
         <div className="form-group">
           <label>Name of the Stock</label>
-          <input type="text" className="form-control"/>
+          <input type="text"
+                 className="form-control"
+                 name={optionsStockSimulation.name}
+                 value={stockSimulation.name}
+                 onChange={this.onStockSimulationInputChange}/>
         </div>
         <div className="form-group">
           <label data-toggle="tooltip"
                  ref="priceTooltip"
-                 title="This is starting price of the stock in $.">
+                 title="This is a starting price of the stock (in $).">
             � Start Price
           </label>
-          <input type="number" className="form-control"/>
+          <input type="number"
+                 className="form-control"
+                 name={optionsStockSimulation.price}
+                 value={stockSimulation.price}
+                 onChange={this.onStockSimulationInputChange}/>
         </div>
         <div className="row">
           <div className="col-xs-6">
             <div className="form-group config-option">
               <label data-toggle="tooltip"
                      ref="oscilationTooltip"
-                     title="This number means the maximum difference between the old price and the new one.">
+                     title="This number means the maximum difference (in $) between the old price and the new one.">
                      � Oscillation
               </label>
               <input type="number"
-                     className="form-control"/>
+                     className="form-control"
+                     name={optionsStockSimulation.oscillation}
+                     value={stockSimulation.oscillation}
+                     onChange={this.onStockSimulationInputChange}/>
             </div>
           </div>
           <div className="col-xs-6">
@@ -309,7 +337,10 @@ export default class Line extends Component {
                      � Frequency
               </label>
               <input type="number"
-                     className="form-control"/>
+                     className="form-control"
+                     name={optionsStockSimulation.frequency}
+                     value={stockSimulation.frequency}
+                     onChange={this.onStockSimulationInputChange}/>
             </div>
           </div>
         </div>

@@ -21,6 +21,12 @@ export const initialState = {
       yAxisTitle: true,
       markers: true,
     },
+    stockSimulation: {
+      name: "Some Very Famous Company",
+      price: 1500,
+      oscillation: 10,
+      frequency: 1
+    },
     polinomials: {
       min: -10,
       max: 10,
@@ -60,6 +66,13 @@ export const optionsPureRandom = {
   animation: "animation",
   yAxisTitle: "yAxisTitle",
   markers: "markers"
+}
+
+export const optionsStockSimulation = {
+  name: "name",
+  price: "price",
+  oscillation: "oscillation",
+  frequency: "frequency"
 }
 
 export const optionsPolinomials = {
