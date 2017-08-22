@@ -35,6 +35,13 @@ export function generateSeriesForStockSimulation(value) {
   return result;
 }
 
+export function newPointToStockSimulation(oldSeries, configurations) {
+  console.log("addPointToStockSimulation oldSeries", oldSeries);
+  console.log("addPointToStockSimulation configurations", configurations);
+  oldSeries[0].data.push([Date.now(), 1000]);
+  return oldSeries;
+}
+
 export function generateSeriesForPolinomials(params) {
   const {
     linearA,

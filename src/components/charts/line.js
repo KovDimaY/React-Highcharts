@@ -23,6 +23,7 @@ import {
 import {
   generateSeriesForPureRandom,
   generateSeriesForStockSimulation,
+  newPointToStockSimulation,
   generateSeriesForPolinomials,
   generateSeriesForTrigonometric
 } from '../../constants/line/data-helpers'
@@ -110,13 +111,37 @@ export default class Line extends Component {
   }
 
   updateStockSimulationConfiguration(event) {
-    const { stockSimulation } = this.state.configurations;
-    const { options } = this.state;
+    const { configurations, options } = this.state;
     console.log("updateStockSimulationConfiguration start", event)
+    if (event) {
+      if (configurations.stockSimulation.isRunning) {
+        configurations.stockSimulation.isRunning = false;
+        this.setState({ configurations });
+      } else {
+        options.series = generateSeriesForStockSimulation(configurations.stockSimulation.price);
+        configurations.stockSimulation.isRunning = true;
+        this.setState({ configurations }, () => {
+          this.addPointToStockSimulation();
+        });
+      }
+    } else {
+      this.setState({ options, rerenderChart: true }, () => {
+        this.setState({ rerenderChart: false })
+      })
+    }
+  }
 
-    this.setState({ options, rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+  addPointToStockSimulation() {
+    console.log("addPointToStockSimulation", this.state)
+    const { configurations, options } = this.state;
+    if (configurations.stockSimulation.isRunning) {
+      console.log("is running")
+      options.series = newPointToStockSimulation(options.series, configurations.stockSimulation);
+      setTimeout(() => this.addPointToStockSimulation(), configurations.stockSimulation.frequency * 1000);
+      this.setState({ options, rerenderChart: true }, () => {
+        this.setState({ rerenderChart: false })
+      })
+    }
   }
 
   updatePolinomialsConfiguration() {
