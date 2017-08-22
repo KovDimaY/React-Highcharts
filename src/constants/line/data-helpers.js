@@ -20,12 +20,12 @@ export function generateSeriesForPureRandom() {
   return result;
 }
 
-export function generateSeriesForStockSimulation(value) {
+export function generateSeriesForStockSimulation(name, price) {
   const now = Date.now();
   let result = [{
-      name: 'AAPL',
+      name: name,
       data: [
-        [now, value]
+        [now, price]
       ],
       tooltip: {
           valueDecimals: 2
@@ -35,10 +35,23 @@ export function generateSeriesForStockSimulation(value) {
   return result;
 }
 
-export function newPointToStockSimulation(oldSeries, configurations) {
-  console.log("addPointToStockSimulation oldSeries", oldSeries);
-  console.log("addPointToStockSimulation configurations", configurations);
-  oldSeries[0].data.push([Date.now(), 1000]);
+export function newPointToStockSimulation(oldSeries, oscillation) {
+  const lastIndex = oldSeries[0].data.length - 1;
+  const lastValue = oldSeries[0].data[lastIndex][1];
+  let coeff = 2;
+  if (lastValue < oscillation * 10) {
+    coeff = 1.5;
+  }
+  if (lastValue < oscillation * 5) {
+    coeff = 1.25;
+  }
+  if (lastValue < oscillation * 3) {
+    coeff = 1;
+  }
+  const difference = oscillation - coeff * Math.random() * oscillation;
+  const newValue = lastValue + difference;
+  oldSeries[0].data.push([Date.now(), newValue]);
+
   return oldSeries;
 }
 

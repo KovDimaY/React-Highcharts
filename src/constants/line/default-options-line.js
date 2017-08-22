@@ -45,7 +45,48 @@ export const stockSimulation = {
         selected: 1
     },
     title: {
-        text: 'AAPL Stock Price'
+        text: 'Simulation'
+    },
+    navigator: {
+        enabled: true
+    },
+    rangeSelector: {
+        enabled: true,
+        buttons: [{
+        	type: 'second',
+        	count: 30,
+        	text: '30sec'
+        }, {
+        	type: 'minute',
+        	count: 1,
+        	text: '1min'
+        }, {
+        	type: 'minute',
+        	count: 5,
+        	text: '5min'
+        }, {
+        	type: 'minute',
+        	count: 10,
+        	text: '5min'
+        }, {
+        	type: 'hour',
+        	count: 1,
+        	text: '1h'
+        }, {
+        	type: 'all',
+        	text: 'All'
+        }],
+        buttonTheme: {
+            width: 60
+        },
+    },
+    plotOptions: {
+        series: {
+            animation: false,
+            marker: {
+                enabled: true
+            }
+        }
     },
     series: []
 }

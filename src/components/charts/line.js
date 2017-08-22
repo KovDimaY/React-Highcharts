@@ -64,8 +64,8 @@ export default class Line extends Component {
 
   initStockSimulationMode() {
     let options = stockSimulation;
-    const { price } = this.state.configurations.stockSimulation;
-    options.series = generateSeriesForStockSimulation(price);
+    const { name, price } = this.state.configurations.stockSimulation;
+    options.series = generateSeriesForStockSimulation(name, price);
     this.setState({ options }, () => {
       this.updateStockSimulationConfiguration();
     });
@@ -112,13 +112,24 @@ export default class Line extends Component {
 
   updateStockSimulationConfiguration(event) {
     const { configurations, options } = this.state;
-    console.log("updateStockSimulationConfiguration start", event)
+    const {
+      name,
+      isRunning,
+      price
+    } = configurations.stockSimulation;
+    options.title.text = pureRandom.title ? name : null;
     if (event) {
-      if (configurations.stockSimulation.isRunning) {
+      if (isRunning) {
+        options.navigator.enabled = true;
+        options.rangeSelector.enabled = true;
         configurations.stockSimulation.isRunning = false;
-        this.setState({ configurations });
+        this.setState({ options, configurations, rerenderChart: true }, () => {
+          this.setState({ rerenderChart: false });
+        });
       } else {
-        options.series = generateSeriesForStockSimulation(configurations.stockSimulation.price);
+        options.navigator.enabled = false;
+        options.rangeSelector.enabled = false;
+        options.series = generateSeriesForStockSimulation(name, price);
         configurations.stockSimulation.isRunning = true;
         this.setState({ configurations }, () => {
           this.addPointToStockSimulation();
@@ -126,21 +137,24 @@ export default class Line extends Component {
       }
     } else {
       this.setState({ options, rerenderChart: true }, () => {
-        this.setState({ rerenderChart: false })
-      })
+        this.setState({ rerenderChart: false });
+      });
     }
   }
 
   addPointToStockSimulation() {
-    console.log("addPointToStockSimulation", this.state)
     const { configurations, options } = this.state;
-    if (configurations.stockSimulation.isRunning) {
-      console.log("is running")
-      options.series = newPointToStockSimulation(options.series, configurations.stockSimulation);
-      setTimeout(() => this.addPointToStockSimulation(), configurations.stockSimulation.frequency * 1000);
+    const {
+      isRunning,
+      oscillation,
+      frequency
+    } = configurations.stockSimulation;
+    if (isRunning) {
+      options.series = newPointToStockSimulation(options.series, oscillation);
+      setTimeout(() => this.addPointToStockSimulation(), frequency * 1000);
       this.setState({ options, rerenderChart: true }, () => {
-        this.setState({ rerenderChart: false })
-      })
+        this.setState({ rerenderChart: false });
+      });
     }
   }
 
@@ -245,8 +259,8 @@ export default class Line extends Component {
   onStockSimulationInputChange(event) {
     const { configurations } = this.state;
     if (event.target.type === "number") {
-      if (event.target.value <= 0) {
-        configurations.stockSimulation[event.target.name] = 1;
+      if (event.target.value <= 0.01) {
+        configurations.stockSimulation[event.target.name] = 0.01;
       } else {
         configurations.stockSimulation[event.target.name] = Number(event.target.value);
       }
