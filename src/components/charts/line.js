@@ -65,7 +65,7 @@ export default class Line extends Component {
   initStockSimulationMode() {
     let options = stockSimulation;
     const { name, price } = this.state.configurations.stockSimulation;
-    options.series = generateSeriesForStockSimulation(name, price);
+    options.series = generateSeriesForStockSimulation(price);
     this.setState({ options }, () => {
       this.updateStockSimulationConfiguration();
     });
@@ -117,7 +117,7 @@ export default class Line extends Component {
       isRunning,
       price
     } = configurations.stockSimulation;
-    options.title.text = pureRandom.title ? name : null;
+    options.title.text = name ? "Stock price of " + name : null;
     if (event) {
       if (isRunning) {
         options.navigator.enabled = true;
@@ -129,7 +129,7 @@ export default class Line extends Component {
       } else {
         options.navigator.enabled = false;
         options.rangeSelector.enabled = false;
-        options.series = generateSeriesForStockSimulation(name, price);
+        options.series = generateSeriesForStockSimulation(price);
         configurations.stockSimulation.isRunning = true;
         this.setState({ configurations }, () => {
           this.addPointToStockSimulation();
@@ -163,6 +163,7 @@ export default class Line extends Component {
     const { options } = this.state;
 
     const series = generateSeriesForPolinomials(polinomials);
+    options.title.text = modes.polinomials;
     options.series = series;
 
     this.setState({ options, rerenderChart: true }, () => {
@@ -175,6 +176,7 @@ export default class Line extends Component {
     const { options } = this.state;
 
     const series = generateSeriesForTrigonometric(trigonometric);
+    options.title.text = modes.trigonometric;
     options.series = series;
 
     this.setState({ options, rerenderChart: true }, () => {

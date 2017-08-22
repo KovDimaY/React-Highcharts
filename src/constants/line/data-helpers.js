@@ -20,10 +20,10 @@ export function generateSeriesForPureRandom() {
   return result;
 }
 
-export function generateSeriesForStockSimulation(name, price) {
+export function generateSeriesForStockSimulation(price) {
   const now = Date.now();
   let result = [{
-      name: name,
+      name: "Price",
       data: [
         [now, price]
       ],

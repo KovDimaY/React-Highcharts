@@ -80,6 +80,11 @@ export const stockSimulation = {
             width: 60
         },
     },
+    tooltip: {
+        valueDecimals: 2,
+        valuePrefix: '$',
+        valueSuffix: ' USD'
+    },
     plotOptions: {
         series: {
             animation: false,
@@ -97,7 +102,7 @@ export const functions = {
         zoomType: 'xy'
     },
     title: {
-        text: 'Polinomial functions'
+        text: 'Functions'
     },
     subtitle: {
         text: 'Discrete representation with the given accuracy'
