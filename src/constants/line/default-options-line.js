@@ -123,7 +123,7 @@ export const functions = {
     series: []
 };
 
-export const interestingFacts = {
+export const interestingFactsTemperature = {
     chart: {
         type: 'line'
     },
@@ -131,7 +131,7 @@ export const interestingFacts = {
         text: 'Monthly Average Temperature'
     },
     subtitle: {
-        text: 'Source: www.holiday-weather.com'
+        text: 'Source: holiday-weather.com'
     },
     xAxis: {
         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -146,7 +146,7 @@ export const interestingFacts = {
             dataLabels: {
                 enabled: true
             },
-            enableMouseTracking: false
+            enableMouseTracking: true
         }
     },
     series: [{
@@ -170,5 +170,77 @@ export const interestingFacts = {
     }, {
         name: 'Toronto',
         data: [-3,	-3,	1,	7,	14,	16,	21,	21,	18,	11,	5,	-1]
+    }]
+}
+
+export const interestingFactsPopulation = {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'Population by Country'
+    },
+    subtitle: {
+        text: 'Source: ourworldindata.org'
+    },
+    xAxis: {
+      title: {
+          text: 'Years'
+      }
+    },
+    yAxis: {
+        title: {
+            text: 'Population (number of people)'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: false
+            },
+            enableMouseTracking: true
+        }
+    },
+    series: [{
+        name: 'China',
+        data: [
+          [1500, 103000000],
+          [1600, 160000000],
+          [1700, 138000000],
+          [1750, 225000000],
+          [1800, 330000000],
+          [1850, 412000000],
+          [1900, 400000000],
+          [1910, 423000000],
+          [1920, 472000000],
+          [1930, 489000000],
+          [1940, 518770000],
+          [1950, 546815000],
+          [1960, 667070000],
+          [1970, 818315000],
+          [1980, 981861000],
+          [1990, 1135185000],
+          [2000, 1262645000]
+        ]
+    },
+    {
+        name: 'India',
+        data: [
+          [1500, 110000000],
+          [1600, 135000000],
+          [1700, 165000000],
+          [1850, 235800017],
+          [1900, 284500000],
+          [1910, 302100000],
+          [1920, 305600000],
+          [1930, 336400000],
+          [1940, 386800000],
+          [1950, 359000000],
+          [1960, 434000000],
+          [1970, 541000000],
+          [1980, 679000000],
+          [1990, 839000000],
+          [2000, 1004124000]
+        ]
     }]
 }
