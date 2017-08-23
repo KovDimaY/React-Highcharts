@@ -131,7 +131,7 @@ export const interestingFacts = {
         text: 'Monthly Average Temperature'
     },
     subtitle: {
-        text: 'Source: WorldClimate.com'
+        text: 'Source: www.holiday-weather.com'
     },
     xAxis: {
         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -151,9 +151,24 @@ export const interestingFacts = {
     },
     series: [{
         name: 'Tokyo',
-        data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+        data: [5,	6,	9,	14,	18,	21,	25,	26,	23,	18,	12,	8]
     }, {
         name: 'London',
-        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+        data: [5,	7,	9,	11,	14,	16,	19,	19,	17,	13,	10,	7]
+    }, {
+        name: 'Kiev',
+        data: [-5,	-3,	2,	8,	15,	18,	19,	18,	14,	8,	2,	-2]
+    }, {
+        name: 'Barcelona',
+        data: [10,	10,	12,	13,	16,	20,	23,	24,	22,	18,	13,	11]
+    }, {
+        name: 'Dubai',
+        data: [19,	20,	23,	26,	31,	33,	35,	36,	33,	29,	25,	21]
+    }, {
+        name: 'Moscow',
+        data: [-8,	-7,	-2,	6,	13,	18,	19,	17,	12,	6,	-1,	-6]
+    }, {
+        name: 'Toronto',
+        data: [-3,	-3,	1,	7,	14,	16,	21,	21,	18,	11,	5,	-1]
     }]
 }
