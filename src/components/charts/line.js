@@ -45,6 +45,7 @@ export default class Line extends Component {
     this.onStockSimulationInputChange = this.onStockSimulationInputChange.bind(this);
     this.onPolinomialsInputChange = this.onPolinomialsInputChange.bind(this);
     this.onTrigonometricInputChange = this.onTrigonometricInputChange.bind(this);
+    this.onInterestingFactsRadioChange = this.onInterestingFactsRadioChange.bind(this);
   }
 
   componentDidMount() {
@@ -280,14 +281,13 @@ export default class Line extends Component {
   }
 
   onInterestingFactsRadioChange(event) {
-    console.log("this is a target.value from onInterestingFactsRadioChange", event.target.value)
-    // const { configurations } = this.state;
-    // if (configurations.pureRandom[event.target.value]) {
-    //   configurations.pureRandom[event.target.value] = false;
-    // } else {
-    //   configurations.pureRandom[event.target.value] = true;
-    // }
-    // this.setState({ configurations })
+    console.log("this is a target.name from onInterestingFactsRadioChange", event.target.name)
+    const { configurations } = this.state;
+    let options = configurations.interestingFacts[event.target.name];
+    configurations.interestingFacts.current = event.target.name;
+    this.setState({ configurations, options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
   }
 
   renderPureRandomModeConfiguration() {
@@ -625,10 +625,31 @@ export default class Line extends Component {
   }
 
   renderInterestingFactsModeConfiguration() {
-    const { pureRandom } = this.state.configurations;
+    const { interestingFacts } = this.state.configurations;
     return (
       <div className="interesting-facts">
-        This is interesting facts configs
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.temperature}
+                        checked={interestingFacts.current === optionsInterestingFacts.temperature}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />Temperature</label>
+        </div>
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.population}
+                        checked={interestingFacts.current === optionsInterestingFacts.population}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />Population</label>
+        </div>
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.itGiants}
+                        checked={interestingFacts.current === optionsInterestingFacts.itGiants}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />IT Giants</label>
+        </div>
+
       </div>
     )
   }

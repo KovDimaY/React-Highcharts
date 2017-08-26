@@ -12,6 +12,59 @@ export const modes = {
   interestingFacts: "Interesting Facts"
 }
 
+export const optionsPureRandom = {
+  tooltip: "tooltip",
+  zoom: "zoom",
+  legend: "legend",
+  title: "title",
+  dataLabels: "dataLabels",
+  animation: "animation",
+  yAxisTitle: "yAxisTitle",
+  markers: "markers"
+}
+
+export const optionsStockSimulation = {
+  name: "name",
+  price: "price",
+  oscillation: "oscillation",
+  frequency: "frequency"
+}
+
+export const optionsPolinomials = {
+  min: "min",
+  max: "max",
+  number: "number",
+  linearA: "linearA",
+  linearB: "linearB",
+  quadraticA: "quadraticA",
+  quadraticB: "quadraticB",
+  quadraticC: "quadraticC",
+  cubicA: "cubicA",
+  cubicB: "cubicB",
+  cubicC: "cubicC",
+  cubicD: "cubicD"
+}
+
+export const optionsTrigonometric = {
+  min: "min",
+  max: "max",
+  number: "number",
+  cosA: "cosA",
+  cosB: "cosB",
+  sinA: "sinA",
+  sinB: "sinB",
+  tanA: "tanA",
+  tanB: "tanB",
+  ctanA: "ctanA",
+  ctanB: "ctanB"
+}
+
+export const optionsInterestingFacts = {
+  temperature: "temperature",
+  population: "population",
+  itGiants: "itGiants"
+}
+
 export const initialState = {
   options: {},
   rerenderChart: false,
@@ -64,60 +117,8 @@ export const initialState = {
     interestingFacts: {
       temperature: interestingFactsTemperature,
       population: interestingFactsPopulation,
-      itGiants: interestingFactsITGiants
+      itGiants: interestingFactsITGiants,
+      current: optionsInterestingFacts.temperature
     }
   }
-}
-
-export const optionsPureRandom = {
-  tooltip: "tooltip",
-  zoom: "zoom",
-  legend: "legend",
-  title: "title",
-  dataLabels: "dataLabels",
-  animation: "animation",
-  yAxisTitle: "yAxisTitle",
-  markers: "markers"
-}
-
-export const optionsStockSimulation = {
-  name: "name",
-  price: "price",
-  oscillation: "oscillation",
-  frequency: "frequency"
-}
-
-export const optionsPolinomials = {
-  min: "min",
-  max: "max",
-  number: "number",
-  linearA: "linearA",
-  linearB: "linearB",
-  quadraticA: "quadraticA",
-  quadraticB: "quadraticB",
-  quadraticC: "quadraticC",
-  cubicA: "cubicA",
-  cubicB: "cubicB",
-  cubicC: "cubicC",
-  cubicD: "cubicD"
-}
-
-export const optionsTrigonometric = {
-  min: "min",
-  max: "max",
-  number: "number",
-  cosA: "cosA",
-  cosB: "cosB",
-  sinA: "sinA",
-  sinB: "sinB",
-  tanA: "tanA",
-  tanB: "tanB",
-  ctanA: "ctanA",
-  ctanB: "ctanB"
-}
-
-export const optionsInterestingFacts = {
-  temperature: "temperature",
-  population: "population",
-  itGiants: "itGiants"
 }
