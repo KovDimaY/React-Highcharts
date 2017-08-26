@@ -15,6 +15,11 @@ export default class Chart extends Component {
           this.props.options,
           this.props.function
       );
+			Highcharts.setOptions({
+				lang: {
+					numericSymbols: [' K', ' M', ' B', ' T']
+				}
+			});
     }
 
 		componentWillUpdate(nextProps, nextState) {
