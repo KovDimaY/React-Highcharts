@@ -8,6 +8,8 @@ import {
   pureRandom,
   stockSimulation,
   functions,
+  interestingFactsTemperature,
+  interestingFactsPopulation,
   interestingFactsITGiants
 } from '../../constants/line/default-options-line'
 
@@ -17,7 +19,8 @@ import {
   optionsPureRandom,
   optionsStockSimulation,
   optionsPolinomials,
-  optionsTrigonometric
+  optionsTrigonometric,
+  optionsInterestingFacts
 } from '../../constants/line/modes-options'
 
 import {
@@ -86,10 +89,10 @@ export default class Line extends Component {
   }
 
   initInterestingFactsMode() {
-    let options = interestingFactsITGiants;
-    this.setState({ options }, () => {
-      this.updateInterestingInfoConfiguration();
-    });
+    let options = interestingFactsTemperature;
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
   }
 
   updatePureRandomConfiguration() {
@@ -178,14 +181,6 @@ export default class Line extends Component {
     const series = generateSeriesForTrigonometric(trigonometric);
     options.title.text = modes.trigonometric;
     options.series = series;
-
-    this.setState({ options, rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
-  }
-
-  updateInterestingInfoConfiguration() {
-    const { options } = this.state;
 
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -282,6 +277,17 @@ export default class Line extends Component {
     const { configurations } = this.state;
     configurations.trigonometric[event.target.name] = Number(event.target.value);
     this.setState({ configurations });
+  }
+
+  onInterestingFactsRadioChange(event) {
+    console.log("this is a target.value from onInterestingFactsRadioChange", event.target.value)
+    // const { configurations } = this.state;
+    // if (configurations.pureRandom[event.target.value]) {
+    //   configurations.pureRandom[event.target.value] = false;
+    // } else {
+    //   configurations.pureRandom[event.target.value] = true;
+    // }
+    // this.setState({ configurations })
   }
 
   renderPureRandomModeConfiguration() {
@@ -618,6 +624,15 @@ export default class Line extends Component {
     )
   }
 
+  renderInterestingFactsModeConfiguration() {
+    const { pureRandom } = this.state.configurations;
+    return (
+      <div className="interesting-facts">
+        This is interesting facts configs
+      </div>
+    )
+  }
+
   renderBasicConfigTrigonometric(trigonometric) {
     return (
       <div className="row basic-config">
@@ -695,6 +710,9 @@ export default class Line extends Component {
       }
       case modes.trigonometric: {
         return this.renderTrigonometricModeConfiguration();
+      }
+      case modes.interestingFacts: {
+        return this.renderInterestingFactsModeConfiguration();
       }
       default: {
         return null;

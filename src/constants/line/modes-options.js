@@ -1,3 +1,9 @@
+import {
+  interestingFactsTemperature,
+  interestingFactsPopulation,
+  interestingFactsITGiants
+} from '../../constants/line/default-options-line'
+
 export const modes = {
   pureRandom: "Pure Random",
   stockSimulation: "Stock Simulation",
@@ -54,6 +60,11 @@ export const initialState = {
       tanB: 1,
       ctanA: 1,
       ctanB: 1
+    },
+    interestingFacts: {
+      temperature: interestingFactsTemperature,
+      population: interestingFactsPopulation,
+      itGiants: interestingFactsITGiants
     }
   }
 }
@@ -103,4 +114,10 @@ export const optionsTrigonometric = {
   tanB: "tanB",
   ctanA: "ctanA",
   ctanB: "ctanB"
+}
+
+export const optionsInterestingFacts = {
+  temperature: "temperature",
+  population: "population",
+  itGiants: "itGiants"
 }
