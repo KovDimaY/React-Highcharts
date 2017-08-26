@@ -141,6 +141,9 @@ export const interestingFactsTemperature = {
             text: 'Temperature (°C)'
         }
     },
+    tooltip: {
+        valueSuffix: ' (°C)'
+    },
     plotOptions: {
         line: {
             dataLabels: {
@@ -193,6 +196,9 @@ export const interestingFactsPopulation = {
         title: {
             text: 'Population (number of people)'
         }
+    },
+    tooltip: {
+        valueSuffix: ' people'
     },
     plotOptions: {
         line: {
@@ -388,6 +394,10 @@ export const interestingFactsITGiants = {
             },
             lineWidth: 2
         }
+    },
+    tooltip: {
+        valuePrefix: '$',
+        valueSuffix: ' USD'
     },
     series: [{
         name: 'Apple Inc.',
