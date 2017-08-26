@@ -8,7 +8,7 @@ import {
   pureRandom,
   stockSimulation,
   functions,
-  interestingFactsPopulation
+  interestingFactsITGiants
 } from '../../constants/line/default-options-line'
 
 import {
@@ -86,7 +86,7 @@ export default class Line extends Component {
   }
 
   initInterestingFactsMode() {
-    let options = interestingFactsPopulation;
+    let options = interestingFactsITGiants;
     this.setState({ options }, () => {
       this.updateInterestingInfoConfiguration();
     });
