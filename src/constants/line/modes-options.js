@@ -6,6 +6,7 @@ import {
 
 export const modes = {
   pureRandom: "Pure Random",
+  configurableRandom: "Configurable Random",
   stockSimulation: "Stock Simulation",
   polinomials: "Polinomial Functions",
   trigonometric: "Trigonometric Functions",
@@ -21,6 +22,13 @@ export const optionsPureRandom = {
   animation: "animation",
   yAxisTitle: "yAxisTitle",
   markers: "markers"
+}
+
+export const configurableRandom = {
+  seriesNumber: "seriesNumber",
+  pointsNumber: "pointsNumber",
+  min: "min",
+  max: "max"
 }
 
 export const optionsStockSimulation = {
@@ -79,6 +87,12 @@ export const initialState = {
       animation: true,
       yAxisTitle: true,
       markers: true,
+    },
+    configurableRandom: {
+      seriesNumber: 3,
+      pointsNumber: 10,
+      min: -10,
+      max: 10
     },
     stockSimulation: {
       name: "Some Very Famous Company",

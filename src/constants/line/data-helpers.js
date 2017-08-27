@@ -20,6 +20,15 @@ export function generateSeriesForPureRandom() {
   return result;
 }
 
+export function generateSeriesForConfigurableRandom() {
+  let result = {
+    name: "Lalala",
+    data: [[1,2],[1,3],[1,7]]
+  }
+
+  return result;
+}
+
 export function generateSeriesForStockSimulation(price) {
   const now = Date.now();
   let result = [{

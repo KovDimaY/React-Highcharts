@@ -40,6 +40,45 @@ export const pureRandom = {
     series: []
 };
 
+export const configurableRandom = {
+    chart: {
+        type: 'line',
+        zoomType: 'xy'
+    },
+    title: {
+        text: 'Randomly generated data'
+    },
+    subtitle: {
+        text: 'This data is not real'
+    },
+    legend: {
+        enabled: true
+    },
+    yAxis: {
+        title: {
+            text: 'Random Value (UOM)'
+        }
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>:<br/> <b>{point.x}: {point.y}</b> (UOM)<br/>'
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: true
+        },
+        series: {
+            animation: true,
+            marker: {
+                enabled: true
+            }
+        }
+    },
+    series: []
+};
+
 export const stockSimulation = {
     rangeSelector: {
         selected: 1

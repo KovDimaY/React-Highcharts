@@ -6,6 +6,7 @@ import Stock from './stock-abstract'
 
 import {
   pureRandom,
+  configurableRandom,
   stockSimulation,
   functions,
   interestingFactsTemperature,
@@ -25,6 +26,7 @@ import {
 
 import {
   generateSeriesForPureRandom,
+  generateSeriesForConfigurableRandom,
   generateSeriesForStockSimulation,
   newPointToStockSimulation,
   generateSeriesForPolinomials,
@@ -61,6 +63,14 @@ export default class Line extends Component {
   initPureRandomeMode() {
     let options = pureRandom;
     options.series = generateSeriesForPureRandom();
+    this.setState({ options }, () => {
+      this.updatePureRandomConfiguration();
+    });
+  }
+
+  initConfigurableRandomeMode() {
+    let options = configurableRandom;
+    options.series = generateSeriesForConfigurableRandom();
     this.setState({ options }, () => {
       this.updatePureRandomConfiguration();
     });
@@ -197,6 +207,10 @@ export default class Line extends Component {
         this.initPureRandomeMode();
         break;
       }
+      case modes.configurableRandom: {
+        this.initConfigurableRandomeMode();
+        break;
+      }
       case modes.stockSimulation: {
         this.initStockSimulationMode();
         break;
@@ -228,17 +242,15 @@ export default class Line extends Component {
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.stockSimulation}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>??????</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Functions Visualization</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.polinomials}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.trigonometric}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>???????</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Real World Data</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>???????</a></li>
         </ul>
       </div>
     )
@@ -281,7 +293,6 @@ export default class Line extends Component {
   }
 
   onInterestingFactsRadioChange(event) {
-    console.log("this is a target.name from onInterestingFactsRadioChange", event.target.name)
     const { configurations } = this.state;
     let options = configurations.interestingFacts[event.target.name];
     configurations.interestingFacts.current = event.target.name;
@@ -351,6 +362,22 @@ export default class Line extends Component {
         </button>
       </div>
     )
+  }
+
+  renderConfigurableRandomModeConfiguration() {
+    const { configurableRandom } = this.state.configurations;
+    return (
+      <div className="configurable-random">
+        <div className="form-group config-option">
+          <label>This is config random options</label>
+            <input type="number"
+                   className="form-control"
+                   name={2}
+                   value={1}
+                   onChange={null}/>
+        </div>
+      </div>
+    );
   }
 
   renderStockSimulationModeConfiguration() {
@@ -722,6 +749,9 @@ export default class Line extends Component {
     switch (currentMode) {
       case modes.pureRandom: {
         return this.renderPureRandomModeConfiguration();
+      }
+      case modes.configurableRandom: {
+        return this.renderConfigurableRandomModeConfiguration();
       }
       case modes.stockSimulation: {
         return this.renderStockSimulationModeConfiguration();
