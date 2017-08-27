@@ -46,6 +46,7 @@ export default class Line extends Component {
     this.updatePolinomialsConfiguration = this.updatePolinomialsConfiguration.bind(this);
     this.updateTrigonometricConfiguration = this.updateTrigonometricConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
+    this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
     this.onStockSimulationInputChange = this.onStockSimulationInputChange.bind(this);
     this.onPolinomialsInputChange = this.onPolinomialsInputChange.bind(this);
     this.onTrigonometricInputChange = this.onTrigonometricInputChange.bind(this);
@@ -280,10 +281,36 @@ export default class Line extends Component {
     this.setState({ configurations })
   }
 
+  onConfigurableRandomInputChange(event) {
+    const { configurations } = this.state;
+    if (event.target.dataset.type === "positive") {
+      if (Number(event.target.value) <= 1) {
+        configurations.configurableRandom[event.target.name] = 1;
+      } else {
+        configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
+      }
+    } else {
+      if (event.target.name === optionsConfigurableRandom.min) {
+        if (Number(event.target.value) > configurations.configurableRandom[optionsConfigurableRandom.max]) {
+          configurations.configurableRandom[event.target.name] = configurations.configurableRandom[optionsConfigurableRandom.max];
+        } else {
+          configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
+        }
+      } else if (event.target.name === optionsConfigurableRandom.max) {
+        if (Number(event.target.value) < configurations.configurableRandom[optionsConfigurableRandom.min]) {
+          configurations.configurableRandom[event.target.name] = configurations.configurableRandom[optionsConfigurableRandom.min];
+        } else {
+          configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
+        }
+      }
+    }
+    this.setState({ configurations });
+  }
+
   onStockSimulationInputChange(event) {
     const { configurations } = this.state;
     if (event.target.type === "number") {
-      if (event.target.value <= 0.01) {
+      if (Number(event.target.value) <= 0.01) {
         configurations.stockSimulation[event.target.name] = 0.01;
       } else {
         configurations.stockSimulation[event.target.name] = Number(event.target.value);
@@ -385,34 +412,36 @@ export default class Line extends Component {
         <div className="form-group config-option">
           <label>Number of series</label>
             <input type="number"
+                   data-type="positive"
                    className="form-control"
                    name={optionsConfigurableRandom.seriesNumber}
                    value={configurableRandom.seriesNumber}
-                   onChange={null}/>
+                   onChange={this.onConfigurableRandomInputChange}/>
         </div>
         <div className="form-group config-option">
           <label>Max number of points</label>
             <input type="number"
+                   data-type="positive"
                    className="form-control"
-                   name={optionsConfigurableRandom.seriesNumber}
-                   value={configurableRandom.seriesNumber}
-                   onChange={null}/>
+                   name={optionsConfigurableRandom.pointsNumber}
+                   value={configurableRandom.pointsNumber}
+                   onChange={this.onConfigurableRandomInputChange}/>
         </div>
         <div className="form-group config-option">
           <label>Min value</label>
             <input type="number"
                    className="form-control"
-                   name={optionsConfigurableRandom.seriesNumber}
-                   value={configurableRandom.seriesNumber}
-                   onChange={null}/>
+                   name={optionsConfigurableRandom.min}
+                   value={configurableRandom.min}
+                   onChange={this.onConfigurableRandomInputChange}/>
         </div>
         <div className="form-group config-option">
           <label>Max value</label>
             <input type="number"
                    className="form-control"
-                   name={optionsConfigurableRandom.seriesNumber}
-                   value={configurableRandom.seriesNumber}
-                   onChange={null}/>
+                   name={optionsConfigurableRandom.max}
+                   value={configurableRandom.max}
+                   onChange={this.onConfigurableRandomInputChange}/>
         </div>
 
         <button
