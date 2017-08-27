@@ -28,6 +28,13 @@
         margin-bottom: 20px;
       }
     }
+    .configurable-random {
+      margin-top: 30px;
+      .config-option {
+        width: 60%;
+        margin-left: 20%;
+      }
+    }
     .functions {
       .basic-config {
         margin-top: 10px;
@@ -40,21 +47,11 @@
           margin-top: 30px;
         }
       }
-      .apply-button {
-        position: unset;
-        bottom: 30px;
-        left: 0;
-        width: 40%;
-        margin-left: 30%;
-        margin-bottom: 30px;
-        margin-top: 30px;
-      }
       h3 {
         text-align: center;
         margin-bottom: -20px;
       }
     }
-
     .stock-simulation {
       width: 90%;
       margin: 5%;
@@ -73,6 +70,11 @@
     .modified {
       width: 60px;
       display: inline-block;
+    }
+    .position-dynamic {
+      position: unset;
+      margin-bottom: 30px;
+      margin-top: 30px;
     }
   }
 

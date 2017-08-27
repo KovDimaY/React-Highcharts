@@ -24,7 +24,7 @@ export const optionsPureRandom = {
   markers: "markers"
 }
 
-export const configurableRandom = {
+export const optionsConfigurableRandom = {
   seriesNumber: "seriesNumber",
   pointsNumber: "pointsNumber",
   min: "min",

@@ -18,6 +18,7 @@ import {
   modes,
   initialState,
   optionsPureRandom,
+  optionsConfigurableRandom,
   optionsStockSimulation,
   optionsPolinomials,
   optionsTrigonometric,
@@ -40,6 +41,7 @@ export default class Line extends Component {
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this);
+    this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
     this.updateStockSimulationConfiguration = this.updateStockSimulationConfiguration.bind(this);
     this.updatePolinomialsConfiguration = this.updatePolinomialsConfiguration.bind(this);
     this.updateTrigonometricConfiguration = this.updateTrigonometricConfiguration.bind(this);
@@ -72,7 +74,7 @@ export default class Line extends Component {
     let options = configurableRandom;
     options.series = generateSeriesForConfigurableRandom();
     this.setState({ options }, () => {
-      this.updatePureRandomConfiguration();
+      this.updateConfigurableRandomConfiguration();
     });
   }
 
@@ -118,6 +120,18 @@ export default class Line extends Component {
     options.plotOptions.line.enableMouseTracking = pureRandom.tooltip;
     options.plotOptions.series.animation = pureRandom.animation;
     options.plotOptions.series.marker.enabled = pureRandom.markers;
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
+  updateConfigurableRandomConfiguration() {
+    const { configurableRandom } = this.state.configurations;
+    const { options } = this.state;
+
+    const series = generateSeriesForConfigurableRandom(configurableRandom);
+    options.series = series;
 
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -369,13 +383,44 @@ export default class Line extends Component {
     return (
       <div className="configurable-random">
         <div className="form-group config-option">
-          <label>This is config random options</label>
+          <label>Number of series</label>
             <input type="number"
                    className="form-control"
-                   name={2}
-                   value={1}
+                   name={optionsConfigurableRandom.seriesNumber}
+                   value={configurableRandom.seriesNumber}
                    onChange={null}/>
         </div>
+        <div className="form-group config-option">
+          <label>Max number of points</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsConfigurableRandom.seriesNumber}
+                   value={configurableRandom.seriesNumber}
+                   onChange={null}/>
+        </div>
+        <div className="form-group config-option">
+          <label>Min value</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsConfigurableRandom.seriesNumber}
+                   value={configurableRandom.seriesNumber}
+                   onChange={null}/>
+        </div>
+        <div className="form-group config-option">
+          <label>Max value</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsConfigurableRandom.seriesNumber}
+                   value={configurableRandom.seriesNumber}
+                   onChange={null}/>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateConfigurableRandomConfiguration}>
+          Apply
+        </button>
       </div>
     );
   }
@@ -473,7 +518,7 @@ export default class Line extends Component {
 
         <button
           type="button"
-          className="btn btn-success apply-button"
+          className="btn btn-success apply-button position-dynamic"
           onClick={this.updatePolinomialsConfiguration}>
           Apply
         </button>
@@ -643,7 +688,7 @@ export default class Line extends Component {
 
         <button
           type="button"
-          className="btn btn-success apply-button"
+          className="btn btn-success apply-button position-dynamic"
           onClick={this.updateTrigonometricConfiguration}>
           Apply
         </button>

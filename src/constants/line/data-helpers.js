@@ -21,10 +21,10 @@ export function generateSeriesForPureRandom() {
 }
 
 export function generateSeriesForConfigurableRandom() {
-  let result = {
+  let result = [{
     name: "Lalala",
-    data: [[1,2],[1,3],[1,7]]
-  }
+    data: [[1,2],[2,3],[3,7]]
+  }]
 
   return result;
 }
