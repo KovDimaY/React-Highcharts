@@ -58,9 +58,9 @@ export default class Line extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    $(this.refs.priceTooltip).tooltip();
-    $(this.refs.oscilationTooltip).tooltip();
-    $(this.refs.frequencyTooltip).tooltip();
+    // $(this.refs.priceTooltip).tooltip();
+    // $(this.refs.oscilationTooltip).tooltip();
+    // $(this.refs.frequencyTooltip).tooltip();
   }
 
   initPureRandomeMode() {
@@ -469,7 +469,7 @@ export default class Line extends Component {
           <label data-toggle="tooltip"
                  ref="priceTooltip"
                  title="This is a starting price of the stock (in $).">
-            � Start Price
+                 Start Price
           </label>
           <input type="number"
                  className="form-control"
@@ -483,7 +483,7 @@ export default class Line extends Component {
               <label data-toggle="tooltip"
                      ref="oscilationTooltip"
                      title="This number means the maximum difference (in $) between the old price and the new one.">
-                     � Oscillation
+                     Oscillation
               </label>
               <input type="number"
                      className="form-control"
@@ -497,7 +497,7 @@ export default class Line extends Component {
               <label data-toggle="tooltip"
                      ref="frequencyTooltip"
                      title="This number means how often (in seconds) the new price will appear.">
-                     � Frequency
+                     Frequency
               </label>
               <input type="number"
                      className="form-control"

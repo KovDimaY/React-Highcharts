@@ -43,7 +43,7 @@ export const pureRandom = {
 export const configurableRandom = {
     chart: {
         type: 'line',
-        zoomType: 'xy'
+        zoomType: 'x'
     },
     title: {
         text: 'Randomly generated data'
@@ -60,7 +60,12 @@ export const configurableRandom = {
         }
     },
     tooltip: {
-        pointFormat: '<span style="color:{series.color}">{series.name}</span>:<br/> <b>{point.x}: {point.y}</b> (UOM)<br/>'
+        formatter: function () {
+            return '<b style="color: ' + this.series.color + '">' +
+                    this.series.name + '</b><br>' +
+                   'x = <b>' + this.x + '</b><br>' +
+                   'y = <b>' + this.y + '</b>';
+        }
     },
     plotOptions: {
         line: {
