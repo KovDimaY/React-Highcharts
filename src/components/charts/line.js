@@ -73,7 +73,6 @@ export default class Line extends Component {
 
   initConfigurableRandomeMode() {
     let options = configurableRandom;
-    options.series = generateSeriesForConfigurableRandom();
     this.setState({ options }, () => {
       this.updateConfigurableRandomConfiguration();
     });

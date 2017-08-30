@@ -20,11 +20,27 @@ export function generateSeriesForPureRandom() {
   return result;
 }
 
-export function generateSeriesForConfigurableRandom() {
-  let result = [{
-    name: "Lalala",
-    data: [[1,2],[2,3],[3,7]]
-  }]
+export function generateSeriesForConfigurableRandom(params) {
+  const {
+    seriesNumber,
+    pointsNumber,
+    min,
+    max
+  } = params;
+  let result = [];
+  for (let i = 0; i < seriesNumber; i++) {
+    let currentData = [];
+    const currentName = `Random Serie ${i + 1}`;
+    for (let j = 0; j < pointsNumber; j++) {
+      const randValue = Math.random() * (max - min) + min;
+      const shortValue = Math.round(randValue * 1000) / 1000;
+      currentData.push([j+1, shortValue]);
+    }
+    result.push({
+      name: currentName,
+      data: currentData
+    });
+  }
 
   return result;
 }
