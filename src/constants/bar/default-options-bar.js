@@ -20,7 +20,7 @@ export const pureRandom = {
         type: 'bar'
     },
     plotOptions: {
-        line: {
+        bar: {
             dataLabels: {
                 enabled: true
             },

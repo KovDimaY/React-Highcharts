@@ -44,8 +44,8 @@ export default class Bar extends Component {
     options.subtitle.text = pureRandom.title ? 'Randomly generated data' : null;
     options.legend.enabled = pureRandom.legend;
     options.yAxis.title.text = pureRandom.yAxisTitle ? 'Random Value (UOM)' : null;
-    options.plotOptions.line.dataLabels.enabled = pureRandom.dataLabels;
-    options.plotOptions.line.enableMouseTracking = pureRandom.tooltip;
+    options.plotOptions.bar.dataLabels.enabled = pureRandom.dataLabels;
+    options.plotOptions.bar.enableMouseTracking = pureRandom.tooltip;
     options.plotOptions.series.animation = pureRandom.animation;
     options.plotOptions.series.marker.enabled = pureRandom.markers;
 
@@ -163,7 +163,7 @@ export default class Bar extends Component {
       </div>
     )
   }
-  
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
