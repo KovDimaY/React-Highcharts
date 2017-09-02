@@ -13,6 +13,10 @@ import {
   optionsPureRandom
 } from '../../constants/bar/modes-options-bar'
 
+import {
+  generateSeriesForPureRandom
+} from '../../constants/bar/data-helpers-bar'
+
 
 export default class Bar extends Component {
   constructor(props) {
@@ -30,7 +34,7 @@ export default class Bar extends Component {
 
   initPureRandomeMode() {
     let options = pureRandom;
-    // options.series = generateSeriesForPureRandom();
+    options.series = generateSeriesForPureRandom();
     this.setState({ options }, () => {
       this.updatePureRandomConfiguration();
     });
@@ -39,15 +43,20 @@ export default class Bar extends Component {
   updatePureRandomConfiguration() {
     const { pureRandom } = this.state.configurations;
     const { options } = this.state;
+    options.chart.type = pureRandom.vertical ? 'column' : 'bar';
     options.chart.zoomType = pureRandom.zoom ? 'xy' : null;
     options.title.text = pureRandom.title ? 'Randomly generated data' : null;
     options.subtitle.text = pureRandom.title ? 'Randomly generated data' : null;
     options.legend.enabled = pureRandom.legend;
     options.yAxis.title.text = pureRandom.yAxisTitle ? 'Random Value (UOM)' : null;
-    options.plotOptions.bar.dataLabels.enabled = pureRandom.dataLabels;
-    options.plotOptions.bar.enableMouseTracking = pureRandom.tooltip;
+    if (pureRandom.vertical) {
+      options.plotOptions.column.dataLabels.enabled = pureRandom.dataLabels;
+      options.plotOptions.column.enableMouseTracking = pureRandom.tooltip;
+    } else {
+      options.plotOptions.bar.dataLabels.enabled = pureRandom.dataLabels;
+      options.plotOptions.bar.enableMouseTracking = pureRandom.tooltip;
+    }
     options.plotOptions.series.animation = pureRandom.animation;
-    options.plotOptions.series.marker.enabled = pureRandom.markers;
 
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -107,6 +116,12 @@ export default class Bar extends Component {
       <div className="pure-random">
         <div className="checkbox">
           <label><input type="checkbox"
+                        value={optionsPureRandom.vertical}
+                        checked={pureRandom.vertical}
+                        onChange={this.onPureRandomCheckBoxChange}/>Vertical</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
                         value={optionsPureRandom.title}
                         checked={pureRandom.title}
                         onChange={this.onPureRandomCheckBoxChange}/>Show Chart Title</label>
@@ -115,13 +130,7 @@ export default class Bar extends Component {
           <label><input type="checkbox"
                         value={optionsPureRandom.yAxisTitle}
                         checked={pureRandom.yAxisTitle}
-                        onChange={this.onPureRandomCheckBoxChange}/>Show Y-Axis Title</label>
-        </div>
-        <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom.markers}
-                        checked={pureRandom.markers}
-                        onChange={this.onPureRandomCheckBoxChange}/>Show Point Markers</label>
+                        onChange={this.onPureRandomCheckBoxChange}/>Show Axis Title</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"

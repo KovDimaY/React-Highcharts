@@ -1,4 +1,8 @@
 export const pureRandom = {
+    chart: {
+        type: 'column',
+        zoomType: 'x'
+    },
     title: {
         text: ''
     },
@@ -6,18 +10,18 @@ export const pureRandom = {
         text: ''
     },
     xAxis: {
-        categories: ['Apples', 'Bananas', 'Oranges', 'Grapes']
+        categories: ['A', 'B', 'C', 'D', 'E']
     },
     legend: {
         enabled: true
     },
     yAxis: {
         title: {
-            text: 'Fruit eaten'
+            text: 'Rendom Value (UOM)'
         }
     },
-    chart: {
-        type: 'bar'
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> (UOM)<br/>'
     },
     plotOptions: {
         bar: {
@@ -26,21 +30,15 @@ export const pureRandom = {
             },
             enableMouseTracking: true
         },
-        series: {
-            animation: true,
-            marker: {
+        column: {
+            dataLabels: {
                 enabled: true
-            }
+            },
+            enableMouseTracking: true
+        },
+        series: {
+            animation: true
         }
     },
-    series: [{
-        name: 'Dima',
-        data: [1, 3, 4, 3]
-    }, {
-        name: 'Tanya',
-        data: [5, 7, 3, 1]
-    }, {
-        name: 'Masha',
-        data: [3, 5, 6, 4]
-    }]
+    series: []
 };

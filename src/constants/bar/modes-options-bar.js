@@ -3,14 +3,14 @@ export const modes = {
 }
 
 export const optionsPureRandom = {
+  vertical: "vertical",
   tooltip: "tooltip",
   zoom: "zoom",
   legend: "legend",
   title: "title",
   dataLabels: "dataLabels",
   animation: "animation",
-  yAxisTitle: "yAxisTitle",
-  markers: "markers"
+  yAxisTitle: "yAxisTitle"
 }
 
 export const initialState = {
@@ -19,14 +19,14 @@ export const initialState = {
   currentMode: modes.pureRandom,
   configurations: {
     pureRandom: {
+      vertical: true,
       tooltip: true,
       zoom: true,
       legend: true,
       title: true,
       dataLabels: true,
       animation: true,
-      yAxisTitle: true,
-      markers: true,
+      yAxisTitle: true
     }
   }
 }
