@@ -23,7 +23,7 @@ import {
   optionsPolinomials,
   optionsTrigonometric,
   optionsInterestingFacts
-} from '../../constants/line/modes-options'
+} from '../../constants/line/modes-options-line'
 
 import {
   generateSeriesForPureRandom,
@@ -32,7 +32,7 @@ import {
   newPointToStockSimulation,
   generateSeriesForPolinomials,
   generateSeriesForTrigonometric
-} from '../../constants/line/data-helpers'
+} from '../../constants/line/data-helpers-line'
 
 export default class Line extends Component {
   constructor(props) {
@@ -845,7 +845,7 @@ export default class Line extends Component {
   }
 
 	render() {
-    console.log("state: ", this.state);
+    console.log("line state: ", this.state);
 		return(
 			<div className="line-page" key={`line-chart-${this.state.currentMode}`}>
         <div className="row">
