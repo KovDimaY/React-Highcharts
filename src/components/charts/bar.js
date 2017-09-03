@@ -4,17 +4,21 @@ import ReactDOM from 'react-dom'
 import Chart from './chart-abstract'
 
 import {
-  pureRandom
+  pureRandom,
+  configurableRandom,
 } from '../../constants/bar/default-options-bar'
 
 import {
   modes,
   initialState,
-  optionsPureRandom
+  optionsPureRandom,
+  optionsConfigurableRandom,
 } from '../../constants/bar/modes-options-bar'
 
 import {
-  generateSeriesForPureRandom
+  generateSeriesForPureRandom,
+  generateSeriesForConfigurableRandom,
+  generateCategoriesConfigurableRandom
 } from '../../constants/bar/data-helpers-bar'
 
 
@@ -25,7 +29,9 @@ export default class Bar extends Component {
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this);
+    this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
+    this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +43,13 @@ export default class Bar extends Component {
     options.series = generateSeriesForPureRandom();
     this.setState({ options }, () => {
       this.updatePureRandomConfiguration();
+    });
+  }
+
+  initConfigurableRandomeMode() {
+    let options = configurableRandom;
+    this.setState({ options }, () => {
+      this.updateConfigurableRandomConfiguration();
     });
   }
 
@@ -63,12 +76,30 @@ export default class Bar extends Component {
     })
   }
 
+  updateConfigurableRandomConfiguration() {
+    const { configurableRandom } = this.state.configurations;
+    const { options } = this.state;
+
+    const series = generateSeriesForConfigurableRandom(configurableRandom);
+    const categories = generateCategoriesConfigurableRandom(configurableRandom.categoriesNumber);
+    options.series = series;
+    options.xAxis.categories = categories;
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
   dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
     const { configurations } = this.state;
     switch (mode) {
       case modes.pureRandom: {
         this.initPureRandomeMode();
+        break;
+      }
+      case modes.configurableRandom: {
+        this.initConfigurableRandomeMode();
         break;
       }
       default: {
@@ -88,6 +119,32 @@ export default class Bar extends Component {
     this.setState({ configurations })
   }
 
+  onConfigurableRandomInputChange(event) {
+    const { configurations } = this.state;
+    if (event.target.dataset.type === "positive") {
+      if (Number(event.target.value) <= 1) {
+        configurations.configurableRandom[event.target.name] = 1;
+      } else {
+        configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
+      }
+    } else {
+      if (event.target.name === optionsConfigurableRandom.min) {
+        if (Number(event.target.value) > configurations.configurableRandom[optionsConfigurableRandom.max]) {
+          configurations.configurableRandom[event.target.name] = configurations.configurableRandom[optionsConfigurableRandom.max];
+        } else {
+          configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
+        }
+      } else if (event.target.name === optionsConfigurableRandom.max) {
+        if (Number(event.target.value) < configurations.configurableRandom[optionsConfigurableRandom.min]) {
+          configurations.configurableRandom[event.target.name] = configurations.configurableRandom[optionsConfigurableRandom.min];
+        } else {
+          configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
+        }
+      }
+    }
+    this.setState({ configurations });
+  }
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -96,7 +153,7 @@ export default class Bar extends Component {
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a></li>
-          // <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
           // <li><a onClick={this.dropdownClickHandler}>{modes.stockSimulation}</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Functions Visualization</li>
@@ -173,11 +230,63 @@ export default class Bar extends Component {
     )
   }
 
+  renderConfigurableRandomModeConfiguration() {
+    const { configurableRandom } = this.state.configurations;
+    return (
+      <div className="configurable-random">
+        <div className="form-group config-option">
+          <label>Number of series</label>
+            <input type="number"
+                   data-type="positive"
+                   className="form-control"
+                   name={optionsConfigurableRandom.seriesNumber}
+                   value={configurableRandom.seriesNumber}
+                   onChange={this.onConfigurableRandomInputChange}/>
+        </div>
+        <div className="form-group config-option">
+          <label>Number of categories</label>
+            <input type="number"
+                   data-type="positive"
+                   className="form-control"
+                   name={optionsConfigurableRandom.categoriesNumber}
+                   value={configurableRandom.categoriesNumber}
+                   onChange={this.onConfigurableRandomInputChange}/>
+        </div>
+        <div className="form-group config-option">
+          <label>Min value</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsConfigurableRandom.min}
+                   value={configurableRandom.min}
+                   onChange={this.onConfigurableRandomInputChange}/>
+        </div>
+        <div className="form-group config-option">
+          <label>Max value</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsConfigurableRandom.max}
+                   value={configurableRandom.max}
+                   onChange={this.onConfigurableRandomInputChange}/>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateConfigurableRandomConfiguration}>
+          Apply
+        </button>
+      </div>
+    );
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
       case modes.pureRandom: {
         return this.renderPureRandomModeConfiguration();
+      }
+      case modes.configurableRandom: {
+        return this.renderConfigurableRandomModeConfiguration();
       }
       default: {
         return null;
