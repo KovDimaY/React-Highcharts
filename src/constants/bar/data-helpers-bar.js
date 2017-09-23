@@ -52,3 +52,34 @@ export function generateCategoriesConfigurableRandom(number) {
   }
   return result;
 }
+
+export function generateSeriesForBalanceSimulation(income, expenses) {
+  console.log("generateSeriesForBalanceSimulation", income, expenses);
+  let result = [{
+      name: "Income",
+      data: [income]
+    }, {
+        name: "Expenses",
+        data: [expenses]
+    }, {
+        name: "Result",
+        data: [income - expenses]
+    }
+  ];
+
+  return result;
+}
+
+export function newPointsToBalanceSimulation(oldSeries, income, expenses) {
+  for (let i = 0; i < oldSeries.length; i++) {
+    if (oldSeries[i].name === "Income") {
+      oldSeries[i].data.push(income);
+    } else if (oldSeries[i].name === "Expenses") {
+      oldSeries[i].data.push(expenses);
+    } else if (oldSeries[i].name === "Result") {
+      oldSeries[i].data.push(income - expenses);
+    }
+  }
+
+  return oldSeries;
+}

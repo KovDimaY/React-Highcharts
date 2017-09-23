@@ -35,7 +35,8 @@ export const optionsStockSimulation = {
   name: "name",
   price: "price",
   oscillation: "oscillation",
-  frequency: "frequency"
+  frequency: "frequency",
+  isRunning: "isRunning"
 }
 
 export const optionsPolinomials = {

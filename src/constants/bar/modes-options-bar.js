@@ -26,7 +26,8 @@ export const optionsBalanceSimulation = {
   incomeProbability: "incomeProbability",
   expensesProbability: "expensesProbability",
   initIncome: "initIncome",
-  initExpenses: "initExpenses"
+  initExpenses: "initExpenses",
+  isRunning: "isRunning"
 }
 
 export const initialState = {
@@ -54,7 +55,8 @@ export const initialState = {
       incomeProbability: 10,
       expensesProbability: 10,
       initIncome: 1500,
-      initExpenses: 1400
+      initExpenses: 1400,
+      isRunning: false
     },
   }
 }

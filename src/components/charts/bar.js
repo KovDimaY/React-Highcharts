@@ -20,7 +20,9 @@ import {
 import {
   generateSeriesForPureRandom,
   generateSeriesForConfigurableRandom,
-  generateCategoriesConfigurableRandom
+  generateCategoriesConfigurableRandom,
+  generateSeriesForBalanceSimulation,
+  newPointsToBalanceSimulation
 } from '../../constants/bar/data-helpers-bar'
 
 
@@ -105,34 +107,50 @@ export default class Bar extends Component {
 
   updateBalanceSimulationConfiguration(event) {
     const { configurations, options } = this.state;
-    // const {
-    //   name,
-    //   isRunning,
-    //   price
-    // } = configurations.stockSimulation;
-    // options.title.text = name ? "Stock price of " + name : null;
-    // if (event) {
-    //   if (isRunning) {
-    //     options.navigator.enabled = true;
-    //     options.rangeSelector.enabled = true;
-    //     configurations.stockSimulation.isRunning = false;
-    //     this.setState({ options, configurations, rerenderChart: true }, () => {
-    //       this.setState({ rerenderChart: false });
-    //     });
-    //   } else {
-    //     options.navigator.enabled = false;
-    //     options.rangeSelector.enabled = false;
-    //     options.series = generateSeriesForStockSimulation(price);
-    //     configurations.stockSimulation.isRunning = true;
-    //     this.setState({ configurations }, () => {
-    //       this.addPointToStockSimulation();
-    //     });
-    //   }
-    // } else {
-    //   this.setState({ options, rerenderChart: true }, () => {
-    //     this.setState({ rerenderChart: false });
-    //   });
-    // }
+    const {
+      isRunning,
+      initIncome,
+      initExpenses
+    } = configurations.balanceSimulation;
+    if (event) {
+      if (isRunning) {
+        configurations.balanceSimulation.isRunning = false;
+        this.setState({ options, configurations, rerenderChart: true }, () => {
+          this.setState({ rerenderChart: false });
+        });
+      } else {
+        options.series = generateSeriesForBalanceSimulation(initIncome, initExpenses);
+        configurations.balanceSimulation.isRunning = true;
+        this.setState({ configurations }, () => {
+          this.addPointsToBalanceSimulation();
+        });
+      }
+    } else {
+      this.setState({ options, rerenderChart: true }, () => {
+        this.setState({ rerenderChart: false });
+      });
+    }
+  }
+
+  addPointsToBalanceSimulation() {
+    const { configurations, options } = this.state;
+    const {
+      isRunning,
+      incomeProbability,
+      expensesProbability
+    } = configurations.balanceSimulation;
+    if (isRunning) {
+      if (options.series[0].data.length < 12) {
+        options.series = newPointsToBalanceSimulation(options.series, incomeProbability, expensesProbability);
+        setTimeout(() => this.addPointsToBalanceSimulation(), 5000);
+        this.setState({ options, rerenderChart: true }, () => {
+          this.setState({ rerenderChart: false });
+        });
+      } else {
+        configurations.balanceSimulation.isRunning = false;
+        this.setState({ configurations });
+      }
+    }
   }
 
   dropdownClickHandler(input) {
@@ -384,12 +402,26 @@ export default class Bar extends Component {
                    onChange={this.onBalanceSimulationInputChange}/>
         </div>
 
-        <button
-          type="button"
-          className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateBalanceSimulationConfiguration}>
-          Apply
-        </button>
+        {
+          balanceSimulation.isRunning ?
+          (
+            <button
+              type="button"
+              className="btn btn-danger apply-button position-dynamic"
+              onClick={this.updateBalanceSimulationConfiguration}>
+              Stop Simulation
+            </button>
+          )
+          :
+          (
+            <button
+              type="button"
+              className="btn btn-success apply-button position-dynamic"
+              onClick={this.updateBalanceSimulationConfiguration}>
+              Start Simulation
+            </button>
+          )
+        }
       </div>
     );
   }

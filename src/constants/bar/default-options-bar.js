@@ -106,7 +106,7 @@ export const balanceSimulation = {
         enabled: true
     },
     xAxis: {
-        categories: []
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     },
     yAxis: {
         title: {
