@@ -23,11 +23,7 @@
     overflow:auto;
     border: 1px solid rgba(128, 128, 128, 0.50);
 
-    .interesting-facts {
-      .radio {
-        margin-bottom: 20px;
-      }
-    }
+
     .configurable-random {
       margin-top: 30px;
       .config-option {
@@ -35,26 +31,12 @@
         margin-left: 20%;
       }
     }
-    .functions {
-      .basic-config {
-        margin-top: 10px;
+    .balance-simulation {
+      margin-top: 30px;
+      .config-option {
+        width: 80%;
+        margin-left: 10%;
       }
-      .function-config {
-        text-align: center;
-        margin-bottom: 10px;
-        p {
-          margin: 0;
-          margin-top: 30px;
-        }
-      }
-      h3 {
-        text-align: center;
-        margin-bottom: -20px;
-      }
-    }
-    .stock-simulation {
-      width: 90%;
-      margin: 5%;
     }
     .apply-button {
       position: absolute;
@@ -84,20 +66,6 @@
       margin-left: 33%;
       margin-top: 30px;
     }
-    .interesting-facts {
-      margin-left: 40%;
-      margin-top: 30px;
-    }
-    .functions {
-      .config-option {
-        text-align: center;
-        width: 80%;
-        margin-left: 10%;
-      }
-      .coefficient {
-        display: inline-block;
-      }
-    }
     .apply-button {
       width: 40%;
       margin-left: 30%;
@@ -109,21 +77,6 @@
       margin-left: 40px;
       margin-top: 30px;
     }
-    .interesting-facts {
-      margin-left: 50px;
-      margin-top: 30px;
-    }
-    .functions {
-      .config-option {
-        text-align: center;
-        width: 80%;
-        margin-left: 10%;
-      }
-      .coefficient {
-        display: block;
-        margin-left: 0;
-      }
-    }
     .apply-button {
       width: 60%;
       margin-left: 20%;
@@ -133,20 +86,6 @@
     .pure-random {
       margin-left: 80px;
       margin-top: 30px;
-    }
-    .interesting-facts {
-      margin-left: 90px;
-      margin-top: 30px;
-    }
-    .functions {
-      .config-option {
-        text-align: center;
-        width: 80%;
-        margin-left: 10%;
-      }
-      .coefficient {
-        display: inline-block;
-      }
     }
     .apply-button {
       width: 40%;
@@ -158,27 +97,12 @@
       margin-left: 110px;
       margin-top: 30px;
     }
-    .interesting-facts {
-      margin-left: 130px;
-      margin-top: 30px;
-    }
-    .functions {
-      .config-option {
-        text-align: center;
-        width: 60%;
-        margin-left: 20%;
-      }
-      .coefficient {
-        display: inline-block;
-      }
-    }
 
     .apply-button {
       width: 40%;
       margin-left: 30%;
     }
   }
-
 
   .coefficient{
     padding: 15px;
