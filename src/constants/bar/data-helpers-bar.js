@@ -70,16 +70,29 @@ export function generateSeriesForBalanceSimulation(income, expenses) {
   return result;
 }
 
-export function newPointsToBalanceSimulation(oldSeries, income, expenses) {
-  for (let i = 0; i < oldSeries.length; i++) {
-    if (oldSeries[i].name === "Income") {
-      oldSeries[i].data.push(income);
-    } else if (oldSeries[i].name === "Expenses") {
-      oldSeries[i].data.push(expenses);
-    } else if (oldSeries[i].name === "Result") {
-      oldSeries[i].data.push(income - expenses);
-    }
+export function increaseValueWithProbability(value, probability) {
+  const randomValue = Math.random() * 100;
+  if (randomValue < probability) {
+    const randomIncrease = 1.2 - Math.random() * 0.2;
+    return Math.round(value * randomIncrease);
   }
+  return value;
+}
+
+export function newPointsToBalanceSimulation(oldSeries, incomeProbability, expensesProbability) {
+  let newIncome = 0;
+  let newExpenses = 0;
+
+  const lastIndex = oldSeries[0].data.length - 1;
+  const lastIncome = oldSeries[0].data[lastIndex];
+  const lastExpenses = oldSeries[1].data[lastIndex];
+
+  newIncome = increaseValueWithProbability(lastIncome, incomeProbability);
+  newExpenses = increaseValueWithProbability(lastExpenses, expensesProbability);
+
+  oldSeries[0].data.push(newIncome);
+  oldSeries[1].data.push(newExpenses);
+  oldSeries[2].data.push(newIncome - newExpenses);
 
   return oldSeries;
 }

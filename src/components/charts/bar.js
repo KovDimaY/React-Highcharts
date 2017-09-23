@@ -61,8 +61,8 @@ export default class Bar extends Component {
 
   initBalanceSimulationMode() {
     let options = balanceSimulation;
-    // const { name, price } = this.state.configurations.stockSimulation;
-    // options.series = generateSeriesForStockSimulation(price);
+    const { initIncome, initExpenses } = this.state.configurations.balanceSimulation;
+    options.series = generateSeriesForBalanceSimulation(initIncome, initExpenses);
     this.setState({ options }, () => {
       this.updateBalanceSimulationConfiguration();
     });
@@ -384,7 +384,7 @@ export default class Bar extends Component {
                    onChange={this.onBalanceSimulationInputChange}/>
         </div>
         <div className="form-group config-option">
-          <label>Income raise probability (%)</label>
+          <label>Income change probability (%)</label>
             <input type="number"
                    className="form-control"
                    data-type="percent"
@@ -393,7 +393,7 @@ export default class Bar extends Component {
                    onChange={this.onBalanceSimulationInputChange}/>
         </div>
         <div className="form-group config-option">
-          <label>Expenses raise probability (%)</label>
+          <label>Expenses change probability (%)</label>
             <input type="number"
                    data-type="percent"
                    className="form-control"
