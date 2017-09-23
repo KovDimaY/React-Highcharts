@@ -31,9 +31,11 @@ export default class Bar extends Component {
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this);
+    this.updateBalanceSimulationConfiguration = this.updateBalanceSimulationConfiguration.bind(this);
     this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
     this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
+    this.onBalanceSimulationInputChange = this.onBalanceSimulationInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -192,6 +194,23 @@ export default class Bar extends Component {
     this.setState({ configurations });
   }
 
+  onBalanceSimulationInputChange(event) {
+    const { configurations } = this.state;
+    if (Number(event.target.value) <= 0) {
+      configurations.balanceSimulation[event.target.name] = 0;
+    } else {
+      configurations.balanceSimulation[event.target.name] = Math.floor(Number(event.target.value));
+    }
+    if (event.target.dataset.type === "percent") {
+      if (Number(event.target.value) > 100) {
+        configurations.balanceSimulation[event.target.name] = 100;
+      } else {
+        configurations.balanceSimulation[event.target.name] = Math.floor(Number(event.target.value));
+      }
+    }
+    this.setState({ configurations });
+  }
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -326,6 +345,55 @@ export default class Bar extends Component {
     );
   }
 
+  renderBalanceSimulationModeConfiguration() {
+    const { balanceSimulation } = this.state.configurations;
+    return (
+      <div className="balance-simulation">
+        <div className="form-group config-option">
+          <label>Initial Income ($)</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsBalanceSimulation.initIncome}
+                   value={balanceSimulation.initIncome}
+                   onChange={this.onBalanceSimulationInputChange}/>
+        </div>
+        <div className="form-group config-option">
+          <label>Initial Expenses ($)</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsBalanceSimulation.initExpenses}
+                   value={balanceSimulation.initExpenses}
+                   onChange={this.onBalanceSimulationInputChange}/>
+        </div>
+        <div className="form-group config-option">
+          <label>Income raise probability (%)</label>
+            <input type="number"
+                   className="form-control"
+                   data-type="percent"
+                   name={optionsBalanceSimulation.incomeProbability}
+                   value={balanceSimulation.incomeProbability}
+                   onChange={this.onBalanceSimulationInputChange}/>
+        </div>
+        <div className="form-group config-option">
+          <label>Expenses raise probability (%)</label>
+            <input type="number"
+                   data-type="percent"
+                   className="form-control"
+                   name={optionsBalanceSimulation.expensesProbability}
+                   value={balanceSimulation.expensesProbability}
+                   onChange={this.onBalanceSimulationInputChange}/>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateBalanceSimulationConfiguration}>
+          Apply
+        </button>
+      </div>
+    );
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -334,6 +402,9 @@ export default class Bar extends Component {
       }
       case modes.configurableRandom: {
         return this.renderConfigurableRandomModeConfiguration();
+      }
+      case modes.balanceSimulation: {
+        return this.renderBalanceSimulationModeConfiguration();
       }
       default: {
         return null;

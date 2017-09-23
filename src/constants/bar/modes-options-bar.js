@@ -23,10 +23,10 @@ export const optionsConfigurableRandom = {
 }
 
 export const optionsBalanceSimulation = {
-  seriesNumber: "seriesNumber",
-  categoriesNumber: "categoriesNumber",
-  min: "min",
-  max: "max"
+  incomeProbability: "incomeProbability",
+  expensesProbability: "expensesProbability",
+  initIncome: "initIncome",
+  initExpenses: "initExpenses"
 }
 
 export const initialState = {
@@ -49,6 +49,12 @@ export const initialState = {
       categoriesNumber: 5,
       min: -10,
       max: 10
+    },
+    balanceSimulation: {
+      incomeProbability: 10,
+      expensesProbability: 10,
+      initIncome: 1500,
+      initExpenses: 1400
     },
   }
 }
