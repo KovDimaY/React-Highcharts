@@ -90,3 +90,51 @@ export const configurableRandom = {
     },
     series: []
 };
+
+export const balanceSimulation = {
+    chart: {
+        type: 'column',
+        zoomType: 'x'
+    },
+    title: {
+        text: 'Randomly generated data'
+    },
+    subtitle: {
+        text: 'This data is not real'
+    },
+    legend: {
+        enabled: true
+    },
+    xAxis: {
+        categories: []
+    },
+    yAxis: {
+        title: {
+            text: 'Random Value (UOM)'
+        }
+    },
+    tooltip: {
+        formatter: function () {
+          console.log()
+            return '<b style="color: ' + this.series.color + '; font-weight: bold;">' +
+                    this.series.name + '</b><br>' +
+                    this.x + ': ' +
+                   '<b>' + this.y + '</b> (UOM)';
+        }
+    },
+    plotOptions: {
+        column: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: true
+        },
+        series: {
+            animation: true,
+            marker: {
+                enabled: true
+            }
+        }
+    },
+    series: []
+};

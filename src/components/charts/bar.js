@@ -6,6 +6,7 @@ import Chart from './chart-abstract'
 import {
   pureRandom,
   configurableRandom,
+  balanceSimulation
 } from '../../constants/bar/default-options-bar'
 
 import {
@@ -13,6 +14,7 @@ import {
   initialState,
   optionsPureRandom,
   optionsConfigurableRandom,
+  optionsBalanceSimulation
 } from '../../constants/bar/modes-options-bar'
 
 import {
@@ -53,6 +55,15 @@ export default class Bar extends Component {
     });
   }
 
+  initBalanceSimulationMode() {
+    let options = balanceSimulation;
+    // const { name, price } = this.state.configurations.stockSimulation;
+    // options.series = generateSeriesForStockSimulation(price);
+    this.setState({ options }, () => {
+      this.updateBalanceSimulationConfiguration();
+    });
+  }
+
   updatePureRandomConfiguration() {
     const { pureRandom } = this.state.configurations;
     const { options } = this.state;
@@ -90,6 +101,38 @@ export default class Bar extends Component {
     })
   }
 
+  updateBalanceSimulationConfiguration(event) {
+    const { configurations, options } = this.state;
+    // const {
+    //   name,
+    //   isRunning,
+    //   price
+    // } = configurations.stockSimulation;
+    // options.title.text = name ? "Stock price of " + name : null;
+    // if (event) {
+    //   if (isRunning) {
+    //     options.navigator.enabled = true;
+    //     options.rangeSelector.enabled = true;
+    //     configurations.stockSimulation.isRunning = false;
+    //     this.setState({ options, configurations, rerenderChart: true }, () => {
+    //       this.setState({ rerenderChart: false });
+    //     });
+    //   } else {
+    //     options.navigator.enabled = false;
+    //     options.rangeSelector.enabled = false;
+    //     options.series = generateSeriesForStockSimulation(price);
+    //     configurations.stockSimulation.isRunning = true;
+    //     this.setState({ configurations }, () => {
+    //       this.addPointToStockSimulation();
+    //     });
+    //   }
+    // } else {
+    //   this.setState({ options, rerenderChart: true }, () => {
+    //     this.setState({ rerenderChart: false });
+    //   });
+    // }
+  }
+
   dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
     const { configurations } = this.state;
@@ -100,6 +143,10 @@ export default class Bar extends Component {
       }
       case modes.configurableRandom: {
         this.initConfigurableRandomeMode();
+        break;
+      }
+      case modes.balanceSimulation: {
+        this.initBalanceSimulationMode();
         break;
       }
       default: {
@@ -154,9 +201,9 @@ export default class Bar extends Component {
           <li className="dropdown-header">Random Data</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
-          // <li><a onClick={this.dropdownClickHandler}>{modes.stockSimulation}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.balanceSimulation}</a></li>
           <li className="divider"></li>
-          <li className="dropdown-header">Functions Visualization</li>
+          <li className="dropdown-header">Text Analysis</li>
           // <li><a onClick={this.dropdownClickHandler}>{modes.polinomials}</a></li>
           // <li><a onClick={this.dropdownClickHandler}>{modes.trigonometric}</a></li>
           <li className="divider"></li>

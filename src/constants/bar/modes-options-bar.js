@@ -1,6 +1,7 @@
 export const modes = {
   pureRandom: "Pure Random",
-  configurableRandom: "Configurable Random"
+  configurableRandom: "Configurable Random",
+  balanceSimulation: "Balance Simulation"
 }
 
 export const optionsPureRandom = {
@@ -15,6 +16,13 @@ export const optionsPureRandom = {
 }
 
 export const optionsConfigurableRandom = {
+  seriesNumber: "seriesNumber",
+  categoriesNumber: "categoriesNumber",
+  min: "min",
+  max: "max"
+}
+
+export const optionsBalanceSimulation = {
   seriesNumber: "seriesNumber",
   categoriesNumber: "categoriesNumber",
   min: "min",
