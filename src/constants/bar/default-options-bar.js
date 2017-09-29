@@ -97,7 +97,7 @@ export const balanceSimulation = {
         zoomType: 'x'
     },
     title: {
-        text: 'Randomly generated data'
+        text: 'Balance Simulation'
     },
     subtitle: {
         text: 'This data is not real'
@@ -110,7 +110,7 @@ export const balanceSimulation = {
     },
     yAxis: {
         title: {
-            text: 'Random Value (UOM)'
+            text: 'US Dollars ($)'
         }
     },
     tooltip: {

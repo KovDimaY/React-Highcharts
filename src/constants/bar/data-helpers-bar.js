@@ -1,3 +1,5 @@
+import Highcharts from 'highcharts';
+
 export function generateSeriesForPureRandom() {
   const numberOfSeries = Math.round(Math.random() * 3) + 1;
   let result = [];
@@ -57,13 +59,16 @@ export function generateSeriesForBalanceSimulation(income, expenses) {
   console.log("generateSeriesForBalanceSimulation", income, expenses);
   let result = [{
       name: "Income",
-      data: [income]
+      data: [income],
+      color: Highcharts.getOptions().colors[7]
     }, {
         name: "Expenses",
-        data: [expenses]
+        data: [expenses],
+        color: Highcharts.getOptions().colors[3]
     }, {
         name: "Result",
-        data: [income - expenses]
+        data: [income - expenses],
+        color: Highcharts.getOptions().colors[1]
     }
   ];
 
