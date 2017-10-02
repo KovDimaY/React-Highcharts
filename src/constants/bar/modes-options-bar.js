@@ -1,7 +1,8 @@
 export const modes = {
   pureRandom: "Pure Random",
   configurableRandom: "Configurable Random",
-  balanceSimulation: "Balance Simulation"
+  balanceSimulation: "Balance Simulation",
+  symbolsAnalysis: "Symbols Analysis"
 }
 
 export const optionsPureRandom = {
@@ -28,6 +29,10 @@ export const optionsBalanceSimulation = {
   initIncome: "initIncome",
   initExpenses: "initExpenses",
   isRunning: "isRunning"
+}
+
+export const optionsSymbolsAnalysis = {
+  text: "text"
 }
 
 export const initialState = {
@@ -58,5 +63,8 @@ export const initialState = {
       initExpenses: 1400,
       isRunning: false
     },
+    symbolsAnalysis: {
+      text: ""
+    }
   }
 }

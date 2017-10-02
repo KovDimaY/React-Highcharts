@@ -14,7 +14,8 @@ import {
   initialState,
   optionsPureRandom,
   optionsConfigurableRandom,
-  optionsBalanceSimulation
+  optionsBalanceSimulation,
+  optionsSymbolsAnalysis
 } from '../../constants/bar/modes-options-bar'
 
 import {
@@ -38,6 +39,7 @@ export default class Bar extends Component {
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
     this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
     this.onBalanceSimulationInputChange = this.onBalanceSimulationInputChange.bind(this);
+    this.onSymbolAnalysisInputChange = this.onSymbolAnalysisInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -229,6 +231,10 @@ export default class Bar extends Component {
     this.setState({ configurations });
   }
 
+  onSymbolAnalysisInputChange(event) {
+    console.log("onSymbolAnalysisInputChange")
+  }
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -241,7 +247,7 @@ export default class Bar extends Component {
           <li><a onClick={this.dropdownClickHandler}>{modes.balanceSimulation}</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Text Analysis</li>
-          // <li><a onClick={this.dropdownClickHandler}>{modes.polinomials}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.symbolsAnalysis}</a></li>
           // <li><a onClick={this.dropdownClickHandler}>{modes.trigonometric}</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Real World Data</li>
@@ -426,6 +432,28 @@ export default class Bar extends Component {
     );
   }
 
+  renderSymbolsAnalysisModeConfiguration() {
+    const { symbolsAnalysis } = this.state.configurations;
+    return (
+      <div className="symbols-analysis">
+        <div className="form-group config-option">
+          <label>Text for analysis</label>
+            <textarea className="form-control input-textarea"
+                   name={optionsSymbolsAnalysis.text}
+                   value={symbolsAnalysis.text}
+                   onChange={this.onSymbolAnalysisInputChange}/>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateConfigurableRandomConfiguration}>
+          Results
+        </button>
+      </div>
+    );
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -437,6 +465,9 @@ export default class Bar extends Component {
       }
       case modes.balanceSimulation: {
         return this.renderBalanceSimulationModeConfiguration();
+      }
+      case modes.symbolsAnalysis: {
+        return this.renderSymbolsAnalysisModeConfiguration();
       }
       default: {
         return null;
