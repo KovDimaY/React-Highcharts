@@ -150,6 +150,9 @@ export const symbolsAnalysis = {
     subtitle: {
         text: ''
     },
+    xAxis: {
+        categories: []
+    },
     legend: {
         enabled: true
     },

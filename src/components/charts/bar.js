@@ -25,6 +25,7 @@ import {
   generateCategoriesConfigurableRandom,
   generateSeriesForBalanceSimulation,
   newPointsToBalanceSimulation,
+  collectPointsAndCategories,
   generateSeriesForSymbolsAnalysis
 } from '../../constants/bar/data-helpers-bar'
 
@@ -149,7 +150,10 @@ export default class Bar extends Component {
     const { options, configurations } = this.state;
     const { text } = configurations.symbolsAnalysis;
 
-    options.series = generateSeriesForSymbolsAnalysis(text);
+    const { points, categories } = collectPointsAndCategories(text);
+
+    options.series = generateSeriesForSymbolsAnalysis(points);
+    options.xAxis.categories = categories;
 
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
