@@ -17,7 +17,7 @@ export const pureRandom = {
     },
     yAxis: {
         title: {
-            text: 'Rendom Value (UOM)'
+            text: 'Random Value (UOM)'
         }
     },
     tooltip: {
@@ -134,6 +134,48 @@ export const balanceSimulation = {
             marker: {
                 enabled: true
             }
+        }
+    },
+    series: []
+};
+
+export const symbolsAnalysis = {
+    chart: {
+        type: 'column',
+        zoomType: 'xy'
+    },
+    title: {
+        text: ''
+    },
+    subtitle: {
+        text: ''
+    },
+    legend: {
+        enabled: true
+    },
+    yAxis: {
+        title: {
+            text: 'Count'
+        }
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> (UOM)<br/>'
+    },
+    plotOptions: {
+        bar: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: true
+        },
+        column: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: true
+        },
+        series: {
+            animation: true
         }
     },
     series: []

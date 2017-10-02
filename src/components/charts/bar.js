@@ -6,7 +6,8 @@ import Chart from './chart-abstract'
 import {
   pureRandom,
   configurableRandom,
-  balanceSimulation
+  balanceSimulation,
+  symbolsAnalysis
 } from '../../constants/bar/default-options-bar'
 
 import {
@@ -23,7 +24,8 @@ import {
   generateSeriesForConfigurableRandom,
   generateCategoriesConfigurableRandom,
   generateSeriesForBalanceSimulation,
-  newPointsToBalanceSimulation
+  newPointsToBalanceSimulation,
+  generateSeriesForSymbolsAnalysis
 } from '../../constants/bar/data-helpers-bar'
 
 
@@ -36,6 +38,7 @@ export default class Bar extends Component {
     this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this);
     this.updateBalanceSimulationConfiguration = this.updateBalanceSimulationConfiguration.bind(this);
     this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
+    this.updateSymbolsAnalysisConfiguration = this.updateSymbolsAnalysisConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
     this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
     this.onBalanceSimulationInputChange = this.onBalanceSimulationInputChange.bind(this);
@@ -67,6 +70,14 @@ export default class Bar extends Component {
     options.series = generateSeriesForBalanceSimulation(initIncome, initExpenses);
     this.setState({ options }, () => {
       this.updateBalanceSimulationConfiguration();
+    });
+  }
+
+  initSymbolsAnalysisMode() {
+    let options = symbolsAnalysis;
+
+    this.setState({ options }, () => {
+      this.updateSymbolsAnalysisConfiguration();
     });
   }
 
@@ -134,6 +145,17 @@ export default class Bar extends Component {
     }
   }
 
+  updateSymbolsAnalysisConfiguration() {
+    const { options, configurations } = this.state;
+    const { text } = configurations.symbolsAnalysis;
+
+    options.series = generateSeriesForSymbolsAnalysis(text);
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
   addPointsToBalanceSimulation() {
     const { configurations, options } = this.state;
     const {
@@ -169,6 +191,10 @@ export default class Bar extends Component {
       }
       case modes.balanceSimulation: {
         this.initBalanceSimulationMode();
+        break;
+      }
+      case modes.symbolsAnalysis: {
+        this.initSymbolsAnalysisMode();
         break;
       }
       default: {
@@ -232,7 +258,10 @@ export default class Bar extends Component {
   }
 
   onSymbolAnalysisInputChange(event) {
-    console.log("onSymbolAnalysisInputChange")
+    const { configurations } = this.state;
+    configurations.symbolsAnalysis[event.target.name] = event.target.value;
+
+    this.setState({ configurations });
   }
 
   renderOptionsDropdown() {
@@ -447,7 +476,7 @@ export default class Bar extends Component {
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateConfigurableRandomConfiguration}>
+          onClick={this.updateSymbolsAnalysisConfiguration}>
           Results
         </button>
       </div>

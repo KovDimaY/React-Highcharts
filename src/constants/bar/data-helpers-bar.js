@@ -101,3 +101,12 @@ export function newPointsToBalanceSimulation(oldSeries, incomeProbability, expen
 
   return oldSeries;
 }
+
+export function generateSeriesForSymbolsAnalysis(input) {
+  console.log("input from generateSeriesForSymbolsAnalysis", input);
+
+  return [{
+            name: "Symbols",
+            data: [input.length]
+          }];
+}

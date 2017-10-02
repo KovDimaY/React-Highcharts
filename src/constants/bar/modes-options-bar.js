@@ -64,7 +64,7 @@ export const initialState = {
       isRunning: false
     },
     symbolsAnalysis: {
-      text: ""
+      text: "Enter here your text to analyze its symbols set..."
     }
   }
 }
