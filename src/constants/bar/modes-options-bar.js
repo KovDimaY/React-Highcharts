@@ -32,7 +32,10 @@ export const optionsBalanceSimulation = {
 }
 
 export const optionsSymbolsAnalysis = {
-  text: "text"
+  text: "text",
+  limit: "limit",
+  filter: "filter",
+  caseSensitive: "caseSensitive"
 }
 
 export const initialState = {
@@ -64,7 +67,10 @@ export const initialState = {
       isRunning: false
     },
     symbolsAnalysis: {
-      text: "Enter here your text to analyze its symbols set..."
+      text: "Enter here your text to analyze its symbols set...",
+      limit: 10,
+      filter: "",
+      caseSensitive: true
     }
   }
 }

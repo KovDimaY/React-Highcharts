@@ -262,8 +262,17 @@ export default class Bar extends Component {
   }
 
   onSymbolAnalysisInputChange(event) {
+    console.log("onSymbolAnalysisInputChange name/value", event.target.name, event.target.value)
     const { configurations } = this.state;
-    configurations.symbolsAnalysis[event.target.name] = event.target.value;
+    if (event.target.name === "limit") {
+      configurations.symbolsAnalysis[event.target.name] = parseInt(event.target.value, 10);
+    } else if (event.target.name === "caseSensitive") {
+      const currentState = configurations.symbolsAnalysis[event.target.name];
+      console.log(currentState)
+      configurations.symbolsAnalysis[event.target.name] = currentState ? false : true;
+    } else {
+      configurations.symbolsAnalysis[event.target.name] = event.target.value;
+    }
 
     this.setState({ configurations });
   }
@@ -475,6 +484,37 @@ export default class Bar extends Component {
                    name={optionsSymbolsAnalysis.text}
                    value={symbolsAnalysis.text}
                    onChange={this.onSymbolAnalysisInputChange}/>
+        </div>
+
+        <div className="row basic-config">
+          <div className="col-md-6">
+            <div className="form-group config-option">
+              <label>Number of Chars</label>
+                <input type="number"
+                       className="form-control"
+                       name={optionsSymbolsAnalysis.limit}
+                       value={symbolsAnalysis.limit}
+                       onChange={this.onSymbolAnalysisInputChange}/>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="form-group config-option">
+              <label>Filter Next Chars</label>
+                <input type="text"
+                       className="form-control"
+                       name={optionsSymbolsAnalysis.filter}
+                       value={symbolsAnalysis.filter}
+                       onChange={this.onSymbolAnalysisInputChange}/>
+            </div>
+          </div>
+        </div>
+
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsSymbolsAnalysis.caseSensitive}
+                        name={optionsSymbolsAnalysis.caseSensitive}
+                        checked={symbolsAnalysis.caseSensitive}
+                        onChange={this.onSymbolAnalysisInputChange}/>Case Sensitive</label>
         </div>
 
         <button
