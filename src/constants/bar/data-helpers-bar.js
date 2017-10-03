@@ -102,25 +102,43 @@ export function newPointsToBalanceSimulation(oldSeries, incomeProbability, expen
   return oldSeries;
 }
 
-export function collectPointsAndCategories(input) {
- const object = {};
-  for (let i = 0; i < input.length; i++) {
-    if (object[input[i]]) {
-      object[input[i]]++;
-    } else {
-      object[input[i]] = 1;
+export function collectPointsAndCategories(input, caseSensitive, filter) {
+  const object = {};
+  const inputFinal = caseSensitive ? input : input.toUpperCase();
+  const filterFinal = caseSensitive ? filter : filter.toUpperCase();
+
+  for (let i = 0; i < inputFinal.length; i++) {
+    const currentChar = inputFinal[i];
+
+    if (!filterFinal.includes(currentChar)) {
+      if (object[inputFinal[i]]) {
+        object[inputFinal[i]]++;
+      } else {
+        object[inputFinal[i]] = 1;
+      }
     }
   }
 
   const keys = Object.keys(object);
-  const result = {
-    points: [],
-    categories: keys
-  };
+  const result = [];
 
   for (let i = 0; i < keys.length; i++) {
     const value = object[keys[i]];
-    result.points.push(value);
+    result.push([value, keys[i]]);
+  }
+
+  return result;
+}
+
+export function sortAndCutPoints(data, limit) {
+  data.sort((a, b) => b[0] - a[0]);
+  const result = {
+    categories: [],
+    points: []
+  }
+  for (let i = 0; i < Math.min(data.length, limit); i++) {
+    result.points.push(data[i][0]);
+    result.categories.push(data[i][1]);
   }
 
   return result;

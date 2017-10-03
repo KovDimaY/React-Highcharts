@@ -26,7 +26,8 @@ import {
   generateSeriesForBalanceSimulation,
   newPointsToBalanceSimulation,
   collectPointsAndCategories,
-  generateSeriesForSymbolsAnalysis
+  generateSeriesForSymbolsAnalysis,
+  sortAndCutPoints
 } from '../../constants/bar/data-helpers-bar'
 
 
@@ -148,9 +149,10 @@ export default class Bar extends Component {
 
   updateSymbolsAnalysisConfiguration() {
     const { options, configurations } = this.state;
-    const { text } = configurations.symbolsAnalysis;
+    const { text, limit, filter, caseSensitive } = configurations.symbolsAnalysis;
 
-    const { points, categories } = collectPointsAndCategories(text);
+    const rawData = collectPointsAndCategories(text, caseSensitive, filter);
+    const { points, categories } = sortAndCutPoints(rawData, limit);
 
     options.series = generateSeriesForSymbolsAnalysis(points);
     options.xAxis.categories = categories;
@@ -262,13 +264,12 @@ export default class Bar extends Component {
   }
 
   onSymbolAnalysisInputChange(event) {
-    console.log("onSymbolAnalysisInputChange name/value", event.target.name, event.target.value)
     const { configurations } = this.state;
     if (event.target.name === "limit") {
-      configurations.symbolsAnalysis[event.target.name] = parseInt(event.target.value, 10);
+      const tempValue = parseInt(event.target.value, 10);
+      configurations.symbolsAnalysis[event.target.name] = tempValue < 1 ? 1 : tempValue;
     } else if (event.target.name === "caseSensitive") {
       const currentState = configurations.symbolsAnalysis[event.target.name];
-      console.log(currentState)
       configurations.symbolsAnalysis[event.target.name] = currentState ? false : true;
     } else {
       configurations.symbolsAnalysis[event.target.name] = event.target.value;
