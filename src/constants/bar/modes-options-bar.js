@@ -39,12 +39,7 @@ export const optionsSymbolsAnalysis = {
   caseSensitive: "caseSensitive"
 }
 
-export const optionsWordsAnalysis = {
-  text: "text",
-  limit: "limit",
-  filter: "filter",
-  caseSensitive: "caseSensitive"
-}
+export const optionsWordsAnalysis = optionsSymbolsAnalysis;
 
 export const initialState = {
   options: {},

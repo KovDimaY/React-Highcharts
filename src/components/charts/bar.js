@@ -43,10 +43,12 @@ export default class Bar extends Component {
     this.updateBalanceSimulationConfiguration = this.updateBalanceSimulationConfiguration.bind(this);
     this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
     this.updateSymbolsAnalysisConfiguration = this.updateSymbolsAnalysisConfiguration.bind(this);
+    this.updateWordsAnalysisConfiguration = this.updateWordsAnalysisConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
     this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
     this.onBalanceSimulationInputChange = this.onBalanceSimulationInputChange.bind(this);
     this.onSymbolAnalysisInputChange = this.onSymbolAnalysisInputChange.bind(this);
+    this.onWordsAnalysisInputChange = this.onWordsAnalysisInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -166,6 +168,10 @@ export default class Bar extends Component {
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
+  }
+
+  updateWordsAnalysisConfiguration() {
+    console.log("updateWordsAnalysisConfiguration");
   }
 
   addPointsToBalanceSimulation() {
@@ -288,6 +294,10 @@ export default class Bar extends Component {
     }
 
     this.setState({ configurations });
+  }
+
+  onWordsAnalysisInputChange(event) {
+    console.log("onWordsAnalysisInputChange");
   }
 
   renderOptionsDropdown() {
@@ -541,7 +551,56 @@ export default class Bar extends Component {
   }
 
   renderWordsAnalysisModeConfiguration() {
-    return <div>Lalala </div>;
+    const { wordsAnalysis } = this.state.configurations;
+    return (
+      <div className="words-analysis">
+        <div className="form-group config-option">
+          <label>Text for analysis</label>
+            <textarea className="form-control input-textarea"
+                   name={optionsWordsAnalysis.text}
+                   value={wordsAnalysis.text}
+                   onChange={this.onWordsAnalysisInputChange}/>
+        </div>
+
+        <div className="row basic-config">
+          <div className="col-md-6">
+            <div className="form-group config-option">
+              <label>Number of Chars</label>
+                <input type="number"
+                       className="form-control"
+                       name={optionsWordsAnalysis.limit}
+                       value={wordsAnalysis.limit}
+                       onChange={this.onWordsAnalysisInputChange}/>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="form-group config-option">
+              <label>Filter Next Chars</label>
+                <input type="text"
+                       className="form-control"
+                       name={optionsWordsAnalysis.filter}
+                       value={wordsAnalysis.filter}
+                       onChange={this.onWordsAnalysisInputChange}/>
+            </div>
+          </div>
+        </div>
+
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsWordsAnalysis.caseSensitive}
+                        name={optionsWordsAnalysis.caseSensitive}
+                        checked={wordsAnalysis.caseSensitive}
+                        onChange={this.onWordsAnalysisInputChange}/>Case Sensitive</label>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateWordsAnalysisConfiguration}>
+          Results
+        </button>
+      </div>
+    );
   }
 
   renderConfigurationsArea() {

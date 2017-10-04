@@ -45,6 +45,20 @@
         text-align: center;
       }
     }
+    .words-analysis {
+      margin-top: 30px;
+      .config-option {
+        width: 80%;
+        margin-left: 10%;
+      }
+      .input-textarea {
+        resize: none;
+        height: 125px;
+      }
+      .checkbox {
+        text-align: center;
+      }
+    }
     .balance-simulation {
       margin-top: 30px;
       .config-option {
