@@ -267,7 +267,9 @@ export default class Bar extends Component {
     const { configurations } = this.state;
     if (event.target.name === "limit") {
       const tempValue = parseInt(event.target.value, 10);
-      configurations.symbolsAnalysis[event.target.name] = tempValue < 1 ? 1 : tempValue;
+      configurations.symbolsAnalysis[event.target.name] = tempValue < 1 || isNaN(tempValue)
+        ? 1
+        : tempValue;
     } else if (event.target.name === "caseSensitive") {
       const currentState = configurations.symbolsAnalysis[event.target.name];
       configurations.symbolsAnalysis[event.target.name] = currentState ? false : true;
