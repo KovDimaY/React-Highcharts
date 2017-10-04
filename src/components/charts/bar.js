@@ -29,7 +29,10 @@ import {
   newPointsToBalanceSimulation,
   collectPointsAndCategories,
   generateSeriesForSymbolsAnalysis,
-  sortAndCutPoints
+  sortAndCutPoints,
+  collectWordsAndCategories,
+  generateSeriesForWordsAnalysis,
+  sortAndCutWords
 } from '../../constants/bar/data-helpers-bar'
 
 
@@ -88,7 +91,11 @@ export default class Bar extends Component {
   }
 
   initWordsAnalysisMode() {
-    console.log("initWordsAnalysisMode");
+    let options = wordsAnalysis;
+
+    this.setState({ options }, () => {
+      this.updateWordsAnalysisConfiguration();
+    });
   }
 
   updatePureRandomConfiguration() {
@@ -171,7 +178,18 @@ export default class Bar extends Component {
   }
 
   updateWordsAnalysisConfiguration() {
-    console.log("updateWordsAnalysisConfiguration");
+    const { options, configurations } = this.state;
+    const { text, limit, filter, caseSensitive } = configurations.wordsAnalysis;
+
+    const rawData = collectWordsAndCategories(text, caseSensitive, filter);
+    const { words, categories } = sortAndCutWords(rawData, limit);
+
+    options.series = generateSeriesForWordsAnalysis(words);
+    options.xAxis.categories = categories;
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
   }
 
   addPointsToBalanceSimulation() {
@@ -297,7 +315,20 @@ export default class Bar extends Component {
   }
 
   onWordsAnalysisInputChange(event) {
-    console.log("onWordsAnalysisInputChange");
+    const { configurations } = this.state;
+    if (event.target.name === "limit") {
+      const tempValue = parseInt(event.target.value, 10);
+      configurations.wordsAnalysis[event.target.name] = tempValue < 1 || isNaN(tempValue)
+        ? 1
+        : tempValue;
+    } else if (event.target.name === "caseSensitive") {
+      const currentState = configurations.wordsAnalysis[event.target.name];
+      configurations.wordsAnalysis[event.target.name] = currentState ? false : true;
+    } else {
+      configurations.wordsAnalysis[event.target.name] = event.target.value;
+    }
+
+    this.setState({ configurations });
   }
 
   renderOptionsDropdown() {

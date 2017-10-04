@@ -146,7 +146,29 @@ export function sortAndCutPoints(data, limit) {
 
 export function generateSeriesForSymbolsAnalysis(points) {
   return [{
-            name: "Symbols",
+            name: "The most frequent characters",
             data: points
           }];
+}
+
+export function collectWordsAndCategories(input, caseSensitive, filter) {
+  console.log("collectWordsAndCategories");
+
+  return [];
+}
+
+export function generateSeriesForWordsAnalysis(words) {
+  return [{
+            name: "The most frequent words",
+            data: words
+          }];
+}
+
+export function sortAndCutWords(data, limit) {
+  console.log("sortAndCutWords");
+
+  return {
+    categories: [],
+    words: []
+  };
 }
