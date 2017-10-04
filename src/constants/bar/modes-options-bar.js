@@ -2,7 +2,8 @@ export const modes = {
   pureRandom: "Pure Random",
   configurableRandom: "Configurable Random",
   balanceSimulation: "Balance Simulation",
-  symbolsAnalysis: "Symbols Analysis"
+  symbolsAnalysis: "Symbols Analysis",
+  wordsAnalysis: "Words Analysis"
 }
 
 export const optionsPureRandom = {
@@ -32,6 +33,13 @@ export const optionsBalanceSimulation = {
 }
 
 export const optionsSymbolsAnalysis = {
+  text: "text",
+  limit: "limit",
+  filter: "filter",
+  caseSensitive: "caseSensitive"
+}
+
+export const optionsWordsAnalysis = {
   text: "text",
   limit: "limit",
   filter: "filter",
@@ -70,6 +78,12 @@ export const initialState = {
       text: "Enter here your text to analyze its symbols set...",
       limit: 10,
       filter: "",
+      caseSensitive: true
+    },
+    wordsAnalysis: {
+      text: "Enter here your text to analyze its words set...",
+      limit: 10,
+      filter: [],
       caseSensitive: true
     }
   }

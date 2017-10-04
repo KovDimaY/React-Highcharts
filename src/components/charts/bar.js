@@ -7,7 +7,8 @@ import {
   pureRandom,
   configurableRandom,
   balanceSimulation,
-  symbolsAnalysis
+  symbolsAnalysis,
+  wordsAnalysis
 } from '../../constants/bar/default-options-bar'
 
 import {
@@ -16,7 +17,8 @@ import {
   optionsPureRandom,
   optionsConfigurableRandom,
   optionsBalanceSimulation,
-  optionsSymbolsAnalysis
+  optionsSymbolsAnalysis,
+  optionsWordsAnalysis
 } from '../../constants/bar/modes-options-bar'
 
 import {
@@ -81,6 +83,10 @@ export default class Bar extends Component {
     this.setState({ options }, () => {
       this.updateSymbolsAnalysisConfiguration();
     });
+  }
+
+  initWordsAnalysisMode() {
+    console.log("initWordsAnalysisMode");
   }
 
   updatePureRandomConfiguration() {
@@ -203,6 +209,10 @@ export default class Bar extends Component {
         this.initSymbolsAnalysisMode();
         break;
       }
+      case modes.wordsAnalysis: {
+        this.initWordsAnalysisMode();
+        break;
+      }
       default: {
         console.log("lalala");
       }
@@ -293,7 +303,7 @@ export default class Bar extends Component {
           <li className="divider"></li>
           <li className="dropdown-header">Text Analysis</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.symbolsAnalysis}</a></li>
-          // <li><a onClick={this.dropdownClickHandler}>{modes.trigonometric}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.wordsAnalysis}</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Real World Data</li>
           // <li><a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a></li>
@@ -530,6 +540,10 @@ export default class Bar extends Component {
     );
   }
 
+  renderWordsAnalysisModeConfiguration() {
+    return <div>Lalala </div>;
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -544,6 +558,9 @@ export default class Bar extends Component {
       }
       case modes.symbolsAnalysis: {
         return this.renderSymbolsAnalysisModeConfiguration();
+      }
+      case modes.wordsAnalysis: {
+        return this.renderWordsAnalysisModeConfiguration();
       }
       default: {
         return null;

@@ -183,3 +183,5 @@ export const symbolsAnalysis = {
     },
     series: []
 };
+
+export const wordsAnalysis = symbolsAnalysis;
