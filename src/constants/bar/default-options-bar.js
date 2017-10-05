@@ -162,7 +162,7 @@ export const symbolsAnalysis = {
         }
     },
     tooltip: {
-        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> (UOM)<br/>'
+        pointFormat: '<span style="color:{series.color}">Count</span>: <b>{point.y}</b><br/>'
     },
     plotOptions: {
         bar: {

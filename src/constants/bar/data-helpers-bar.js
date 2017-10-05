@@ -111,10 +111,10 @@ export function collectPointsAndCategories(input, caseSensitive, filter) {
     const currentChar = inputFinal[i];
 
     if (!filterFinal.includes(currentChar)) {
-      if (object[inputFinal[i]]) {
-        object[inputFinal[i]]++;
+      if (object[currentChar]) {
+        object[currentChar]++;
       } else {
-        object[inputFinal[i]] = 1;
+        object[currentChar] = 1;
       }
     }
   }
@@ -152,9 +152,32 @@ export function generateSeriesForSymbolsAnalysis(points) {
 }
 
 export function collectWordsAndCategories(input, caseSensitive, filter) {
-  console.log("collectWordsAndCategories");
+  const object = {};
+  const inputFinal = caseSensitive ? input : input.toUpperCase();
+  const inputArray = inputFinal.split(/\W+/);
+  // const filterFinal = caseSensitive ? filter : filter.toUpperCase();
 
-  return [];
+  for (let i = 0; i < inputArray.length; i++) {
+    const currentWord = inputArray[i];
+
+    if (true && currentWord.length > 0) {
+      if (object[currentWord]) {
+        object[currentWord]++;
+      } else {
+        object[currentWord] = 1;
+      }
+    }
+  }
+
+  const keys = Object.keys(object);
+  const result = [];
+
+  for (let i = 0; i < keys.length; i++) {
+    const value = object[keys[i]];
+    result.push([value, keys[i]]);
+  }
+
+  return result;
 }
 
 export function generateSeriesForWordsAnalysis(words) {
@@ -165,10 +188,15 @@ export function generateSeriesForWordsAnalysis(words) {
 }
 
 export function sortAndCutWords(data, limit) {
-  console.log("sortAndCutWords");
-
-  return {
+  data.sort((a, b) => b[0] - a[0]);
+  const result = {
     categories: [],
     words: []
-  };
+  }
+  for (let i = 0; i < Math.min(data.length, limit); i++) {
+    result.words.push(data[i][0]);
+    result.categories.push(data[i][1]);
+  }
+
+  return result;
 }
