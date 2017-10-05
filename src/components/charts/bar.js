@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import TagsInput from 'react-tagsinput'
 
 import Chart from './chart-abstract'
 
@@ -52,6 +53,7 @@ export default class Bar extends Component {
     this.onBalanceSimulationInputChange = this.onBalanceSimulationInputChange.bind(this);
     this.onSymbolAnalysisInputChange = this.onSymbolAnalysisInputChange.bind(this);
     this.onWordsAnalysisInputChange = this.onWordsAnalysisInputChange.bind(this);
+    this.onWordsAnalysisTagsChange = this.onWordsAnalysisTagsChange.bind(this);
   }
 
   componentDidMount() {
@@ -331,6 +333,18 @@ export default class Bar extends Component {
     this.setState({ configurations });
   }
 
+  onWordsAnalysisTagsChange(newTags) {
+    const { configurations } = this.state;
+    const lastTag = newTags[newTags.length - 1];
+    const alreadyExist = configurations.wordsAnalysis.filter.includes(lastTag);
+    const deleted = configurations.wordsAnalysis.filter.length > newTags.length;
+    if (!alreadyExist || deleted) {
+      configurations.wordsAnalysis.filter = newTags;
+    }
+
+    this.setState({ configurations })
+  }
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -593,27 +607,19 @@ export default class Bar extends Component {
                    onChange={this.onWordsAnalysisInputChange}/>
         </div>
 
-        <div className="row basic-config">
-          <div className="col-md-6">
-            <div className="form-group config-option">
-              <label>Number of Chars</label>
-                <input type="number"
-                       className="form-control"
-                       name={optionsWordsAnalysis.limit}
-                       value={wordsAnalysis.limit}
-                       onChange={this.onWordsAnalysisInputChange}/>
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="form-group config-option">
-              <label>Filter Next Chars</label>
-                <input type="text"
-                       className="form-control"
-                       name={optionsWordsAnalysis.filter}
-                       value={wordsAnalysis.filter}
-                       onChange={this.onWordsAnalysisInputChange}/>
-            </div>
-          </div>
+        <div className="form-group config-option">
+          <label>Filter Next Chars</label>
+          <TagsInput value={wordsAnalysis.filter}
+                     onChange={this.onWordsAnalysisTagsChange} />
+        </div>
+
+        <div className="form-group config-option">
+          <label>Number of Chars</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsWordsAnalysis.limit}
+                   value={wordsAnalysis.limit}
+                   onChange={this.onWordsAnalysisInputChange}/>
         </div>
 
         <div className="checkbox">
