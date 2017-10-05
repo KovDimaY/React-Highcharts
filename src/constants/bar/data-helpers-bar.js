@@ -155,12 +155,14 @@ export function collectWordsAndCategories(input, caseSensitive, filter) {
   const object = {};
   const inputFinal = caseSensitive ? input : input.toUpperCase();
   const inputArray = inputFinal.split(/\W+/);
-  // const filterFinal = caseSensitive ? filter : filter.toUpperCase();
+  const filterFinal = caseSensitive
+    ? filter
+    : filter.map(element => element.toUpperCase());
 
   for (let i = 0; i < inputArray.length; i++) {
     const currentWord = inputArray[i];
 
-    if (true && currentWord.length > 0) {
+    if (currentWord.length > 0 && !filterFinal.includes(currentWord)) {
       if (object[currentWord]) {
         object[currentWord]++;
       } else {
