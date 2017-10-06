@@ -45,7 +45,16 @@ export default class Pie extends Component {
     const { pureRandom } = this.state.configurations;
     const { options } = this.state;
 
-    console.log("updatePureRandomConfiguration")
+    options.title.text = pureRandom.title ? 'Randomly generated data' : null;
+    options.subtitle.text = pureRandom.title ? 'Randomly generated data' : null;
+    options.legend.enabled = pureRandom.legend;
+    options.plotOptions.pie.dataLabels.enabled = pureRandom.dataLabels;
+    options.tooltip.enabled = pureRandom.tooltip;
+    options.plotOptions.series.animation = pureRandom.animation;
+    options.chart.options3d.enabled = pureRandom.threeDimensions;
+    options.plotOptions.pie.innerSize = pureRandom.donut ? '30%' : '0';
+
+
 
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -103,7 +112,48 @@ export default class Pie extends Component {
     const { pureRandom } = this.state.configurations;
     return (
       <div className="pure-random">
-        PURE RANDOM
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom.title}
+                        checked={pureRandom.title}
+                        onChange={this.onPureRandomCheckBoxChange}/>Show Chart Title</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom.dataLabels}
+                        checked={pureRandom.dataLabels}
+                        onChange={this.onPureRandomCheckBoxChange}/>Show Data Labels</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom.legend}
+                        checked={pureRandom.legend}
+                        onChange={this.onPureRandomCheckBoxChange}/>Show Legend</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom.tooltip}
+                        checked={pureRandom.tooltip}
+                        onChange={this.onPureRandomCheckBoxChange}/>Enable Tooltip</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom.donut}
+                        checked={pureRandom.donut}
+                        onChange={this.onPureRandomCheckBoxChange}/>Donut Mode</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom.threeDimensions}
+                        checked={pureRandom.threeDimensions}
+                        onChange={this.onPureRandomCheckBoxChange}/>3D Mode</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom.animation}
+                        checked={pureRandom.animation}
+                        onChange={this.onPureRandomCheckBoxChange}/>Enable Animation</label>
+        </div>
 
         <button
           type="button"

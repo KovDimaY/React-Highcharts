@@ -3,7 +3,12 @@ export const pureRandom = {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
-        type: 'pie'
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45,
+            beta: 0
+        }
     },
     title: {
         text: ''
@@ -12,6 +17,7 @@ export const pureRandom = {
         text: ''
     },
     tooltip: {
+        enabled: true,
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
     },
     legend: {
@@ -21,10 +27,16 @@ export const pureRandom = {
         pie: {
             allowPointSelect: true,
             cursor: 'pointer',
+            depth: 35,
             dataLabels: {
-                enabled: true
+                enabled: true,
+                format: '{point.percentage:.1f}%'
             },
+            innerSize: '30%',
             showInLegend: true
+        },
+        series: {
+            animation: true
         }
     },
     series: []
