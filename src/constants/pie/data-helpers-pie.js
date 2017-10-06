@@ -1,26 +1,20 @@
 export function generateSeriesForPureRandom() {
-  console.log("generateSeriesForPureRandom");
+  const numberOfSeries = Math.round(Math.random() * 5) + 2;
+  let currentData = [];
+
+  for (let i = 0; i < numberOfSeries; i++) {
+    const currentName = `Random Serie ${i + 1}`
+    const randValue = Math.random() * 1000;
+
+    currentData.push({
+      name: currentName,
+      y: randValue
+    });
+  }
 
   return [{
-    name: 'Brands',
+    name: 'Random Value',
     colorByPoint: true,
-    data: [{
-        name: 'Microsoft IE',
-        y: 56.33
-    }, {
-        name: 'Chrome',
-        y: 24.03,
-        sliced: true,
-        selected: true
-    }, {
-        name: 'Firefox',
-        y: 10.38
-    }, {
-        name: 'Safari',
-        y: 4.77
-    }, {
-        name: 'Opera',
-        y: 0.91
-    }]
+    data: currentData
   }];
 }

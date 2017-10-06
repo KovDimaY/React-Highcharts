@@ -6,17 +6,23 @@ export const pureRandom = {
         type: 'pie'
     },
     title: {
-        text: 'Browser market shares January, 2015 to May, 2015'
+        text: ''
+    },
+    subtitle: {
+        text: ''
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    legend: {
+        enabled: true
     },
     plotOptions: {
         pie: {
             allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
-                enabled: false
+                enabled: true
             },
             showInLegend: true
         }
