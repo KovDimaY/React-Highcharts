@@ -1,5 +1,6 @@
 export const modes = {
-  pureRandom: "Pure Random"
+  pureRandom: "Pure Random",
+  configurableRandom: "Configurable Random"
 }
 
 export const optionsPureRandom = {
@@ -10,6 +11,10 @@ export const optionsPureRandom = {
   dataLabels: "dataLabels",
   animation: "animation",
   donut: "donut"
+}
+
+export const optionsConfigurableRandom = {
+  seriesNumber: "seriesNumber"
 }
 
 export const initialState = {
@@ -25,6 +30,9 @@ export const initialState = {
       dataLabels: true,
       animation: true,
       donut: true
+    },
+    configurableRandom: {
+      seriesNumber: 3
     }
   }
 }

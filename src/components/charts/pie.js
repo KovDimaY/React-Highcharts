@@ -5,16 +5,19 @@ import Chart from './chart-abstract'
 
 import {
   pureRandom,
+  configurableRandom
 } from '../../constants/pie/default-options-pie'
 
 import {
   modes,
   initialState,
-  optionsPureRandom
+  optionsPureRandom,
+  optionsConfigurableRandom
 } from '../../constants/pie/modes-options-pie'
 
 import {
-  generateSeriesForPureRandom
+  generateSeriesForPureRandom,
+  generateSeriesForConfigurableRandom
 } from '../../constants/pie/data-helpers-pie'
 
 export default class Pie extends Component {
@@ -41,6 +44,14 @@ export default class Pie extends Component {
     });
   }
 
+  initConfigurableRandomeMode() {
+    const options = configurableRandom;
+
+    this.setState({ options }, () => {
+      this.updateConfigurableRandomConfiguration();
+    });
+  }
+
   updatePureRandomConfiguration() {
     const { pureRandom } = this.state.configurations;
     const { options } = this.state;
@@ -54,11 +65,13 @@ export default class Pie extends Component {
     options.chart.options3d.enabled = pureRandom.threeDimensions;
     options.plotOptions.pie.innerSize = pureRandom.donut ? '30%' : '0';
 
-
-
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
+  }
+
+  updateConfigurableRandomConfiguration() {
+    console.log("updateConfigurableRandomConfiguration")
   }
 
   dropdownClickHandler(input) {
@@ -67,6 +80,10 @@ export default class Pie extends Component {
     switch (mode) {
       case modes.pureRandom: {
         this.initPureRandomeMode();
+        break;
+      }
+      case modes.configurableRandom: {
+        this.initConfigurableRandomeMode();
         break;
       }
       default: {
@@ -94,7 +111,7 @@ export default class Pie extends Component {
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a></li>
-          // <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
           // <li><a onClick={this.dropdownClickHandler}>{modes.balanceSimulation}</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Text Analysis</li>
@@ -165,11 +182,18 @@ export default class Pie extends Component {
     )
   }
 
+  renderConfigurableRandomModeConfiguration() {
+    console.log("renderConfigurableRandomModeConfiguration");
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
       case modes.pureRandom: {
         return this.renderPureRandomModeConfiguration();
+      }
+      case modes.configurableRandom: {
+        return this.renderConfigurableRandomModeConfiguration();
       }
       default: {
         return null;

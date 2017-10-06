@@ -41,3 +41,36 @@ export const pureRandom = {
     },
     series: []
 };
+
+export const configurableRandom = {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Randomly generated data'
+    },
+    subtitle: {
+        text: 'This data is not real'
+    },
+    tooltip: {
+        enabled: true,
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    legend: {
+        enabled: true
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            showInLegend: true
+        },
+        series: {
+            animation: true
+        }
+    },
+    series: []
+};
