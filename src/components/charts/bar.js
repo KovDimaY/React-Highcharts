@@ -9,7 +9,10 @@ import {
   configurableRandom,
   balanceSimulation,
   symbolsAnalysis,
-  wordsAnalysis
+  wordsAnalysis,
+  interestingFactsOne,
+  interestingFactsTwo,
+  interestingFactsThree
 } from '../../constants/bar/default-options-bar'
 
 import {
@@ -19,7 +22,8 @@ import {
   optionsConfigurableRandom,
   optionsBalanceSimulation,
   optionsSymbolsAnalysis,
-  optionsWordsAnalysis
+  optionsWordsAnalysis,
+  optionsInterestingFacts
 } from '../../constants/bar/modes-options-bar'
 
 import {
@@ -54,6 +58,7 @@ export default class Bar extends Component {
     this.onSymbolAnalysisInputChange = this.onSymbolAnalysisInputChange.bind(this);
     this.onWordsAnalysisInputChange = this.onWordsAnalysisInputChange.bind(this);
     this.onWordsAnalysisTagsChange = this.onWordsAnalysisTagsChange.bind(this);
+    this.onInterestingFactsRadioChange = this.onInterestingFactsRadioChange.bind(this);
   }
 
   componentDidMount() {
@@ -61,31 +66,36 @@ export default class Bar extends Component {
   }
 
   initPureRandomeMode() {
-    let options = pureRandom;
+    const options = pureRandom;
+
     options.series = generateSeriesForPureRandom();
+
     this.setState({ options }, () => {
       this.updatePureRandomConfiguration();
     });
   }
 
   initConfigurableRandomeMode() {
-    let options = configurableRandom;
+    const options = configurableRandom;
+
     this.setState({ options }, () => {
       this.updateConfigurableRandomConfiguration();
     });
   }
 
   initBalanceSimulationMode() {
-    let options = balanceSimulation;
+    const options = balanceSimulation;
     const { initIncome, initExpenses } = this.state.configurations.balanceSimulation;
+
     options.series = generateSeriesForBalanceSimulation(initIncome, initExpenses);
+
     this.setState({ options }, () => {
       this.updateBalanceSimulationConfiguration();
     });
   }
 
   initSymbolsAnalysisMode() {
-    let options = symbolsAnalysis;
+    const options = symbolsAnalysis;
 
     this.setState({ options }, () => {
       this.updateSymbolsAnalysisConfiguration();
@@ -93,11 +103,19 @@ export default class Bar extends Component {
   }
 
   initWordsAnalysisMode() {
-    let options = wordsAnalysis;
+    const options = wordsAnalysis;
 
     this.setState({ options }, () => {
       this.updateWordsAnalysisConfiguration();
     });
+  }
+
+  initInterestingFactsMode() {
+    const options = interestingFactsOne;
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
   }
 
   updatePureRandomConfiguration() {
@@ -239,8 +257,12 @@ export default class Bar extends Component {
         this.initWordsAnalysisMode();
         break;
       }
+      case modes.interestingFacts: {
+        this.initInterestingFactsMode();
+        break;
+      }
       default: {
-        console.log("lalala");
+        console.log("This is impossible to achieve");
       }
     }
     this.setState({ currentMode: mode, configurations });
@@ -345,6 +367,17 @@ export default class Bar extends Component {
     this.setState({ configurations })
   }
 
+  onInterestingFactsRadioChange(event) {
+    const { configurations } = this.state;
+    let options = configurations.interestingFacts[event.target.name];
+
+    configurations.interestingFacts.current = event.target.name;
+
+    this.setState({ configurations, options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -361,7 +394,7 @@ export default class Bar extends Component {
           <li><a onClick={this.dropdownClickHandler}>{modes.wordsAnalysis}</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Real World Data</li>
-          // <li><a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a></li>
         </ul>
       </div>
     )
@@ -640,6 +673,36 @@ export default class Bar extends Component {
     );
   }
 
+  renderInterestingFactsModeConfiguration() {
+    const { interestingFacts } = this.state.configurations;
+    return (
+      <div className="interesting-facts">
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.first}
+                        checked={interestingFacts.current === optionsInterestingFacts.first}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />First</label>
+        </div>
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.second}
+                        checked={interestingFacts.current === optionsInterestingFacts.second}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />Second</label>
+        </div>
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.third}
+                        checked={interestingFacts.current === optionsInterestingFacts.third}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />Third</label>
+        </div>
+
+      </div>
+    )
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -657,6 +720,9 @@ export default class Bar extends Component {
       }
       case modes.wordsAnalysis: {
         return this.renderWordsAnalysisModeConfiguration();
+      }
+      case modes.interestingFacts: {
+        return this.renderInterestingFactsModeConfiguration();
       }
       default: {
         return null;

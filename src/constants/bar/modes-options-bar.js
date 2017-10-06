@@ -1,9 +1,16 @@
+import {
+  interestingFactsOne,
+  interestingFactsTwo,
+  interestingFactsThree
+} from '../../constants/bar/default-options-bar'
+
 export const modes = {
   pureRandom: "Pure Random",
   configurableRandom: "Configurable Random",
   balanceSimulation: "Balance Simulation",
   symbolsAnalysis: "Symbols Analysis",
-  wordsAnalysis: "Words Analysis"
+  wordsAnalysis: "Words Analysis",
+  interestingFacts: "Interesting Facts"
 }
 
 export const optionsPureRandom = {
@@ -40,6 +47,12 @@ export const optionsSymbolsAnalysis = {
 }
 
 export const optionsWordsAnalysis = optionsSymbolsAnalysis;
+
+export const optionsInterestingFacts = {
+  first: "first",
+  second: "second",
+  third: "third"
+}
 
 export const initialState = {
   options: {},
@@ -80,6 +93,12 @@ export const initialState = {
       limit: 10,
       filter: [],
       caseSensitive: true
+    },
+    interestingFacts: {
+      first: interestingFactsOne,
+      second: interestingFactsTwo,
+      third: interestingFactsThree,
+      current: optionsInterestingFacts.first
     }
   }
 }

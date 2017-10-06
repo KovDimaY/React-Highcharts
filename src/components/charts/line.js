@@ -242,7 +242,7 @@ export default class Line extends Component {
         break;
       }
       default: {
-        console.log("lalala");
+        console.log("This is impossible to achieve");
       }
     }
     this.setState({ currentMode: mode, configurations });
