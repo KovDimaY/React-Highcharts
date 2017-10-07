@@ -27,7 +27,9 @@ export default class Pie extends Component {
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this);
+    this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
+    this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -71,7 +73,16 @@ export default class Pie extends Component {
   }
 
   updateConfigurableRandomConfiguration() {
-    console.log("updateConfigurableRandomConfiguration")
+    const { configurableRandom } = this.state.configurations;
+    const { options } = this.state;
+
+    const series = generateSeriesForConfigurableRandom(configurableRandom);
+
+    options.series = series;
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
   }
 
   dropdownClickHandler(input) {
@@ -87,7 +98,7 @@ export default class Pie extends Component {
         break;
       }
       default: {
-        console.log("This is impossible to achieve");
+        console.log("This mode is not supported yet");
       }
     }
     this.setState({ currentMode: mode, configurations });
@@ -101,6 +112,19 @@ export default class Pie extends Component {
       configurations.pureRandom[event.target.value] = true;
     }
     this.setState({ configurations })
+  }
+
+  onConfigurableRandomInputChange(event) {
+    const { configurations } = this.state;
+    if (event.target.dataset.type === "positive") {
+      if (Number(event.target.value) <= 1) {
+        configurations.configurableRandom[event.target.name] = 1;
+      } else {
+        configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
+      }
+    }
+
+    this.setState({ configurations });
   }
 
   renderOptionsDropdown() {
@@ -183,7 +207,27 @@ export default class Pie extends Component {
   }
 
   renderConfigurableRandomModeConfiguration() {
-    console.log("renderConfigurableRandomModeConfiguration");
+    const { configurableRandom } = this.state.configurations;
+    return (
+      <div className="configurable-random">
+        <div className="form-group config-option">
+          <label>Number of series</label>
+            <input type="number"
+                   data-type="positive"
+                   className="form-control"
+                   name={optionsConfigurableRandom.seriesNumber}
+                   value={configurableRandom.seriesNumber}
+                   onChange={this.onConfigurableRandomInputChange}/>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updateConfigurableRandomConfiguration}>
+          Apply
+        </button>
+      </div>
+    );
   }
 
   renderConfigurationsArea() {
