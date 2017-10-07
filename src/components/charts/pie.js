@@ -87,7 +87,7 @@ export default class Pie extends Component {
         break;
       }
       default: {
-        console.log("This is impossible to achieve");
+        console.log("This mode is not supported yet");
       }
     }
     this.setState({ currentMode: mode, configurations });
