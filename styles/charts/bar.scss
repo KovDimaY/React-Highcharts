@@ -23,7 +23,11 @@
     overflow:auto;
     border: 1px solid rgba(128, 128, 128, 0.50);
 
-
+    .interesting-facts {
+      .radio {
+        margin-bottom: 20px;
+      }
+    }
     .configurable-random {
       margin-top: 30px;
       .config-option {
@@ -98,6 +102,10 @@
       width: 40%;
       margin-left: 30%;
     }
+    .interesting-facts {
+      margin-left: 40%;
+      margin-top: 30px;
+    }
   }
 
   @media (min-width: 768px) {
@@ -109,6 +117,10 @@
       width: 80%;
       margin-left: 10%;
     }
+    .interesting-facts {
+      margin-left: 50px;
+      margin-top: 30px;
+    }
   }
   @media (min-width: 992px) {
     .pure-random {
@@ -119,10 +131,18 @@
       width: 60%;
       margin-left: 20%;
     }
+    .interesting-facts {
+      margin-left: 90px;
+      margin-top: 30px;
+    }
   }
   @media (min-width: 1200px) {
     .pure-random {
       margin-left: 110px;
+      margin-top: 30px;
+    }
+    .interesting-facts {
+      margin-left: 130px;
       margin-top: 30px;
     }
 
