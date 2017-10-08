@@ -5,14 +5,16 @@ import Chart from './chart-abstract'
 
 import {
   pureRandom,
-  configurableRandom
+  configurableRandom,
+  clusteringSimulation
 } from '../../constants/pie/default-options-pie'
 
 import {
   modes,
   initialState,
   optionsPureRandom,
-  optionsConfigurableRandom
+  optionsConfigurableRandom,
+  optionsClusteringSimulation
 } from '../../constants/pie/modes-options-pie'
 
 import {
@@ -28,6 +30,7 @@ export default class Pie extends Component {
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this);
     this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
+    this.updateClusteringSimulationConfiguration = this.updateClusteringSimulationConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
     this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
   }
@@ -51,6 +54,14 @@ export default class Pie extends Component {
 
     this.setState({ options }, () => {
       this.updateConfigurableRandomConfiguration();
+    });
+  }
+
+  initClusteringSimulationMode() {
+    const options = clusteringSimulation;
+
+    this.setState({ options }, () => {
+      this.updateClusteringSimulationConfiguration();
     });
   }
 
@@ -85,6 +96,10 @@ export default class Pie extends Component {
     })
   }
 
+  updateClusteringSimulationConfiguration() {
+    console.log("updateClusteringSimulationConfiguration")
+  }
+
   dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
     const { configurations } = this.state;
@@ -95,6 +110,10 @@ export default class Pie extends Component {
       }
       case modes.configurableRandom: {
         this.initConfigurableRandomeMode();
+        break;
+      }
+      case modes.clusteringSimulation: {
+        this.initClusteringSimulationMode();
         break;
       }
       default: {
@@ -136,7 +155,7 @@ export default class Pie extends Component {
           <li className="dropdown-header">Random Data</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
-          // <li><a onClick={this.dropdownClickHandler}>{modes.balanceSimulation}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.clusteringSimulation}</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Text Analysis</li>
           // <li><a onClick={this.dropdownClickHandler}>{modes.symbolsAnalysis}</a></li>
@@ -230,6 +249,10 @@ export default class Pie extends Component {
     );
   }
 
+  renderClusteringSimulationModeConfiguration() {
+    console.log("renderClusteringSimulationModeConfiguration");
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -238,6 +261,9 @@ export default class Pie extends Component {
       }
       case modes.configurableRandom: {
         return this.renderConfigurableRandomModeConfiguration();
+      }
+      case modes.clusteringSimulation: {
+        return this.renderClusteringSimulationModeConfiguration();
       }
       default: {
         return null;

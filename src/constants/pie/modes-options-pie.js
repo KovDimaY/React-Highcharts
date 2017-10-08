@@ -1,6 +1,7 @@
 export const modes = {
   pureRandom: "Pure Random",
-  configurableRandom: "Configurable Random"
+  configurableRandom: "Configurable Random",
+  clusteringSimulation: "Clustering Simulation"
 }
 
 export const optionsPureRandom = {
@@ -15,6 +16,12 @@ export const optionsPureRandom = {
 
 export const optionsConfigurableRandom = {
   seriesNumber: "seriesNumber"
+}
+
+export const optionsClusteringSimulation = {
+  maxNumber: "maxNumber",
+  clusterNumber: "clusterNumber",
+  isRunning: "isRunning"
 }
 
 export const initialState = {
@@ -33,6 +40,11 @@ export const initialState = {
     },
     configurableRandom: {
       seriesNumber: 3
+    },
+    clusteringSimulation: {
+      maxNumber: 100,
+      clusterNumber: 10,
+      isRunning: false
     }
   }
 }
