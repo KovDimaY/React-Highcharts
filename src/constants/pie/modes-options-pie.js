@@ -21,7 +21,8 @@ export const optionsConfigurableRandom = {
 export const optionsClusteringSimulation = {
   maxNumber: "maxNumber",
   clusterNumber: "clusterNumber",
-  isRunning: "isRunning"
+  isRunning: "isRunning",
+  frequency: "frequency"
 }
 
 export const initialState = {
@@ -44,6 +45,7 @@ export const initialState = {
     clusteringSimulation: {
       maxNumber: 100,
       clusterNumber: 10,
+      frequency: 1,
       isRunning: false
     }
   }

@@ -39,3 +39,18 @@ export function generateSeriesForConfigurableRandom(params) {
     data: currentData
   }];
 }
+
+export function generateSeriesForClusteringSimulation(maxNumber, clusterNumber) {
+  console.log("generateSeriesForClusteringSimulation maxNumber", maxNumber)
+  console.log("generateSeriesForClusteringSimulation clusterNumber", clusterNumber)
+
+  return [];
+}
+
+export function newPointToClusteringSimulation(series, maxNumber, clusterNumber) {
+  console.log("newPointToClusteringSimulation series", series)
+  console.log("newPointToClusteringSimulation maxNumber", maxNumber)
+  console.log("newPointToClusteringSimulation clusterNumber", clusterNumber)
+
+  return series;
+}
