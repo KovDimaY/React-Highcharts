@@ -105,5 +105,18 @@ export const clusteringSimulation = {
             animation: true
         }
     },
-    series: []
+    series: [{
+      name: 'Clusters',
+      colorByPoint: true,
+      data: [{
+        name: 'Cluster 1',
+        y: 1
+      },{
+        name: 'Cluster 2',
+        y: 4
+      },{
+        name: 'Cluster 3',
+        y: 2
+      }]
+    }]
 };

@@ -41,16 +41,39 @@ export function generateSeriesForConfigurableRandom(params) {
 }
 
 export function generateSeriesForClusteringSimulation(maxNumber, clusterNumber) {
-  console.log("generateSeriesForClusteringSimulation maxNumber", maxNumber)
-  console.log("generateSeriesForClusteringSimulation clusterNumber", clusterNumber)
+  const randValue = Math.random() * maxNumber;
+  const clusterSize = maxNumber / clusterNumber;
+  const cluster = Math.ceil(randValue / clusterSize);
+  const clusterName = `Cluster ${cluster}`;
+  const data = [];
 
-  return [];
+  for (let i = 0; i < clusterNumber; i++) {
+    const currentName = `Cluster ${i+1}`;
+    const value = currentName === clusterName ? 1 : 0;
+    data.push({
+      name: currentName,
+      y: value
+    });
+  }
+
+  return [{
+    name: 'Clusters',
+    colorByPoint: true,
+    data
+  }];
 }
 
 export function newPointToClusteringSimulation(series, maxNumber, clusterNumber) {
-  console.log("newPointToClusteringSimulation series", series)
-  console.log("newPointToClusteringSimulation maxNumber", maxNumber)
-  console.log("newPointToClusteringSimulation clusterNumber", clusterNumber)
+  const randValue = Math.random() * maxNumber;
+  const clusterSize = maxNumber / clusterNumber;
+  const cluster = Math.ceil(randValue / clusterSize);
+  const clusterName = `Cluster ${cluster}`;
+
+  series[0].data.forEach((point) => {
+    if (point.name === clusterName) {
+      point.y += 1;
+    }
+  })
 
   return series;
 }

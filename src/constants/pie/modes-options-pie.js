@@ -44,8 +44,8 @@ export const initialState = {
     },
     clusteringSimulation: {
       maxNumber: 100,
-      clusterNumber: 10,
-      frequency: 1,
+      clusterNumber: 5,
+      frequency: 3,
       isRunning: false
     }
   }
