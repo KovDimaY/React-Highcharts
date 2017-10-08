@@ -128,7 +128,7 @@ export default class Pie extends Component {
   }
 
   addPointsToClusteringSimulation() {
-    const { configurations, options } = this.state;
+    const { configurations, options: oldOptions } = this.state;
     const {
       isRunning,
       maxNumber,
@@ -136,7 +136,7 @@ export default class Pie extends Component {
       frequency
     } = configurations.clusteringSimulation;
     if (isRunning) {
-      options.series = newPointToClusteringSimulation(options.series, maxNumber, clusterNumber);
+      const options = newPointToClusteringSimulation(oldOptions, maxNumber, clusterNumber);
       setTimeout(() => this.addPointsToClusteringSimulation(), frequency * 1000);
       this.setState({ options, rerenderChart: true }, () => {
         this.setState({ rerenderChart: false });
