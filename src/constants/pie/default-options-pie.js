@@ -57,7 +57,8 @@ export const configurableRandom = {
     },
     tooltip: {
         enabled: true,
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        pointFormat: 'Value: <b>{point.y:.1f}</b><br/>' +
+                     'Percent: <b>{point.percentage:.1f}%</b>'
     },
     legend: {
         enabled: true
@@ -66,11 +67,64 @@ export const configurableRandom = {
         pie: {
             allowPointSelect: true,
             cursor: 'pointer',
-            showInLegend: true
+            showInLegend: true,
+            dataLabels: {
+                enabled: true
+            },
         },
         series: {
             animation: true
         }
     },
     series: []
+};
+
+export const clusteringSimulation = {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Simple Clustering Simulation'
+    },
+    subtitle: {
+        text: 'This data is generated randomly'
+    },
+    tooltip: {
+        enabled: true,
+        pointFormat: 'Count: <b>{point.y}</b><br/>' +
+                     'Percent: <b>{point.percentage:.1f}%</b>'
+    },
+    legend: {
+        enabled: true
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            showInLegend: true,
+            dataLabels: {
+                enabled: false
+            },
+        },
+        series: {
+            animation: true
+        }
+    },
+    series: [{
+      name: 'Clusters',
+      colorByPoint: true,
+      data: [{
+        name: 'Cluster 1',
+        y: 1
+      },{
+        name: 'Cluster 2',
+        y: 4
+      },{
+        name: 'Cluster 3',
+        y: 2
+      }]
+    }]
 };

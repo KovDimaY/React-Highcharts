@@ -5,19 +5,23 @@ import Chart from './chart-abstract'
 
 import {
   pureRandom,
-  configurableRandom
+  configurableRandom,
+  clusteringSimulation
 } from '../../constants/pie/default-options-pie'
 
 import {
   modes,
   initialState,
   optionsPureRandom,
-  optionsConfigurableRandom
+  optionsConfigurableRandom,
+  optionsClusteringSimulation
 } from '../../constants/pie/modes-options-pie'
 
 import {
   generateSeriesForPureRandom,
-  generateSeriesForConfigurableRandom
+  generateSeriesForConfigurableRandom,
+  generateSeriesForClusteringSimulation,
+  newPointToClusteringSimulation
 } from '../../constants/pie/data-helpers-pie'
 
 export default class Pie extends Component {
@@ -28,8 +32,10 @@ export default class Pie extends Component {
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this);
     this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
+    this.updateClusteringSimulationConfiguration = this.updateClusteringSimulationConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
     this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
+    this.onClusteringSimulationInputChange = this.onClusteringSimulationInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -51,6 +57,14 @@ export default class Pie extends Component {
 
     this.setState({ options }, () => {
       this.updateConfigurableRandomConfiguration();
+    });
+  }
+
+  initClusteringSimulationMode() {
+    const options = clusteringSimulation;
+
+    this.setState({ options }, () => {
+      this.updateClusteringSimulationConfiguration();
     });
   }
 
@@ -85,6 +99,51 @@ export default class Pie extends Component {
     })
   }
 
+  updateClusteringSimulationConfiguration(event) {
+    const { configurations, options } = this.state;
+    const {
+      isRunning,
+      maxNumber,
+      clusterNumber
+    } = configurations.clusteringSimulation;
+
+    if (event) {
+      if (isRunning) {
+        configurations.clusteringSimulation.isRunning = false;
+        this.setState({ options, configurations, rerenderChart: true }, () => {
+          this.setState({ rerenderChart: false });
+        });
+      } else {
+        options.series = generateSeriesForClusteringSimulation(maxNumber, clusterNumber);
+        configurations.clusteringSimulation.isRunning = true;
+        this.setState({ configurations }, () => {
+          this.addPointsToClusteringSimulation();
+        });
+      }
+    } else {
+      this.setState({ options, rerenderChart: true }, () => {
+        this.setState({ rerenderChart: false });
+      });
+    }
+  }
+
+  addPointsToClusteringSimulation() {
+    const { configurations, options: oldOptions } = this.state;
+    const {
+      isRunning,
+      maxNumber,
+      clusterNumber,
+      frequency
+    } = configurations.clusteringSimulation;
+    if (isRunning) {
+      const options = newPointToClusteringSimulation(oldOptions, maxNumber, clusterNumber);
+      setTimeout(() => this.addPointsToClusteringSimulation(), frequency * 1000);
+      this.setState({ options, rerenderChart: true }, () => {
+        this.setState({ rerenderChart: false });
+      });
+    }
+  }
+
   dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
     const { configurations } = this.state;
@@ -95,6 +154,10 @@ export default class Pie extends Component {
       }
       case modes.configurableRandom: {
         this.initConfigurableRandomeMode();
+        break;
+      }
+      case modes.clusteringSimulation: {
+        this.initClusteringSimulationMode();
         break;
       }
       default: {
@@ -127,6 +190,19 @@ export default class Pie extends Component {
     this.setState({ configurations });
   }
 
+  onClusteringSimulationInputChange(event) {
+    const { configurations } = this.state;
+    if (event.target.dataset.type === "positive") {
+      if (Number(event.target.value) <= 1) {
+        configurations.clusteringSimulation[event.target.name] = 1;
+      } else {
+        configurations.clusteringSimulation[event.target.name] = Math.floor(Number(event.target.value));
+      }
+    }
+
+    this.setState({ configurations });
+  }
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -136,7 +212,7 @@ export default class Pie extends Component {
           <li className="dropdown-header">Random Data</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
-          // <li><a onClick={this.dropdownClickHandler}>{modes.balanceSimulation}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.clusteringSimulation}</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Text Analysis</li>
           // <li><a onClick={this.dropdownClickHandler}>{modes.symbolsAnalysis}</a></li>
@@ -230,6 +306,62 @@ export default class Pie extends Component {
     );
   }
 
+  renderClusteringSimulationModeConfiguration() {
+    const { clusteringSimulation } = this.state.configurations;
+    return (
+      <div className="clustering-simulation">
+        <div className="form-group config-option">
+          <label>Max number</label>
+            <input type="number"
+                   data-type="positive"
+                   className="form-control"
+                   name={optionsClusteringSimulation.maxNumber}
+                   value={clusteringSimulation.maxNumber}
+                   onChange={this.onClusteringSimulationInputChange}/>
+        </div>
+        <div className="form-group config-option">
+          <label>Number of clusters</label>
+            <input type="number"
+                   data-type="positive"
+                   className="form-control"
+                   name={optionsClusteringSimulation.clusterNumber}
+                   value={clusteringSimulation.clusterNumber}
+                   onChange={this.onClusteringSimulationInputChange}/>
+        </div>
+        <div className="form-group config-option">
+          <label>Frequency</label>
+            <input type="number"
+                   data-type="positive"
+                   className="form-control"
+                   name={optionsClusteringSimulation.frequency}
+                   value={clusteringSimulation.frequency}
+                   onChange={this.onClusteringSimulationInputChange}/>
+        </div>
+
+        {
+          clusteringSimulation.isRunning ?
+          (
+            <button
+              type="button"
+              className="btn btn-danger apply-button position-dynamic"
+              onClick={this.updateClusteringSimulationConfiguration}>
+              Stop Simulation
+            </button>
+          )
+          :
+          (
+            <button
+              type="button"
+              className="btn btn-success apply-button position-dynamic"
+              onClick={this.updateClusteringSimulationConfiguration}>
+              Start Simulation
+            </button>
+          )
+        }
+      </div>
+    );
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -238,6 +370,9 @@ export default class Pie extends Component {
       }
       case modes.configurableRandom: {
         return this.renderConfigurableRandomModeConfiguration();
+      }
+      case modes.clusteringSimulation: {
+        return this.renderClusteringSimulationModeConfiguration();
       }
       default: {
         return null;
