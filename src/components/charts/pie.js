@@ -33,6 +33,7 @@ export default class Pie extends Component {
     this.updateClusteringSimulationConfiguration = this.updateClusteringSimulationConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
     this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
+    this.onClusteringSimulationInputChange = this.onClusteringSimulationInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -98,6 +99,16 @@ export default class Pie extends Component {
 
   updateClusteringSimulationConfiguration() {
     console.log("updateClusteringSimulationConfiguration")
+    const { configurations, options } = this.state;
+    const {
+      isRunning,
+      initIncome,
+      initExpenses
+    } = configurations.balanceSimulation;
+  }
+
+  addPointsToClusteringSimulation() {
+    console.log("addPointsToBalanceSimulation")
   }
 
   dropdownClickHandler(input) {
@@ -140,6 +151,19 @@ export default class Pie extends Component {
         configurations.configurableRandom[event.target.name] = 1;
       } else {
         configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
+      }
+    }
+
+    this.setState({ configurations });
+  }
+
+  onClusteringSimulationInputChange(event) {
+    const { configurations } = this.state;
+    if (event.target.dataset.type === "positive") {
+      if (Number(event.target.value) <= 1) {
+        configurations.clusteringSimulation[event.target.name] = 1;
+      } else {
+        configurations.clusteringSimulation[event.target.name] = Math.floor(Number(event.target.value));
       }
     }
 
@@ -250,7 +274,36 @@ export default class Pie extends Component {
   }
 
   renderClusteringSimulationModeConfiguration() {
-    console.log("renderClusteringSimulationModeConfiguration");
+    const { clusteringSimulation } = this.state.configurations;
+    return (
+      <div className="clustering-simulation">
+        <div className="form-group config-option">
+          <label>Max number</label>
+            <input type="number"
+                   data-type="positive"
+                   className="form-control"
+                   name={optionsClusteringSimulation.maxNumber}
+                   value={clusteringSimulation.maxNumber}
+                   onChange={this.onClusteringSimulationInputChange}/>
+        </div>
+        <div className="form-group config-option">
+          <label>Number of clusters</label>
+            <input type="number"
+                   data-type="positive"
+                   className="form-control"
+                   name={optionsClusteringSimulation.clusterNumber}
+                   value={clusteringSimulation.clusterNumber}
+                   onChange={this.onClusteringSimulationInputChange}/>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updateClusteringSimulationConfiguration}>
+          Start Simulation
+        </button>
+      </div>
+    );
   }
 
   renderConfigurationsArea() {
