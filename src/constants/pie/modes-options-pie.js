@@ -1,7 +1,10 @@
 export const modes = {
   pureRandom: "Pure Random",
   configurableRandom: "Configurable Random",
-  clusteringSimulation: "Clustering Simulation"
+  clusteringSimulation: "Clustering Simulation",
+  primeFactorization: "Prime Factorization",
+  textAnalysis: "Text Analysis",
+  interestingFacts: "Interesting facts"
 }
 
 export const optionsPureRandom = {

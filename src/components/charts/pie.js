@@ -214,12 +214,12 @@ export default class Pie extends Component {
           <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.clusteringSimulation}</a></li>
           <li className="divider"></li>
-          <li className="dropdown-header">Text Analysis</li>
-          // <li><a onClick={this.dropdownClickHandler}>{modes.symbolsAnalysis}</a></li>
-          // <li><a onClick={this.dropdownClickHandler}>{modes.wordsAnalysis}</a></li>
+          <li className="dropdown-header">Analysis Section</li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.primeFactorization}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.textAnalysis}</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Real World Data</li>
-          // <li><a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a></li>
         </ul>
       </div>
     )
