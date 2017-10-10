@@ -30,6 +30,8 @@ import {
   generateSeriesForIrrationalAnalysis
 } from '../../constants/pie/data-helpers-pie'
 
+import { limitNumericalInput } from '../../constants/shared/helpers'
+
 export default class Pie extends Component {
   constructor(props) {
     super(props);
@@ -236,11 +238,14 @@ export default class Pie extends Component {
   onConfigurableRandomInputChange(event) {
     const { configurations } = this.state;
     if (event.target.dataset.type === "positive") {
-      if (Number(event.target.value) <= 1) {
-        configurations.configurableRandom[event.target.name] = 1;
-      } else {
-        configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
-      }
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        1,
+        20,
+        true
+      );
     }
 
     this.setState({ configurations });
@@ -248,12 +253,33 @@ export default class Pie extends Component {
 
   onClusteringSimulationInputChange(event) {
     const { configurations } = this.state;
-    if (event.target.dataset.type === "positive") {
-      if (Number(event.target.value) <= 1) {
-        configurations.clusteringSimulation[event.target.name] = 1;
-      } else {
-        configurations.clusteringSimulation[event.target.name] = Math.floor(Number(event.target.value));
-      }
+    if (event.target.dataset.type === "max-number") {
+      limitNumericalInput(
+        configurations.clusteringSimulation,
+        event.target.name,
+        event.target.value,
+        1,
+        1000000,
+        false
+      );
+    } else if (event.target.dataset.type === "clusters") {
+      limitNumericalInput(
+        configurations.clusteringSimulation,
+        event.target.name,
+        event.target.value,
+        1,
+        10,
+        true
+      );
+    } else if (event.target.dataset.type === "frequency") {
+      limitNumericalInput(
+        configurations.clusteringSimulation,
+        event.target.name,
+        event.target.value,
+        1,
+        5,
+        true
+      );
     }
 
     this.setState({ configurations });
@@ -262,11 +288,14 @@ export default class Pie extends Component {
   onPrimeFactorizationInputChange(event) {
     const { configurations } = this.state;
     if (event.target.dataset.type === "positive") {
-      if (Number(event.target.value) <= 2) {
-        configurations.primeFactorization[event.target.name] = 2;
-      } else {
-        configurations.primeFactorization[event.target.name] = Math.floor(Number(event.target.value));
-      }
+      limitNumericalInput(
+        configurations.primeFactorization,
+        event.target.name,
+        event.target.value,
+        2,
+        1000000000,
+        true
+      );
     }
 
     this.setState({ configurations });
@@ -275,13 +304,14 @@ export default class Pie extends Component {
   onIrrationalAnalysisInputChange(event) {
     const { configurations } = this.state;
     if (event.target.dataset.type === "positive") {
-      if (Number(event.target.value) <= 1) {
-        configurations.irrationalAnalysis[event.target.name] = 1;
-      } else  if (Number(event.target.value) >= 1000000) {
-        configurations.irrationalAnalysis[event.target.name] = 1000000;
-      } else {
-        configurations.irrationalAnalysis[event.target.name] = Math.floor(Number(event.target.value));
-      }
+      limitNumericalInput(
+        configurations.irrationalAnalysis,
+        event.target.name,
+        event.target.value,
+        1,
+        1000000,
+        true
+      );
     }
 
     this.setState({ configurations });
@@ -397,7 +427,7 @@ export default class Pie extends Component {
         <div className="form-group config-option">
           <label>Max number</label>
             <input type="number"
-                   data-type="positive"
+                   data-type="max-number"
                    className="form-control"
                    name={optionsClusteringSimulation.maxNumber}
                    value={clusteringSimulation.maxNumber}
@@ -406,7 +436,7 @@ export default class Pie extends Component {
         <div className="form-group config-option">
           <label>Number of clusters</label>
             <input type="number"
-                   data-type="positive"
+                   data-type="clusters"
                    className="form-control"
                    name={optionsClusteringSimulation.clusterNumber}
                    value={clusteringSimulation.clusterNumber}
@@ -415,7 +445,7 @@ export default class Pie extends Component {
         <div className="form-group config-option">
           <label>Frequency</label>
             <input type="number"
-                   data-type="positive"
+                   data-type="frequency"
                    className="form-control"
                    name={optionsClusteringSimulation.frequency}
                    value={clusteringSimulation.frequency}

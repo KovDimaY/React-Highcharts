@@ -1,4 +1,4 @@
-import { pi } from './pi-digits.js'
+import { pi } from './pi-digits'
 
 export function generateSeriesForPureRandom() {
   const numberOfSeries = Math.round(Math.random() * 5) + 2;

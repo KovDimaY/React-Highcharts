@@ -34,6 +34,8 @@ import {
   generateSeriesForTrigonometric
 } from '../../constants/line/data-helpers-line'
 
+import { limitNumericalInput } from '../../constants/shared/helpers'
+
 export default class Line extends Component {
   constructor(props) {
     super(props);
@@ -282,12 +284,24 @@ export default class Line extends Component {
 
   onConfigurableRandomInputChange(event) {
     const { configurations } = this.state;
-    if (event.target.dataset.type === "positive") {
-      if (Number(event.target.value) <= 1) {
-        configurations.configurableRandom[event.target.name] = 1;
-      } else {
-        configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
-      }
+    if (event.target.dataset.type === "series") {
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        1,
+        20,
+        true
+      );
+    } else if (event.target.dataset.type === "points") {
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        1,
+        1000,
+        true
+      );
     } else {
       if (event.target.name === optionsConfigurableRandom.min) {
         if (Number(event.target.value) > configurations.configurableRandom[optionsConfigurableRandom.max]) {
@@ -309,11 +323,14 @@ export default class Line extends Component {
   onStockSimulationInputChange(event) {
     const { configurations } = this.state;
     if (event.target.type === "number") {
-      if (Number(event.target.value) <= 0.01) {
-        configurations.stockSimulation[event.target.name] = 0.01;
-      } else {
-        configurations.stockSimulation[event.target.name] = Number(event.target.value);
-      }
+      limitNumericalInput(
+        configurations.stockSimulation,
+        event.target.name,
+        event.target.value,
+        0.01,
+        1000000,
+        false
+      );
     } else {
       configurations.stockSimulation[event.target.name] = event.target.value;
     }
@@ -411,7 +428,7 @@ export default class Line extends Component {
         <div className="form-group config-option">
           <label>Number of series</label>
             <input type="number"
-                   data-type="positive"
+                   data-type="series"
                    className="form-control"
                    name={optionsConfigurableRandom.seriesNumber}
                    value={configurableRandom.seriesNumber}
@@ -420,7 +437,7 @@ export default class Line extends Component {
         <div className="form-group config-option">
           <label>Max number of points</label>
             <input type="number"
-                   data-type="positive"
+                   data-type="points"
                    className="form-control"
                    name={optionsConfigurableRandom.pointsNumber}
                    value={configurableRandom.pointsNumber}

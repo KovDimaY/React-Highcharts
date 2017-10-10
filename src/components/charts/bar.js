@@ -40,6 +40,8 @@ import {
   sortAndCutWords
 } from '../../constants/bar/data-helpers-bar'
 
+import { limitNumericalInput } from '../../constants/shared/helpers'
+
 
 export default class Bar extends Component {
   constructor(props) {
@@ -281,11 +283,14 @@ export default class Bar extends Component {
   onConfigurableRandomInputChange(event) {
     const { configurations } = this.state;
     if (event.target.dataset.type === "positive") {
-      if (Number(event.target.value) <= 1) {
-        configurations.configurableRandom[event.target.name] = 1;
-      } else {
-        configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
-      }
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        1,
+        20,
+        true
+      );
     } else {
       if (event.target.name === optionsConfigurableRandom.min) {
         if (Number(event.target.value) > configurations.configurableRandom[optionsConfigurableRandom.max]) {
@@ -306,17 +311,24 @@ export default class Bar extends Component {
 
   onBalanceSimulationInputChange(event) {
     const { configurations } = this.state;
-    if (Number(event.target.value) <= 0) {
-      configurations.balanceSimulation[event.target.name] = 0;
-    } else {
-      configurations.balanceSimulation[event.target.name] = Math.floor(Number(event.target.value));
-    }
     if (event.target.dataset.type === "percent") {
-      if (Number(event.target.value) > 100) {
-        configurations.balanceSimulation[event.target.name] = 100;
-      } else {
-        configurations.balanceSimulation[event.target.name] = Math.floor(Number(event.target.value));
-      }
+      limitNumericalInput(
+        configurations.balanceSimulation,
+        event.target.name,
+        event.target.value,
+        0,
+        100,
+        true
+      );
+    } else {
+      limitNumericalInput(
+        configurations.balanceSimulation,
+        event.target.name,
+        event.target.value,
+        0,
+        1000000000,
+        true
+      );
     }
     this.setState({ configurations });
   }
@@ -324,10 +336,14 @@ export default class Bar extends Component {
   onSymbolAnalysisInputChange(event) {
     const { configurations } = this.state;
     if (event.target.name === "limit") {
-      const tempValue = parseInt(event.target.value, 10);
-      configurations.symbolsAnalysis[event.target.name] = tempValue < 1 || isNaN(tempValue)
-        ? 1
-        : tempValue;
+      limitNumericalInput(
+        configurations.symbolsAnalysis,
+        event.target.name,
+        event.target.value,
+        1,
+        1000,
+        true
+      );
     } else if (event.target.name === "caseSensitive") {
       const currentState = configurations.symbolsAnalysis[event.target.name];
       configurations.symbolsAnalysis[event.target.name] = currentState ? false : true;
@@ -341,10 +357,14 @@ export default class Bar extends Component {
   onWordsAnalysisInputChange(event) {
     const { configurations } = this.state;
     if (event.target.name === "limit") {
-      const tempValue = parseInt(event.target.value, 10);
-      configurations.wordsAnalysis[event.target.name] = tempValue < 1 || isNaN(tempValue)
-        ? 1
-        : tempValue;
+      limitNumericalInput(
+        configurations.wordsAnalysis,
+        event.target.name,
+        event.target.value,
+        1,
+        1000,
+        true
+      );
     } else if (event.target.name === "caseSensitive") {
       const currentState = configurations.wordsAnalysis[event.target.name];
       configurations.wordsAnalysis[event.target.name] = currentState ? false : true;
