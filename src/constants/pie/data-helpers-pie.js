@@ -85,4 +85,12 @@ export function newPointToClusteringSimulation(options, maxNumber, clusterNumber
 
 export function generateSeriesForPrimeFactorization(options) {
   console.log("options from generateSeriesForPrimeFactorization", options)
+
+  return [];
+}
+
+export function generateSeriesForIrrationalAnalysis(options) {
+  console.log("options from generateSeriesForIrrationalAnalysis", options)
+
+  return [];
 }

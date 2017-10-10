@@ -7,7 +7,8 @@ import {
   pureRandom,
   configurableRandom,
   clusteringSimulation,
-  primeFactorization
+  primeFactorization,
+  irrationalAnalysis
 } from '../../constants/pie/default-options-pie'
 
 import {
@@ -16,7 +17,8 @@ import {
   optionsPureRandom,
   optionsConfigurableRandom,
   optionsClusteringSimulation,
-  optionsPrimeFactorization
+  optionsPrimeFactorization,
+  optionsIrrationalAnalysis
 } from '../../constants/pie/modes-options-pie'
 
 import {
@@ -24,7 +26,8 @@ import {
   generateSeriesForConfigurableRandom,
   generateSeriesForClusteringSimulation,
   newPointToClusteringSimulation,
-  generateSeriesForPrimeFactorization
+  generateSeriesForPrimeFactorization,
+  generateSeriesForIrrationalAnalysis
 } from '../../constants/pie/data-helpers-pie'
 
 export default class Pie extends Component {
@@ -37,10 +40,12 @@ export default class Pie extends Component {
     this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
     this.updateClusteringSimulationConfiguration = this.updateClusteringSimulationConfiguration.bind(this);
     this.updatePrimeFactorizationConfiguration = this.updatePrimeFactorizationConfiguration.bind(this);
+    this.updateIrrationalAnalysisConfiguration = this.updateIrrationalAnalysisConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
     this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
     this.onClusteringSimulationInputChange = this.onClusteringSimulationInputChange.bind(this);
     this.onPrimeFactorizationInputChange = this.onPrimeFactorizationInputChange.bind(this);
+    this.onIrrationalAnalysisInputChange = this.onIrrationalAnalysisInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -78,6 +83,14 @@ export default class Pie extends Component {
 
     this.setState({ options }, () => {
       this.updatePrimeFactorizationConfiguration();
+    });
+  }
+
+  initIrrationalAnalysisMode() {
+    const options = irrationalAnalysis;
+
+    this.setState({ options }, () => {
+      this.updateIrrationalAnalysisConfiguration();
     });
   }
 
@@ -151,6 +164,17 @@ export default class Pie extends Component {
     })
   }
 
+  updateIrrationalAnalysisConfiguration() {
+    const { irrationalAnalysis } = this.state.configurations;
+    const { options } = this.state;
+
+    options.series = generateSeriesForIrrationalAnalysis(irrationalAnalysis);
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
   addPointsToClusteringSimulation() {
     const { configurations, options: oldOptions } = this.state;
     const {
@@ -186,6 +210,10 @@ export default class Pie extends Component {
       }
       case modes.primeFactorization: {
         this.initPrimeFactorizationMode();
+        break;
+      }
+      case modes.irrationalAnalysis: {
+        this.initIrrationalAnalysisMode();
         break;
       }
       default: {
@@ -234,10 +262,23 @@ export default class Pie extends Component {
   onPrimeFactorizationInputChange(event) {
     const { configurations } = this.state;
     if (event.target.dataset.type === "positive") {
-      if (Number(event.target.value) <= 1) {
-        configurations.primeFactorization[event.target.name] = 1;
+      if (Number(event.target.value) <= 2) {
+        configurations.primeFactorization[event.target.name] = 2;
       } else {
         configurations.primeFactorization[event.target.name] = Math.floor(Number(event.target.value));
+      }
+    }
+
+    this.setState({ configurations });
+  }
+
+  onIrrationalAnalysisInputChange(event) {
+    const { configurations } = this.state;
+    if (event.target.dataset.type === "positive") {
+      if (Number(event.target.value) <= 1) {
+        configurations.irrationalAnalysis[event.target.name] = 1;
+      } else {
+        configurations.irrationalAnalysis[event.target.name] = Math.floor(Number(event.target.value));
       }
     }
 
@@ -257,7 +298,7 @@ export default class Pie extends Component {
           <li className="divider"></li>
           <li className="dropdown-header">Analysis Section</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.primeFactorization}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.textAnalysis}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.irrationalAnalysis}</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Real World Data</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a></li>
@@ -427,6 +468,30 @@ export default class Pie extends Component {
     );
   }
 
+  renderIrrationalAnalysisModeConfiguration() {
+    const { irrationalAnalysis } = this.state.configurations;
+    return (
+      <div className="prime-factorization">
+        <div className="form-group config-option">
+          <label>Number for factorization</label>
+            <input type="number"
+                   data-type="positive"
+                   className="form-control"
+                   name={optionsIrrationalAnalysis.input}
+                   value={irrationalAnalysis.input}
+                   onChange={this.onIrrationalAnalysisInputChange}/>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updateIrrationalAnalysisConfiguration}>
+          Apply
+        </button>
+      </div>
+    );
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -441,6 +506,9 @@ export default class Pie extends Component {
       }
       case modes.primeFactorization: {
         return this.renderPrimeFactorizationModeConfiguration();
+      }
+      case modes.irrationalAnalysis: {
+        return this.renderIrrationalAnalysisModeConfiguration();
       }
       default: {
         return null;

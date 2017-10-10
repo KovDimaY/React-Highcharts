@@ -3,7 +3,7 @@ export const modes = {
   configurableRandom: "Configurable Random",
   clusteringSimulation: "Clustering Simulation",
   primeFactorization: "Prime Factorization",
-  textAnalysis: "Text Analysis",
+  irrationalAnalysis: "Irrational Analysis",
   interestingFacts: "Interesting facts"
 }
 
@@ -29,7 +29,11 @@ export const optionsClusteringSimulation = {
 }
 
 export const optionsPrimeFactorization = {
-  input: "input",
+  input: "input"
+}
+
+export const optionsIrrationalAnalysis = {
+  input: "input"
 }
 
 export const initialState = {
@@ -58,5 +62,8 @@ export const initialState = {
     primeFactorization: {
       input: 120
     },
+    irrationalAnalysis: {
+      input: 10
+    }
   }
 }
