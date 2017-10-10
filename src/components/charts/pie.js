@@ -6,7 +6,8 @@ import Chart from './chart-abstract'
 import {
   pureRandom,
   configurableRandom,
-  clusteringSimulation
+  clusteringSimulation,
+  primeFactorization
 } from '../../constants/pie/default-options-pie'
 
 import {
@@ -14,14 +15,16 @@ import {
   initialState,
   optionsPureRandom,
   optionsConfigurableRandom,
-  optionsClusteringSimulation
+  optionsClusteringSimulation,
+  optionsPrimeFactorization
 } from '../../constants/pie/modes-options-pie'
 
 import {
   generateSeriesForPureRandom,
   generateSeriesForConfigurableRandom,
   generateSeriesForClusteringSimulation,
-  newPointToClusteringSimulation
+  newPointToClusteringSimulation,
+  generateSeriesForPrimeFactorization
 } from '../../constants/pie/data-helpers-pie'
 
 export default class Pie extends Component {
@@ -33,9 +36,11 @@ export default class Pie extends Component {
     this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this);
     this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
     this.updateClusteringSimulationConfiguration = this.updateClusteringSimulationConfiguration.bind(this);
+    this.updatePrimeFactorizationConfiguration = this.updatePrimeFactorizationConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
     this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
     this.onClusteringSimulationInputChange = this.onClusteringSimulationInputChange.bind(this);
+    this.onPrimeFactorizationInputChange = this.onPrimeFactorizationInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -65,6 +70,14 @@ export default class Pie extends Component {
 
     this.setState({ options }, () => {
       this.updateClusteringSimulationConfiguration();
+    });
+  }
+
+  initPrimeFactorizationMode() {
+    const options = primeFactorization;
+
+    this.setState({ options }, () => {
+      this.updatePrimeFactorizationConfiguration();
     });
   }
 
@@ -127,6 +140,17 @@ export default class Pie extends Component {
     }
   }
 
+  updatePrimeFactorizationConfiguration() {
+    const { primeFactorization } = this.state.configurations;
+    const { options } = this.state;
+
+    options.series = generateSeriesForPrimeFactorization(primeFactorization);
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
   addPointsToClusteringSimulation() {
     const { configurations, options: oldOptions } = this.state;
     const {
@@ -158,6 +182,10 @@ export default class Pie extends Component {
       }
       case modes.clusteringSimulation: {
         this.initClusteringSimulationMode();
+        break;
+      }
+      case modes.primeFactorization: {
+        this.initPrimeFactorizationMode();
         break;
       }
       default: {
@@ -197,6 +225,19 @@ export default class Pie extends Component {
         configurations.clusteringSimulation[event.target.name] = 1;
       } else {
         configurations.clusteringSimulation[event.target.name] = Math.floor(Number(event.target.value));
+      }
+    }
+
+    this.setState({ configurations });
+  }
+
+  onPrimeFactorizationInputChange(event) {
+    const { configurations } = this.state;
+    if (event.target.dataset.type === "positive") {
+      if (Number(event.target.value) <= 1) {
+        configurations.primeFactorization[event.target.name] = 1;
+      } else {
+        configurations.primeFactorization[event.target.name] = Math.floor(Number(event.target.value));
       }
     }
 
@@ -362,6 +403,30 @@ export default class Pie extends Component {
     );
   }
 
+  renderPrimeFactorizationModeConfiguration() {
+    const { primeFactorization } = this.state.configurations;
+    return (
+      <div className="prime-factorization">
+        <div className="form-group config-option">
+          <label>Number for factorization</label>
+            <input type="number"
+                   data-type="positive"
+                   className="form-control"
+                   name={optionsPrimeFactorization.input}
+                   value={primeFactorization.input}
+                   onChange={this.onPrimeFactorizationInputChange}/>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updatePrimeFactorizationConfiguration}>
+          Apply
+        </button>
+      </div>
+    );
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -373,6 +438,9 @@ export default class Pie extends Component {
       }
       case modes.clusteringSimulation: {
         return this.renderClusteringSimulationModeConfiguration();
+      }
+      case modes.primeFactorization: {
+        return this.renderPrimeFactorizationModeConfiguration();
       }
       default: {
         return null;

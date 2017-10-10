@@ -28,6 +28,10 @@ export const optionsClusteringSimulation = {
   frequency: "frequency"
 }
 
+export const optionsPrimeFactorization = {
+  input: "input",
+}
+
 export const initialState = {
   options: {},
   rerenderChart: false,
@@ -50,6 +54,9 @@ export const initialState = {
       clusterNumber: 5,
       frequency: 3,
       isRunning: false
-    }
+    },
+    primeFactorization: {
+      input: 120
+    },
   }
 }
