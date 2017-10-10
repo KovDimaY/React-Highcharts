@@ -1,3 +1,5 @@
+import { pi } from './pi-digits.js'
+
 export function generateSeriesForPureRandom() {
   const numberOfSeries = Math.round(Math.random() * 5) + 2;
   let currentData = [];
@@ -90,7 +92,30 @@ export function generateSeriesForPrimeFactorization(options) {
 }
 
 export function generateSeriesForIrrationalAnalysis(options) {
-  console.log("options from generateSeriesForIrrationalAnalysis", options)
+  const accumulation = {};
 
-  return [];
+  for (let i = 0; i < options.input; i++) {
+    if (accumulation[pi[i]]) {
+      accumulation[pi[i]] += 1;
+    } else {
+      accumulation[pi[i]] = 1;
+    }
+  }
+
+  const data = [];
+  const keys = Object.keys(accumulation);
+  for (let i = 0; i < keys.length; i++) {
+    const currentName = keys[i];
+    const value = accumulation[keys[i]];
+    data.push({
+      name: currentName,
+      y: value
+    });
+  }
+
+  return [{
+    name: 'Digits Distribution',
+    colorByPoint: true,
+    data
+  }];
 }

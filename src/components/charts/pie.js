@@ -277,6 +277,8 @@ export default class Pie extends Component {
     if (event.target.dataset.type === "positive") {
       if (Number(event.target.value) <= 1) {
         configurations.irrationalAnalysis[event.target.name] = 1;
+      } else  if (Number(event.target.value) >= 1000000) {
+        configurations.irrationalAnalysis[event.target.name] = 1000000;
       } else {
         configurations.irrationalAnalysis[event.target.name] = Math.floor(Number(event.target.value));
       }
@@ -471,9 +473,9 @@ export default class Pie extends Component {
   renderIrrationalAnalysisModeConfiguration() {
     const { irrationalAnalysis } = this.state.configurations;
     return (
-      <div className="prime-factorization">
+      <div className="irrational-analysis">
         <div className="form-group config-option">
-          <label>Number for factorization</label>
+          <label>Number of digits</label>
             <input type="number"
                    data-type="positive"
                    className="form-control"
