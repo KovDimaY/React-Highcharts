@@ -291,20 +291,26 @@ export default class Bar extends Component {
         20,
         true
       );
+    } else if (event.target.dataset.type === "min") {
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        -10000,
+        configurations.configurableRandom.max,
+        false
+      );
+    } else if (event.target.dataset.type === "max") {
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        configurations.configurableRandom.min,
+        10000,
+        false
+      );
     } else {
-      if (event.target.name === optionsConfigurableRandom.min) {
-        if (Number(event.target.value) > configurations.configurableRandom[optionsConfigurableRandom.max]) {
-          configurations.configurableRandom[event.target.name] = configurations.configurableRandom[optionsConfigurableRandom.max];
-        } else {
-          configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
-        }
-      } else if (event.target.name === optionsConfigurableRandom.max) {
-        if (Number(event.target.value) < configurations.configurableRandom[optionsConfigurableRandom.min]) {
-          configurations.configurableRandom[event.target.name] = configurations.configurableRandom[optionsConfigurableRandom.min];
-        } else {
-          configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
-        }
-      }
+      configurations.configurableRandom[event.target.name] = Number(event.target.value);
     }
     this.setState({ configurations });
   }
@@ -509,6 +515,7 @@ export default class Bar extends Component {
           <label>Min value</label>
             <input type="number"
                    className="form-control"
+                   data-type="min"
                    name={optionsConfigurableRandom.min}
                    value={configurableRandom.min}
                    onChange={this.onConfigurableRandomInputChange}/>
@@ -516,6 +523,7 @@ export default class Bar extends Component {
         <div className="form-group config-option">
           <label>Max value</label>
             <input type="number"
+                   data-type="max"
                    className="form-control"
                    name={optionsConfigurableRandom.max}
                    value={configurableRandom.max}
