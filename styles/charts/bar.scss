@@ -98,13 +98,14 @@
       margin-left: 33%;
       margin-top: 30px;
     }
-    .apply-button {
-      width: 40%;
-      margin-left: 30%;
-    }
     .interesting-facts {
       margin-left: 40%;
       margin-top: 30px;
+    }
+    
+    .apply-button {
+      width: 40%;
+      margin-left: 30%;
     }
   }
 
@@ -113,13 +114,14 @@
       margin-left: 40px;
       margin-top: 30px;
     }
-    .apply-button {
-      width: 80%;
-      margin-left: 10%;
-    }
     .interesting-facts {
       margin-left: 50px;
       margin-top: 30px;
+    }
+
+    .apply-button {
+      width: 80%;
+      margin-left: 10%;
     }
   }
   @media (min-width: 992px) {
@@ -127,13 +129,14 @@
       margin-left: 80px;
       margin-top: 30px;
     }
-    .apply-button {
-      width: 60%;
-      margin-left: 20%;
-    }
     .interesting-facts {
       margin-left: 90px;
       margin-top: 30px;
+    }
+
+    .apply-button {
+      width: 60%;
+      margin-left: 20%;
     }
   }
   @media (min-width: 1200px) {
@@ -150,11 +153,6 @@
       width: 40%;
       margin-left: 30%;
     }
-  }
-
-  .coefficient{
-    padding: 15px;
-    padding-bottom: 0;
   }
 
   .chart-area {
