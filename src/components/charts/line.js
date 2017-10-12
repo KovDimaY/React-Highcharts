@@ -34,6 +34,8 @@ import {
   generateSeriesForTrigonometric
 } from '../../constants/line/data-helpers-line'
 
+import { limitNumericalInput } from '../../constants/shared/helpers'
+
 export default class Line extends Component {
   constructor(props) {
     super(props);
@@ -282,26 +284,44 @@ export default class Line extends Component {
 
   onConfigurableRandomInputChange(event) {
     const { configurations } = this.state;
-    if (event.target.dataset.type === "positive") {
-      if (Number(event.target.value) <= 1) {
-        configurations.configurableRandom[event.target.name] = 1;
-      } else {
-        configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
-      }
+    if (event.target.dataset.type === "series") {
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        1,
+        20,
+        true
+      );
+    } else if (event.target.dataset.type === "points") {
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        1,
+        1000,
+        true
+      );
+    } else if (event.target.dataset.type === "min") {
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        -10000,
+        configurations.configurableRandom.max,
+        false
+      );
+    } else if (event.target.dataset.type === "max") {
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        configurations.configurableRandom.min,
+        10000,
+        false
+      );
     } else {
-      if (event.target.name === optionsConfigurableRandom.min) {
-        if (Number(event.target.value) > configurations.configurableRandom[optionsConfigurableRandom.max]) {
-          configurations.configurableRandom[event.target.name] = configurations.configurableRandom[optionsConfigurableRandom.max];
-        } else {
-          configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
-        }
-      } else if (event.target.name === optionsConfigurableRandom.max) {
-        if (Number(event.target.value) < configurations.configurableRandom[optionsConfigurableRandom.min]) {
-          configurations.configurableRandom[event.target.name] = configurations.configurableRandom[optionsConfigurableRandom.min];
-        } else {
-          configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
-        }
-      }
+      configurations.configurableRandom[event.target.name] = Number(event.target.value);
     }
     this.setState({ configurations });
   }
@@ -309,11 +329,14 @@ export default class Line extends Component {
   onStockSimulationInputChange(event) {
     const { configurations } = this.state;
     if (event.target.type === "number") {
-      if (Number(event.target.value) <= 0.01) {
-        configurations.stockSimulation[event.target.name] = 0.01;
-      } else {
-        configurations.stockSimulation[event.target.name] = Number(event.target.value);
-      }
+      limitNumericalInput(
+        configurations.stockSimulation,
+        event.target.name,
+        event.target.value,
+        0.01,
+        1000000,
+        false
+      );
     } else {
       configurations.stockSimulation[event.target.name] = event.target.value;
     }
@@ -322,13 +345,71 @@ export default class Line extends Component {
 
   onPolinomialsInputChange(event) {
     const { configurations } = this.state;
-    configurations.polinomials[event.target.name] = Number(event.target.value);
+    if (event.target.dataset.type === "integer") {
+      limitNumericalInput(
+        configurations.polinomials,
+        event.target.name,
+        event.target.value,
+        1,
+        1000,
+        true
+      );
+    } else if (event.target.dataset.type === "min") {
+      limitNumericalInput(
+        configurations.polinomials,
+        event.target.name,
+        event.target.value,
+        -10000,
+        configurations.polinomials.max,
+        false
+      );
+    } else if (event.target.dataset.type === "max") {
+      limitNumericalInput(
+        configurations.polinomials,
+        event.target.name,
+        event.target.value,
+        configurations.polinomials.min,
+        10000,
+        false
+      );
+    } else {
+      configurations.polinomials[event.target.name] = Number(event.target.value);
+    }
     this.setState({ configurations });
   }
 
   onTrigonometricInputChange(event) {
     const { configurations } = this.state;
-    configurations.trigonometric[event.target.name] = Number(event.target.value);
+    if (event.target.dataset.type === "integer") {
+      limitNumericalInput(
+        configurations.trigonometric,
+        event.target.name,
+        event.target.value,
+        1,
+        1000,
+        true
+      );
+    } else if (event.target.dataset.type === "min") {
+      limitNumericalInput(
+        configurations.trigonometric,
+        event.target.name,
+        event.target.value,
+        -10000,
+        configurations.trigonometric.max,
+        false
+      );
+    } else if (event.target.dataset.type === "max") {
+      limitNumericalInput(
+        configurations.trigonometric,
+        event.target.name,
+        event.target.value,
+        configurations.trigonometric.min,
+        10000,
+        false
+      );
+    } else {
+      configurations.trigonometric[event.target.name] = Number(event.target.value);
+    }
     this.setState({ configurations });
   }
 
@@ -411,7 +492,7 @@ export default class Line extends Component {
         <div className="form-group config-option">
           <label>Number of series</label>
             <input type="number"
-                   data-type="positive"
+                   data-type="series"
                    className="form-control"
                    name={optionsConfigurableRandom.seriesNumber}
                    value={configurableRandom.seriesNumber}
@@ -420,7 +501,7 @@ export default class Line extends Component {
         <div className="form-group config-option">
           <label>Max number of points</label>
             <input type="number"
-                   data-type="positive"
+                   data-type="points"
                    className="form-control"
                    name={optionsConfigurableRandom.pointsNumber}
                    value={configurableRandom.pointsNumber}
@@ -429,6 +510,7 @@ export default class Line extends Component {
         <div className="form-group config-option">
           <label>Min value</label>
             <input type="number"
+                   data-type="min"
                    className="form-control"
                    name={optionsConfigurableRandom.min}
                    value={configurableRandom.min}
@@ -437,6 +519,7 @@ export default class Line extends Component {
         <div className="form-group config-option">
           <label>Max value</label>
             <input type="number"
+                   data-type="max"
                    className="form-control"
                    name={optionsConfigurableRandom.max}
                    value={configurableRandom.max}
@@ -561,6 +644,7 @@ export default class Line extends Component {
           <div className="form-group config-option">
             <label>Min X</label>
               <input type="number"
+                     data-type="min"
                      className="form-control"
                      name={optionsPolinomials.min}
                      value={polinomials.min}
@@ -571,6 +655,7 @@ export default class Line extends Component {
           <div className="form-group config-option">
             <label>Max X</label>
               <input type="number"
+                     data-type="max"
                      className="form-control"
                      name={optionsPolinomials.max}
                      value={polinomials.max}
@@ -581,6 +666,7 @@ export default class Line extends Component {
           <div className="form-group config-option">
             <label>Count X</label>
               <input type="number"
+                     data-type="integer"
                      className="form-control"
                      name={optionsPolinomials.number}
                      value={polinomials.number}
@@ -724,36 +810,6 @@ export default class Line extends Component {
     )
   }
 
-  renderInterestingFactsModeConfiguration() {
-    const { interestingFacts } = this.state.configurations;
-    return (
-      <div className="interesting-facts">
-        <div className="radio">
-          <label><input type="radio"
-                        name={optionsInterestingFacts.temperature}
-                        checked={interestingFacts.current === optionsInterestingFacts.temperature}
-                        onChange={this.onInterestingFactsRadioChange}
-                        />Temperature</label>
-        </div>
-        <div className="radio">
-          <label><input type="radio"
-                        name={optionsInterestingFacts.population}
-                        checked={interestingFacts.current === optionsInterestingFacts.population}
-                        onChange={this.onInterestingFactsRadioChange}
-                        />Population</label>
-        </div>
-        <div className="radio">
-          <label><input type="radio"
-                        name={optionsInterestingFacts.itGiants}
-                        checked={interestingFacts.current === optionsInterestingFacts.itGiants}
-                        onChange={this.onInterestingFactsRadioChange}
-                        />IT Giants</label>
-        </div>
-
-      </div>
-    )
-  }
-
   renderBasicConfigTrigonometric(trigonometric) {
     return (
       <div className="row basic-config">
@@ -761,6 +817,7 @@ export default class Line extends Component {
           <div className="form-group config-option">
             <label>Min X</label>
               <input type="number"
+                     data-type="min"
                      className="form-control"
                      name={optionsTrigonometric.min}
                      value={trigonometric.min}
@@ -771,6 +828,7 @@ export default class Line extends Component {
           <div className="form-group config-option">
             <label>Max X</label>
               <input type="number"
+                     data-type="max"
                      className="form-control"
                      name={optionsTrigonometric.max}
                      value={trigonometric.max}
@@ -781,6 +839,7 @@ export default class Line extends Component {
           <div className="form-group config-option">
             <label>Count X</label>
               <input type="number"
+                     data-type="integer"
                      className="form-control"
                      name={optionsTrigonometric.number}
                      value={trigonometric.number}
@@ -815,6 +874,36 @@ export default class Line extends Component {
         </div>
       </div>
     );
+  }
+
+  renderInterestingFactsModeConfiguration() {
+    const { interestingFacts } = this.state.configurations;
+    return (
+      <div className="interesting-facts">
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.temperature}
+                        checked={interestingFacts.current === optionsInterestingFacts.temperature}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />Temperature</label>
+        </div>
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.population}
+                        checked={interestingFacts.current === optionsInterestingFacts.population}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />Population</label>
+        </div>
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.itGiants}
+                        checked={interestingFacts.current === optionsInterestingFacts.itGiants}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />IT Giants</label>
+        </div>
+
+      </div>
+    )
   }
 
   renderConfigurationsArea() {

@@ -128,3 +128,77 @@ export const clusteringSimulation = {
       }]
     }]
 };
+
+export const primeFactorization = {
+  chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+  },
+  title: {
+      text: 'Simple Clustering Simulation'
+  },
+  subtitle: {
+      text: 'Lalala subtitle'
+  },
+  tooltip: {
+      enabled: true,
+      pointFormat: 'Count: <b>{point.y}</b><br/>' +
+                   'Percent: <b>{point.percentage:.1f}%</b>'
+  },
+  legend: {
+      enabled: true
+  },
+  plotOptions: {
+      pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          showInLegend: true,
+          dataLabels: {
+              enabled: false
+          },
+      },
+      series: {
+          animation: true
+      }
+  },
+  series: []
+}
+
+export const irrationalAnalysis = {
+  chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+  },
+  title: {
+      text: 'Distibution of digits of the number Pi'
+  },
+  subtitle: {
+      text: 'THis is subtitle'
+  },
+  tooltip: {
+      enabled: true,
+      pointFormat: 'Count: <b>{point.y}</b><br/>' +
+                   'Percent: <b>{point.percentage:.1f}%</b>'
+  },
+  legend: {
+      enabled: true
+  },
+  plotOptions: {
+      pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          showInLegend: true,
+          dataLabels: {
+              enabled: false
+          },
+      },
+      series: {
+          animation: true
+      }
+  },
+  series: []
+}

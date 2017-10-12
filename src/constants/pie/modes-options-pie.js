@@ -1,7 +1,10 @@
 export const modes = {
   pureRandom: "Pure Random",
   configurableRandom: "Configurable Random",
-  clusteringSimulation: "Clustering Simulation"
+  clusteringSimulation: "Clustering Simulation",
+  primeFactorization: "Prime Factorization",
+  irrationalAnalysis: "Irrational Analysis",
+  interestingFacts: "Interesting facts"
 }
 
 export const optionsPureRandom = {
@@ -23,6 +26,14 @@ export const optionsClusteringSimulation = {
   clusterNumber: "clusterNumber",
   isRunning: "isRunning",
   frequency: "frequency"
+}
+
+export const optionsPrimeFactorization = {
+  input: "input"
+}
+
+export const optionsIrrationalAnalysis = {
+  input: "input"
 }
 
 export const initialState = {
@@ -47,6 +58,12 @@ export const initialState = {
       clusterNumber: 5,
       frequency: 3,
       isRunning: false
+    },
+    primeFactorization: {
+      input: 120
+    },
+    irrationalAnalysis: {
+      input: 10
     }
   }
 }

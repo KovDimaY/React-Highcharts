@@ -6,7 +6,9 @@ import Chart from './chart-abstract'
 import {
   pureRandom,
   configurableRandom,
-  clusteringSimulation
+  clusteringSimulation,
+  primeFactorization,
+  irrationalAnalysis
 } from '../../constants/pie/default-options-pie'
 
 import {
@@ -14,15 +16,21 @@ import {
   initialState,
   optionsPureRandom,
   optionsConfigurableRandom,
-  optionsClusteringSimulation
+  optionsClusteringSimulation,
+  optionsPrimeFactorization,
+  optionsIrrationalAnalysis
 } from '../../constants/pie/modes-options-pie'
 
 import {
   generateSeriesForPureRandom,
   generateSeriesForConfigurableRandom,
   generateSeriesForClusteringSimulation,
-  newPointToClusteringSimulation
+  newPointToClusteringSimulation,
+  generateSeriesForPrimeFactorization,
+  generateSeriesForIrrationalAnalysis
 } from '../../constants/pie/data-helpers-pie'
+
+import { limitNumericalInput } from '../../constants/shared/helpers'
 
 export default class Pie extends Component {
   constructor(props) {
@@ -33,9 +41,13 @@ export default class Pie extends Component {
     this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this);
     this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
     this.updateClusteringSimulationConfiguration = this.updateClusteringSimulationConfiguration.bind(this);
+    this.updatePrimeFactorizationConfiguration = this.updatePrimeFactorizationConfiguration.bind(this);
+    this.updateIrrationalAnalysisConfiguration = this.updateIrrationalAnalysisConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
     this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
     this.onClusteringSimulationInputChange = this.onClusteringSimulationInputChange.bind(this);
+    this.onPrimeFactorizationInputChange = this.onPrimeFactorizationInputChange.bind(this);
+    this.onIrrationalAnalysisInputChange = this.onIrrationalAnalysisInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -65,6 +77,22 @@ export default class Pie extends Component {
 
     this.setState({ options }, () => {
       this.updateClusteringSimulationConfiguration();
+    });
+  }
+
+  initPrimeFactorizationMode() {
+    const options = primeFactorization;
+
+    this.setState({ options }, () => {
+      this.updatePrimeFactorizationConfiguration();
+    });
+  }
+
+  initIrrationalAnalysisMode() {
+    const options = irrationalAnalysis;
+
+    this.setState({ options }, () => {
+      this.updateIrrationalAnalysisConfiguration();
     });
   }
 
@@ -127,6 +155,28 @@ export default class Pie extends Component {
     }
   }
 
+  updatePrimeFactorizationConfiguration() {
+    const { primeFactorization } = this.state.configurations;
+    const { options } = this.state;
+
+    options.series = generateSeriesForPrimeFactorization(primeFactorization);
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
+  updateIrrationalAnalysisConfiguration() {
+    const { irrationalAnalysis } = this.state.configurations;
+    const { options } = this.state;
+
+    options.series = generateSeriesForIrrationalAnalysis(irrationalAnalysis);
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
   addPointsToClusteringSimulation() {
     const { configurations, options: oldOptions } = this.state;
     const {
@@ -160,6 +210,14 @@ export default class Pie extends Component {
         this.initClusteringSimulationMode();
         break;
       }
+      case modes.primeFactorization: {
+        this.initPrimeFactorizationMode();
+        break;
+      }
+      case modes.irrationalAnalysis: {
+        this.initIrrationalAnalysisMode();
+        break;
+      }
       default: {
         console.log("This mode is not supported yet");
       }
@@ -180,11 +238,14 @@ export default class Pie extends Component {
   onConfigurableRandomInputChange(event) {
     const { configurations } = this.state;
     if (event.target.dataset.type === "positive") {
-      if (Number(event.target.value) <= 1) {
-        configurations.configurableRandom[event.target.name] = 1;
-      } else {
-        configurations.configurableRandom[event.target.name] = Math.floor(Number(event.target.value));
-      }
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        1,
+        20,
+        true
+      );
     }
 
     this.setState({ configurations });
@@ -192,12 +253,65 @@ export default class Pie extends Component {
 
   onClusteringSimulationInputChange(event) {
     const { configurations } = this.state;
+    if (event.target.dataset.type === "max-number") {
+      limitNumericalInput(
+        configurations.clusteringSimulation,
+        event.target.name,
+        event.target.value,
+        1,
+        1000000,
+        false
+      );
+    } else if (event.target.dataset.type === "clusters") {
+      limitNumericalInput(
+        configurations.clusteringSimulation,
+        event.target.name,
+        event.target.value,
+        1,
+        10,
+        true
+      );
+    } else if (event.target.dataset.type === "frequency") {
+      limitNumericalInput(
+        configurations.clusteringSimulation,
+        event.target.name,
+        event.target.value,
+        1,
+        5,
+        true
+      );
+    }
+
+    this.setState({ configurations });
+  }
+
+  onPrimeFactorizationInputChange(event) {
+    const { configurations } = this.state;
     if (event.target.dataset.type === "positive") {
-      if (Number(event.target.value) <= 1) {
-        configurations.clusteringSimulation[event.target.name] = 1;
-      } else {
-        configurations.clusteringSimulation[event.target.name] = Math.floor(Number(event.target.value));
-      }
+      limitNumericalInput(
+        configurations.primeFactorization,
+        event.target.name,
+        event.target.value,
+        2,
+        1000000000,
+        true
+      );
+    }
+
+    this.setState({ configurations });
+  }
+
+  onIrrationalAnalysisInputChange(event) {
+    const { configurations } = this.state;
+    if (event.target.dataset.type === "positive") {
+      limitNumericalInput(
+        configurations.irrationalAnalysis,
+        event.target.name,
+        event.target.value,
+        1,
+        1000000,
+        true
+      );
     }
 
     this.setState({ configurations });
@@ -214,12 +328,12 @@ export default class Pie extends Component {
           <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.clusteringSimulation}</a></li>
           <li className="divider"></li>
-          <li className="dropdown-header">Text Analysis</li>
-          // <li><a onClick={this.dropdownClickHandler}>{modes.symbolsAnalysis}</a></li>
-          // <li><a onClick={this.dropdownClickHandler}>{modes.wordsAnalysis}</a></li>
+          <li className="dropdown-header">Analysis Section</li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.primeFactorization}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.irrationalAnalysis}</a></li>
           <li className="divider"></li>
           <li className="dropdown-header">Real World Data</li>
-          // <li><a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a></li>
         </ul>
       </div>
     )
@@ -313,7 +427,7 @@ export default class Pie extends Component {
         <div className="form-group config-option">
           <label>Max number</label>
             <input type="number"
-                   data-type="positive"
+                   data-type="max-number"
                    className="form-control"
                    name={optionsClusteringSimulation.maxNumber}
                    value={clusteringSimulation.maxNumber}
@@ -322,7 +436,7 @@ export default class Pie extends Component {
         <div className="form-group config-option">
           <label>Number of clusters</label>
             <input type="number"
-                   data-type="positive"
+                   data-type="clusters"
                    className="form-control"
                    name={optionsClusteringSimulation.clusterNumber}
                    value={clusteringSimulation.clusterNumber}
@@ -331,7 +445,7 @@ export default class Pie extends Component {
         <div className="form-group config-option">
           <label>Frequency</label>
             <input type="number"
-                   data-type="positive"
+                   data-type="frequency"
                    className="form-control"
                    name={optionsClusteringSimulation.frequency}
                    value={clusteringSimulation.frequency}
@@ -362,6 +476,54 @@ export default class Pie extends Component {
     );
   }
 
+  renderPrimeFactorizationModeConfiguration() {
+    const { primeFactorization } = this.state.configurations;
+    return (
+      <div className="prime-factorization">
+        <div className="form-group config-option">
+          <label>Number for factorization</label>
+            <input type="number"
+                   data-type="positive"
+                   className="form-control"
+                   name={optionsPrimeFactorization.input}
+                   value={primeFactorization.input}
+                   onChange={this.onPrimeFactorizationInputChange}/>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updatePrimeFactorizationConfiguration}>
+          Apply
+        </button>
+      </div>
+    );
+  }
+
+  renderIrrationalAnalysisModeConfiguration() {
+    const { irrationalAnalysis } = this.state.configurations;
+    return (
+      <div className="irrational-analysis">
+        <div className="form-group config-option">
+          <label>Number of digits</label>
+            <input type="number"
+                   data-type="positive"
+                   className="form-control"
+                   name={optionsIrrationalAnalysis.input}
+                   value={irrationalAnalysis.input}
+                   onChange={this.onIrrationalAnalysisInputChange}/>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updateIrrationalAnalysisConfiguration}>
+          Apply
+        </button>
+      </div>
+    );
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -373,6 +535,12 @@ export default class Pie extends Component {
       }
       case modes.clusteringSimulation: {
         return this.renderClusteringSimulationModeConfiguration();
+      }
+      case modes.primeFactorization: {
+        return this.renderPrimeFactorizationModeConfiguration();
+      }
+      case modes.irrationalAnalysis: {
+        return this.renderIrrationalAnalysisModeConfiguration();
       }
       default: {
         return null;
