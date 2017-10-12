@@ -1,3 +1,12 @@
+import {
+  interestingFactsOne,
+  interestingFactsTwo,
+  interestingFactsThree,
+  interestingFactsFour,
+  interestingFactsFive,
+  interestingFactsSix
+} from '../../constants/pie/default-options-pie'
+
 export const modes = {
   pureRandom: "Pure Random",
   configurableRandom: "Configurable Random",
@@ -32,8 +41,15 @@ export const optionsPrimeFactorization = {
   input: "input"
 }
 
-export const optionsIrrationalAnalysis = {
-  input: "input"
+export const optionsIrrationalAnalysis = optionsPrimeFactorization;
+
+export const optionsInterestingFacts = {
+  first: "first",
+  second: "second",
+  third: "third",
+  fourth: "fourth",
+  fifth: "fifth",
+  sixth: "sixth",
 }
 
 export const initialState = {
@@ -64,6 +80,15 @@ export const initialState = {
     },
     irrationalAnalysis: {
       input: 10
+    },
+    interestingFacts: {
+      first: interestingFactsOne,
+      second: interestingFactsTwo,
+      third: interestingFactsThree,
+      fourth: interestingFactsFour,
+      fifth: interestingFactsFive,
+      sixth: interestingFactsSix,
+      current: optionsInterestingFacts.first
     }
   }
 }

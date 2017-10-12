@@ -23,6 +23,13 @@
     overflow:auto;
     border: 1px solid rgba(128, 128, 128, 0.50);
 
+    .interesting-facts {
+      padding-top: 5px;
+
+      .radio {
+        margin-bottom: 30px;
+      }
+    }
     .configurable-random {
       margin-top: 30px;
       .config-option {
@@ -79,6 +86,11 @@
       margin-left: 33%;
       margin-top: 30px;
     }
+    .interesting-facts {
+      margin-left: 40%;
+      margin-top: 30px;
+    }
+
     .apply-button {
       width: 40%;
       margin-left: 30%;
@@ -90,6 +102,11 @@
       margin-left: 40px;
       margin-top: 30px;
     }
+    .interesting-facts {
+      margin-left: 40px;
+      margin-top: 30px;
+    }
+
     .apply-button {
       width: 70%;
       margin-left: 15%;
@@ -100,6 +117,11 @@
       margin-left: 80px;
       margin-top: 30px;
     }
+    .interesting-facts {
+      margin-left: 80px;
+      margin-top: 30px;
+    }
+
     .apply-button {
       width: 60%;
       margin-left: 20%;
@@ -110,16 +132,15 @@
       margin-left: 110px;
       margin-top: 30px;
     }
+    .interesting-facts {
+      margin-left: 100px;
+      margin-top: 30px;
+    }
 
     .apply-button {
       width: 40%;
       margin-left: 30%;
     }
-  }
-
-  .coefficient{
-    padding: 15px;
-    padding-bottom: 0;
   }
 
   .chart-area {

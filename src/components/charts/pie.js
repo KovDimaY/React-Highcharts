@@ -8,7 +8,10 @@ import {
   configurableRandom,
   clusteringSimulation,
   primeFactorization,
-  irrationalAnalysis
+  irrationalAnalysis,
+  interestingFactsOne,
+  interestingFactsTwo,
+  interestingFactsThree
 } from '../../constants/pie/default-options-pie'
 
 import {
@@ -18,7 +21,8 @@ import {
   optionsConfigurableRandom,
   optionsClusteringSimulation,
   optionsPrimeFactorization,
-  optionsIrrationalAnalysis
+  optionsIrrationalAnalysis,
+  optionsInterestingFacts
 } from '../../constants/pie/modes-options-pie'
 
 import {
@@ -48,6 +52,7 @@ export default class Pie extends Component {
     this.onClusteringSimulationInputChange = this.onClusteringSimulationInputChange.bind(this);
     this.onPrimeFactorizationInputChange = this.onPrimeFactorizationInputChange.bind(this);
     this.onIrrationalAnalysisInputChange = this.onIrrationalAnalysisInputChange.bind(this);
+    this.onInterestingFactsRadioChange = this.onInterestingFactsRadioChange.bind(this);
   }
 
   componentDidMount() {
@@ -94,6 +99,14 @@ export default class Pie extends Component {
     this.setState({ options }, () => {
       this.updateIrrationalAnalysisConfiguration();
     });
+  }
+
+  initInterestingFactsMode() {
+    const options = interestingFactsOne;
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
   }
 
   updatePureRandomConfiguration() {
@@ -218,8 +231,12 @@ export default class Pie extends Component {
         this.initIrrationalAnalysisMode();
         break;
       }
+      case modes.interestingFacts: {
+        this.initInterestingFactsMode();
+        break;
+      }
       default: {
-        console.log("This mode is not supported yet");
+        console.log("This is impossible to achieve");
       }
     }
     this.setState({ currentMode: mode, configurations });
@@ -315,6 +332,17 @@ export default class Pie extends Component {
     }
 
     this.setState({ configurations });
+  }
+
+  onInterestingFactsRadioChange(event) {
+    const { configurations } = this.state;
+    let options = configurations.interestingFacts[event.target.name];
+
+    configurations.interestingFacts.current = event.target.name;
+
+    this.setState({ configurations, options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
   }
 
   renderOptionsDropdown() {
@@ -524,6 +552,57 @@ export default class Pie extends Component {
     );
   }
 
+  renderInterestingFactsModeConfiguration() {
+    const { interestingFacts } = this.state.configurations;
+    return (
+      <div className="interesting-facts">
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.first}
+                        checked={interestingFacts.current === optionsInterestingFacts.first}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />Earth Composition</label>
+        </div>
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.second}
+                        checked={interestingFacts.current === optionsInterestingFacts.second}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />Earth Population</label>
+        </div>
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.third}
+                        checked={interestingFacts.current === optionsInterestingFacts.third}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />Earth Atmosphere</label>
+        </div>
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.fourth}
+                        checked={interestingFacts.current === optionsInterestingFacts.fourth}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />Earth Chemistry</label>
+        </div>
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.fifth}
+                        checked={interestingFacts.current === optionsInterestingFacts.fifth}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />Human Chemistry</label>
+        </div>
+        <div className="radio">
+          <label><input type="radio"
+                        name={optionsInterestingFacts.sixth}
+                        checked={interestingFacts.current === optionsInterestingFacts.sixth}
+                        onChange={this.onInterestingFactsRadioChange}
+                        />Modern Life Time</label>
+        </div>
+
+      </div>
+    )
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -541,6 +620,9 @@ export default class Pie extends Component {
       }
       case modes.irrationalAnalysis: {
         return this.renderIrrationalAnalysisModeConfiguration();
+      }
+      case modes.interestingFacts: {
+        return this.renderInterestingFactsModeConfiguration();
       }
       default: {
         return null;
