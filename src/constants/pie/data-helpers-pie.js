@@ -85,16 +85,65 @@ export function newPointToClusteringSimulation(options, maxNumber, clusterNumber
   return options;
 }
 
-export function generateSeriesForPrimeFactorization(options) {
-  console.log("options from generateSeriesForPrimeFactorization", options)
+const primeFactors = function (number) {
+	if (number === 0) return [-1];
 
-  return [];
+	var factors = [];
+  var divisor = 2;
+
+	if (Number.isInteger(number)) {
+		if (number < 0) number *= -1;
+
+    while (number > 1) {
+  		if (number % divisor === 0) {
+       		factors.push(divisor);
+       		number = number / divisor;
+  		} else {
+    			divisor++;
+  		}
+		}
+	}
+
+	return factors;
 }
 
-export function generateSeriesForIrrationalAnalysis(options) {
+export function generateSeriesForPrimeFactorization(options, params) {
+  const accumulation = {};
+  const factors = primeFactors(params.input);
+
+  factors.forEach((factor) => {
+    if (accumulation[factor]) {
+      accumulation[factor] += 1;
+    } else {
+      accumulation[factor] = 1;
+    }
+  });
+
+  const data = [];
+  const keys = Object.keys(accumulation);
+  for (let i = 0; i < keys.length; i++) {
+    const currentName = keys[i];
+    const value = accumulation[keys[i]];
+    data.push({
+      name: currentName,
+      y: value
+    });
+  }
+
+  options.subtitle.text = `Prime factors of ${params.input}`;
+  options.series = [{
+    name: 'Factors Distribution',
+    colorByPoint: true,
+    data
+  }];
+
+  return options;
+}
+
+export function generateSeriesForIrrationalAnalysis(options, params) {
   const accumulation = {};
 
-  for (let i = 0; i < options.input; i++) {
+  for (let i = 0; i < params.input; i++) {
     if (accumulation[pi[i]]) {
       accumulation[pi[i]] += 1;
     } else {
@@ -113,9 +162,13 @@ export function generateSeriesForIrrationalAnalysis(options) {
     });
   }
 
-  return [{
+  options.subtitle.text = `Distribution of the first ${params.input}
+                          ${params.input === 1 ? 'digit' : 'digits'} of the number Pi`;
+  options.series = [{
     name: 'Digits Distribution',
     colorByPoint: true,
     data
   }];
+
+  return options;
 }

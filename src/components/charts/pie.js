@@ -157,9 +157,9 @@ export default class Pie extends Component {
 
   updatePrimeFactorizationConfiguration() {
     const { primeFactorization } = this.state.configurations;
-    const { options } = this.state;
+    const { options: oldOptions } = this.state;
 
-    options.series = generateSeriesForPrimeFactorization(primeFactorization);
+    const options = generateSeriesForPrimeFactorization(oldOptions, primeFactorization);
 
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -168,9 +168,9 @@ export default class Pie extends Component {
 
   updateIrrationalAnalysisConfiguration() {
     const { irrationalAnalysis } = this.state.configurations;
-    const { options } = this.state;
+    const { options: oldOptions } = this.state;
 
-    options.series = generateSeriesForIrrationalAnalysis(irrationalAnalysis);
+    const options = generateSeriesForIrrationalAnalysis(oldOptions, irrationalAnalysis);
 
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
