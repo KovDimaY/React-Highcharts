@@ -193,6 +193,8 @@ export default class Bar extends Component {
 
     options.series = generateSeriesForSymbolsAnalysis(points);
     options.xAxis.categories = categories;
+    options.title.text = 'Characters Analysis';
+    options.subtitle.text = `${limit} the most frequent characters`;
 
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -208,6 +210,8 @@ export default class Bar extends Component {
 
     options.series = generateSeriesForWordsAnalysis(words);
     options.xAxis.categories = categories;
+    options.title.text = 'Words Analysis';
+    options.subtitle.text = `${limit} the most frequent words`;
 
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -618,7 +622,7 @@ export default class Bar extends Component {
         <div className="row basic-config">
           <div className="col-md-6">
             <div className="form-group config-option">
-              <label>Number of Chars</label>
+              <label>Number of chars</label>
                 <input type="number"
                        className="form-control"
                        name={optionsSymbolsAnalysis.limit}
@@ -628,7 +632,7 @@ export default class Bar extends Component {
           </div>
           <div className="col-md-6">
             <div className="form-group config-option">
-              <label>Filter Next Chars</label>
+              <label>Filter next chars</label>
                 <input type="text"
                        className="form-control"
                        name={optionsSymbolsAnalysis.filter}
@@ -669,13 +673,13 @@ export default class Bar extends Component {
         </div>
 
         <div className="form-group config-option">
-          <label>Filter Next Chars</label>
+          <label>Filter next words</label>
           <TagsInput value={wordsAnalysis.filter}
                      onChange={this.onWordsAnalysisTagsChange} />
         </div>
 
         <div className="form-group config-option">
-          <label>Number of Chars</label>
+          <label>Number of words</label>
             <input type="number"
                    className="form-control"
                    name={optionsWordsAnalysis.limit}

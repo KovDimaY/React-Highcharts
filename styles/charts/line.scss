@@ -3,6 +3,7 @@
 
   .dropdown {
     margin-bottom: 20px;
+
     .btn {
       width: 80%;
       margin-left: 10%;
@@ -23,17 +24,20 @@
     overflow:auto;
     border: 1px solid rgba(128, 128, 128, 0.50);
 
-    .interesting-facts {
-      .radio {
-        margin-bottom: 20px;
-      }
+    .pure-random {
+      margin-top: 40px;
     }
     .configurable-random {
       margin-top: 30px;
+
       .config-option {
         width: 60%;
         margin-left: 20%;
       }
+    }
+    .stock-simulation {
+      width: 90%;
+      margin: 5%;
     }
     .functions {
       .basic-config {
@@ -52,9 +56,12 @@
         margin-bottom: -20px;
       }
     }
-    .stock-simulation {
-      width: 90%;
-      margin: 5%;
+    .interesting-facts {
+      margin-top: 50px;
+
+      .radio {
+        margin-bottom: 30px;
+      }
     }
     .apply-button {
       position: absolute;
@@ -82,11 +89,6 @@
   @media (min-width: 0px) {
     .pure-random {
       margin-left: 33%;
-      margin-top: 30px;
-    }
-    .interesting-facts {
-      margin-left: 40%;
-      margin-top: 30px;
     }
     .functions {
       .config-option {
@@ -98,20 +100,24 @@
         display: inline-block;
       }
     }
+    .interesting-facts {
+      margin-left: 40%;
+    }
     .apply-button {
       width: 40%;
       margin-left: 30%;
+    }
+    .configuration-area {
+      margin-bottom: 20px;
+    }
+    .chart-area {
+      border: none;
     }
   }
 
   @media (min-width: 768px) {
     .pure-random {
       margin-left: 40px;
-      margin-top: 30px;
-    }
-    .interesting-facts {
-      margin-left: 50px;
-      margin-top: 30px;
     }
     .functions {
       .config-option {
@@ -124,19 +130,24 @@
         margin-left: 0;
       }
     }
+    .interesting-facts {
+      margin-left: 50px;
+    }
     .apply-button {
       width: 60%;
       margin-left: 20%;
     }
+    .configuration-area {
+      margin-bottom: 0;
+    }
+    .chart-area {
+      border: 1px solid rgba(128, 128, 128, 0.50);
+    }
   }
+
   @media (min-width: 992px) {
     .pure-random {
       margin-left: 80px;
-      margin-top: 30px;
-    }
-    .interesting-facts {
-      margin-left: 90px;
-      margin-top: 30px;
     }
     .functions {
       .config-option {
@@ -148,6 +159,9 @@
         display: inline-block;
       }
     }
+    .interesting-facts {
+      margin-left: 90px;
+    }
     .apply-button {
       width: 40%;
       margin-left: 30%;
@@ -156,11 +170,6 @@
   @media (min-width: 1200px) {
     .pure-random {
       margin-left: 110px;
-      margin-top: 30px;
-    }
-    .interesting-facts {
-      margin-left: 130px;
-      margin-top: 30px;
     }
     .functions {
       .config-option {
@@ -172,23 +181,19 @@
         display: inline-block;
       }
     }
-
+    .interesting-facts {
+      margin-left: 130px;
+    }
     .apply-button {
       width: 40%;
       margin-left: 30%;
     }
   }
 
-
   .coefficient{
     padding: 15px;
     padding-bottom: 0;
   }
-
-  .chart-area {
-    border: 1px solid rgba(128, 128, 128, 0.50);
-  }
-
   h3 {
     text-align: center;
   }

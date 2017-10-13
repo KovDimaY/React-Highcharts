@@ -10,18 +10,18 @@ export default class Home extends Component {
             <p><a href="https://www.highcharts.com/">Highcharts</a> is a charting library written in pure JavaScript, offering an easy way of adding
                 interactive charts to your web site or web application. Highcharts currently supports line,
                 spline, area, areaspline, column, bar, pie, scatter, angular gauges, arearange, areasplinerange,
-                columnrange, bubble, box plot, error bars, funnel, waterfall and polar chart types.</p>
+                columnrange, bubble, box plot, error bars, funnel, waterfall and polar chart types.
 
-            <p>It works in all modern mobile and desktop browsers including the iPhone/iPad
+								It works in all modern mobile and desktop browsers including the iPhone/iPad
                 and Internet Explorer from version 6. On iOS and Android, multitouch support
                 provides a seamless user experience. Standard browsers use SVG for the graphics rendering.
                 In legacy Internet Explorer graphics are drawn using VML.</p>
 
             <p>Here I tried to use some of the most important and popular charts as React.js components.
-                Also in this application I used the concept of
-                <a href="https://webpack.github.io/docs/multiple-entry-points.html"> multiple entry points </a>
-                in my webpack config for the first time. So this app helped me to learn a lot of new stuff!
-                Hope it will also help somebody else. :)</p>
+							I used many different configurations of the charts in different
+							modes to make the application interesting and useful at the same time. This app helped me to
+							learn a lot of new stuff and save some knowledge so later it will be easier to use some features
+							of React or Highcharts! Hope it will also help somebody else. :)</p>
 
 							<a className="btn btn-lg btn-success read-more" href="#charts-info" role="button">Read More About Charts</a>
           </div>
