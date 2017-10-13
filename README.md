@@ -1,7 +1,7 @@
 # React-Highcharts
 This project was created to practice my knowledge of React.js and to integrate highcharts as react components in application with Express.js back-end. Also I tried to collect all my knowledge about Highcharts and how to work with them in one place, where it will be not only useful but also interesting to see results.
 
-You can try it here:
+You can try it here: https://react-highcharts-practice.herokuapp.com/
 
 
 ### Content
