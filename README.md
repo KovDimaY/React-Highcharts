@@ -1,163 +1,59 @@
 # React-Highcharts
-This project was created to practice my knowledge of React.js and to integrate highcharts as react components in application with Express.js back-end.
+This project was created to practice my knowledge of React.js and to integrate highcharts as react components in application with Express.js back-end. Also I tried to collect all my knowledge about Highcharts and how to work with them in one place, where it will be not only useful but also interesting to see results.
+
+You can try it here:
+
 
 ### Content
-There are several Highcharts converted from pure Javascript to React.js components:
+There are several Highcharts converted from pure Javascript to React.js components (development is still in progress):
 1. Line Chart
 2. Bar Chart
 3. Pie Chart
-4. Bubble Chart
-5. Scatter chart
-6. Gauge Chart
 
-Also there is a combination of charts implemented on the same plane and cool clock  created on base of the gauge chart. Later I will try to implement possibility of modification of the data that is used by charts.
+Each chart has a page where the user can try different modes to play with representation. The modes have 3 global sections united by common behavior:
+
+**First** is about random, where the data is generated using random numbers. The idea is to try different configurations of the chart itself and to see how different data looks like when represented by the current type of chart.
+
+**Second** is about analysis, where the data is provided by the user and the chart is used to represent some results of the analysis to the user. The idea is to make chart useful or interesting.
+
+**Third** is about interesting information, where the data is taken from different sources on the internet. The idea is to show some interesting facts using a type of chart that makes this data the most understandable and representable.
+
+
 
 ### Screenshots
-![screenshot 1](https://cloud.githubusercontent.com/assets/26466644/25593089/86dabf66-2ebb-11e7-87ea-8703c913024f.png)
+1) Main Page Layout
+![image](https://user-images.githubusercontent.com/26466644/31556335-e6b3d980-b044-11e7-8707-249399c11a3d.png)
 ![screenshot 2](https://cloud.githubusercontent.com/assets/26466644/25593093/88d33a50-2ebb-11e7-8695-976ef01c6bc2.png)
 ![screenshot 3](https://cloud.githubusercontent.com/assets/26466644/25593096/8b2b9fe0-2ebb-11e7-9ced-760bc0fa1f5e.png)
 
+2) Line Chart (Pure Random Mode)
+![image](https://user-images.githubusercontent.com/26466644/31556398-2945c1be-b045-11e7-8077-329a5a3b281c.png)
+
+3) Bar chart (Symbols Analysis Mode)
+![image](https://user-images.githubusercontent.com/26466644/31556451-662a901e-b045-11e7-812d-57294691c4b9.png)
+
+4) Pie Chart (Interesting Facts Mode)
+![image](https://user-images.githubusercontent.com/26466644/31556497-9e2006d4-b045-11e7-8266-3c85ae35713f.png)
 
 
 
-## React + Express little tutorial
-1. Create folder for your project<br>
+### Deployment to Heroku
 
-2. Inside this folder create Express project:
+Make sure you have Node.js and the Heroku CLI installed amd write the next commands:
 ```
-$ express --view=<view>
-```
-where you have to put your view engine on the place of ```<view>```.
-For example you can write ```$ express --view=ejs``` to create a project with ```ejs``` view engine.<br>
-- *PS: to be able to run this command, you need to have express generator installed globally on your computer. Do do this you have to execute in command line* ```$ npm install express-generator -g```. *For more information about express generator you can visit this page:* https://expressjs.com/en/starter/generator.html 
-<br>
-
-3. Install all node modules that are needed:
-```
+$ git clone git@github.com:###-your app-###
+$ cd ###-your app-###
 $ npm install
-```
-<br>
-
-4. Install React:
-```
-$ npm install react --save
-```
-<br>
-
-5. Install ReactDOM:
-```
-$ npm install react-dom --save
-```
-<br>
-
-6. Install webpack:
-```
-$ npm install webpack --save-dev
-```
-- *PS: later you will need to have webpack installed globally on your computer. Do do this you have to execute in command line* ```$ npm install webpack -g```.
-<br>
-
-7. Install Babel Core:
-```
-$ npm install babel-core --save-dev
-```
-<br>
-
-8. Install Babel Loader:
-```
-$ npm install babel-loader --save-dev
-```
-<br>
-
-9. Install Babel Presets:
-```
-$ npm install babel-preset-react --save-dev
-$ npm install babel-preset-es2015 --save-dev
-```
-<br>
-
-10. Create **webpack.config.js** file inside project folder:
-```javascript
-var webpack = require('webpack')
-var path = require('path')
-
-module.exports = {
-    entry: {
-        app: './public/app/App.js'
-    },
-    output:{
-        filename: 'public/build/bundle.js',
-        sourceMapFilename: 'public/build/bundle.map'
-    },
-    devtool: '#source-map',
-    module: {
-       loaders: [
-           {
-               test: /\.jsx?$/,
-               exclude: /(node_modules|bower_components)/,
-               loader: 'babel-loader',
-               query:{
-                   presets: ['react','es2015']
-               }
-           }
-       ]
-    }
-}
-```
-<br>
-
-11. Create **app** folder with react components and configure paths:
-- *PS: The simplest component that is rendering into* ```div``` *with* ```id="app"``` *will look like this:*
-```javascript
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-
-class App extends Component {
-	render() {
-    return(
-        <div>
-          <h1>Hello world!</h1>
-        </div>
-    )
-	}
-}
-
-ReactDOM.render(<App />, document.getElementById('app'))
-```
-<br>
-
-12. Import your components inside view:
-- *PS: The simplest component that use previous component will look like this:*
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-  <meta charset="utf-8">
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-
-  <body>
-  	<div id="app"></div>
-
-    <script type="text/javascript" src="/build/bundle.js"></script> 
-  </body>
-</html>
-```
-<br>
-
-13. Run webpack to compile your react components and wach their changes:
-```
-$ webpack -w
-```
-<br>
-
-14. To run the app write in other command line tab:
-```
 $ npm start
 ```
-<br>
 
-15. Open in your browser on **http://localhost:3000/** and enjoy your app with react component and express back-end
+After this step your app should be running locally, it means that everything is ok and the app is ready for deployment. So to deploy it to Heroku, write the next commands:
 
-#### Good luck! :)
+```
+$ heroku create
+$ git push heroku master
+$ heroku open
+```
+Congratulations, your app is deployed! :D
+
+For more details, visit https://devcenter.heroku.com/articles/getting-started-with-nodejs
