@@ -9,9 +9,7 @@ import {
   clusteringSimulation,
   primeFactorization,
   irrationalAnalysis,
-  interestingFactsOne,
-  interestingFactsTwo,
-  interestingFactsThree
+  interestingFactsOne
 } from '../../constants/pie/default-options-pie'
 
 import {

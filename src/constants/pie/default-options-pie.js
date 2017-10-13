@@ -353,7 +353,7 @@ export const interestingFactsTwo = {
       text: 'Source: <a href="https://www.thoughtco.com/continents-by-area-and-size-ranking-1435142">ThoughtCo.</a>'
   },
   tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      pointFormat: '{series.name}: <b>{point.y}</b> people'
   },
   plotOptions: {
       pie: {
@@ -618,7 +618,7 @@ export const interestingFactsSix = {
       text: 'Human Life Time'
   },
   legend: {
-      enabled: true
+      enabled: false
   },
   tooltip: {
       pointFormat: 'Absolute: <b>{point.y} years</b><br/> Percentage: <b>{point.percentage:.2f}%</b>'

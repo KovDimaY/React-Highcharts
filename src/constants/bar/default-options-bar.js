@@ -154,7 +154,7 @@ export const symbolsAnalysis = {
         categories: []
     },
     legend: {
-        enabled: true
+        enabled: false
     },
     yAxis: {
         title: {
