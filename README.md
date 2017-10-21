@@ -35,6 +35,32 @@ Each chart has a page where the user can try different modes to play with repres
 4) Pie Chart (Interesting Facts Mode)
 ![image](https://user-images.githubusercontent.com/26466644/31556497-9e2006d4-b045-11e7-8266-3c85ae35713f.png)
 
+### Setup the project
+
+##### Clone the project: 
+```
+git clone https://github.com/KovDimaY/React-Highcharts.git
+```
+##### Open it:
+```
+cd React-Highcharts
+```
+##### Install all required packages:
+```
+npm install
+```
+##### Compile React.js components:
+```
+webpack -w
+```
+##### Run the application:
+```
+npm run start
+```
+
+##### Open in browser http://localhost:3000/
+
+<br>
 
 
 ### Deployment to Heroku
