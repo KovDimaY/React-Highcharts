@@ -24,31 +24,31 @@ export const pureRandom = {
         pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> (UOM)<br/>'
     },
     plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: true
-        },
-		area: {
-            stacking: 'normal',
-            lineColor: '#666666',
-            lineWidth: 1,
-            marker: {
-                lineWidth: 1,
-                lineColor: '#666666'
-            },
+		line: {
 			dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: true
-        },
-        series: {
-            animation: true,
-            marker: {
-                enabled: true
-            }
-        }
+				enabled: true
+			},
+			enableMouseTracking: true
+		},
+		area: {
+			stacking: 'normal',
+			lineColor: '#666666',
+			lineWidth: 1,
+			marker: {
+				lineWidth: 1,
+				lineColor: '#666666'
+			},
+			dataLabels: {
+				enabled: true
+			},
+			enableMouseTracking: true
+		},
+		series: {
+			animation: true,
+			marker: {
+				enabled: true
+			}
+		}
     },
     series: []
 };
