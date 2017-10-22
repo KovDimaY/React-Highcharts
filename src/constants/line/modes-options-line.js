@@ -21,7 +21,8 @@ export const optionsPureRandom = {
   dataLabels: "dataLabels",
   animation: "animation",
   yAxisTitle: "yAxisTitle",
-  markers: "markers"
+  markers: "markers",
+  area: "area"
 }
 
 export const optionsConfigurableRandom = {
@@ -88,6 +89,7 @@ export const initialState = {
       animation: true,
       yAxisTitle: true,
       markers: true,
+      area: false
     },
     configurableRandom: {
       seriesNumber: 3,
