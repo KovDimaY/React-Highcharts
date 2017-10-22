@@ -7,6 +7,8 @@ import Chart from './chart-abstract'
 
 import {
   scatterOptions3D,
+  scatterOptions2D,
+  scatterOptionsBubble
 } from '../../constants/scatter/default-options-scatter'
 
 import {
@@ -72,16 +74,50 @@ export default class Scattering extends Component {
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
   }
 
-  initPureRandomeMode() {
-    console.log("3d mode init")
+  componentDidMount() {
+    this.initScatter3DMode();
   }
 
-  initConfigurableRandomeMode() {
-    console.log("2d mode init")
+  initScatter3DMode() {
+    const options = scatterOptions3D;
+
+    this.setState({ options }, () => {
+      this.updateScatter3DConfiguration();
+    });
   }
 
-  initBalanceSimulationMode() {
-    console.log("bubble mode init")
+  initScatter2DMode() {
+    const options = scatterOptions2D;
+
+    this.setState({ options }, () => {
+      this.updateScatter2DConfiguration();
+    });
+  }
+
+  initScatterBubbleMode() {
+    const options = scatterOptionsBubble;
+
+    this.setState({ options }, () => {
+      this.updateScatterBubbleConfiguration();
+    });
+  }
+
+  updateScatter3DConfiguration() {
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
+  updateScatter2DConfiguration() {
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
+  updateScatterBubbleConfiguration() {
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
   }
 
   dropdownClickHandler(input) {
@@ -89,15 +125,15 @@ export default class Scattering extends Component {
     const { configurations } = this.state;
     switch (mode) {
       case modes.scatter3d: {
-        this.initPureRandomeMode();
+        this.initScatter3DMode();
         break;
       }
       case modes.scatter2d: {
-        this.initConfigurableRandomeMode();
+        this.initScatter2DMode();
         break;
       }
       case modes.scatterBubble: {
-        this.initBalanceSimulationMode();
+        this.initScatterBubbleMode();
         break;
       }
       default: {
@@ -153,7 +189,7 @@ export default class Scattering extends Component {
           </div>
           <div className="col-sm-8 chart-area">
             <Chart container={'scattering-chart'}
-                   options={scatterOptions3D}
+                   options={this.state.options}
                    update={this.state.rerenderChart}
                    function={move}/>
           </div>
