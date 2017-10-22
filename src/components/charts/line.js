@@ -113,18 +113,18 @@ export default class Line extends Component {
   updatePureRandomConfiguration() {
     const { pureRandom } = this.state.configurations;
     const { options } = this.state;
-	options.chart.zoomType = pureRandom.zoom ? 'xy' : null;
-	options.chart.type = pureRandom.area ? 'area'  : 'line';
-	options.title.text = pureRandom.title ? 'Randomly generated data' : null;
-	options.subtitle.text = pureRandom.title ? 'Randomly generated data' : null;
-	options.legend.enabled = pureRandom.legend;
-	options.yAxis.title.text = pureRandom.yAxisTitle ? 'Random Value (UOM)' : null;
-	options.plotOptions.line.dataLabels.enabled = pureRandom.dataLabels;
-	options.plotOptions.area.dataLabels.enabled = pureRandom.dataLabels;
-	options.plotOptions.line.enableMouseTracking = pureRandom.tooltip;
-	options.plotOptions.area.enableMouseTracking = pureRandom.tooltip;
-	options.plotOptions.series.animation = pureRandom.animation;
-	options.plotOptions.series.marker.enabled = pureRandom.markers;
+    options.chart.zoomType = pureRandom.zoom ? 'xy' : null;
+    options.chart.type = pureRandom.area ? 'area'  : 'line';
+    options.title.text = pureRandom.title ? 'Randomly generated data' : null;
+    options.subtitle.text = pureRandom.title ? 'Randomly generated data' : null;
+    options.legend.enabled = pureRandom.legend;
+    options.yAxis.title.text = pureRandom.yAxisTitle ? 'Random Value (UOM)' : null;
+    options.plotOptions.line.dataLabels.enabled = pureRandom.dataLabels;
+    options.plotOptions.area.dataLabels.enabled = pureRandom.dataLabels;
+    options.plotOptions.line.enableMouseTracking = pureRandom.tooltip;
+    options.plotOptions.area.enableMouseTracking = pureRandom.tooltip;
+    options.plotOptions.series.animation = pureRandom.animation;
+    options.plotOptions.series.marker.enabled = pureRandom.markers;
 
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })

@@ -14,15 +14,15 @@ export const modes = {
 }
 
 export const optionsPureRandom = {
-	tooltip: "tooltip",
-	zoom: "zoom",
-	legend: "legend",
-	title: "title",
-	dataLabels: "dataLabels",
-	animation: "animation",
-	yAxisTitle: "yAxisTitle",
-	markers: "markers",
-	area: "area"
+  tooltip: "tooltip",
+  zoom: "zoom",
+  legend: "legend",
+  title: "title",
+  dataLabels: "dataLabels",
+  animation: "animation",
+  yAxisTitle: "yAxisTitle",
+  markers: "markers",
+  area: "area"
 }
 
 export const optionsConfigurableRandom = {
@@ -81,15 +81,15 @@ export const initialState = {
   currentMode: modes.pureRandom,
   configurations: {
     pureRandom: {
-		tooltip: true,
-		zoom: true,
-		legend: true,
-		title: true,
-		dataLabels: true,
-		animation: true,
-		yAxisTitle: true,
-		markers: true,
-		area: false
+	  tooltip: true,
+	  zoom: true,
+	  legend: true,
+	  title: true,
+	  dataLabels: true,
+	  animation: true,
+	  yAxisTitle: true,
+	  markers: true,
+	  area: false
     },
     configurableRandom: {
       seriesNumber: 3,
