@@ -8,14 +8,10 @@ import Home from './components/home';
 import Line from './components/charts/line';
 import Bar from './components/charts/bar';
 import Pie from './components/charts/pie';
-// import Bubble from './components/charts/bubble';
 import Scattering from './components/charts/scatter';
 import Gauge from './components/charts/gauge';
 import Combo from './components/charts/combo';
 import Clock from './components/charts/clock';
-
-// hidden route
-// <Router path='/bubble' component={Bubble} />
 
 // Routes definition
 export default (
