@@ -30,6 +30,19 @@ export const pureRandom = {
             },
             enableMouseTracking: true
         },
+		area: {
+            stacking: 'normal',
+            lineColor: '#666666',
+            lineWidth: 1,
+            marker: {
+                lineWidth: 1,
+                lineColor: '#666666'
+            },
+			dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: true
+        },
         series: {
             animation: true,
             marker: {

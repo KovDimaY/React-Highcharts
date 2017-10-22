@@ -4,7 +4,7 @@ export function generateSeriesForPureRandom() {
   for (let i = 0; i < numberOfSeries; i++) {
     let currentData = [];
     const currentName = `Random Serie ${i + 1}`
-    const min = Math.random() * 1000 - 500;
+    const min = Math.random() * 1000;
     const max = Math.random() * 1000 + min;
     for (let j = 0; j < 12; j++) {
       const randValue = Math.random() * (max - min) + min;
