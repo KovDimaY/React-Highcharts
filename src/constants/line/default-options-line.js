@@ -25,10 +25,10 @@ export const pureRandom = {
     },
     plotOptions: {
         line: {
-	        dataLabels: {
-		        enabled: true
-	        },
-	        enableMouseTracking: true
+            dataLabels: {
+	            enabled: true
+            },
+            enableMouseTracking: true
         },
         area: {
 	        stacking: 'normal',
@@ -49,7 +49,7 @@ export const pureRandom = {
 		        enabled: true
 	        }
         }
-    },
+            },
     series: []
 };
 
