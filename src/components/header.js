@@ -17,7 +17,7 @@ export default class Header extends Component {
       line: "/line",
       bar: "/bar",
       pie: "/pie",
-      bubble: "/bubble",
+      // bubble: "/bubble",
       scatter: "/scatter",
       gauge: "/gauge",
       combo: "/combo",
@@ -41,9 +41,12 @@ export default class Header extends Component {
               <li className={this.makeActiveBasedOnPath(path.pie)}>
                 <a href={path.pie}>Pie</a>
               </li>
-              <li className={this.makeActiveBasedOnPath(path.bubble)}>
-                <a href={path.bubble}>Bubble</a>
-              </li>
+              {
+                false &&
+                (<li className={this.makeActiveBasedOnPath(path.bubble)}>
+                  <a href={path.bubble}>Bubble</a>
+                </li>)
+              }
               <li className={this.makeActiveBasedOnPath(path.scatter)}>
                 <a href={path.scatter}>Scattering</a>
               </li>
