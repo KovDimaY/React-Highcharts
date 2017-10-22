@@ -8,7 +8,6 @@ import Home from './components/home';
 import Line from './components/charts/line';
 import Bar from './components/charts/bar';
 import Pie from './components/charts/pie';
-import Bubble from './components/charts/bubble';
 import Scattering from './components/charts/scatter';
 import Gauge from './components/charts/gauge';
 import Combo from './components/charts/combo';
@@ -21,7 +20,6 @@ export default (
     <Router path='/line' component={Line} />
     <Router path='/bar' component={Bar} />
     <Router path='/pie' component={Pie} />
-    <Router path='/bubble' component={Bubble} />
     <Router path='/scatter' component={Scattering} />
     <Router path='/gauge' component={Gauge} />
     <Router path='/combo' component={Combo} />

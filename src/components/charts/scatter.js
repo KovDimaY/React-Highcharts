@@ -5,6 +5,17 @@ import $ from 'jquery'
 
 import Chart from './chart-abstract'
 
+import {
+  scatterOptions3D,
+  scatterOptions2D,
+  scatterOptionsBubble
+} from '../../constants/scatter/default-options-scatter'
+
+import {
+  modes,
+  initialState,
+} from '../../constants/scatter/modes-options-scatter'
+
 // Give the points a 3D feel by adding a radial gradient
 // Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function (color) {
 //     return {
@@ -20,71 +31,7 @@ import Chart from './chart-abstract'
 //     };
 // });
 
-// Set up the chart
-const scatterOptions = {
-    chart: {
-        renderTo: 'container',
-        margin: 100,
-        type: 'scatter',
-        options3d: {
-            enabled: true,
-            alpha: 10,
-            beta: 30,
-            depth: 250,
-            viewDistance: 5,
-            fitToPlot: false,
-            frame: {
-                bottom: { size: 1, color: 'rgba(0,0,0,0.02)' },
-                back: { size: 1, color: 'rgba(0,0,0,0.04)' },
-                side: { size: 1, color: 'rgba(0,0,0,0.06)' }
-            }
-        }
-    },
-    title: {
-        text: 'Draggable box'
-    },
-    subtitle: {
-        text: 'Click and drag the plot area to rotate in space'
-    },
-    plotOptions: {
-        scatter: {
-            width: 10,
-            height: 10,
-            depth: 10
-        }
-    },
-    yAxis: {
-        min: 0,
-        max: 10,
-        title: null
-    },
-    xAxis: {
-        min: 0,
-        max: 10,
-        gridLineWidth: 1
-    },
-    zAxis: {
-        min: 0,
-        max: 10,
-        showFirstLabel: false
-    },
-    legend: {
-        enabled: false
-    },
-    series: [{
-        name: 'Reading',
-        marker: {
-            fillColor: {
-                radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
-                stops: [
-                    [0, 'rgba(255,255,255,1)'],
-                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(1).get('rgba')]
-                ]
-            }
-        },
-        data: [[1, 6, 5], [8, 7, 9], [1, 3, 4], [4, 6, 8], [5, 7, 7], [6, 9, 6], [7, 0, 5], [2, 3, 3], [3, 9, 8], [3, 6, 5], [4, 9, 4], [2, 3, 3], [6, 9, 9], [0, 7, 0], [7, 7, 9], [7, 2, 9], [0, 6, 2], [4, 6, 7], [3, 7, 7], [0, 1, 7], [2, 8, 6], [2, 3, 7], [6, 4, 8], [3, 5, 9], [7, 9, 5], [3, 1, 7], [4, 4, 2], [3, 6, 2], [3, 1, 6], [6, 8, 5], [6, 6, 7], [4, 1, 1], [7, 2, 7], [7, 7, 0], [8, 8, 9], [9, 4, 1], [8, 3, 4], [9, 8, 9], [3, 5, 3], [0, 2, 4], [6, 0, 2], [2, 1, 3], [5, 8, 9], [2, 1, 1], [9, 7, 6], [3, 0, 2], [9, 9, 0], [3, 4, 8], [2, 6, 1], [8, 9, 2], [7, 6, 5], [6, 3, 1], [9, 3, 1], [8, 9, 3], [9, 1, 0], [3, 8, 7], [8, 0, 0], [4, 9, 7], [8, 6, 2], [4, 3, 0], [2, 3, 5], [9, 1, 4], [1, 1, 4], [6, 0, 2], [6, 1, 6], [3, 8, 8], [8, 8, 7], [5, 5, 0], [3, 9, 6], [5, 4, 3], [6, 8, 3], [0, 1, 5], [6, 7, 3], [8, 3, 2], [3, 8, 3], [2, 1, 6], [4, 6, 7], [8, 9, 9], [5, 4, 2], [6, 1, 3], [6, 9, 5], [4, 8, 2], [9, 7, 4], [5, 4, 2], [9, 6, 1], [2, 7, 3], [4, 5, 4], [6, 8, 1], [3, 4, 0], [2, 2, 6], [5, 1, 2], [9, 9, 7], [6, 9, 9], [8, 4, 3], [4, 1, 7], [6, 2, 5], [0, 4, 9], [3, 5, 9], [6, 9, 1], [1, 9, 2]]
-    }]
-};
+
 
 function move(chart) {
 // Add mouse events for rotation
@@ -115,16 +62,138 @@ function move(chart) {
             $(document).off('.hc');
         }
     });
-});
+  });
 };
 
 
 export default class Scattering extends Component {
+  constructor(props) {
+    super(props);
+    this.state = initialState;
+
+    this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
+  }
+
+  componentDidMount() {
+    this.initScatter3DMode();
+  }
+
+  initScatter3DMode() {
+    const options = scatterOptions3D;
+
+    this.setState({ options }, () => {
+      this.updateScatter3DConfiguration();
+    });
+  }
+
+  initScatter2DMode() {
+    const options = scatterOptions2D;
+
+    this.setState({ options }, () => {
+      this.updateScatter2DConfiguration();
+    });
+  }
+
+  initScatterBubbleMode() {
+    const options = scatterOptionsBubble;
+
+    this.setState({ options }, () => {
+      this.updateScatterBubbleConfiguration();
+    });
+  }
+
+  updateScatter3DConfiguration() {
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
+  updateScatter2DConfiguration() {
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
+  updateScatterBubbleConfiguration() {
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
+  dropdownClickHandler(input) {
+    const mode = input.target.innerHTML;
+    const { configurations } = this.state;
+    switch (mode) {
+      case modes.scatter3d: {
+        this.initScatter3DMode();
+        break;
+      }
+      case modes.scatter2d: {
+        this.initScatter2DMode();
+        break;
+      }
+      case modes.scatterBubble: {
+        this.initScatterBubbleMode();
+        break;
+      }
+      default: {
+        console.log("This mode is not implemented yet");
+      }
+    }
+    this.setState({ currentMode: mode, configurations });
+  }
+
+  renderOptionsDropdown() {
+    return (
+      <div className="dropdown">
+        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Configurations
+        <span className="caret"></span></button>
+        <ul className="dropdown-menu">
+          <li className="dropdown-header">Scattering Charts</li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.scatter3d}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.scatter2d}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.scatterBubble}</a></li>
+        </ul>
+      </div>
+    )
+  }
+
+  renderConfigurationsArea() {
+    const { currentMode } = this.state;
+    switch (currentMode) {
+      case modes.scatter3d: {
+        return <div> SCATTER 3D </div>;
+      }
+      case modes.scatter2d: {
+        return <div> SCATTER 2D </div>;
+      }
+      case modes.scatterBubble: {
+        return <div> SCATTER BUBBLE </div>;
+      }
+      default: {
+        return null;
+      }
+    }
+  }
 
 	render() {
-		return(
-			<div>
-				<Chart container={'scattering-chart'} options={scatterOptions} function={move}/>
+    console.log("scatter state: ", this.state);
+    return(
+			<div className="scatter-page" key={`scatter-chart-${this.state.currentMode}`}>
+        <div className="row">
+          <div className="col-sm-4">
+            {this.renderOptionsDropdown()}
+            <div className="configuration-area">
+              {this.renderConfigurationsArea()}
+            </div>
+          </div>
+          <div className="col-sm-8 chart-area">
+            <Chart container={'scattering-chart'}
+                   options={this.state.options}
+                   update={this.state.rerenderChart}
+                   function={move}/>
+          </div>
+        </div>
 			</div>
 		)
 	}
