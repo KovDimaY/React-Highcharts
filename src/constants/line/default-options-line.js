@@ -26,7 +26,7 @@ export const pureRandom = {
     plotOptions: {
         line: {
             dataLabels: {
-	            enabled: true
+                enabled: true
             },
             enableMouseTracking: true
         },
@@ -44,12 +44,12 @@ export const pureRandom = {
 	        enableMouseTracking: true
         },
         series: {
-	        animation: true,
-	        marker: {
-		        enabled: true
-	        }
+            animation: true,
+            marker: {
+                enabled: true
+            }
         }
-            },
+    },
     series: []
 };
 
