@@ -21,7 +21,8 @@ export const optionsPureRandom = {
   title: "title",
   dataLabels: "dataLabels",
   animation: "animation",
-  yAxisTitle: "yAxisTitle"
+  yAxisTitle: "yAxisTitle",
+  stacking: "stacking"
 }
 
 export const optionsConfigurableRandom = {
@@ -67,7 +68,8 @@ export const initialState = {
       title: true,
       dataLabels: true,
       animation: true,
-      yAxisTitle: true
+      yAxisTitle: true,
+      stacking: false
     },
     configurableRandom: {
       seriesNumber: 3,
