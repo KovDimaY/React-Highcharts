@@ -16,6 +16,7 @@ import {
 
 import {
   modes,
+	modesDescription,
   initialState,
   optionsPureRandom,
   optionsConfigurableRandom,
@@ -35,6 +36,7 @@ import {
 } from '../../constants/line/data-helpers-line'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
+import { Tooltip } from "../tooltip";
 
 export default class Line extends Component {
   constructor(props) {
@@ -253,20 +255,72 @@ export default class Line extends Component {
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
-        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Configurations
-        <span className="caret"></span></button>
+        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          Configurations&nbsp;
+          <span className="caret"></span>
+        </button>
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.stockSimulation}</a></li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>
+              {modes.pureRandom}
+            </a>
+            <Tooltip
+              text={modesDescription.pureRandom}
+              addClass="dropdown-menu__help"
+            />
+          </li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>
+              {modes.configurableRandom}
+            </a>
+            <Tooltip
+              text={modesDescription.configurableRandom}
+              addClass="dropdown-menu__help"
+            />
+          </li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>
+              {modes.stockSimulation}
+            </a>
+            <Tooltip
+              text={modesDescription.stockSimulation}
+              addClass="dropdown-menu__help"
+            />
+          </li>
           <li className="divider"></li>
           <li className="dropdown-header">Functions Visualization</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.polinomials}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.trigonometric}</a></li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>
+              {modes.polinomials}
+            </a>
+            <Tooltip
+              text={modesDescription.polinomials}
+              addClass="dropdown-menu__help"
+              position={'right'}
+            />
+          </li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>
+              {modes.trigonometric}
+            </a>
+            <Tooltip
+              text={modesDescription.trigonometric}
+              addClass="dropdown-menu__help"
+              position={'right'}
+            />
+          </li>
           <li className="divider"></li>
           <li className="dropdown-header">Real World Data</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a></li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>
+              {modes.interestingFacts}
+            </a>
+            <Tooltip
+              text={modesDescription.interestingFacts}
+              addClass="dropdown-menu__help"
+            />
+          </li>
         </ul>
       </div>
     )

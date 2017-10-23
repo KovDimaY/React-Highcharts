@@ -13,6 +13,15 @@ export const modes = {
   interestingFacts: "Interesting Facts"
 }
 
+export const modesDescription = {
+	pureRandom: "Pure Random",
+	configurableRandom: "Configurable Random",
+	stockSimulation: "Stock Simulation",
+	polinomials: "Polinomial Functions",
+	trigonometric: "Trigonometric Functions",
+	interestingFacts: "Interesting Facts"
+}
+
 export const optionsPureRandom = {
   tooltip: "tooltip",
   zoom: "zoom",

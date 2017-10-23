@@ -12,9 +12,16 @@
       width: 90%;
       margin-left: 5%;
       text-align: center;
-      li {
-        cursor: pointer;
-      }
+    }
+    .dropdown-menu__item {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .dropdown-menu__help {
+      position: absolute;
+      top: 2px;
+      right: 5px;
     }
   }
 
