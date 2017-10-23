@@ -132,9 +132,11 @@ export default class Bar extends Component {
     if (pureRandom.vertical) {
       options.plotOptions.column.dataLabels.enabled = pureRandom.dataLabels;
       options.plotOptions.column.enableMouseTracking = pureRandom.tooltip;
+	  options.plotOptions.column.stacking = pureRandom.stacking ? 'normal' : null;
     } else {
       options.plotOptions.bar.dataLabels.enabled = pureRandom.dataLabels;
       options.plotOptions.bar.enableMouseTracking = pureRandom.tooltip;
+	  options.plotOptions.bar.stacking = pureRandom.stacking ? 'normal' : null;
     }
     options.plotOptions.series.animation = pureRandom.animation;
 
@@ -481,6 +483,12 @@ export default class Bar extends Component {
                         value={optionsPureRandom.animation}
                         checked={pureRandom.animation}
                         onChange={this.onPureRandomCheckBoxChange}/>Enable Animation</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom.stacking}
+                        checked={pureRandom.stacking}
+                        onChange={this.onPureRandomCheckBoxChange}/>Stacked Mode</label>
         </div>
 
         <button

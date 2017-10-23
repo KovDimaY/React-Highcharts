@@ -25,12 +25,14 @@ export const pureRandom = {
     },
     plotOptions: {
         bar: {
+            stacking: null,
             dataLabels: {
                 enabled: true
             },
             enableMouseTracking: true
         },
         column: {
+            stacking: null,
             dataLabels: {
                 enabled: true
             },
