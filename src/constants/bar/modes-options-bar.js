@@ -69,7 +69,7 @@ export const initialState = {
       dataLabels: true,
       animation: true,
       yAxisTitle: true,
-	  stacking: false
+      stacking: false
     },
     configurableRandom: {
       seriesNumber: 3,

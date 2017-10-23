@@ -132,11 +132,11 @@ export default class Bar extends Component {
     if (pureRandom.vertical) {
       options.plotOptions.column.dataLabels.enabled = pureRandom.dataLabels;
       options.plotOptions.column.enableMouseTracking = pureRandom.tooltip;
-	  options.plotOptions.column.stacking = pureRandom.stacking ? 'normal' : null;
+      options.plotOptions.column.stacking = pureRandom.stacking ? 'normal' : null;
     } else {
       options.plotOptions.bar.dataLabels.enabled = pureRandom.dataLabels;
       options.plotOptions.bar.enableMouseTracking = pureRandom.tooltip;
-	  options.plotOptions.bar.stacking = pureRandom.stacking ? 'normal' : null;
+      options.plotOptions.bar.stacking = pureRandom.stacking ? 'normal' : null;
     }
     options.plotOptions.series.animation = pureRandom.animation;
 
