@@ -27,7 +27,9 @@ export function Tooltip(props) {
 	return (
 		<div className={wrapperClasses}>
 			{hoverElement}
-			<span className="help__content">{text}</span>
+			<div className="help__content">
+				<span className="help__text">{text}</span>
+			</div>
 		</div>
 	)
 }

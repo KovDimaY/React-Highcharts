@@ -23,7 +23,7 @@
   background-color: #ddd;
 }
 
-.help:hover > .help__content {
+.help:hover .help__content {
   visibility: visible;
   opacity: 1;
 }
@@ -31,16 +31,20 @@
 .help__content {
   position: absolute;
   z-index: 5;
-  display: inline-block;
-  max-width: 250px;
-  min-width: 150px;
-  padding: 8px 10px;
+  width: 250px;
   visibility: hidden;
   opacity: 0;
+  transition: opacify .2s linear;
+}
+
+.help__text {
+  display: inline-block;
+  max-width: 250px;
+  padding: 8px 10px;
   background-color: #333;
   border-radius: 3px;
-  transition: all .2s linear;
   color: #fff;
+  font-size: 14px;
   text-align: left;
 }
 
@@ -56,6 +60,7 @@
   .help__content {
     bottom: calc(100% + 5px);
     left: -11px;
+    text-align: left;
   }
 
   .help__content:before {
@@ -69,6 +74,7 @@
   .help__content {
     top: calc(100% + 5px);
     left: -11px;
+    text-align: left;
   }
 
   .help__content:before {
@@ -82,6 +88,7 @@
   .help__content {
     top: -7px;
     left: calc(100% + 5px);
+    text-align: left;
   }
 
   .help__content:before {
@@ -95,6 +102,7 @@
   .help__content {
     top: -7px;
     right: calc(100% + 5px);
+    text-align: right;
   }
 
   .help__content:before {

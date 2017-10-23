@@ -14,12 +14,12 @@ export const modes = {
 }
 
 export const modesDescription = {
-	pureRandom: "Pure Random",
-	configurableRandom: "Configurable Random",
-	stockSimulation: "Stock Simulation",
-	polinomials: "Polinomial Functions",
-	trigonometric: "Trigonometric Functions",
-	interestingFacts: "Interesting Facts"
+	pureRandom: "Generate random data.",
+	configurableRandom: "Generate random data with ability to configure range and other params.",
+	stockSimulation: "Simulate trading process of stock market.",
+	polinomials: "Polinomial Functions.",
+	trigonometric: "Trigonometric Functions.",
+	interestingFacts: "Some very nteresting facts from our life."
 }
 
 export const optionsPureRandom = {
