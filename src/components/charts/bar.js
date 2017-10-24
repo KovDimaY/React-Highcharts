@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import TagsInput from 'react-tagsinput'
 
 import Chart from './chart-abstract'
+import Tooltip from "../tooltip";
 
 import {
   pureRandom,
@@ -17,7 +18,7 @@ import {
 
 import {
   modes,
-	modesDescription,
+  tooltips,
   initialState,
   optionsPureRandom,
   optionsConfigurableRandom,
@@ -42,7 +43,6 @@ import {
 } from '../../constants/bar/data-helpers-bar'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
-import { Tooltip } from "../tooltip";
 
 
 export default class Bar extends Component {
@@ -422,21 +422,21 @@ export default class Bar extends Component {
           <li className="dropdown-menu__item">
             <a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a>
             <Tooltip
-              text={modesDescription.pureRandom}
+              text={tooltips.pureRandom}
               addClass="dropdown-menu__help"
             />
           </li>
           <li className="dropdown-menu__item">
             <a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a>
             <Tooltip
-              text={modesDescription.configurableRandom}
+              text={tooltips.configurableRandom}
               addClass="dropdown-menu__help"
             />
           </li>
           <li className="dropdown-menu__item">
             <a onClick={this.dropdownClickHandler}>{modes.balanceSimulation}</a>
             <Tooltip
-              text={modesDescription.balanceSimulation}
+              text={tooltips.balanceSimulation}
               addClass="dropdown-menu__help"
             />
           </li>
@@ -445,14 +445,14 @@ export default class Bar extends Component {
           <li className="dropdown-menu__item">
             <a onClick={this.dropdownClickHandler}>{modes.symbolsAnalysis}</a>
             <Tooltip
-              text={modesDescription.symbolsAnalysis}
+              text={tooltips.symbolsAnalysis}
               addClass="dropdown-menu__help"
             />
           </li>
           <li className="dropdown-menu__item">
             <a onClick={this.dropdownClickHandler}>{modes.wordsAnalysis}</a>
             <Tooltip
-              text={modesDescription.wordsAnalysis}
+              text={tooltips.wordsAnalysis}
               addClass="dropdown-menu__help"
             />
           </li>
@@ -461,7 +461,7 @@ export default class Bar extends Component {
           <li className="dropdown-menu__item">
             <a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a>
             <Tooltip
-              text={modesDescription.interestingFacts}
+              text={tooltips.interestingFacts}
               addClass="dropdown-menu__help"
             />
           </li>

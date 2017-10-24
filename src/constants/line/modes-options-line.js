@@ -13,13 +13,13 @@ export const modes = {
   interestingFacts: "Interesting Facts"
 }
 
-export const modesDescription = {
-	pureRandom: "Generate random data.",
-	configurableRandom: "Generate random data with ability to configure range, number of series and points.",
-	stockSimulation: "Simulate trading process of stock market.",
-	polinomials: "Polinomial Functions.",
-	trigonometric: "Trigonometric Functions.",
-	interestingFacts: "Some very interesting facts from our life."
+export const tooltips = {
+  pureRandom: "Generate random data.",
+  configurableRandom: "Generate random data with ability to configure range, number of series and points.",
+  stockSimulation: "Simulate trading process of stock market.",
+  polinomials: "Polinomial Functions.",
+  trigonometric: "Trigonometric Functions.",
+  interestingFacts: "Some very interesting facts from our life."
 }
 
 export const optionsPureRandom = {

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import Chart from './chart-abstract'
+import Tooltip from "../tooltip";
 
 import {
   pureRandom,
@@ -14,7 +15,7 @@ import {
 
 import {
   modes,
-  modesDescription,
+  tooltips,
   initialState,
   optionsPureRandom,
   optionsConfigurableRandom,
@@ -34,7 +35,7 @@ import {
 } from '../../constants/pie/data-helpers-pie'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
-import {Tooltip} from "../tooltip";
+
 
 export default class Pie extends Component {
   constructor(props) {
@@ -357,21 +358,21 @@ export default class Pie extends Component {
           <li className="dropdown-menu__item">
             <a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a>
             <Tooltip
-              text={modesDescription.pureRandom}
+              text={tooltips.pureRandom}
               addClass="dropdown-menu__help"
             />
           </li>
           <li className="dropdown-menu__item">
             <a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a>
             <Tooltip
-              text={modesDescription.configurableRandom}
+              text={tooltips.configurableRandom}
               addClass="dropdown-menu__help"
             />
           </li>
           <li className="dropdown-menu__item">
             <a onClick={this.dropdownClickHandler}>{modes.clusteringSimulation}</a>
             <Tooltip
-              text={modesDescription.clusteringSimulation}
+              text={tooltips.clusteringSimulation}
               addClass="dropdown-menu__help"
             />
           </li>
@@ -380,14 +381,14 @@ export default class Pie extends Component {
           <li className="dropdown-menu__item">
             <a onClick={this.dropdownClickHandler}>{modes.primeFactorization}</a>
             <Tooltip
-              text={modesDescription.primeFactorization}
+              text={tooltips.primeFactorization}
               addClass="dropdown-menu__help"
             />
           </li>
           <li className="dropdown-menu__item">
             <a onClick={this.dropdownClickHandler}>{modes.irrationalAnalysis}</a>
             <Tooltip
-              text={modesDescription.irrationalAnalysis}
+              text={tooltips.irrationalAnalysis}
               addClass="dropdown-menu__help"
             />
           </li>
@@ -396,7 +397,7 @@ export default class Pie extends Component {
           <li className="dropdown-menu__item">
             <a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a>
             <Tooltip
-              text={modesDescription.interestingFacts}
+              text={tooltips.interestingFacts}
               addClass="dropdown-menu__help"
             />
           </li>

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 import Chart from './chart-abstract'
 import Stock from './stock-abstract'
+import Tooltip from "../tooltip";
 
 import {
   pureRandom,
@@ -16,7 +17,7 @@ import {
 
 import {
   modes,
-	modesDescription,
+  tooltips,
   initialState,
   optionsPureRandom,
   optionsConfigurableRandom,
@@ -36,7 +37,7 @@ import {
 } from '../../constants/line/data-helpers-line'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
-import { Tooltip } from "../tooltip";
+
 
 export default class Line extends Component {
   constructor(props) {
@@ -266,7 +267,7 @@ export default class Line extends Component {
               {modes.pureRandom}
             </a>
             <Tooltip
-              text={modesDescription.pureRandom}
+              text={tooltips.pureRandom}
               addClass="dropdown-menu__help"
             />
           </li>
@@ -275,7 +276,7 @@ export default class Line extends Component {
               {modes.configurableRandom}
             </a>
             <Tooltip
-              text={modesDescription.configurableRandom}
+              text={tooltips.configurableRandom}
               addClass="dropdown-menu__help"
             />
           </li>
@@ -284,7 +285,7 @@ export default class Line extends Component {
               {modes.stockSimulation}
             </a>
             <Tooltip
-              text={modesDescription.stockSimulation}
+              text={tooltips.stockSimulation}
               addClass="dropdown-menu__help"
             />
           </li>
@@ -295,7 +296,7 @@ export default class Line extends Component {
               {modes.polinomials}
             </a>
             <Tooltip
-              text={modesDescription.polinomials}
+              text={tooltips.polinomials}
               addClass="dropdown-menu__help"
               position={'right'}
             />
@@ -305,7 +306,7 @@ export default class Line extends Component {
               {modes.trigonometric}
             </a>
             <Tooltip
-              text={modesDescription.trigonometric}
+              text={tooltips.trigonometric}
               addClass="dropdown-menu__help"
               position={'right'}
             />
@@ -317,7 +318,7 @@ export default class Line extends Component {
               {modes.interestingFacts}
             </a>
             <Tooltip
-              text={modesDescription.interestingFacts}
+              text={tooltips.interestingFacts}
               addClass="dropdown-menu__help"
             />
           </li>

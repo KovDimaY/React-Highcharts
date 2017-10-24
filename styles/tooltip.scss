@@ -34,7 +34,7 @@
   width: 250px;
   visibility: hidden;
   opacity: 0;
-  transition: opacify .2s linear;
+  transition: all .2s linear;
 }
 
 .help__text {
@@ -46,6 +46,8 @@
   color: #fff;
   font-size: 14px;
   text-align: left;
+  white-space: normal;
+  transition: opacify .2s linear, visibility .2s linear;
 }
 
 .help__content:before {
@@ -54,48 +56,6 @@
   width: 0;
   height: 0;
   border: 5px solid;
-}
-
-.top {
-  .help__content {
-    bottom: calc(100% + 5px);
-    left: -11px;
-    text-align: left;
-  }
-
-  .help__content:before {
-    top: 100%;
-    left: 15px;
-    border-color: #333 transparent transparent transparent;
-  }
-}
-
-.bottom {
-  .help__content {
-    top: calc(100% + 5px);
-    left: -11px;
-    text-align: left;
-  }
-
-  .help__content:before {
-    top: -10px;
-    left: 15px;
-    border-color: transparent transparent #333 transparent;
-  }
-}
-
-.right {
-  .help__content {
-    top: -7px;
-    left: calc(100% + 5px);
-    text-align: left;
-  }
-
-  .help__content:before {
-    top: 12px;
-    left: -10px;
-    border-color: transparent #333 transparent transparent;
-  }
 }
 
 .left {
@@ -109,5 +69,75 @@
     top: 12px;
     right: -10px;
     border-color: transparent transparent transparent #333;
+  }
+}
+
+@media (min-width: 0px) {
+  .help__content {
+    width: 200px;
+  }
+
+  .top,
+  .right,
+  .bottom {
+    .help__content {
+      top: -7px;
+      right: calc(100% + 5px);
+      text-align: right;
+    }
+
+    .help__content:before {
+      top: 12px;
+      right: -10px;
+      border-color: transparent transparent transparent #333;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .help__content {
+    width: 250px;
+  }
+
+  .top {
+    .help__content {
+      bottom: calc(100% + 5px);
+      left: -11px;
+      text-align: left;
+    }
+
+    .help__content:before {
+      top: 100%;
+      left: 15px;
+      border-color: #333 transparent transparent transparent;
+    }
+  }
+
+  .bottom {
+    .help__content {
+      top: calc(100% + 5px);
+      left: -11px;
+      text-align: left;
+    }
+
+    .help__content:before {
+      top: -10px;
+      left: 15px;
+      border-color: transparent transparent #333 transparent;
+    }
+  }
+
+  .right {
+    .help__content {
+      top: -7px;
+      left: calc(100% + 5px);
+      text-align: left;
+    }
+
+    .help__content:before {
+      top: 12px;
+      left: -10px;
+      border-color: transparent #333 transparent transparent;
+    }
   }
 }
