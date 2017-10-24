@@ -14,6 +14,7 @@ import {
 
 import {
   modes,
+  modesDescription,
   initialState,
   optionsPureRandom,
   optionsConfigurableRandom,
@@ -33,6 +34,7 @@ import {
 } from '../../constants/pie/data-helpers-pie'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
+import {Tooltip} from "../tooltip";
 
 export default class Pie extends Component {
   constructor(props) {
@@ -346,20 +348,58 @@ export default class Pie extends Component {
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
-        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Configurations
-        <span className="caret"></span></button>
+        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          Configurations&nbsp;
+          <span className="caret"></span>
+        </button>
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.clusteringSimulation}</a></li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a>
+            <Tooltip
+              text={modesDescription.pureRandom}
+              addClass="dropdown-menu__help"
+            />
+          </li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a>
+            <Tooltip
+              text={modesDescription.configurableRandom}
+              addClass="dropdown-menu__help"
+            />
+          </li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>{modes.clusteringSimulation}</a>
+            <Tooltip
+              text={modesDescription.clusteringSimulation}
+              addClass="dropdown-menu__help"
+            />
+          </li>
           <li className="divider"></li>
           <li className="dropdown-header">Analysis Section</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.primeFactorization}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.irrationalAnalysis}</a></li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>{modes.primeFactorization}</a>
+            <Tooltip
+              text={modesDescription.primeFactorization}
+              addClass="dropdown-menu__help"
+            />
+          </li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>{modes.irrationalAnalysis}</a>
+            <Tooltip
+              text={modesDescription.irrationalAnalysis}
+              addClass="dropdown-menu__help"
+            />
+          </li>
           <li className="divider"></li>
           <li className="dropdown-header">Real World Data</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a></li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a>
+            <Tooltip
+              text={modesDescription.interestingFacts}
+              addClass="dropdown-menu__help"
+            />
+          </li>
         </ul>
       </div>
     )

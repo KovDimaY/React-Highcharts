@@ -17,6 +17,7 @@ import {
 
 import {
   modes,
+	modesDescription,
   initialState,
   optionsPureRandom,
   optionsConfigurableRandom,
@@ -41,6 +42,7 @@ import {
 } from '../../constants/bar/data-helpers-bar'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
+import { Tooltip } from "../tooltip";
 
 
 export default class Bar extends Component {
@@ -411,20 +413,58 @@ export default class Bar extends Component {
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
-        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Configurations
-        <span className="caret"></span></button>
+        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          Configurations&nbsp;
+          <span className="caret"></span>
+        </button>
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.balanceSimulation}</a></li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a>
+            <Tooltip
+              text={modesDescription.pureRandom}
+              addClass="dropdown-menu__help"
+            />
+          </li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a>
+            <Tooltip
+              text={modesDescription.configurableRandom}
+              addClass="dropdown-menu__help"
+            />
+          </li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>{modes.balanceSimulation}</a>
+            <Tooltip
+              text={modesDescription.balanceSimulation}
+              addClass="dropdown-menu__help"
+            />
+          </li>
           <li className="divider"></li>
           <li className="dropdown-header">Text Analysis</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.symbolsAnalysis}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.wordsAnalysis}</a></li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>{modes.symbolsAnalysis}</a>
+            <Tooltip
+              text={modesDescription.symbolsAnalysis}
+              addClass="dropdown-menu__help"
+            />
+          </li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>{modes.wordsAnalysis}</a>
+            <Tooltip
+              text={modesDescription.wordsAnalysis}
+              addClass="dropdown-menu__help"
+            />
+          </li>
           <li className="divider"></li>
           <li className="dropdown-header">Real World Data</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a></li>
+          <li className="dropdown-menu__item">
+            <a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a>
+            <Tooltip
+              text={modesDescription.interestingFacts}
+              addClass="dropdown-menu__help"
+            />
+          </li>
         </ul>
       </div>
     )
