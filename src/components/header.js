@@ -18,8 +18,7 @@ export default class Header extends Component {
       bar: "/bar",
       pie: "/pie",
       scatter: "/scatter",
-      gauge: "/gauge",
-      combo: "/combo",
+      other: "/other",
       clock: "/clock"
     }
     return (
@@ -43,11 +42,8 @@ export default class Header extends Component {
               <li className={this.makeActiveBasedOnPath(path.scatter)}>
                 <a href={path.scatter}>Scattering</a>
               </li>
-              <li className={this.makeActiveBasedOnPath(path.gauge)}>
-                <a href={path.gauge}>Gauge</a>
-              </li>
-              <li className={this.makeActiveBasedOnPath(path.combo)}>
-                <a href={path.combo}>Combination</a>
+              <li className={this.makeActiveBasedOnPath(path.other)}>
+                <a href={path.other}>Other</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.clock)}>
                 <a href={path.clock}>Clock</a>

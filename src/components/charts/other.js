@@ -206,7 +206,7 @@ const rpmOptions = {
 };
 
 
-export default class Gauge extends Component {
+export default class Other extends Component {
 
 	render() {
 		return(
