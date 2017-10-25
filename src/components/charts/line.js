@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 import Chart from './chart-abstract'
 import Stock from './stock-abstract'
+import Tooltip from "../tooltip";
 
 import {
   pureRandom,
@@ -16,6 +17,7 @@ import {
 
 import {
   modes,
+  tooltips,
   initialState,
   optionsPureRandom,
   optionsConfigurableRandom,
@@ -35,6 +37,7 @@ import {
 } from '../../constants/line/data-helpers-line'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
+
 
 export default class Line extends Component {
   constructor(props) {
@@ -217,8 +220,7 @@ export default class Line extends Component {
     })
   }
 
-  dropdownClickHandler(input) {
-    const mode = input.target.innerHTML;
+  dropdownClickHandler(mode) {
     const { configurations } = this.state;
     configurations.stockSimulation.isRunning = false;
     switch (mode) {
@@ -256,20 +258,70 @@ export default class Line extends Component {
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
-        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Configurations
-        <span className="caret"></span></button>
+        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          Configurations&nbsp;
+          <span className="caret"></span>
+        </button>
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.stockSimulation}</a></li>
+          <li className="dropdown-menu__item">
+            <a onClick={() => this.dropdownClickHandler(modes.pureRandom)}>
+              {modes.pureRandom}
+              <Tooltip
+                text={tooltips.pureRandom}
+                addClass="dropdown-menu__help"
+              />
+            </a>
+          </li>
+          <li className="dropdown-menu__item">
+            <a onClick={() => this.dropdownClickHandler(modes.configurableRandom)}>
+              {modes.configurableRandom}
+              <Tooltip
+                text={tooltips.configurableRandom}
+                addClass="dropdown-menu__help"
+              />
+            </a>
+          </li>
+          <li className="dropdown-menu__item">
+            <a onClick={() => this.dropdownClickHandler(modes.stockSimulation)}>
+              {modes.stockSimulation}
+              <Tooltip
+                text={tooltips.stockSimulation}
+                addClass="dropdown-menu__help"
+              />
+            </a>
+          </li>
           <li className="divider"></li>
           <li className="dropdown-header">Functions Visualization</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.polinomials}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.trigonometric}</a></li>
+          <li className="dropdown-menu__item">
+            <a onClick={() => this.dropdownClickHandler(modes.polinomials)}>
+              {modes.polinomials}
+              <Tooltip
+                text={tooltips.polinomials}
+                addClass="dropdown-menu__help"
+              />
+            </a>
+          </li>
+          <li className="dropdown-menu__item">
+            <a onClick={() => this.dropdownClickHandler(modes.trigonometric)}>
+              {modes.trigonometric}
+              <Tooltip
+                text={tooltips.trigonometric}
+                addClass="dropdown-menu__help"
+              />
+            </a>
+          </li>
           <li className="divider"></li>
           <li className="dropdown-header">Real World Data</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.interestingFacts}</a></li>
+          <li className="dropdown-menu__item">
+            <a onClick={() => this.dropdownClickHandler(modes.interestingFacts)}>
+              {modes.interestingFacts}
+              <Tooltip
+                text={tooltips.interestingFacts}
+                addClass="dropdown-menu__help"
+              />
+            </a>
+          </li>
         </ul>
       </div>
     )

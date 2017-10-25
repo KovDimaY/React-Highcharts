@@ -16,6 +16,15 @@ export const modes = {
   interestingFacts: "Interesting facts"
 }
 
+export const tooltips = {
+  pureRandom: "Generate random data.",
+  configurableRandom: "Generate random data with ability to configure the number of series.",
+  clusteringSimulation: "Simple Clustering Simulation.",
+  primeFactorization: "Find prime factors of the number.",
+  irrationalAnalysis: "Get distribution of digits of the number Pi.",
+  interestingFacts: "Some very interesting facts from our life."
+}
+
 export const optionsPureRandom = {
   tooltip: "tooltip",
   threeDimensions: "threeDimensions",

@@ -174,7 +174,7 @@ export const irrationalAnalysis = {
       type: 'pie'
   },
   title: {
-      text: 'Distibution of digits of the number Pi'
+      text: 'Distribution of digits of the number Pi'
   },
   subtitle: {
       text: 'THis is subtitle'

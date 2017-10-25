@@ -13,6 +13,15 @@ export const modes = {
   interestingFacts: "Interesting Facts"
 }
 
+export const tooltips = {
+  pureRandom: "Generate random data.",
+  configurableRandom: "Generate random data with ability to configure range, number of series and categories.",
+  balanceSimulation: "Analyze expenses and income.",
+  symbolsAnalysis: "Analyze the quantity of symbols in text.",
+  wordsAnalysis: "Analyze the quantity of words in text.",
+  interestingFacts: "Some very interesting facts from our life."
+}
+
 export const optionsPureRandom = {
   vertical: "vertical",
   tooltip: "tooltip",
