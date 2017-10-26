@@ -4,10 +4,12 @@ import HighchartsMore from 'highcharts/highcharts-more'
 import Highcharts3D from 'highcharts/highcharts-3d'
 import HighchartsGauge from 'highcharts/modules/solid-gauge'
 import HighchartsHeatmap from 'highcharts/modules/heatmap'
+import HighchartsTilemap from 'highcharts/modules/tilemap'
 HighchartsMore(Highcharts)
 Highcharts3D(Highcharts)
 HighchartsGauge(Highcharts)
 HighchartsHeatmap(Highcharts)
+HighchartsTilemap(Highcharts)
 
 export default class Chart extends Component {
 

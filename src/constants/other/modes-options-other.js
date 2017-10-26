@@ -1,5 +1,6 @@
 export const modes = {
   heatmap: "Heatmap",
+  tilemap: "Tilemap"
 }
 
 
@@ -10,6 +11,7 @@ export const initialState = {
   rerenderChart: false,
   currentMode: modes.heatmap,
   configurations: {
-    heatmap: {}
+    heatmap: {},
+    tilemap: {}
   }
 }

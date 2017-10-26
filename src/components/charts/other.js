@@ -5,7 +5,8 @@ import Highcharts from 'highcharts'
 import Chart from './chart-abstract'
 
 import {
-  heatmap
+  heatmap,
+  tilemap
 } from '../../constants/other/default-options-other'
 
 import {
@@ -34,7 +35,21 @@ export default class Other extends Component {
     });
   }
 
+  initTilemap() {
+    const options = tilemap;
+
+    this.setState({ options }, () => {
+      this.updateTilemapConfiguration();
+    });
+  }
+
   updateHeatmapConfiguration() {
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
+  updateTilemapConfiguration() {
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -46,6 +61,10 @@ export default class Other extends Component {
     switch (mode) {
       case modes.heatmap: {
         this.initHeatmap();
+        break;
+      }
+      case modes.tilemap: {
+        this.initTilemap();
         break;
       }
       default: {
@@ -63,6 +82,7 @@ export default class Other extends Component {
         <ul className="dropdown-menu">
           <li className="dropdown-header">Other Charts</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.heatmap}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.tilemap}</a></li>
         </ul>
       </div>
     )
