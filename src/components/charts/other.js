@@ -6,7 +6,8 @@ import Chart from './chart-abstract'
 
 import {
   heatmap,
-  tilemap
+  tilemap,
+  polar
 } from '../../constants/other/default-options-other'
 
 import {
@@ -43,6 +44,14 @@ export default class Other extends Component {
     });
   }
 
+  initPolar() {
+    const options = polar;
+
+    this.setState({ options }, () => {
+      this.updatePolarConfiguration();
+    });
+  }
+
   updateHeatmapConfiguration() {
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -50,6 +59,12 @@ export default class Other extends Component {
   }
 
   updateTilemapConfiguration() {
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
+  updatePolarConfiguration() {
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -65,6 +80,10 @@ export default class Other extends Component {
       }
       case modes.tilemap: {
         this.initTilemap();
+        break;
+      }
+      case modes.polar: {
+        this.initPolar();
         break;
       }
       default: {
@@ -83,6 +102,7 @@ export default class Other extends Component {
           <li className="dropdown-header">Other Charts</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.heatmap}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.tilemap}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.polar}</a></li>
         </ul>
       </div>
     )
@@ -93,6 +113,12 @@ export default class Other extends Component {
     switch (currentMode) {
       case modes.heatmap: {
         return <div> HEATMAP </div>;
+      }
+      case modes.tilemap: {
+        return <div> TILEMAP </div>;
+      }
+      case modes.polar: {
+        return <div> POLAR </div>;
       }
       default: {
         return null;
