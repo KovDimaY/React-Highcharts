@@ -2,7 +2,8 @@ export const modes = {
   heatmap: "Heatmap",
   tilemap: "Tilemap",
   polar: "Polar",
-  boxplot: "Box Plot"
+  boxplot: "Box Plot",
+  wordcloud: "Word Cloud"
 }
 
 
@@ -16,6 +17,7 @@ export const initialState = {
     heatmap: {},
     tilemap: {},
     polar: {},
-    boxplot: {}
+    boxplot: {},
+    wordcloud: {}
   }
 }
