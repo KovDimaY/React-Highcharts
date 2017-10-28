@@ -7,7 +7,8 @@ import Chart from './chart-abstract'
 import {
   heatmap,
   tilemap,
-  polar
+  polar,
+  boxplot
 } from '../../constants/other/default-options-other'
 
 import {
@@ -52,6 +53,14 @@ export default class Other extends Component {
     });
   }
 
+  initBoxplot() {
+    const options = boxplot;
+
+    this.setState({ options }, () => {
+      this.updateBoxplotConfiguration();
+    });
+  }
+
   updateHeatmapConfiguration() {
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -65,6 +74,12 @@ export default class Other extends Component {
   }
 
   updatePolarConfiguration() {
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
+  updateBoxplotConfiguration() {
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -86,6 +101,10 @@ export default class Other extends Component {
         this.initPolar();
         break;
       }
+      case modes.boxplot: {
+        this.initBoxplot();
+        break;
+      }
       default: {
         console.log("This mode is not implemented yet");
       }
@@ -103,6 +122,7 @@ export default class Other extends Component {
           <li><a onClick={this.dropdownClickHandler}>{modes.heatmap}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.tilemap}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.polar}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.boxplot}</a></li>
         </ul>
       </div>
     )
@@ -119,6 +139,9 @@ export default class Other extends Component {
       }
       case modes.polar: {
         return <div> POLAR </div>;
+      }
+      case modes.boxplot: {
+        return <div> BOXPLOT </div>;
       }
       default: {
         return null;

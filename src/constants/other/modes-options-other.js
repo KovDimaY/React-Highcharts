@@ -1,7 +1,8 @@
 export const modes = {
   heatmap: "Heatmap",
   tilemap: "Tilemap",
-  polar: "Polar"
+  polar: "Polar",
+  boxplot: "Box Plot"
 }
 
 
@@ -14,6 +15,7 @@ export const initialState = {
   configurations: {
     heatmap: {},
     tilemap: {},
-    polar: {}
+    polar: {},
+    boxplot: {}
   }
 }
