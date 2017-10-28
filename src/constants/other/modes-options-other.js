@@ -3,6 +3,7 @@ export const modes = {
   tilemap: "Tilemap",
   polar: "Polar",
   boxplot: "Box Plot",
+  pyramid: "Pyramid",
   wordcloud: "Word Cloud"
 }
 
@@ -18,6 +19,7 @@ export const initialState = {
     tilemap: {},
     polar: {},
     boxplot: {},
+    pyramid: {},
     wordcloud: {}
   }
 }

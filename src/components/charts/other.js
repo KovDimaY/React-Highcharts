@@ -9,6 +9,7 @@ import {
   tilemap,
   polar,
   boxplot,
+  pyramid,
   wordcloud
 } from '../../constants/other/default-options-other'
 
@@ -62,6 +63,14 @@ export default class Other extends Component {
     });
   }
 
+  initPyramid() {
+    const options = pyramid;
+
+    this.setState({ options }, () => {
+      this.updatePyramidConfiguration();
+    });
+  }
+
   initWordcloud() {
     const options = wordcloud;
 
@@ -94,6 +103,12 @@ export default class Other extends Component {
     })
   }
 
+  updatePyramidConfiguration() {
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
   updateWordcloudConfiguration() {
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -120,6 +135,10 @@ export default class Other extends Component {
         this.initBoxplot();
         break;
       }
+      case modes.pyramid: {
+        this.initPyramid();
+        break;
+      }
       case modes.wordcloud: {
         this.initWordcloud();
         break;
@@ -142,6 +161,7 @@ export default class Other extends Component {
           <li><a onClick={this.dropdownClickHandler}>{modes.tilemap}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.polar}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.boxplot}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.pyramid}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.wordcloud}</a></li>
         </ul>
       </div>
