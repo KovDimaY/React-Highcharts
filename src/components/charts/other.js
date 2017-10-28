@@ -243,8 +243,8 @@ export default class Other extends Component {
 
   render() {
     console.log("other state: ", this.state);
-    return(
-			<div className="other-page" key={`other-chart-${this.state.currentMode}`}>
+    return (
+      <div className="other-page" key={`other-chart-${this.state.currentMode}`}>
         <div className="row">
           <div className="col-sm-4">
             {this.renderOptionsDropdown()}
@@ -252,13 +252,14 @@ export default class Other extends Component {
               {this.renderConfigurationsArea()}
             </div>
           </div>
+
           <div className="col-sm-8 chart-area">
             <Chart container={'others-chart'}
                    options={this.state.options}
                    update={this.state.rerenderChart}/>
           </div>
         </div>
-			</div>
-		)
-	}
+      </div>
+    )
+  }
 }
