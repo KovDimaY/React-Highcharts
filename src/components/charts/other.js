@@ -10,7 +10,8 @@ import {
   polar,
   boxplot,
   pyramid,
-  wordcloud
+  wordcloud,
+  sankey
 } from '../../constants/other/default-options-other'
 
 import {
@@ -79,6 +80,14 @@ export default class Other extends Component {
     });
   }
 
+  initSankey() {
+    const options = sankey;
+
+    this.setState({ options }, () => {
+      this.updateSankeyConfiguration();
+    });
+  }
+
   updateHeatmapConfiguration() {
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -115,6 +124,12 @@ export default class Other extends Component {
     })
   }
 
+  updateSankeyConfiguration() {
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
   dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
     const { configurations } = this.state;
@@ -143,6 +158,10 @@ export default class Other extends Component {
         this.initWordcloud();
         break;
       }
+      case modes.sankey: {
+        this.initSankey();
+        break;
+      }
       default: {
         console.log("This mode is not implemented yet");
       }
@@ -163,6 +182,7 @@ export default class Other extends Component {
           <li><a onClick={this.dropdownClickHandler}>{modes.boxplot}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pyramid}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.wordcloud}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.sankey}</a></li>
         </ul>
       </div>
     )
@@ -183,8 +203,14 @@ export default class Other extends Component {
       case modes.boxplot: {
         return <div> BOXPLOT </div>;
       }
+      case modes.pyramid: {
+        return <div> PYRAMID </div>;
+      }
       case modes.wordcloud: {
         return <div> WORDCLOUD </div>;
+      }
+      case modes.sankey: {
+        return <div> SANKEY </div>;
       }
       default: {
         return null;

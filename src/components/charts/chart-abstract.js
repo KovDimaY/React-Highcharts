@@ -7,6 +7,7 @@ import HighchartsHeatmap from 'highcharts/modules/heatmap'
 import HighchartsTilemap from 'highcharts/modules/tilemap'
 import HighchartsFunnel from 'highcharts/modules/funnel'
 import HighchartsWordcloud from 'highcharts/modules/wordcloud'
+import HighchartsSankey from 'highcharts/modules/sankey'
 HighchartsMore(Highcharts)
 Highcharts3D(Highcharts)
 HighchartsGauge(Highcharts)
@@ -14,6 +15,7 @@ HighchartsHeatmap(Highcharts)
 HighchartsTilemap(Highcharts)
 HighchartsFunnel(Highcharts)
 HighchartsWordcloud(Highcharts)
+HighchartsSankey(Highcharts)
 
 export default class Chart extends Component {
 

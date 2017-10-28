@@ -4,7 +4,8 @@ export const modes = {
   polar: "Polar",
   boxplot: "Box Plot",
   pyramid: "Pyramid",
-  wordcloud: "Word Cloud"
+  wordcloud: "Word Cloud",
+  sankey: "Sankey Diagram"
 }
 
 
@@ -20,6 +21,7 @@ export const initialState = {
     polar: {},
     boxplot: {},
     pyramid: {},
-    wordcloud: {}
+    wordcloud: {},
+    sankey: {}
   }
 }
