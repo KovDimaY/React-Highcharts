@@ -9,6 +9,7 @@ import {
   tilemap,
   polar,
   boxplot,
+  gauge,
   pyramid,
   wordcloud,
   sankey
@@ -64,6 +65,14 @@ export default class Other extends Component {
     });
   }
 
+  initGauge() {
+    const options = gauge;
+
+    this.setState({ options }, () => {
+      this.updateGaugeConfiguration();
+    });
+  }
+
   initPyramid() {
     const options = pyramid;
 
@@ -112,6 +121,12 @@ export default class Other extends Component {
     })
   }
 
+  updateGaugeConfiguration() {
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
   updatePyramidConfiguration() {
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -150,6 +165,10 @@ export default class Other extends Component {
         this.initBoxplot();
         break;
       }
+      case modes.gauge: {
+        this.initGauge();
+        break;
+      }
       case modes.pyramid: {
         this.initPyramid();
         break;
@@ -180,6 +199,7 @@ export default class Other extends Component {
           <li><a onClick={this.dropdownClickHandler}>{modes.tilemap}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.polar}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.boxplot}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.gauge}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pyramid}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.wordcloud}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.sankey}</a></li>
@@ -202,6 +222,9 @@ export default class Other extends Component {
       }
       case modes.boxplot: {
         return <div> BOXPLOT </div>;
+      }
+      case modes.gauge: {
+        return <div> GAUGE </div>;
       }
       case modes.pyramid: {
         return <div> PYRAMID </div>;
