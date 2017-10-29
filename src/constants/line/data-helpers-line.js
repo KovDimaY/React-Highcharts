@@ -80,7 +80,7 @@ export function newPointToStockSimulation(oldSeries, oscillation) {
   return oldSeries;
 }
 
-export function generateSeriesForPolinomials(params) {
+export function generateSeriesForPolynomials(params) {
   const {
     linearA,
     linearB,

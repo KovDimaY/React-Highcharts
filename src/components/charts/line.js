@@ -22,7 +22,7 @@ import {
   optionsPureRandom,
   optionsConfigurableRandom,
   optionsStockSimulation,
-  optionsPolinomials,
+  optionsPolynomials,
   optionsTrigonometric,
   optionsInterestingFacts
 } from '../../constants/line/modes-options-line'
@@ -32,7 +32,7 @@ import {
   generateSeriesForConfigurableRandom,
   generateSeriesForStockSimulation,
   newPointToStockSimulation,
-  generateSeriesForPolinomials,
+  generateSeriesForPolynomials,
   generateSeriesForTrigonometric
 } from '../../constants/line/data-helpers-line'
 
@@ -48,12 +48,12 @@ export default class Line extends Component {
     this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this);
     this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
     this.updateStockSimulationConfiguration = this.updateStockSimulationConfiguration.bind(this);
-    this.updatePolinomialsConfiguration = this.updatePolinomialsConfiguration.bind(this);
+    this.updatePolynomialsConfiguration = this.updatePolynomialsConfiguration.bind(this);
     this.updateTrigonometricConfiguration = this.updateTrigonometricConfiguration.bind(this);
     this.onPureRandomCheckBoxChange = this.onPureRandomCheckBoxChange.bind(this);
     this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
     this.onStockSimulationInputChange = this.onStockSimulationInputChange.bind(this);
-    this.onPolinomialsInputChange = this.onPolinomialsInputChange.bind(this);
+    this.onPolynomialsInputChange = this.onPolynomialsInputChange.bind(this);
     this.onTrigonometricInputChange = this.onTrigonometricInputChange.bind(this);
     this.onInterestingFactsRadioChange = this.onInterestingFactsRadioChange.bind(this);
   }
@@ -92,10 +92,10 @@ export default class Line extends Component {
     });
   }
 
-  initPolinomialsMode() {
+  initPolynomialsMode() {
     let options = functions;
     this.setState({ options }, () => {
-      this.updatePolinomialsConfiguration();
+      this.updatePolynomialsConfiguration();
     });
   }
 
@@ -194,12 +194,12 @@ export default class Line extends Component {
     }
   }
 
-  updatePolinomialsConfiguration() {
-    const { polinomials } = this.state.configurations;
+  updatePolynomialsConfiguration() {
+    const { polynomials } = this.state.configurations;
     const { options } = this.state;
 
-    const series = generateSeriesForPolinomials(polinomials);
-    options.title.text = modes.polinomials;
+    const series = generateSeriesForPolynomials(polynomials);
+    options.title.text = modes.polynomials;
     options.series = series;
 
     this.setState({ options, rerenderChart: true }, () => {
@@ -236,8 +236,8 @@ export default class Line extends Component {
         this.initStockSimulationMode();
         break;
       }
-      case modes.polinomials: {
-        this.initPolinomialsMode();
+      case modes.polynomials: {
+        this.initPolynomialsMode();
         break;
       }
       case modes.trigonometric: {
@@ -294,10 +294,10 @@ export default class Line extends Component {
           <li className="divider"></li>
           <li className="dropdown-header">Functions Visualization</li>
           <li className="dropdown-menu__item">
-            <a onClick={() => this.dropdownClickHandler(modes.polinomials)}>
-              {modes.polinomials}
+            <a onClick={() => this.dropdownClickHandler(modes.polynomials)}>
+              {modes.polynomials}
               <Tooltip
-                text={tooltips.polinomials}
+                text={tooltips.polynomials}
                 addClass="dropdown-menu__help"
               />
             </a>
@@ -398,11 +398,11 @@ export default class Line extends Component {
     this.setState({ configurations });
   }
 
-  onPolinomialsInputChange(event) {
+  onPolynomialsInputChange(event) {
     const { configurations } = this.state;
     if (event.target.dataset.type === "integer") {
       limitNumericalInput(
-        configurations.polinomials,
+        configurations.polynomials,
         event.target.name,
         event.target.value,
         1,
@@ -411,24 +411,24 @@ export default class Line extends Component {
       );
     } else if (event.target.dataset.type === "min") {
       limitNumericalInput(
-        configurations.polinomials,
+        configurations.polynomials,
         event.target.name,
         event.target.value,
         -10000,
-        configurations.polinomials.max,
+        configurations.polynomials.max,
         false
       );
     } else if (event.target.dataset.type === "max") {
       limitNumericalInput(
-        configurations.polinomials,
+        configurations.polynomials,
         event.target.name,
         event.target.value,
-        configurations.polinomials.min,
+        configurations.polynomials.min,
         10000,
         false
       );
     } else {
-      configurations.polinomials[event.target.name] = Number(event.target.value);
+      configurations.polynomials[event.target.name] = Number(event.target.value);
     }
     this.setState({ configurations });
   }
@@ -675,30 +675,30 @@ export default class Line extends Component {
     )
   }
 
-  renderPolinomialsModeConfiguration() {
-    const { polinomials } = this.state.configurations;
+  renderPolynomialsModeConfiguration() {
+    const { polynomials } = this.state.configurations;
     return (
       <div className="functions">
 
-        {this.renderBasicConfigPolinomials(polinomials)}
+        {this.renderBasicConfigPolynomials(polynomials)}
 
         <h3>Functions:</h3>
 
-        {this.renderLinearConfigPolinomials(polinomials)}
-        {this.renderQuadraticConfigPolinomials(polinomials)}
-        {this.renderCubicConfigPolinomials(polinomials)}
+        {this.renderLinearConfigPolynomials(polynomials)}
+        {this.renderQuadraticConfigPolynomials(polynomials)}
+        {this.renderCubicConfigPolynomials(polynomials)}
 
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updatePolinomialsConfiguration}>
+          onClick={this.updatePolynomialsConfiguration}>
           Apply
         </button>
       </div>
     )
   }
 
-  renderBasicConfigPolinomials(polinomials) {
+  renderBasicConfigPolynomials(polynomials) {
     return (
       <div className="row basic-config">
         <div className="col-md-4">
@@ -707,9 +707,9 @@ export default class Line extends Component {
               <input type="number"
                      data-type="min"
                      className="form-control"
-                     name={optionsPolinomials.min}
-                     value={polinomials.min}
-                     onChange={this.onPolinomialsInputChange}/>
+                     name={optionsPolynomials.min}
+                     value={polynomials.min}
+                     onChange={this.onPolynomialsInputChange}/>
           </div>
         </div>
         <div className="col-md-4">
@@ -718,9 +718,9 @@ export default class Line extends Component {
               <input type="number"
                      data-type="max"
                      className="form-control"
-                     name={optionsPolinomials.max}
-                     value={polinomials.max}
-                     onChange={this.onPolinomialsInputChange}/>
+                     name={optionsPolynomials.max}
+                     value={polynomials.max}
+                     onChange={this.onPolynomialsInputChange}/>
           </div>
         </div>
         <div className="col-md-4">
@@ -729,16 +729,16 @@ export default class Line extends Component {
               <input type="number"
                      data-type="integer"
                      className="form-control"
-                     name={optionsPolinomials.number}
-                     value={polinomials.number}
-                     onChange={this.onPolinomialsInputChange}/>
+                     name={optionsPolynomials.number}
+                     value={polynomials.number}
+                     onChange={this.onPolynomialsInputChange}/>
           </div>
         </div>
       </div>
     );
   }
 
-  renderLinearConfigPolinomials(polinomials) {
+  renderLinearConfigPolynomials(polynomials) {
     return (
       <div className="function-config">
         <div>
@@ -748,23 +748,23 @@ export default class Line extends Component {
           <span className="coefficient">
             A = <input type="number"
                        className="form-control modified"
-                       name={optionsPolinomials.linearA}
-                       value={polinomials.linearA}
-                       onChange={this.onPolinomialsInputChange}/>
+                       name={optionsPolynomials.linearA}
+                       value={polynomials.linearA}
+                       onChange={this.onPolynomialsInputChange}/>
           </span>
           <span className="coefficient">
             B = <input type="number"
                        className="form-control modified"
-                       name={optionsPolinomials.linearB}
-                       value={polinomials.linearB}
-                       onChange={this.onPolinomialsInputChange}/>
+                       name={optionsPolynomials.linearB}
+                       value={polynomials.linearB}
+                       onChange={this.onPolynomialsInputChange}/>
           </span>
         </div>
       </div>
     );
   }
 
-  renderQuadraticConfigPolinomials(polinomials) {
+  renderQuadraticConfigPolynomials(polynomials) {
     return (
       <div className="function-config">
         <p><i>y</i> = <b>A</b> · <i>x</i><sup>2</sup> + <b>B</b> · <i>x</i> + <b>C</b></p>
@@ -772,30 +772,30 @@ export default class Line extends Component {
           <span className="coefficient">
             A = <input type="number"
                        className="form-control modified"
-                       name={optionsPolinomials.quadraticA}
-                       value={polinomials.quadraticA}
-                       onChange={this.onPolinomialsInputChange}/>
+                       name={optionsPolynomials.quadraticA}
+                       value={polynomials.quadraticA}
+                       onChange={this.onPolynomialsInputChange}/>
           </span>
           <span className="coefficient">
             B = <input type="number"
                        className="form-control modified"
-                       name={optionsPolinomials.quadraticB}
-                       value={polinomials.quadraticB}
-                       onChange={this.onPolinomialsInputChange}/>
+                       name={optionsPolynomials.quadraticB}
+                       value={polynomials.quadraticB}
+                       onChange={this.onPolynomialsInputChange}/>
           </span>
           <span className="coefficient">
             C = <input type="number"
                        className="form-control modified"
-                       name={optionsPolinomials.quadraticC}
-                       value={polinomials.quadraticC}
-                       onChange={this.onPolinomialsInputChange}/>
+                       name={optionsPolynomials.quadraticC}
+                       value={polynomials.quadraticC}
+                       onChange={this.onPolynomialsInputChange}/>
           </span>
         </div>
       </div>
     );
   }
 
-  renderCubicConfigPolinomials(polinomials) {
+  renderCubicConfigPolynomials(polynomials) {
     return (
       <div className="function-config">
         <p><i>y</i> = <b>A</b> · <i>x</i><sup>3</sup> + <b>B</b> · <i>x</i><sup>2</sup> + <b>C</b> · <i>x</i> + <b>D</b></p>
@@ -803,32 +803,32 @@ export default class Line extends Component {
           <span className="coefficient">
             A = <input type="number"
                        className="form-control modified"
-                       name={optionsPolinomials.cubicA}
-                       value={polinomials.cubicA}
-                       onChange={this.onPolinomialsInputChange}/>
+                       name={optionsPolynomials.cubicA}
+                       value={polynomials.cubicA}
+                       onChange={this.onPolynomialsInputChange}/>
           </span>
           <span className="coefficient">
             B = <input type="number"
                        className="form-control modified"
-                       name={optionsPolinomials.cubicB}
-                       value={polinomials.cubicB}
-                       onChange={this.onPolinomialsInputChange}/>
+                       name={optionsPolynomials.cubicB}
+                       value={polynomials.cubicB}
+                       onChange={this.onPolynomialsInputChange}/>
           </span>
         </div>
         <div>
           <span className="coefficient">
             C = <input type="number"
                        className="form-control modified"
-                       name={optionsPolinomials.cubicC}
-                       value={polinomials.cubicC}
-                       onChange={this.onPolinomialsInputChange}/>
+                       name={optionsPolynomials.cubicC}
+                       value={polynomials.cubicC}
+                       onChange={this.onPolynomialsInputChange}/>
           </span>
           <span className="coefficient">
             D = <input type="number"
                        className="form-control modified"
-                       name={optionsPolinomials.cubicD}
-                       value={polinomials.cubicD}
-                       onChange={this.onPolinomialsInputChange}/>
+                       name={optionsPolynomials.cubicD}
+                       value={polynomials.cubicD}
+                       onChange={this.onPolynomialsInputChange}/>
           </span>
         </div>
       </div>
@@ -979,8 +979,8 @@ export default class Line extends Component {
       case modes.stockSimulation: {
         return this.renderStockSimulationModeConfiguration();
       }
-      case modes.polinomials: {
-        return this.renderPolinomialsModeConfiguration();
+      case modes.polynomials: {
+        return this.renderPolynomialsModeConfiguration();
       }
       case modes.trigonometric: {
         return this.renderTrigonometricModeConfiguration();

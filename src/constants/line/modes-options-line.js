@@ -8,18 +8,18 @@ export const modes = {
   pureRandom: "Pure Random",
   configurableRandom: "Configurable Random",
   stockSimulation: "Stock Simulation",
-  polinomials: "Polinomial Functions",
+  polynomials: "Polynomial Functions",
   trigonometric: "Trigonometric Functions",
   interestingFacts: "Interesting Facts"
 }
 
 export const tooltips = {
-  pureRandom: "Generate random data.",
-  configurableRandom: "Generate random data with ability to configure range, number of series and points.",
-  stockSimulation: "Simulate trading process of stock market.",
-  polinomials: "Polinomial Functions.",
-  trigonometric: "Trigonometric Functions.",
-  interestingFacts: "Some very interesting facts from our life."
+  pureRandom: "In this mode, you have an opportunity to play with different configurations of the line chart. Use checkboxes to configure the view and press the button to apply changes.",
+  configurableRandom: "This mode has fixed options of the chart representation, but you can configure the random generation of data. Just enter all the parameters and press the button to see the result.",
+  stockSimulation: "Here you can simulate the trading process of stock markets. Enter the name of the stock, a starting price and params of volatility and you will see how the situation can be changed with the pass of time.",
+  polynomials: "This mode gives an opportunity to plot polynomial functions with the given accuracy. Just enter all the coefficients needed, domain borders, number of points on the chart and press the button to plot them.",
+  trigonometric: "In this mode, you have an opportunity to plot trigonometric functions with the given accuracy. Just enter all the coefficients needed, domain borders, number of points on the chart and press the button to plot them.",
+  interestingFacts: "Here you can see a collection of some interesting facts about different things, represented by line charts. Use radio buttons to change immediately charts with information."
 }
 
 export const optionsPureRandom = {
@@ -49,7 +49,7 @@ export const optionsStockSimulation = {
   isRunning: "isRunning"
 }
 
-export const optionsPolinomials = {
+export const optionsPolynomials = {
   min: "min",
   max: "max",
   number: "number",
@@ -113,7 +113,7 @@ export const initialState = {
       frequency: 1,
       isRunning: false
     },
-    polinomials: {
+    polynomials: {
       min: -10,
       max: 10,
       number: 100,
