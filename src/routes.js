@@ -9,8 +9,7 @@ import Line from './components/charts/line';
 import Bar from './components/charts/bar';
 import Pie from './components/charts/pie';
 import Scattering from './components/charts/scatter';
-import Gauge from './components/charts/gauge';
-import Combo from './components/charts/combo';
+import Other from './components/charts/other';
 import Clock from './components/charts/clock';
 
 // Routes definition
@@ -21,8 +20,7 @@ export default (
     <Router path='/bar' component={Bar} />
     <Router path='/pie' component={Pie} />
     <Router path='/scatter' component={Scattering} />
-    <Router path='/gauge' component={Gauge} />
-    <Router path='/combo' component={Combo} />
+    <Router path='/other' component={Other} />
     <Router path='/clock' component={Clock} />
     <Router path='*' component={Home} />
   </Router>
