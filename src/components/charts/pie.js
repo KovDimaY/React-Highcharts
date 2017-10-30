@@ -682,22 +682,20 @@ export default class Pie extends Component {
 
   render() {
     console.log("pie state: ", this.state);
-    return(
-			<div className="pie-page" key={`pie-chart-${this.state.currentMode}`}>
-        <div className="row">
-          <div className="col-sm-4">
-            {this.renderOptionsDropdown()}
-            <div className="configuration-area">
-              {this.renderConfigurationsArea()}
-            </div>
-          </div>
-          <div className="col-sm-8 chart-area">
-            <Chart container={'pie-chart'}
-                   options={this.state.options}
-                   update={this.state.rerenderChart}/>
+    return (
+      <div className="row pie-page main-content" key={`pie-chart-${this.state.currentMode}`}>
+        <div className="col-sm-4">
+          {this.renderOptionsDropdown()}
+          <div className="configuration-area">
+            {this.renderConfigurationsArea()}
           </div>
         </div>
-			</div>
-		)
-	}
+        <div className="col-sm-8">
+          <Chart container='chart-area'
+                 options={this.state.options}
+                 update={this.state.rerenderChart}/>
+        </div>
+      </div>
+    )
+  }
 }

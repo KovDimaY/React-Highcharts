@@ -176,25 +176,23 @@ export default class Scattering extends Component {
     }
   }
 
-	render() {
+  render() {
     console.log("scatter state: ", this.state);
-    return(
-			<div className="scatter-page" key={`scatter-chart-${this.state.currentMode}`}>
-        <div className="row">
-          <div className="col-sm-4">
-            {this.renderOptionsDropdown()}
-            <div className="configuration-area">
-              {this.renderConfigurationsArea()}
-            </div>
-          </div>
-          <div className="col-sm-8 chart-area">
-            <Chart container={'scattering-chart'}
-                   options={this.state.options}
-                   update={this.state.rerenderChart}
-                   function={move}/>
+    return (
+      <div className="row scatter-page main-content" key={`scatter-chart-${this.state.currentMode}`}>
+        <div className="col-sm-4">
+          {this.renderOptionsDropdown()}
+          <div className="configuration-area">
+            {this.renderConfigurationsArea()}
           </div>
         </div>
-			</div>
-		)
-	}
+        <div className="col-sm-8">
+          <Chart container='chart-area'
+                 options={this.state.options}
+                 update={this.state.rerenderChart}
+                 function={move}/>
+        </div>
+      </div>
+    )
+  }
 }

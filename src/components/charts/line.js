@@ -994,35 +994,33 @@ export default class Line extends Component {
     }
   }
 
-	render() {
+  render() {
     console.log("line state: ", this.state);
-		return(
-			<div className="line-page" key={`line-chart-${this.state.currentMode}`}>
-        <div className="row">
-          <div className="col-sm-4">
-            {this.renderOptionsDropdown()}
-            <div className="configuration-area">
-              {this.renderConfigurationsArea()}
-            </div>
-          </div>
-          <div className="col-sm-8 chart-area">
-            {
-              this.state.currentMode === modes.stockSimulation ?
-              (
-                <Stock container={'line-stock'}
-                       options={this.state.options}
-                       update={this.state.rerenderChart}/>
-              )
-              :
-              (
-                <Chart container={'line-chart'}
-                       options={this.state.options}
-                       update={this.state.rerenderChart}/>
-              )
-            }
+    return (
+      <div className="row line-page main-content" key={`line-chart-${this.state.currentMode}`}>
+        <div className="col-sm-4">
+          {this.renderOptionsDropdown()}
+          <div className="configuration-area">
+            {this.renderConfigurationsArea()}
           </div>
         </div>
-			</div>
-		)
-	}
+        <div className="col-sm-8">
+          {
+            this.state.currentMode === modes.stockSimulation ?
+            (
+              <Stock container='chart-area'
+                     options={this.state.options}
+                     update={this.state.rerenderChart}/>
+            )
+            :
+            (
+              <Chart container='chart-area'
+                     options={this.state.options}
+                     update={this.state.rerenderChart}/>
+            )
+          }
+        </div>
+      </div>
+    )
+  }
 }

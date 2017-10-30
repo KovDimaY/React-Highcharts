@@ -9,30 +9,30 @@ HighchartsGauge(Highcharts)
 
 export default class Chart extends Component {
 
-		componentDidMount() {
-      this.chart = new Highcharts[this.props.type || "Chart"](
-          this.refs.chart,
-          this.props.options,
-          this.props.function
-      );
-			Highcharts.setOptions({
-				lang: {
-					numericSymbols: [' K', ' M', ' B', ' T']
-				}
-			});
+    componentDidMount() {
+        this.chart = new Highcharts[this.props.type || "Chart"](
+            this.refs.chart,
+            this.props.options,
+            this.props.function
+        );
+        Highcharts.setOptions({
+            lang: {
+                numericSymbols: [' K', ' M', ' B', ' T']
+            }
+        });
     }
 
-		componentWillUpdate(nextProps, nextState) {
-			this.chart = new Highcharts[nextProps.type || "Chart"](
-          this.refs.chart,
-          nextProps.options,
-          nextProps.function
-      );
-		}
+    componentWillUpdate(nextProps, nextState) {
+        this.chart = new Highcharts[nextProps.type || "Chart"](
+            this.refs.chart,
+            nextProps.options,
+            nextProps.function
+        );
+    }
 
-		shouldComponentUpdate(nextProps, nextState) {
-			return nextProps.update;
-		}
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.update;
+    }
 
     componentWillUnmount() {
         this.chart.destroy();

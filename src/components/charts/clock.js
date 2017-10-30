@@ -190,11 +190,11 @@ const clockOptions = {
 
 export default class Line extends Component {
 
-	render() {
-		return(
-			<div>
-				<Chart container={'clock'} options={clockOptions} function={move}/>
-			</div>
-		)
-	}
+    render() {
+        return (
+            <Chart container='main-content'
+                   options={clockOptions}
+                   function={move}/>
+        )
+    }
 }

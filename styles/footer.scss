@@ -1,29 +1,21 @@
 footer {
-  margin-top: 50px;
-}
-
-footer::before {
-  content: "";
-  display: block;
-  width: 90%;
-  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  overflow: hidden;
   border-top: 1px solid #dedede;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 footer p {
   float: left;
+  margin: 0 20px 20px 0;
   color: #999;
   letter-spacing: 0.3px;
   font-size: 14px;
-  padding-bottom: 20px;
-  margin-left: 10%;
+  text-indent: 0px;
 }
 
 footer .social-media-icons {
   float: right;
-  margin-right: 10%;
 }
 
 footer .social-media-icons i {
@@ -32,8 +24,8 @@ footer .social-media-icons i {
   transition: 0.5s ease-in-out;
 }
 
-footer .social-media-icons a {
-  margin-right: 20px;
+footer .social-media-icons a + a {
+  margin-left: 20px;
 }
 
 
