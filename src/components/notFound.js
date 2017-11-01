@@ -13,7 +13,7 @@ export default function NotFound () {
           If you see this page, probably you have typed an incorrect address.
         </div>
         <h4>
-          You can go to <a href="/">main page</a> or select chart in main menu.
+          You can go to the <a href="/">Home page</a> or select a chart in the main menu.
         </h4>
       </div>
     </div>
