@@ -1,0 +1,36 @@
+.not-found-page {
+  margin: 50px auto;
+  max-width: 770px;
+  min-height: 260px;
+  background: url('../images/404.png') center bottom no-repeat;
+  background-size: contain;
+}
+
+.not-found-page__status-code {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.not-found-page__text {
+  display: inline-block;
+  text-align: left;
+  max-width: 600px;
+}
+
+.not-found-page__description {
+  margin-bottom: 20px;
+}
+
+@media (min-width: 0px) {
+  .not-found-page__title {
+    margin-bottom: 16px;
+    font-size: 30px;
+    color: #777;
+  }
+}
+
+@media (min-width: 768px) {
+  .not-found-page__title {
+    font-size: 36px;
+  }
+}
