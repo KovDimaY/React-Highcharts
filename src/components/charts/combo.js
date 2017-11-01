@@ -71,10 +71,11 @@ const comboOptions = {
 
 export default class Combo extends Component {
 
-    render() {
-        return (
-            <Chart container='main-content'
-                   options={comboOptions}/>
-        )
-    }
+	render() {
+		return(
+			<div>
+				<Chart container={'combo-chart'} options={comboOptions}/>
+			</div>
+		)
+	}
 }

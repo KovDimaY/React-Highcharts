@@ -789,6 +789,7 @@ export default class Bar extends Component {
                         onChange={this.onInterestingFactsRadioChange}
                         />Third</label>
         </div>
+
       </div>
     )
   }
@@ -820,22 +821,24 @@ export default class Bar extends Component {
     }
   }
 
-  render() {
+	render() {
     console.log("bar state: ", this.state);
-    return (
-      <div className="row bar-page main-content" key={`bar-chart-${this.state.currentMode}`}>
-        <div className="col-sm-4">
-          {this.renderOptionsDropdown()}
-          <div className="configuration-area">
-            {this.renderConfigurationsArea()}
+    return(
+			<div className="bar-page" key={`bar-chart-${this.state.currentMode}`}>
+        <div className="row">
+          <div className="col-sm-4">
+            {this.renderOptionsDropdown()}
+            <div className="configuration-area">
+              {this.renderConfigurationsArea()}
+            </div>
+          </div>
+          <div className="col-sm-8 chart-area">
+            <Chart container={'bar-chart'}
+                   options={this.state.options}
+                   update={this.state.rerenderChart}/>
           </div>
         </div>
-        <div className="col-sm-8">
-          <Chart container='chart-area'
-                 options={this.state.options}
-                 update={this.state.rerenderChart}/>
-        </div>
-      </div>
-    )
-  }
+			</div>
+		)
+	}
 }

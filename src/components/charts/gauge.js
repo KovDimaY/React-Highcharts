@@ -208,18 +208,16 @@ const rpmOptions = {
 
 export default class Gauge extends Component {
 
-    render() {
-        return (
-            <div className="row main-content">
-                <div className="col-sm-6">
-                    <Chart options={speedOptions}
-                           function={moveSpeed}/>
-                </div>
-                <div className="col-sm-6">
-                    <Chart options={rpmOptions}
-                           function={moveRPM}/>
-                </div>
-            </div>
-        )
-    }
+	render() {
+		return(
+			<div className="row">
+        <div className="col-sm-6">
+				      <Chart container={'speed-chart'} options={speedOptions} function={moveSpeed}/>
+        </div>
+        <div className="col-sm-6">
+				      <Chart container={'rpm-chart'} options={rpmOptions} function={moveRPM}/>
+        </div>
+			</div>
+		)
+	}
 }
