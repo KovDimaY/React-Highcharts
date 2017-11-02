@@ -11,6 +11,7 @@ import Pie from './components/charts/pie';
 import Scattering from './components/charts/scatter';
 import Other from './components/charts/other';
 import Clock from './components/charts/clock';
+import NotFound from './components/notFound';
 
 // Routes definition
 export default (
@@ -22,6 +23,6 @@ export default (
     <Router path='/scatter' component={Scattering} />
     <Router path='/other' component={Other} />
     <Router path='/clock' component={Clock} />
-    <Router path='*' component={Home} />
+    <Router path='*' component={NotFound} />
   </Router>
 );
