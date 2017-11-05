@@ -7,7 +7,7 @@ import Chart from './chart-abstract'
 
 import {
   pureRandom2D,
-  scatterOptions3D,
+  pureRandom3D,
   scatterOptionsBubble
 } from '../../constants/scatter/default-options-scatter'
 
@@ -51,7 +51,7 @@ export default class Scattering extends Component {
   }
 
   initPureRandom3DMode() {
-    const options = scatterOptions3D;
+    const options = pureRandom3D;
     options.series = generateSeriesForPureRandom3D();
     this.setState({ options }, () => {
       this.updatePureRandom3DConfiguration();
@@ -77,7 +77,7 @@ export default class Scattering extends Component {
     options.xAxis.title.text = pureRandom2D.axisTitle ? 'Random Value (UOM)' : null;
     options.plotOptions.scatter.marker.radius = pureRandom2D.smallMarkers ? 2 : 5;
     options.plotOptions.scatter.dataLabels.enabled = pureRandom2D.dataLabels;
-    options.plotOptions.scatter.enableMouseTracking = pureRandom2D.tooltip;
+    options.tooltip.enabled = pureRandom2D.tooltip;
     options.plotOptions.series.animation = pureRandom2D.animation;
     options.series.forEach((serie) => {
       serie.colorByPoint = pureRandom2D.colors;
@@ -91,16 +91,16 @@ export default class Scattering extends Component {
   updatePureRandom3DConfiguration() {
     const { pureRandom3D } = this.state.configurations;
     const { options } = this.state;
-    // options.chart.zoomType = pureRandom3D.zoom ? 'xy' : null;
-    // options.title.text = pureRandom3D.title ? 'Randomly generated data' : null;
-    // options.subtitle.text = pureRandom3D.title ? 'Randomly generated data' : null;
-    // options.legend.enabled = pureRandom3D.legend;
-    // options.yAxis.title.text = pureRandom3D.axisTitle ? 'Random Value (UOM)' : null;
-    // options.xAxis.title.text = pureRandom3D.axisTitle ? 'Random Value (UOM)' : null;
-    // options.plotOptions.scatter.marker.radius = pureRandom3D.smallMarkers ? 2 : 5;
-    // options.plotOptions.scatter.dataLabels.enabled = pureRandom3D.dataLabels;
-    // options.plotOptions.scatter.enableMouseTracking = pureRandom3D.tooltip;
-    // options.plotOptions.series.animation = pureRandom3D.animation;
+    options.title.text = pureRandom3D.title ? 'Randomly generated data' : null;
+    options.subtitle.text = pureRandom3D.title ? 'Click and drag the plot area to rotate in space' : null;
+    options.legend.enabled = pureRandom3D.legend;
+    options.yAxis.title.text = pureRandom3D.axisTitle ? 'Random Value (UOM)' : null;
+    options.xAxis.title.text = pureRandom3D.axisTitle ? 'Random Value (UOM)' : null;
+    options.zAxis.title.text = pureRandom3D.axisTitle ? 'Random Value (UOM)' : null;
+    options.plotOptions.scatter3d.marker.radius = pureRandom3D.smallMarkers ? 2 : 5;
+    options.plotOptions.scatter3d.dataLabels.enabled = pureRandom3D.dataLabels;
+    options.tooltip.enabled = pureRandom3D.tooltip;
+    options.plotOptions.series.animation = pureRandom3D.animation;
     options.series.forEach((serie, i) => {
       serie.colorByPoint = pureRandom3D.colors;
     });
@@ -279,12 +279,6 @@ export default class Scattering extends Component {
                         value={optionsPureRandom3D.tooltip}
                         checked={pureRandom3D.tooltip}
                         onChange={this.onPureRandom3DCheckBoxChange}/>Enable Tooltip</label>
-        </div>
-        <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom3D.zoom}
-                        checked={pureRandom3D.zoom}
-                        onChange={this.onPureRandom3DCheckBoxChange}/>Enable Zoom</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"

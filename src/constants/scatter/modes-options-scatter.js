@@ -16,7 +16,16 @@ export const optionsPureRandom2D = {
   colors: "colors"
 }
 
-export const optionsPureRandom3D = optionsPureRandom2D;
+export const optionsPureRandom3D = {
+  tooltip: "tooltip",
+  legend: "legend",
+  title: "title",
+  dataLabels: "dataLabels",
+  animation: "animation",
+  axisTitle: "axisTitle",
+  smallMarkers: "smallMarkers",
+  colors: "colors"
+};
 
 
 
@@ -41,7 +50,6 @@ export const initialState = {
     },
     pureRandom3D: {
       tooltip: true,
-      zoom: true,
       legend: true,
       title: true,
       dataLabels: true,
