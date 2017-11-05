@@ -44,3 +44,30 @@ export function move(chart) {
     });
   });
 };
+
+export function generateSeriesForPureRandom2D() {
+  const numberOfSeries = Math.round(Math.random() * 4) + 1;
+  const numberOfPoints = Math.round(Math.random() * 199) + 1;
+  let result = [];
+  for (let i = 0; i < numberOfSeries; i++) {
+    let currentData = [];
+    const currentName = `Random Serie ${i + 1}`
+    const minX = Math.random() * 1000 - 500;
+    const maxX = Math.random() * 1000 + minX;
+    const minY = Math.random() * 1000 - 500;
+    const maxY = Math.random() * 1000 + minY;
+    for (let j = 0; j < numberOfPoints; j++) {
+      const randX = Math.random() * (maxX - minX) + minX;
+      const randY = Math.random() * (maxY - minY) + minY;
+      const shortX = Math.round(randX * 1000) / 1000;
+      const shortY = Math.round(randY * 1000) / 1000;
+      currentData.push([shortX, shortY]);
+    }
+    result.push({
+      name: currentName,
+      data: currentData
+    });
+  }
+
+  return result;
+}

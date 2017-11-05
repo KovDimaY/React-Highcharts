@@ -38,7 +38,7 @@ export default class Scattering extends Component {
 
   initPureRandom2DMode() {
     const options = pureRandom2D;
-
+    options.series = generateSeriesForPureRandom2D();
     this.setState({ options }, () => {
       this.updatePureRandom2DConfiguration();
     });
