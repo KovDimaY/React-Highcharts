@@ -1,6 +1,6 @@
 export const modes = {
   pureRandom2D: "Pure Random 2D",
-  scatter3d: "Scattering 3D",
+  pureRandom3D: "Pure Random 3D",
   scatterBubble: "Scattering Bubble"
 }
 
@@ -15,6 +15,9 @@ export const optionsPureRandom2D = {
   smallMarkers: "smallMarkers",
   colors: "colors"
 }
+
+export const optionsPureRandom3D = optionsPureRandom2D;
+
 
 
 
@@ -35,7 +38,17 @@ export const initialState = {
       smallMarkers: true,
       colors: false
     },
-    scatter3d: {},
+    pureRandom3D: {
+      tooltip: true,
+      zoom: true,
+      legend: true,
+      title: true,
+      dataLabels: true,
+      animation: true,
+      axisTitle: true,
+      smallMarkers: true,
+      colors: false
+    },
     scatterBubble: {}
   }
 }
