@@ -6,65 +6,21 @@ import $ from 'jquery'
 import Chart from './chart-abstract'
 
 import {
+  pureRandom2D,
   scatterOptions3D,
-  scatterOptions2D,
   scatterOptionsBubble
 } from '../../constants/scatter/default-options-scatter'
 
 import {
   modes,
   initialState,
+  optionsPureRandom2D
 } from '../../constants/scatter/modes-options-scatter'
 
-// Give the points a 3D feel by adding a radial gradient
-// Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function (color) {
-//     return {
-//         radialGradient: {
-//             cx: 0.4,
-//             cy: 0.3,
-//             r: 0.5
-//         },
-//         stops: [
-//             [0, color],
-//             [1, Highcharts.Color(color).brighten(-0.2).get('rgb')]
-//         ]
-//     };
-// });
-
-
-
-function move(chart) {
-// Add mouse events for rotation
- $(chart.container).on('mousedown.hc touchstart.hc', function (eStart) {
-    eStart = chart.pointer.normalize(eStart);
-
-    var posX = eStart.pageX,
-        posY = eStart.pageY,
-        alpha = chart.options.chart.options3d.alpha,
-        beta = chart.options.chart.options3d.beta,
-        newAlpha,
-        newBeta,
-        sensitivity = 5; // lower is more sensitive
-
-    $(document).on({
-        'mousemove.hc touchdrag.hc': function (e) {
-            // Run beta
-            newBeta = beta + (posX - e.pageX) / sensitivity;
-            chart.options.chart.options3d.beta = newBeta;
-
-            // Run alpha
-            newAlpha = alpha + (e.pageY - posY) / sensitivity;
-            chart.options.chart.options3d.alpha = newAlpha;
-
-            chart.redraw(false);
-        },
-        'mouseup touchend': function () {
-            $(document).off('.hc');
-        }
-    });
-  });
-};
-
+import {
+  move,
+  generateSeriesForPureRandom2D
+} from '../../constants/scatter/data-helpers-scatter'
 
 export default class Scattering extends Component {
   constructor(props) {
@@ -72,10 +28,20 @@ export default class Scattering extends Component {
     this.state = initialState;
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
+    this.updatePureRandom2DConfiguration = this.updatePureRandom2DConfiguration.bind(this);
+    this.onPureRandom2DCheckBoxChange = this.onPureRandom2DCheckBoxChange.bind(this);
   }
 
   componentDidMount() {
     this.initScatter3DMode();
+  }
+
+  initPureRandom2DMode() {
+    const options = pureRandom2D;
+
+    this.setState({ options }, () => {
+      this.updatePureRandom2DConfiguration();
+    });
   }
 
   initScatter3DMode() {
@@ -83,14 +49,6 @@ export default class Scattering extends Component {
 
     this.setState({ options }, () => {
       this.updateScatter3DConfiguration();
-    });
-  }
-
-  initScatter2DMode() {
-    const options = scatterOptions2D;
-
-    this.setState({ options }, () => {
-      this.updateScatter2DConfiguration();
     });
   }
 
@@ -108,7 +66,22 @@ export default class Scattering extends Component {
     })
   }
 
-  updateScatter2DConfiguration() {
+  updatePureRandom2DConfiguration() {
+    const { pureRandom2D } = this.state.configurations;
+    const { options } = this.state;
+    options.chart.zoomType = pureRandom2D.zoom ? 'xy' : null;
+    // options.chart.type = pureRandom2D.area ? 'area'  : 'line';
+    options.title.text = pureRandom2D.title ? 'Randomly generated data' : null;
+    options.subtitle.text = pureRandom2D.title ? 'Randomly generated data' : null;
+    options.legend.enabled = pureRandom2D.legend;
+    options.yAxis.title.text = pureRandom2D.yAxisTitle ? 'Random Value (UOM)' : null;
+    // options.plotOptions.line.dataLabels.enabled = pureRandom2D.dataLabels;
+    // options.plotOptions.area.dataLabels.enabled = pureRandom2D.dataLabels;
+    // options.plotOptions.line.enableMouseTracking = pureRandom2D.tooltip;
+    // options.plotOptions.area.enableMouseTracking = pureRandom2D.tooltip;
+    // options.plotOptions.series.animation = pureRandom2D.animation;
+    // options.plotOptions.series.marker.enabled = pureRandom2D.markers;
+
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -124,12 +97,12 @@ export default class Scattering extends Component {
     const mode = input.target.innerHTML;
     const { configurations } = this.state;
     switch (mode) {
-      case modes.scatter3d: {
-        this.initScatter3DMode();
+      case modes.pureRandom2D: {
+        this.initPureRandom2DMode();
         break;
       }
-      case modes.scatter2d: {
-        this.initScatter2DMode();
+      case modes.scatter3d: {
+        this.initScatter3DMode();
         break;
       }
       case modes.scatterBubble: {
@@ -143,6 +116,16 @@ export default class Scattering extends Component {
     this.setState({ currentMode: mode, configurations });
   }
 
+  onPureRandom2DCheckBoxChange(event) {
+    const { configurations } = this.state;
+    if (configurations.pureRandom2D[event.target.value]) {
+      configurations.pureRandom2D[event.target.value] = false;
+    } else {
+      configurations.pureRandom2D[event.target.value] = true;
+    }
+    this.setState({ configurations })
+  }
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -150,10 +133,79 @@ export default class Scattering extends Component {
         <span className="caret"></span></button>
         <ul className="dropdown-menu">
           <li className="dropdown-header">Scattering Charts</li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom2D}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.scatter3d}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.scatter2d}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.scatterBubble}</a></li>
         </ul>
+      </div>
+    )
+  }
+
+  renderPureRandom2DModeConfiguration() {
+    const { pureRandom2D } = this.state.configurations;
+    return (
+      <div className="pure-random-2d">
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom2D.title}
+                        checked={pureRandom2D.title}
+                        onChange={this.onPureRandom2DCheckBoxChange}/>Show Chart Title</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom2D.yAxisTitle}
+                        checked={pureRandom2D.yAxisTitle}
+                        onChange={this.onPureRandom2DCheckBoxChange}/>Show Y-Axis Title</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom2D.markers}
+                        checked={pureRandom2D.markers}
+                        onChange={this.onPureRandom2DCheckBoxChange}/>Show Point Markers</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom2D.dataLabels}
+                        checked={pureRandom2D.dataLabels}
+                        onChange={this.onPureRandom2DCheckBoxChange}/>Show Data Labels</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom2D.legend}
+                        checked={pureRandom2D.legend}
+                        onChange={this.onPureRandom2DCheckBoxChange}/>Show Legend</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom2D.tooltip}
+                        checked={pureRandom2D.tooltip}
+                        onChange={this.onPureRandom2DCheckBoxChange}/>Enable Tooltip</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom2D.zoom}
+                        checked={pureRandom2D.zoom}
+                        onChange={this.onPureRandom2DCheckBoxChange}/>Enable Zoom</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom2D.animation}
+                        checked={pureRandom2D.animation}
+                        onChange={this.onPureRandom2DCheckBoxChange}/>Enable Animation</label>
+        </div>
+		<div className="checkbox">
+		  <label><input type="checkbox"
+						value={optionsPureRandom2D.area}
+						checked={pureRandom2D.area}
+						onChange={this.onPureRandom2DCheckBoxChange}/>Use Areas</label>
+		</div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updatePureRandom2DConfiguration}>
+          Apply
+        </button>
       </div>
     )
   }
@@ -161,11 +213,11 @@ export default class Scattering extends Component {
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
+      case modes.pureRandom2D: {
+        return this.renderPureRandom2DModeConfiguration();
+      }
       case modes.scatter3d: {
         return <div> SCATTER 3D </div>;
-      }
-      case modes.scatter2d: {
-        return <div> SCATTER 2D </div>;
       }
       case modes.scatterBubble: {
         return <div> SCATTER BUBBLE </div>;

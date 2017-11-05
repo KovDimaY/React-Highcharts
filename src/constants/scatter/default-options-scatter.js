@@ -66,7 +66,7 @@ export const scatterOptions3D = {
     }]
 }
 
-export const scatterOptions2D = {
+export const pureRandom2D = {
     chart: {
         type: 'scatter',
         zoomType: 'xy'
