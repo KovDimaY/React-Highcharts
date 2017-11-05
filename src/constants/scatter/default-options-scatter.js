@@ -72,15 +72,15 @@ export const pureRandom2D = {
         zoomType: 'xy'
     },
     title: {
-        text: 'Height Versus Weight of 507 Individuals by Gender'
+        text: ''
     },
     subtitle: {
-        text: 'Source: Heinz  2003'
+        text: ''
     },
     xAxis: {
         title: {
             enabled: true,
-            text: 'Height (cm)'
+            text: ''
         },
         startOnTick: true,
         endOnTick: true,
@@ -88,23 +88,17 @@ export const pureRandom2D = {
     },
     yAxis: {
         title: {
-            text: 'Weight (kg)'
+            enabled: true,
+            text: ''
         }
     },
     legend: {
-        layout: 'vertical',
-        align: 'left',
-        verticalAlign: 'top',
-        x: 100,
-        y: 70,
-        floating: true,
-        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
-        borderWidth: 1
+        enabled: true
     },
     plotOptions: {
         scatter: {
             marker: {
-                radius: 5,
+                radius: 2,
                 states: {
                     hover: {
                         enabled: true,
@@ -122,12 +116,17 @@ export const pureRandom2D = {
             tooltip: {
                 headerFormat: '<b>{series.name}</b><br>',
                 pointFormat: '{point.x} cm, {point.y} kg'
+            },
+            dataLabels: {
+                enabled: true
             }
+        },
+        series: {
+            animation: true
         }
     },
     series: [{
         name: 'Female',
-        color: 'rgba(223, 83, 83, .5)',
         data: [[161.2, 51.6], [167.5, 59.0], [159.5, 49.2], [157.0, 63.0], [155.8, 53.6],
             [170.0, 59.0], [159.1, 47.6], [166.0, 69.8], [176.2, 66.8], [160.2, 75.2],
             [172.5, 55.2], [170.9, 54.2], [172.9, 62.5], [153.4, 42.0], [160.0, 50.0],
@@ -183,7 +182,6 @@ export const pureRandom2D = {
 
     }, {
         name: 'Male',
-        color: 'rgba(119, 152, 191, .5)',
         data: [[174.0, 65.6], [175.3, 71.8], [193.5, 80.7], [186.5, 72.6], [187.2, 78.8],
             [181.5, 74.8], [184.0, 86.4], [184.5, 78.4], [175.0, 62.0], [184.0, 81.6],
             [180.0, 76.6], [177.8, 83.6], [192.0, 90.0], [176.0, 74.6], [174.0, 71.0],

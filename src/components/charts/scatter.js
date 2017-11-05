@@ -33,7 +33,7 @@ export default class Scattering extends Component {
   }
 
   componentDidMount() {
-    this.initScatter3DMode();
+    this.initPureRandom2DMode();
   }
 
   initPureRandom2DMode() {
@@ -70,17 +70,18 @@ export default class Scattering extends Component {
     const { pureRandom2D } = this.state.configurations;
     const { options } = this.state;
     options.chart.zoomType = pureRandom2D.zoom ? 'xy' : null;
-    // options.chart.type = pureRandom2D.area ? 'area'  : 'line';
     options.title.text = pureRandom2D.title ? 'Randomly generated data' : null;
     options.subtitle.text = pureRandom2D.title ? 'Randomly generated data' : null;
     options.legend.enabled = pureRandom2D.legend;
-    options.yAxis.title.text = pureRandom2D.yAxisTitle ? 'Random Value (UOM)' : null;
-    // options.plotOptions.line.dataLabels.enabled = pureRandom2D.dataLabels;
-    // options.plotOptions.area.dataLabels.enabled = pureRandom2D.dataLabels;
-    // options.plotOptions.line.enableMouseTracking = pureRandom2D.tooltip;
-    // options.plotOptions.area.enableMouseTracking = pureRandom2D.tooltip;
-    // options.plotOptions.series.animation = pureRandom2D.animation;
-    // options.plotOptions.series.marker.enabled = pureRandom2D.markers;
+    options.yAxis.title.text = pureRandom2D.axisTitle ? 'Random Value (UOM)' : null;
+    options.xAxis.title.text = pureRandom2D.axisTitle ? 'Random Value (UOM)' : null;
+    options.plotOptions.scatter.marker.radius = pureRandom2D.smallMarkers ? 2 : 5;
+    options.plotOptions.scatter.dataLabels.enabled = pureRandom2D.dataLabels;
+    options.plotOptions.scatter.enableMouseTracking = pureRandom2D.tooltip;
+    options.plotOptions.series.animation = pureRandom2D.animation;
+    options.series.forEach((serie) => {
+      serie.colorByPoint = pureRandom2D.colors;
+    });
 
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -153,15 +154,9 @@ export default class Scattering extends Component {
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
-                        value={optionsPureRandom2D.yAxisTitle}
-                        checked={pureRandom2D.yAxisTitle}
-                        onChange={this.onPureRandom2DCheckBoxChange}/>Show Y-Axis Title</label>
-        </div>
-        <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom2D.markers}
-                        checked={pureRandom2D.markers}
-                        onChange={this.onPureRandom2DCheckBoxChange}/>Show Point Markers</label>
+                        value={optionsPureRandom2D.axisTitle}
+                        checked={pureRandom2D.axisTitle}
+                        onChange={this.onPureRandom2DCheckBoxChange}/>Show Axis Titles</label>
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
@@ -193,12 +188,18 @@ export default class Scattering extends Component {
                         checked={pureRandom2D.animation}
                         onChange={this.onPureRandom2DCheckBoxChange}/>Enable Animation</label>
         </div>
-		<div className="checkbox">
-		  <label><input type="checkbox"
-						value={optionsPureRandom2D.area}
-						checked={pureRandom2D.area}
-						onChange={this.onPureRandom2DCheckBoxChange}/>Use Areas</label>
-		</div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandom2D.smallMarkers}
+                        checked={pureRandom2D.smallMarkers}
+                        onChange={this.onPureRandom2DCheckBoxChange}/>Small Markers</label>
+        </div>
+    		<div className="checkbox">
+    		  <label><input type="checkbox"
+    						value={optionsPureRandom2D.colors}
+    						checked={pureRandom2D.colors}
+    						onChange={this.onPureRandom2DCheckBoxChange}/>Color Per Point</label>
+    		</div>
 
         <button
           type="button"

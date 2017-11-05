@@ -11,9 +11,9 @@ export const optionsPureRandom2D = {
   title: "title",
   dataLabels: "dataLabels",
   animation: "animation",
-  yAxisTitle: "yAxisTitle",
-  markers: "markers",
-  area: "area"
+  axisTitle: "axisTitle",
+  smallMarkers: "smallMarkers",
+  colors: "colors"
 }
 
 
@@ -22,7 +22,7 @@ export const optionsPureRandom2D = {
 export const initialState = {
   options: {},
   rerenderChart: false,
-  currentMode: modes.scatter3d,
+  currentMode: modes.pureRandom2D,
   configurations: {
     pureRandom2D: {
       tooltip: true,
@@ -31,9 +31,9 @@ export const initialState = {
       title: true,
       dataLabels: true,
       animation: true,
-      yAxisTitle: true,
-      markers: true,
-      area: false
+      axisTitle: true,
+      smallMarkers: true,
+      colors: false
     },
     scatter3d: {},
     scatterBubble: {}
