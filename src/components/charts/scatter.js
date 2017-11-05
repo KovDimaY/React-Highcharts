@@ -145,7 +145,7 @@ export default class Scattering extends Component {
   renderPureRandom2DModeConfiguration() {
     const { pureRandom2D } = this.state.configurations;
     return (
-      <div className="pure-random-2d">
+      <div className="pure-random">
         <div className="checkbox">
           <label><input type="checkbox"
                         value={optionsPureRandom2D.title}
