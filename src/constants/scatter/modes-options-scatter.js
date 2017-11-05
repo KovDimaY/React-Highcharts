@@ -24,6 +24,7 @@ export const optionsPureRandom3D = optionsPureRandom2D;
 
 export const initialState = {
   options: {},
+  defaultColors: undefined,
   rerenderChart: false,
   currentMode: modes.pureRandom2D,
   configurations: {

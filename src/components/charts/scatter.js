@@ -20,14 +20,17 @@ import {
 
 import {
   move,
-  generateSeriesForPureRandom2D
+  convertColorsTo3D,
+  convertColorsToFlat,
+  generateSeriesForPureRandom2D,
+  generateSeriesForPureRandom3D
 } from '../../constants/scatter/data-helpers-scatter'
 
 export default class Scattering extends Component {
   constructor(props) {
     super(props);
     this.state = initialState;
-
+    this.state.defaultColors = Highcharts.getOptions().colors.slice();
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.updatePureRandom2DConfiguration = this.updatePureRandom2DConfiguration.bind(this);
     this.updatePureRandom3DConfiguration = this.updatePureRandom3DConfiguration.bind(this);
@@ -49,7 +52,7 @@ export default class Scattering extends Component {
 
   initPureRandom3DMode() {
     const options = scatterOptions3D;
-
+    options.series = generateSeriesForPureRandom3D();
     this.setState({ options }, () => {
       this.updatePureRandom3DConfiguration();
     });
@@ -98,9 +101,9 @@ export default class Scattering extends Component {
     // options.plotOptions.scatter.dataLabels.enabled = pureRandom3D.dataLabels;
     // options.plotOptions.scatter.enableMouseTracking = pureRandom3D.tooltip;
     // options.plotOptions.series.animation = pureRandom3D.animation;
-    // options.series.forEach((serie) => {
-    //   serie.colorByPoint = pureRandom3D.colors;
-    // });
+    options.series.forEach((serie, i) => {
+      serie.colorByPoint = pureRandom3D.colors;
+    });
 
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -115,17 +118,20 @@ export default class Scattering extends Component {
 
   dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
-    const { configurations } = this.state;
+    const { configurations, defaultColors } = this.state;
     switch (mode) {
       case modes.pureRandom2D: {
+        convertColorsToFlat(defaultColors);
         this.initPureRandom2DMode();
         break;
       }
       case modes.pureRandom3D: {
+        convertColorsTo3D(defaultColors);
         this.initPureRandom3DMode();
         break;
       }
       case modes.scatterBubble: {
+        convertColorsTo3D(defaultColors);
         this.initScatterBubbleMode();
         break;
       }

@@ -34,18 +34,12 @@ export const scatterOptions3D = {
         }
     },
     yAxis: {
-        min: 0,
-        max: 10,
         title: null
     },
     xAxis: {
-        min: 0,
-        max: 10,
         gridLineWidth: 1
     },
     zAxis: {
-        min: 0,
-        max: 10,
         showFirstLabel: false
     },
     legend: {
