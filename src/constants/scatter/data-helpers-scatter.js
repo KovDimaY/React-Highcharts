@@ -120,3 +120,34 @@ export function generateSeriesForPureRandom3D() {
 
   return result;
 }
+
+export function generateSeriesForPureRandomBubble() {
+  const numberOfSeries = Math.round(Math.random() * 4) + 1;
+  const numberOfPoints = Math.round(Math.random() * 19) + 1;
+  let result = [];
+  for (let i = 0; i < numberOfSeries; i++) {
+    let currentData = [];
+    const currentName = `Random Serie ${i + 1}`
+    const minX = Math.random() * 1000 - 500;
+    const maxX = Math.random() * 1000 + minX;
+    const minY = Math.random() * 1000 - 500;
+    const maxY = Math.random() * 1000 + minY;
+    const minZ = Math.random() * 100;
+    const maxZ = Math.random() * 100 + minZ;
+    for (let j = 0; j < numberOfPoints; j++) {
+      const randX = Math.random() * (maxX - minX) + minX;
+      const randY = Math.random() * (maxY - minY) + minY;
+      const randZ = Math.random() * (maxZ - minZ) + minZ;
+      const shortX = Math.round(randX * 1000) / 1000;
+      const shortY = Math.round(randY * 1000) / 1000;
+      const shortZ = Math.round(randZ);
+      currentData.push([shortX, shortY, shortZ]);
+    }
+    result.push({
+      name: currentName,
+      data: currentData
+    });
+  }
+
+  return result;
+}

@@ -25,7 +25,8 @@ import {
   convertColorsToBubbles,
   convertColorsToFlat,
   generateSeriesForPureRandom2D,
-  generateSeriesForPureRandom3D
+  generateSeriesForPureRandom3D,
+  generateSeriesForPureRandomBubble
 } from '../../constants/scatter/data-helpers-scatter'
 
 export default class Scattering extends Component {
@@ -64,7 +65,7 @@ export default class Scattering extends Component {
 
   initPureRandomBubbleMode() {
     const options = pureRandomBubble;
-
+    options.series = generateSeriesForPureRandomBubble();
     this.setState({ options }, () => {
       this.updatePureRandomBubbleConfiguration();
     });
