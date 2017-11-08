@@ -148,7 +148,7 @@ export const pureRandom3D = {
     series: []
 }
 
-export const scatterOptionsBubble = {
+export const pureRandomBubble = {
     chart: {
         type: 'bubble',
         plotBorderWidth: 1,

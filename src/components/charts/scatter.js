@@ -8,14 +8,15 @@ import Chart from './chart-abstract'
 import {
   pureRandom2D,
   pureRandom3D,
-  scatterOptionsBubble
+  pureRandomBubble
 } from '../../constants/scatter/default-options-scatter'
 
 import {
   modes,
   initialState,
   optionsPureRandom2D,
-  optionsPureRandom3D
+  optionsPureRandom3D,
+  optionsPureRandomBubble
 } from '../../constants/scatter/modes-options-scatter'
 
 import {
@@ -34,8 +35,10 @@ export default class Scattering extends Component {
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.updatePureRandom2DConfiguration = this.updatePureRandom2DConfiguration.bind(this);
     this.updatePureRandom3DConfiguration = this.updatePureRandom3DConfiguration.bind(this);
+    this.updatePureRandomBubbleConfiguration = this.updatePureRandomBubbleConfiguration.bind(this);
     this.onPureRandom2DCheckBoxChange = this.onPureRandom2DCheckBoxChange.bind(this);
     this.onPureRandom3DCheckBoxChange = this.onPureRandom3DCheckBoxChange.bind(this);
+    this.onPureRandomBubbleCheckBoxChange = this.onPureRandomBubbleCheckBoxChange.bind(this);
   }
 
   componentDidMount() {
@@ -58,11 +61,11 @@ export default class Scattering extends Component {
     });
   }
 
-  initScatterBubbleMode() {
-    const options = scatterOptionsBubble;
+  initPureRandomBubbleMode() {
+    const options = pureRandomBubble;
 
     this.setState({ options }, () => {
-      this.updateScatterBubbleConfiguration();
+      this.updatePureRandomBubbleConfiguration();
     });
   }
 
@@ -110,7 +113,7 @@ export default class Scattering extends Component {
     })
   }
 
-  updateScatterBubbleConfiguration() {
+  updatePureRandomBubbleConfiguration() {
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -130,9 +133,9 @@ export default class Scattering extends Component {
         this.initPureRandom3DMode();
         break;
       }
-      case modes.scatterBubble: {
+      case modes.pureRandomBubble: {
         convertColorsTo3D(defaultColors);
-        this.initScatterBubbleMode();
+        this.initPureRandomBubbleMode();
         break;
       }
       default: {
@@ -162,6 +165,16 @@ export default class Scattering extends Component {
     this.setState({ configurations })
   }
 
+  onPureRandomBubbleCheckBoxChange(event) {
+    const { configurations } = this.state;
+    if (configurations.pureRandomBubble[event.target.value]) {
+      configurations.pureRandomBubble[event.target.value] = false;
+    } else {
+      configurations.pureRandomBubble[event.target.value] = true;
+    }
+    this.setState({ configurations })
+  }
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -171,7 +184,7 @@ export default class Scattering extends Component {
           <li className="dropdown-header">Scattering Charts</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom2D}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom3D}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.scatterBubble}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.pureRandomBubble}</a></li>
         </ul>
       </div>
     )
@@ -309,6 +322,69 @@ export default class Scattering extends Component {
     )
   }
 
+  renderPureRandomBubbleModeConfiguration() {
+    const { pureRandomBubble } = this.state.configurations;
+    return (
+      <div className="pure-random">
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandomBubble.title}
+                        checked={pureRandomBubble.title}
+                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Show Chart Title</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandomBubble.axisTitle}
+                        checked={pureRandomBubble.axisTitle}
+                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Show Axis Titles</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandomBubble.dataLabels}
+                        checked={pureRandomBubble.dataLabels}
+                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Show Data Labels</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandomBubble.legend}
+                        checked={pureRandomBubble.legend}
+                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Show Legend</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandomBubble.tooltip}
+                        checked={pureRandomBubble.tooltip}
+                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Enable Tooltip</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandomBubble.zoom}
+                        checked={pureRandomBubble.zoom}
+                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Enable Zoom</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandomBubble.animation}
+                        checked={pureRandomBubble.animation}
+                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Enable Animation</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsPureRandomBubble.colors}
+                        checked={pureRandomBubble.colors}
+                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Color Per Bubble</label>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updatePureRandomBubbleConfiguration}>
+          Apply
+        </button>
+      </div>
+    )
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -318,8 +394,8 @@ export default class Scattering extends Component {
       case modes.pureRandom3D: {
         return this.renderPureRandom3DModeConfiguration();
       }
-      case modes.scatterBubble: {
-        return <div> SCATTER BUBBLE </div>;
+      case modes.pureRandomBubble: {
+        return this.renderPureRandomBubbleModeConfiguration();
       }
       default: {
         return null;
