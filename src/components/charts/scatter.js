@@ -114,6 +114,21 @@ export default class Scattering extends Component {
   }
 
   updatePureRandomBubbleConfiguration() {
+    const { pureRandomBubble } = this.state.configurations;
+    const { options } = this.state;
+    options.chart.zoomType = pureRandomBubble.zoom ? 'xy' : null;
+    options.title.text = pureRandomBubble.title ? 'Randomly generated data' : null;
+    options.subtitle.text = pureRandomBubble.title ? 'Randomly generated data' : null;
+    options.legend.enabled = pureRandomBubble.legend;
+    options.yAxis.title.text = pureRandomBubble.axisTitle ? 'Random Value (UOM)' : null;
+    options.xAxis.title.text = pureRandomBubble.axisTitle ? 'Random Value (UOM)' : null;
+    options.plotOptions.bubble.dataLabels.enabled = pureRandomBubble.dataLabels;
+    options.tooltip.enabled = pureRandomBubble.tooltip;
+    options.plotOptions.series.animation = pureRandomBubble.animation;
+    options.series.forEach((serie, i) => {
+      serie.colorByPoint = pureRandomBubble.colors;
+    });
+
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })

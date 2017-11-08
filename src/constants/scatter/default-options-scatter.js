@@ -154,20 +154,41 @@ export const pureRandomBubble = {
         plotBorderWidth: 1,
         zoomType: 'xy'
     },
-
     title: {
-        text: 'Highcharts bubbles with radial gradient fill'
+        text: ''
     },
-
-    xAxis: {
-        gridLineWidth: 1
+    subtitle: {
+        text: ''
     },
-
+    legend: {
+        enabled: false
+    },
+    tooltip: {
+        enabled: true
+    },
     yAxis: {
-        startOnTick: false,
-        endOnTick: false
+        title: {
+            enabled: true,
+            text: ''
+        }
     },
-
+    xAxis: {
+        gridLineWidth: 1,
+        title: {
+            enabled: true,
+            text: ''
+        }
+    },
+    plotOptions: {
+        bubble: {
+            dataLabels: {
+                enabled: true
+            }
+        },
+        series: {
+            animation: true
+        }
+    },
     series: [{
         data: [
             [9, 81, 63],
