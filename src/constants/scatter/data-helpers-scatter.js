@@ -13,6 +13,19 @@ export function convertColorsTo3D(colors) {
   });
 }
 
+// Give the points a pretty look and feel by adding a radial gradient
+export function convertColorsToBubbles(colors) {
+  Highcharts.getOptions().colors = colors.map((color) => {
+      return {
+          radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
+          stops: [
+              [0, 'rgba(255,255,255,0.5)'],
+              [1, Highcharts.Color(color).setOpacity(0.5).get('rgba')]
+          ]
+      };
+  });
+}
+
 export function convertColorsToFlat(colors) {
   Highcharts.getOptions().colors = colors.slice();
 }

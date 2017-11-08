@@ -22,6 +22,7 @@ import {
 import {
   move,
   convertColorsTo3D,
+  convertColorsToBubbles,
   convertColorsToFlat,
   generateSeriesForPureRandom2D,
   generateSeriesForPureRandom3D
@@ -149,7 +150,7 @@ export default class Scattering extends Component {
         break;
       }
       case modes.pureRandomBubble: {
-        convertColorsTo3D(defaultColors);
+        convertColorsToBubbles(defaultColors);
         this.initPureRandomBubbleMode();
         break;
       }

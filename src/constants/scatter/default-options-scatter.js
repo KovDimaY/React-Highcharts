@@ -206,15 +206,6 @@ export const pureRandomBubble = {
             [93, 23, 23],
             [44, 83, 22]
         ],
-        marker: {
-            fillColor: {
-                radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
-                stops: [
-                    [0, 'rgba(255,255,255,0.5)'],
-                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0.5).get('rgba')]
-                ]
-            }
-        }
     }, {
         data: [
             [42, 38, 20],
@@ -232,14 +223,5 @@ export const pureRandomBubble = {
             [57, 91, 82],
             [45, 15, 98]
         ],
-        marker: {
-            fillColor: {
-                radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
-                stops: [
-                    [0, 'rgba(255,255,255,0.5)'],
-                    [1, Highcharts.Color(Highcharts.getOptions().colors[1]).setOpacity(0.5).get('rgba')]
-                ]
-            }
-        }
     }]
 }
