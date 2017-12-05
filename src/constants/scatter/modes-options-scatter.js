@@ -1,7 +1,8 @@
 export const modes = {
   pureRandom2D: "Pure Random 2D",
   pureRandom3D: "Pure Random 3D",
-  pureRandomBubble: "Pure Random Bubble"
+  pureRandomBubble: "Pure Random Bubble",
+  configurableRandom: "Configurable Random"
 }
 
 export const optionsPureRandom2D = {

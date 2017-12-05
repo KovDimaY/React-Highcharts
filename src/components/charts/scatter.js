@@ -70,7 +70,15 @@ export default class Scattering extends Component {
       this.updatePureRandomBubbleConfiguration();
     });
   }
-
+  
+  initConfigurableRandomMode() {
+    const options = pureRandom2D;
+    options.series = generateSeriesForPureRandom2D();
+    this.setState({ options }, () => {
+      this.updateConfigurableRandomConfiguration();
+    });
+  }
+  
   updatePureRandom2DConfiguration() {
     const { pureRandom2D } = this.state.configurations;
     const { options } = this.state;
@@ -135,7 +143,13 @@ export default class Scattering extends Component {
       this.setState({ rerenderChart: false })
     })
   }
-
+  
+  updateConfigurableRandomConfiguration() {
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+  
   dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
     const { configurations, defaultColors } = this.state;
@@ -153,6 +167,11 @@ export default class Scattering extends Component {
       case modes.pureRandomBubble: {
         convertColorsToBubbles(defaultColors);
         this.initPureRandomBubbleMode();
+        break;
+      }
+      case modes.configurableRandom: {
+        convertColorsToFlat(defaultColors);
+        this.initConfigurableRandomMode();
         break;
       }
       default: {
@@ -202,6 +221,7 @@ export default class Scattering extends Component {
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom2D}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom3D}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandomBubble}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
         </ul>
       </div>
     )
@@ -401,7 +421,11 @@ export default class Scattering extends Component {
       </div>
     )
   }
-
+  
+  renderConfigurableRandomModeConfiguration() {
+    return (<div>Hello from Configurable Random</div>);
+  }
+  
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -413,6 +437,9 @@ export default class Scattering extends Component {
       }
       case modes.pureRandomBubble: {
         return this.renderPureRandomBubbleModeConfiguration();
+      }
+      case modes.configurableRandom: {
+        return this.renderConfigurableRandomModeConfiguration();
       }
       default: {
         return null;
