@@ -30,6 +30,8 @@ import {
   generateSeriesForPureRandomBubble
 } from '../../constants/scatter/data-helpers-scatter'
 
+import { limitNumericalInput } from '../../constants/shared/helpers'
+
 export default class Scattering extends Component {
   constructor(props) {
     super(props);
@@ -42,6 +44,7 @@ export default class Scattering extends Component {
     this.onPureRandom2DCheckBoxChange = this.onPureRandom2DCheckBoxChange.bind(this);
     this.onPureRandom3DCheckBoxChange = this.onPureRandom3DCheckBoxChange.bind(this);
     this.onPureRandomBubbleCheckBoxChange = this.onPureRandomBubbleCheckBoxChange.bind(this);
+    this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -211,7 +214,33 @@ export default class Scattering extends Component {
     }
     this.setState({ configurations })
   }
-
+  
+  onConfigurableRandomInputChange(event) {
+    const { configurations } = this.state;
+    if (event.target.dataset.type === "series") {
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        1,
+        20,
+        true
+      );
+    } else if (event.target.dataset.type === "points") {
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        1,
+        1000,
+        true
+      );
+    } else {
+      configurations.configurableRandom[event.target.name] = event.target.value;
+    }
+    this.setState({ configurations });
+  }
+  
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -429,11 +458,13 @@ export default class Scattering extends Component {
       <div className="configurable-random">
         <div className="form-group config-option">
           <label>Type of the Scattering:</label>
-          <select className="form-control">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+          <select 
+            className="form-control" 
+            onChange={this.onConfigurableRandomInputChange}
+            name={optionsConfigurableRandom.chartType}>
+            <option>2D</option>
+            <option>3D</option>
+            <option>Bubble</option>
           </select>
         </div>
         <div className="form-group config-option">

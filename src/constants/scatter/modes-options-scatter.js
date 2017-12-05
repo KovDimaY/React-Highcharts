@@ -40,6 +40,7 @@ export const optionsPureRandomBubble = {
 }
 
 export const optionsConfigurableRandom = {
+  chartType: "chartType",
   seriesNumber: "seriesNumber",
   pointsNumber: "pointsNumber"
 }
@@ -84,6 +85,7 @@ export const initialState = {
       colors: false
     },
     configurableRandom: {
+      chartType: "2D",
       seriesNumber: 3,
       pointsNumber: 10
     },
