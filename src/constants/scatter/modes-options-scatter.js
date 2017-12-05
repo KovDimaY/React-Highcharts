@@ -39,7 +39,10 @@ export const optionsPureRandomBubble = {
   colors: "colors"
 }
 
-
+export const optionsConfigurableRandom = {
+  seriesNumber: "seriesNumber",
+  pointsNumber: "pointsNumber"
+}
 
 
 
@@ -79,6 +82,10 @@ export const initialState = {
       animation: true,
       axisTitle: true,
       colors: false
+    },
+    configurableRandom: {
+      seriesNumber: 3,
+      pointsNumber: 10
     },
   }
 }

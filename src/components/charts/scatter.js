@@ -16,7 +16,8 @@ import {
   initialState,
   optionsPureRandom2D,
   optionsPureRandom3D,
-  optionsPureRandomBubble
+  optionsPureRandomBubble,
+  optionsConfigurableRandom
 } from '../../constants/scatter/modes-options-scatter'
 
 import {
@@ -423,7 +424,38 @@ export default class Scattering extends Component {
   }
   
   renderConfigurableRandomModeConfiguration() {
-    return (<div>Hello from Configurable Random</div>);
+    const { configurableRandom } = this.state.configurations;
+    return (
+      <div className="configurable-random">
+        <div className="form-group config-option">
+          <label>Type of the Scattering:</label>
+          <select className="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </div>
+        <div className="form-group config-option">
+          <label>Number of series</label>
+            <input type="number"
+                   data-type="series"
+                   className="form-control"
+                   name={optionsConfigurableRandom.seriesNumber}
+                   value={configurableRandom.seriesNumber}
+                   onChange={this.onConfigurableRandomInputChange}/>
+        </div>
+        <div className="form-group config-option">
+          <label>Max number of points</label>
+            <input type="number"
+                   data-type="points"
+                   className="form-control"
+                   name={optionsConfigurableRandom.pointsNumber}
+                   value={configurableRandom.pointsNumber}
+                   onChange={this.onConfigurableRandomInputChange}/>
+        </div>
+      </div>
+    );
   }
   
   renderConfigurationsArea() {
