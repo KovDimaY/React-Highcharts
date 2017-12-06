@@ -154,16 +154,20 @@ export default class Scattering extends Component {
   
   updateConfigurableRandomConfiguration() {
     const { configurableRandom } = this.state.configurations;
+    const { defaultColors } = this.state;
     let options;
     switch (configurableRandom.chartType) {
       case "2D":
         options = configurableRandom2D;
+        convertColorsToFlat(defaultColors);
         break;
       case "3D":
         options = configurableRandom3D;
+        convertColorsTo3D(defaultColors);
         break;
       case "Bubble":
         options = configurableRandomBubble;
+        convertColorsToBubbles(defaultColors);
         break;        
     }
     const series = generateSeriesForConfigurableRandom(configurableRandom);

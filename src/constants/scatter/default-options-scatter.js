@@ -198,15 +198,12 @@ export const configurableRandom2D = {
         zoomType: 'xy'
     },
     title: {
-        text: ''
-    },
-    subtitle: {
-        text: ''
+        text: 'Randomly generated data'
     },
     xAxis: {
         title: {
             enabled: true,
-            text: ''
+            text: 'Random values (UOM)'
         },
         startOnTick: true,
         endOnTick: true,
@@ -215,7 +212,7 @@ export const configurableRandom2D = {
     yAxis: {
         title: {
             enabled: true,
-            text: ''
+            text: 'Random values (UOM)'
         }
     },
     legend: {
@@ -227,7 +224,7 @@ export const configurableRandom2D = {
     plotOptions: {
         scatter: {
             marker: {
-                radius: 2,
+                radius: 5,
                 states: {
                     hover: {
                         enabled: true,
@@ -245,9 +242,6 @@ export const configurableRandom2D = {
             tooltip: {
                 headerFormat: '<b>{series.name}</b><br>',
                 pointFormat: 'x: {point.x}<br>y: {point.y}'
-            },
-            dataLabels: {
-                enabled: true
             }
         },
         series: {
@@ -277,7 +271,7 @@ export const configurableRandom3D = {
         }
     },
     title: {
-        text: ''
+        text: 'Randomly generated data'
     },
     subtitle: {
         text: 'Click and drag the plot area to rotate in space'
@@ -285,7 +279,7 @@ export const configurableRandom3D = {
     plotOptions: {
         scatter3d: {
             marker: {
-                radius: 2,
+                radius: 5,
                 states: {
                     hover: {
                         enabled: true,
@@ -300,9 +294,6 @@ export const configurableRandom3D = {
                     }
                 }
             },
-            dataLabels: {
-                enabled: true
-            },
             width: 10,
             height: 10,
             depth: 10
@@ -314,21 +305,21 @@ export const configurableRandom3D = {
     yAxis: {
         title: {
             enabled: true,
-            text: ''
+            text: 'Random values (UOM)'
         }
     },
     xAxis: {
         gridLineWidth: 1,
         title: {
             enabled: true,
-            text: ''
+            text: 'Random values (UOM)'
         }
     },
     zAxis: {
         showFirstLabel: false,
         title: {
             enabled: true,
-            text: ''
+            text: 'Random values (UOM)'
         }
     },
     legend: {
@@ -347,10 +338,7 @@ export const configurableRandomBubble = {
         zoomType: 'xy'
     },
     title: {
-        text: ''
-    },
-    subtitle: {
-        text: ''
+        text: 'Randomly generated data'
     },
     legend: {
         enabled: false
@@ -361,14 +349,14 @@ export const configurableRandomBubble = {
     yAxis: {
         title: {
             enabled: true,
-            text: ''
+            text: 'Random values (UOM)'
         }
     },
     xAxis: {
         gridLineWidth: 1,
         title: {
             enabled: true,
-            text: ''
+            text: 'Random values (UOM)'
         }
     },
     plotOptions: {
