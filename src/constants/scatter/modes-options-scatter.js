@@ -1,7 +1,8 @@
 export const modes = {
   pureRandom2D: "Pure Random 2D",
   pureRandom3D: "Pure Random 3D",
-  pureRandomBubble: "Pure Random Bubble"
+  pureRandomBubble: "Pure Random Bubble",
+  configurableRandom: "Configurable Random"
 }
 
 export const optionsPureRandom2D = {
@@ -38,7 +39,11 @@ export const optionsPureRandomBubble = {
   colors: "colors"
 }
 
-
+export const optionsConfigurableRandom = {
+  chartType: "chartType",
+  seriesNumber: "seriesNumber",
+  pointsNumber: "pointsNumber"
+}
 
 
 
@@ -78,6 +83,11 @@ export const initialState = {
       animation: true,
       axisTitle: true,
       colors: false
+    },
+    configurableRandom: {
+      chartType: "2D",
+      seriesNumber: 3,
+      pointsNumber: 10
     },
   }
 }

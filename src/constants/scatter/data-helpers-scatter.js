@@ -63,9 +63,11 @@ export function move(chart) {
   });
 };
 
-export function generateSeriesForPureRandom2D() {
-  const numberOfSeries = Math.round(Math.random() * 4) + 1;
-  const numberOfPoints = Math.round(Math.random() * 199) + 1;
+export function generateSeriesForPureRandom2D(series, points) {
+  const randomSeries = Math.round(Math.random() * 4) + 1;
+  const randomPoints = Math.round(Math.random() * 199) + 1;
+  const numberOfSeries = series || randomSeries;
+  const numberOfPoints = points || randomPoints;
   let result = [];
   for (let i = 0; i < numberOfSeries; i++) {
     let currentData = [];
@@ -90,9 +92,11 @@ export function generateSeriesForPureRandom2D() {
   return result;
 }
 
-export function generateSeriesForPureRandom3D() {
-  const numberOfSeries = Math.round(Math.random() * 4) + 1;
-  const numberOfPoints = Math.round(Math.random() * 199) + 1;
+export function generateSeriesForPureRandom3D(series, points) {
+  const randomSeries = Math.round(Math.random() * 4) + 1;
+  const randomPoints = Math.round(Math.random() * 199) + 1;
+  const numberOfSeries = series || randomSeries;
+  const numberOfPoints = points || randomPoints;
   let result = [];
   for (let i = 0; i < numberOfSeries; i++) {
     let currentData = [];
@@ -121,9 +125,11 @@ export function generateSeriesForPureRandom3D() {
   return result;
 }
 
-export function generateSeriesForPureRandomBubble() {
-  const numberOfSeries = Math.round(Math.random() * 4) + 1;
-  const numberOfPoints = Math.round(Math.random() * 19) + 1;
+export function generateSeriesForPureRandomBubble(series, points) {
+  const randomSeries = Math.round(Math.random() * 4) + 1;
+  const randomPoints = Math.round(Math.random() * 19) + 1;
+  const numberOfSeries = series || randomSeries;
+  const numberOfPoints = points || randomPoints;
   let result = [];
   for (let i = 0; i < numberOfSeries; i++) {
     let currentData = [];
@@ -150,4 +156,18 @@ export function generateSeriesForPureRandomBubble() {
   }
 
   return result;
+}
+
+export function generateSeriesForConfigurableRandom(options) {
+  const { chartType, seriesNumber, pointsNumber } = options;
+  switch (chartType) {
+    case "2D":
+      return generateSeriesForPureRandom2D(seriesNumber, pointsNumber);
+    case "3D":
+      return generateSeriesForPureRandom3D(seriesNumber, pointsNumber);
+    case "Bubble":
+      return generateSeriesForPureRandomBubble(seriesNumber, pointsNumber);
+    default:
+      return [];
+  }
 }

@@ -27,6 +27,14 @@
     .pure-random {
       margin-top: 40px;
     }
+    .configurable-random {
+      margin-top: 30px;
+
+      .config-option {
+        width: 60%;
+        margin-left: 20%;
+      }
+    }
     .apply-button {
       position: absolute;
       bottom: 30px;
