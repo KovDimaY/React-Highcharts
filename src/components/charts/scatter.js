@@ -8,7 +8,10 @@ import Chart from './chart-abstract'
 import {
   pureRandom2D,
   pureRandom3D,
-  pureRandomBubble
+  pureRandomBubble,
+  configurableRandom2D,
+  configurableRandom3D,
+  configurableRandomBubble
 } from '../../constants/scatter/default-options-scatter'
 
 import {
@@ -27,7 +30,8 @@ import {
   convertColorsToFlat,
   generateSeriesForPureRandom2D,
   generateSeriesForPureRandom3D,
-  generateSeriesForPureRandomBubble
+  generateSeriesForPureRandomBubble,
+  generateSeriesForConfigurableRandom
 } from '../../constants/scatter/data-helpers-scatter'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
@@ -41,6 +45,7 @@ export default class Scattering extends Component {
     this.updatePureRandom2DConfiguration = this.updatePureRandom2DConfiguration.bind(this);
     this.updatePureRandom3DConfiguration = this.updatePureRandom3DConfiguration.bind(this);
     this.updatePureRandomBubbleConfiguration = this.updatePureRandomBubbleConfiguration.bind(this);
+    this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
     this.onPureRandom2DCheckBoxChange = this.onPureRandom2DCheckBoxChange.bind(this);
     this.onPureRandom3DCheckBoxChange = this.onPureRandom3DCheckBoxChange.bind(this);
     this.onPureRandomBubbleCheckBoxChange = this.onPureRandomBubbleCheckBoxChange.bind(this);
@@ -76,8 +81,7 @@ export default class Scattering extends Component {
   }
   
   initConfigurableRandomMode() {
-    const options = pureRandom2D;
-    options.series = generateSeriesForPureRandom2D();
+    const options = configurableRandom2D;
     this.setState({ options }, () => {
       this.updateConfigurableRandomConfiguration();
     });
@@ -149,7 +153,23 @@ export default class Scattering extends Component {
   }
   
   updateConfigurableRandomConfiguration() {
-    this.setState({ rerenderChart: true }, () => {
+    const { configurableRandom } = this.state.configurations;
+    let options;
+    switch (configurableRandom.chartType) {
+      case "2D":
+        options = configurableRandom2D;
+        break;
+      case "3D":
+        options = configurableRandom3D;
+        break;
+      case "Bubble":
+        options = configurableRandomBubble;
+        break;        
+    }
+    const series = generateSeriesForConfigurableRandom(configurableRandom);
+    options.series = series;
+
+    this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
   }
@@ -477,7 +497,7 @@ export default class Scattering extends Component {
                    onChange={this.onConfigurableRandomInputChange}/>
         </div>
         <div className="form-group config-option">
-          <label>Max number of points</label>
+          <label>Number of points</label>
             <input type="number"
                    data-type="points"
                    className="form-control"
@@ -485,6 +505,13 @@ export default class Scattering extends Component {
                    value={configurableRandom.pointsNumber}
                    onChange={this.onConfigurableRandomInputChange}/>
         </div>
+        
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateConfigurableRandomConfiguration}>
+          Apply
+        </button>
       </div>
     );
   }
