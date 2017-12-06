@@ -9,6 +9,14 @@ export const modes = {
   sankey: "Sankey Diagram"
 }
 
+export const optionsHeatmap = {
+  tooltip: "tooltip",
+  title: "title",
+  dataLabels: "dataLabels",
+  animation: "animation",
+  axisTitles: "axisTitles"
+}
+
 
 
 
@@ -17,7 +25,13 @@ export const initialState = {
   rerenderChart: false,
   currentMode: modes.heatmap,
   configurations: {
-    heatmap: {},
+    heatmap: {
+      tooltip: true,
+      title: true,
+      dataLabels: true,
+      animation: true,
+      axisTitles: true
+    },
     tilemap: {},
     polar: {},
     boxplot: {},

@@ -18,6 +18,7 @@ import {
 import {
   modes,
   initialState,
+  optionsHeatmap
 } from '../../constants/other/modes-options-other'
 
 import {
@@ -31,6 +32,7 @@ export default class Other extends Component {
     this.state = initialState;
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
+    this.onHeatmapCheckBoxChange = this.onHeatmapCheckBoxChange.bind(this);
   }
 
   componentDidMount() {
@@ -191,7 +193,17 @@ export default class Other extends Component {
     }
     this.setState({ currentMode: mode, configurations });
   }
-
+  
+  onHeatmapCheckBoxChange(event) {
+    const { configurations } = this.state;
+    if (configurations.heatmap[event.target.value]) {
+      configurations.heatmap[event.target.value] = false;
+    } else {
+      configurations.heatmap[event.target.value] = true;
+    }
+    this.setState({ configurations })
+  }
+  
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -211,12 +223,57 @@ export default class Other extends Component {
       </div>
     )
   }
+  
+  renderHeatmapConfiguration() {
+    const { heatmap } = this.state.configurations;
+    return (
+      <div className="other-heatmap">
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsHeatmap.title}
+                        checked={heatmap.title}
+                        onChange={this.onHeatmapCheckBoxChange}/>Show Chart Title</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsHeatmap.axisTitles}
+                        checked={heatmap.axisTitles}
+                        onChange={this.onHeatmapCheckBoxChange}/>Show Axis Titles</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsHeatmap.dataLabels}
+                        checked={heatmap.dataLabels}
+                        onChange={this.onHeatmapCheckBoxChange}/>Show Data Labels</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsHeatmap.tooltip}
+                        checked={heatmap.tooltip}
+                        onChange={this.onHeatmapCheckBoxChange}/>Enable Tooltip</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
+                        value={optionsHeatmap.animation}
+                        checked={heatmap.animation}
+                        onChange={this.onHeatmapCheckBoxChange}/>Enable Animation</label>
+        </div>
 
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updatePureRandomConfiguration}>
+          Apply
+        </button>
+      </div>
+    )
+  }
+  
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
       case modes.heatmap: {
-        return <div> HEATMAP </div>;
+        return this.renderHeatmapConfiguration();
       }
       case modes.tilemap: {
         return <div> TILEMAP </div>;
