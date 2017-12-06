@@ -15,11 +15,11 @@ export const heatmap = {
     },
 
     xAxis: {
-        categories: ['Alexander', 'Marie', 'Maximilian', 'Sophia', 'Lukas', 'Maria', 'Leon', 'Anna', 'Tim', 'Laura']
+        categories: []
     },
 
     yAxis: {
-        categories: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        categories: [],
         title: null
     },
     colorAxis: {

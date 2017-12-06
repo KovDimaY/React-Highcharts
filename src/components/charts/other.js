@@ -20,6 +20,10 @@ import {
   initialState,
 } from '../../constants/other/modes-options-other'
 
+import {
+  generateSeriesForHeatmap
+} from '../../constants/other/data-helpers-other'
+
 
 export default class Other extends Component {
   constructor(props) {
@@ -34,8 +38,8 @@ export default class Other extends Component {
   }
 
   initHeatmap() {
-    const options = heatmap;
-
+    const options = generateSeriesForHeatmap(heatmap);
+        
     this.setState({ options }, () => {
       this.updateHeatmapConfiguration();
     });
