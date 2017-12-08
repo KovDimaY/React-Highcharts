@@ -239,49 +239,71 @@ export default class Other extends Component {
   renderHeatmapConfiguration() {
     const { heatmap } = this.state.configurations;
     return (
-      <div className="other-heatmap">
-        <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsHeatmap.title}
-                        checked={heatmap.title}
-                        onChange={this.onHeatmapCheckBoxChange}/>Show Chart Title</label>
-        </div>
-        <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsHeatmap.axisTitles}
-                        checked={heatmap.axisTitles}
-                        onChange={this.onHeatmapCheckBoxChange}/>Show Axis Titles</label>
-        </div>
-        <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsHeatmap.dataLabels}
-                        checked={heatmap.dataLabels}
-                        onChange={this.onHeatmapCheckBoxChange}/>Show Data Labels</label>
-        </div>
-        <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsHeatmap.legend}
-                        checked={heatmap.legend}
-                        onChange={this.onHeatmapCheckBoxChange}/>Show Legend</label>
-        </div>
-        <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsHeatmap.tooltip}
-                        checked={heatmap.tooltip}
-                        onChange={this.onHeatmapCheckBoxChange}/>Enable Tooltip</label>
-        </div>
-        <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsHeatmap.animation}
-                        checked={heatmap.animation}
-                        onChange={this.onHeatmapCheckBoxChange}/>Enable Animation</label>
+      <div className="other-heatmap-container">
+        <div className="checkboxes other-heatmap">
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsHeatmap.title}
+                          checked={heatmap.title}
+                          onChange={this.onHeatmapCheckBoxChange}/>Show Chart Title</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsHeatmap.axisTitles}
+                          checked={heatmap.axisTitles}
+                          onChange={this.onHeatmapCheckBoxChange}/>Show Axis Titles</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsHeatmap.dataLabels}
+                          checked={heatmap.dataLabels}
+                          onChange={this.onHeatmapCheckBoxChange}/>Show Data Labels</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsHeatmap.legend}
+                          checked={heatmap.legend}
+                          onChange={this.onHeatmapCheckBoxChange}/>Show Legend</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsHeatmap.tooltip}
+                          checked={heatmap.tooltip}
+                          onChange={this.onHeatmapCheckBoxChange}/>Enable Tooltip</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsHeatmap.animation}
+                          checked={heatmap.animation}
+                          onChange={this.onHeatmapCheckBoxChange}/>Enable Animation</label>
+          </div>
         </div>
 
-        <SketchColorPicker />
+
+        <div className="color-pickers">
+          <div className="color-picker-item">
+            <label>
+              Min Color
+              <SketchColorPicker />
+            </label>
+          </div>
+          <div className="color-picker-item">
+            <label>
+              Max Color
+              <SketchColorPicker />
+            </label>
+          </div>
+          <div className="color-picker-item">
+            <label>
+              Border Color
+              <SketchColorPicker />
+            </label>
+          </div>
+        </div>
 
         <button
           type="button"
-          className="btn btn-success apply-button"
+          className="btn btn-success apply-button position-dynamic"
           onClick={this.updateHeatmapConfiguration}>
           Apply
         </button>

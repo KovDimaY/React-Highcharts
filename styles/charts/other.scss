@@ -23,9 +23,17 @@
     height: 348px;
     overflow:auto;
     border: 1px solid rgba(128, 128, 128, 0.50);
-    
+
     .other-heatmap {
       margin-top: 40px;
+    }
+    .color-pickers {
+      margin-top: 20px;
+    }
+    .color-picker-item {
+      display: inline-block;
+      width: 33%;
+      text-align: center;
     }
     .apply-button {
       position: absolute;
@@ -76,6 +84,12 @@
     }
     .configuration-area {
       margin-bottom: 0;
+
+      .color-picker-item {
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
     }
     .chart-area {
       border: 1px solid rgba(128, 128, 128, 0.50);
@@ -86,6 +100,13 @@
     .other-heatmap {
       margin-left: 80px;
     }
+    .configuration-area {
+      .color-picker-item {
+        display: inline-block;
+        width: 33%;
+        text-align: center;
+      }
+    }
     .apply-button {
       width: 60%;
       margin-left: 20%;
@@ -95,6 +116,13 @@
   @media (min-width: 1200px) {
     .other-heatmap {
       margin-left: 110px;
+    }
+    .configuration-area {
+      .color-picker-item {
+        display: inline-block;
+        width: 33%;
+        text-align: center;
+      }
     }
     .apply-button {
       width: 40%;
