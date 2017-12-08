@@ -19,6 +19,7 @@ export const optionsHeatmap = {
   minColor: "minColor",
   maxColor: "maxColor",
   borderColor: "borderColor",
+  diagonalized: "diagonalized"
 }
 
 
@@ -38,7 +39,8 @@ export const initialState = {
       axisTitles: true,
       minColor: "#ffffff",
       maxColor: "#f45b5b",
-      borderColor: "#f45b5b"
+      borderColor: "#f45b5b",
+      diagonalized: false
     },
     tilemap: {},
     polar: {},

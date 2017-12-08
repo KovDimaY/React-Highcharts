@@ -1,6 +1,6 @@
-export function generateSeriesForHeatmap(options) {
+export function generateSeriesForHeatmap(options, diagonalized) {
   const width = Math.round(Math.random() * 8) + 2;
-  const height = Math.round(Math.random() * 8) + 2;
+  const height = diagonalized ? width : Math.round(Math.random() * 8) + 2;
   const data = [];
   const xCategories = [];
   const yCategories = [];
@@ -10,8 +10,16 @@ export function generateSeriesForHeatmap(options) {
 
     for (let j = 0; j < height; j++) {
       if (i === 0) yCategories.push("yCategory " + j);
-      const value = Math.round(Math.random() * 100) + 1;
-      data.push([i, j, value]);
+      if (diagonalized && i < j) {
+        const value = Math.round(Math.random() * 100) + 1;
+        data.push([i, j, value]);
+        data.push([j, i, value]);
+      } else if (diagonalized && i === j) {
+        data.push([i, j, null]);
+      } else if (!diagonalized) {
+        const value = Math.round(Math.random() * 100) + 1;
+        data.push([i, j, value]);
+      }
     }
   }
   options.xAxis.categories = xCategories;

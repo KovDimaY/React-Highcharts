@@ -43,7 +43,7 @@ export default class Other extends Component {
   }
 
   initHeatmap() {
-    const options = generateSeriesForHeatmap(heatmap);
+    const options = generateSeriesForHeatmap(heatmap, false);
 
     this.setState({ options }, () => {
       this.updateHeatmapConfiguration();
@@ -109,6 +109,9 @@ export default class Other extends Component {
   updateHeatmapConfiguration() {
     const { heatmap } = this.state.configurations;
     const { options } = this.state;
+    options.series = heatmap.diagonalized
+      ? generateSeriesForHeatmap(options, heatmap.diagonalized).series
+      : options.series;
     options.title.text = heatmap.title ? 'Randomly generated data' : null;
     options.subtitle.text = heatmap.title ? 'This data is not real' : null;
     options.legend.enabled = heatmap.legend;
@@ -321,6 +324,12 @@ export default class Other extends Component {
                           value={optionsHeatmap.animation}
                           checked={heatmap.animation}
                           onChange={this.onHeatmapCheckBoxChange}/>Enable Animation</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsHeatmap.diagonalized}
+                          checked={heatmap.diagonalized}
+                          onChange={this.onHeatmapCheckBoxChange}/>Correlation Mode</label>
           </div>
         </div>
 

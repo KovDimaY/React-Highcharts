@@ -42,9 +42,12 @@ export const heatmap = {
     tooltip: {
         enabled: true,
         formatter: function () {
-            return `The intersection of <b>${this.series.xAxis.categories[this.point.x]}</b>
-                    and <b>${this.series.yAxis.categories[this.point.y]}</b>
-                    has the value <b>${this.point.value}</b>`;
+          if (this.point.value === null) {
+            return false;
+          }
+          return `The intersection of <b>${this.series.xAxis.categories[this.point.x]}</b>
+                  and <b>${this.series.yAxis.categories[this.point.y]}</b>
+                  has the value <b>${this.point.value}</b>`;
         }
     },
     plotOptions: {
