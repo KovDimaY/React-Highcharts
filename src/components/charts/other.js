@@ -117,6 +117,9 @@ export default class Other extends Component {
     options.plotOptions.series.animation = heatmap.animation;
     options.xAxis.labels.enabled = heatmap.axisTitles;
     options.yAxis.labels.enabled = heatmap.axisTitles;
+    options.colorAxis.minColor = heatmap.minColor;
+    options.colorAxis.maxColor = heatmap.maxColor;
+    options.series[0].borderColor = heatmap.borderColor;
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -256,7 +259,8 @@ export default class Other extends Component {
               <SketchColorPicker
                 color={ heatmap.minColor }
                 onChangeColor={this.onChangeColorHeatmap}
-                identificator={optionsHeatmap.minColor}/>
+                identificator={optionsHeatmap.minColor}
+                presetColors={Highcharts.getOptions().colors}/>
             </label>
           </div>
           <div className="color-picker-item">
@@ -265,7 +269,8 @@ export default class Other extends Component {
               <SketchColorPicker
                 color={ heatmap.maxColor }
                 onChangeColor={this.onChangeColorHeatmap}
-                identificator={optionsHeatmap.maxColor}/>
+                identificator={optionsHeatmap.maxColor}
+                presetColors={Highcharts.getOptions().colors}/>
             </label>
           </div>
           <div className="color-picker-item">
@@ -274,7 +279,8 @@ export default class Other extends Component {
               <SketchColorPicker
                 color={ heatmap.borderColor }
                 onChangeColor={this.onChangeColorHeatmap}
-                identificator={optionsHeatmap.borderColor}/>
+                identificator={optionsHeatmap.borderColor}
+                presetColors={Highcharts.getOptions().colors}/>
             </label>
           </div>
         </div>
