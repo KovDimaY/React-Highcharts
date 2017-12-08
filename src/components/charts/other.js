@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import Highcharts from 'highcharts'
 
 import Chart from './chart-abstract'
+import SketchColorPicker from '../color-picker'
 
 import {
   heatmap,
@@ -275,6 +276,8 @@ export default class Other extends Component {
                         checked={heatmap.animation}
                         onChange={this.onHeatmapCheckBoxChange}/>Enable Animation</label>
         </div>
+
+        <SketchColorPicker />
 
         <button
           type="button"

@@ -10,7 +10,7 @@ export const pureRandom = {
         text: 'This data is not real'
     },
     xAxis: {
-        categories: []
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     },
     legend: {
         enabled: true
