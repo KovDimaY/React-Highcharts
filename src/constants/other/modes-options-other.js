@@ -14,6 +14,7 @@ export const optionsHeatmap = {
   title: "title",
   dataLabels: "dataLabels",
   animation: "animation",
+  legend: "legend",
   axisTitles: "axisTitles"
 }
 
@@ -30,6 +31,7 @@ export const initialState = {
       title: true,
       dataLabels: true,
       animation: true,
+      legend: true,
       axisTitles: true
     },
     tilemap: {},

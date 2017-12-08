@@ -4,14 +4,12 @@ export function generateSeriesForHeatmap(options) {
   const data = [];
   const xCategories = [];
   const yCategories = [];
-  
+
   for (let i = 0; i < width; i++) {
     xCategories.push("xCategory " + i);
-    // xCategories.push("");
-    
+
     for (let j = 0; j < height; j++) {
       if (i === 0) yCategories.push("yCategory " + j);
-      // if (i === 0) yCategories.push("");
       const value = Math.round(Math.random() * 100) + 1;
       data.push([i, j, value]);
     }
@@ -27,6 +25,6 @@ export function generateSeriesForHeatmap(options) {
         color: '#000000'
     }
   }];
-  
+
   return options;
 }

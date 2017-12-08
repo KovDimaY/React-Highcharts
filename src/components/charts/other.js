@@ -33,6 +33,7 @@ export default class Other extends Component {
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.onHeatmapCheckBoxChange = this.onHeatmapCheckBoxChange.bind(this);
+    this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
   }
 
   componentDidMount() {
@@ -41,7 +42,7 @@ export default class Other extends Component {
 
   initHeatmap() {
     const options = generateSeriesForHeatmap(heatmap);
-        
+
     this.setState({ options }, () => {
       this.updateHeatmapConfiguration();
     });
@@ -104,6 +105,16 @@ export default class Other extends Component {
   }
 
   updateHeatmapConfiguration() {
+    const { heatmap } = this.state.configurations;
+    const { options } = this.state;
+    options.title.text = heatmap.title ? 'Randomly generated data' : null;
+    options.subtitle.text = heatmap.title ? 'This data is not real' : null;
+    options.legend.enabled = heatmap.legend;
+    options.tooltip.enabled = heatmap.tooltip;
+    options.series[0].dataLabels.enabled = heatmap.dataLabels;
+    options.plotOptions.series.animation = heatmap.animation;
+    options.xAxis.labels.enabled = heatmap.axisTitles;
+    options.yAxis.labels.enabled = heatmap.axisTitles;
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -193,7 +204,7 @@ export default class Other extends Component {
     }
     this.setState({ currentMode: mode, configurations });
   }
-  
+
   onHeatmapCheckBoxChange(event) {
     const { configurations } = this.state;
     if (configurations.heatmap[event.target.value]) {
@@ -203,7 +214,7 @@ export default class Other extends Component {
     }
     this.setState({ configurations })
   }
-  
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -223,7 +234,7 @@ export default class Other extends Component {
       </div>
     )
   }
-  
+
   renderHeatmapConfiguration() {
     const { heatmap } = this.state.configurations;
     return (
@@ -248,6 +259,12 @@ export default class Other extends Component {
         </div>
         <div className="checkbox">
           <label><input type="checkbox"
+                        value={optionsHeatmap.legend}
+                        checked={heatmap.legend}
+                        onChange={this.onHeatmapCheckBoxChange}/>Show Legend</label>
+        </div>
+        <div className="checkbox">
+          <label><input type="checkbox"
                         value={optionsHeatmap.tooltip}
                         checked={heatmap.tooltip}
                         onChange={this.onHeatmapCheckBoxChange}/>Enable Tooltip</label>
@@ -262,13 +279,13 @@ export default class Other extends Component {
         <button
           type="button"
           className="btn btn-success apply-button"
-          onClick={this.updatePureRandomConfiguration}>
+          onClick={this.updateHeatmapConfiguration}>
           Apply
         </button>
       </div>
     )
   }
-  
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
