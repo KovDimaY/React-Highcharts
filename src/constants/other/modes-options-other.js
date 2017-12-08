@@ -15,7 +15,10 @@ export const optionsHeatmap = {
   dataLabels: "dataLabels",
   animation: "animation",
   legend: "legend",
-  axisTitles: "axisTitles"
+  axisTitles: "axisTitles",
+  minColor: "minColor",
+  maxColor: "maxColor",
+  borderColor: "borderColor",
 }
 
 
@@ -32,7 +35,10 @@ export const initialState = {
       dataLabels: true,
       animation: true,
       legend: true,
-      axisTitles: true
+      axisTitles: true,
+      minColor: "#ffffff",
+      maxColor: "#f45b5b",
+      borderColor: "#f45b5b"
     },
     tilemap: {},
     polar: {},

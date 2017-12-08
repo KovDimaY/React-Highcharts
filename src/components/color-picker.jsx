@@ -3,15 +3,15 @@ import reactCSS from 'reactcss'
 import { SketchPicker } from 'react-color'
 
 export default class SketchColorPicker extends Component {
-  state = {
-    displayColorPicker: false,
-    color: {
-      r: '241',
-      g: '112',
-      b: '19',
-      a: '1',
-    },
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayColorPicker: false,
+      color: {
+        hex: this.props.color || '#7ED321'
+      }
+    };
+  }
 
   handleClick = () => {
     this.setState({ displayColorPicker: !this.state.displayColorPicker })
@@ -22,18 +22,20 @@ export default class SketchColorPicker extends Component {
   };
 
   handleChange = (color) => {
-    this.setState({ color: color.rgb })
+    if (typeof this.props.onChangeColor === 'function') {
+      this.props.onChangeColor(this.props.identificator, color);
+    }
+    this.setState({ color })
   };
 
   render() {
-
     const styles = reactCSS({
       'default': {
         color: {
           width: '36px',
           height: '14px',
           borderRadius: '2px',
-          background: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,
+          background: `${this.state.color.hex}`,
         },
         swatch: {
           padding: '5px',
@@ -57,6 +59,10 @@ export default class SketchColorPicker extends Component {
       },
     });
 
+    const defaultColors = ['#D0021B', '#F5A623', '#F8E71C', '#8B572A',
+      '#7ED321', '#417505', '#BD10E0', '#9013FE', '#4A90E2', '#50E3C2',
+      '#B8E986', '#000000', '#4A4A4A', '#9B9B9B', '#FFFFFF'];
+
     return (
       <div>
         <div style={ styles.swatch } onClick={ this.handleClick }>
@@ -64,7 +70,11 @@ export default class SketchColorPicker extends Component {
         </div>
         { this.state.displayColorPicker ? <div style={ styles.popover }>
           <div style={ styles.cover } onClick={ this.handleClose }/>
-          <SketchPicker color={ this.state.color } onChange={ this.handleChange } />
+          <SketchPicker
+            color={ this.state.color }
+            onChange={ this.handleChange }
+            disableAlpha={ true }
+            presetColors={ this.props.presetColors || defaultColors } />
         </div> : null }
       </div>
     )

@@ -34,6 +34,7 @@ export default class Other extends Component {
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.onHeatmapCheckBoxChange = this.onHeatmapCheckBoxChange.bind(this);
+    this.onChangeColorHeatmap = this.onChangeColorHeatmap.bind(this);
     this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
   }
 
@@ -216,6 +217,14 @@ export default class Other extends Component {
     this.setState({ configurations })
   }
 
+  onChangeColorHeatmap(key, color) {
+    const { configurations } = this.state;
+    if (typeof key === "string" && configurations.heatmap[key]) {
+      configurations.heatmap[key] = color.hex;
+    }
+    this.setState({ configurations });
+  }
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -240,6 +249,36 @@ export default class Other extends Component {
     const { heatmap } = this.state.configurations;
     return (
       <div className="other-heatmap-container">
+        <div className="color-pickers">
+          <div className="color-picker-item">
+            <label>
+              Min Color
+              <SketchColorPicker
+                color={ heatmap.minColor }
+                onChangeColor={this.onChangeColorHeatmap}
+                identificator={optionsHeatmap.minColor}/>
+            </label>
+          </div>
+          <div className="color-picker-item">
+            <label>
+              Max Color
+              <SketchColorPicker
+                color={ heatmap.maxColor }
+                onChangeColor={this.onChangeColorHeatmap}
+                identificator={optionsHeatmap.maxColor}/>
+            </label>
+          </div>
+          <div className="color-picker-item">
+            <label>
+              Border Color
+              <SketchColorPicker
+                color={ heatmap.borderColor }
+                onChangeColor={this.onChangeColorHeatmap}
+                identificator={optionsHeatmap.borderColor}/>
+            </label>
+          </div>
+        </div>
+
         <div className="checkboxes other-heatmap">
           <div className="checkbox">
             <label><input type="checkbox"
@@ -276,28 +315,6 @@ export default class Other extends Component {
                           value={optionsHeatmap.animation}
                           checked={heatmap.animation}
                           onChange={this.onHeatmapCheckBoxChange}/>Enable Animation</label>
-          </div>
-        </div>
-
-
-        <div className="color-pickers">
-          <div className="color-picker-item">
-            <label>
-              Min Color
-              <SketchColorPicker />
-            </label>
-          </div>
-          <div className="color-picker-item">
-            <label>
-              Max Color
-              <SketchColorPicker />
-            </label>
-          </div>
-          <div className="color-picker-item">
-            <label>
-              Border Color
-              <SketchColorPicker />
-            </label>
           </div>
         </div>
 
