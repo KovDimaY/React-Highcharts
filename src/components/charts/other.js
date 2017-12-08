@@ -109,6 +109,27 @@ export default class Other extends Component {
   updateHeatmapConfiguration() {
     const { heatmap } = this.state.configurations;
     const { options } = this.state;
+    const usualTooltip = {
+        formatter: function () {
+          return `The intersection of <b>${this.series.xAxis.categories[this.point.x]}</b>
+                  and <b>${this.series.yAxis.categories[this.point.y]}</b>
+                  has the value <b>${this.point.value}</b>`;
+        }
+    };
+    const diagonalizedTooltip = {
+        formatter: function () {
+          if (this.point.x === this.point.y) {
+            return false;
+          }
+          return `The correlation between <b>${this.series.xAxis.categories[this.point.x]}</b>
+                  and <b>${this.series.yAxis.categories[this.point.y]}</b>
+                  has the next coefficient <b>${this.point.value}</b>`;
+        }
+    };
+
+    options.tooltip = heatmap.diagonalized
+      ? diagonalizedTooltip
+      : usualTooltip;
     options.series = heatmap.diagonalized
       ? generateSeriesForHeatmap(options, heatmap.diagonalized).series
       : options.series;

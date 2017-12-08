@@ -6,12 +6,17 @@ export function generateSeriesForHeatmap(options, diagonalized) {
   const yCategories = [];
 
   for (let i = 0; i < width; i++) {
-    xCategories.push("xCategory " + i);
+    if (diagonalized) {
+      xCategories.push("Variable " + (i+1));
+    } else {
+      xCategories.push("xCategory " + (i+1));
+    }
 
     for (let j = 0; j < height; j++) {
-      if (i === 0) yCategories.push("yCategory " + j);
+      if (i === 0 && diagonalized) yCategories.push("Variable " + (j+1));
+      if (i === 0 && !diagonalized) yCategories.push("yCategory " + (j+1));
       if (diagonalized && i < j) {
-        const value = Math.round(Math.random() * 100) + 1;
+        const value = Math.round(Math.random() * 100) / 100;
         data.push([i, j, value]);
         data.push([j, i, value]);
       } else if (diagonalized && i === j) {
