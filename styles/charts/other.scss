@@ -24,6 +24,17 @@
     overflow:auto;
     border: 1px solid rgba(128, 128, 128, 0.50);
 
+    .other-heatmap {
+      margin-top: 20px;
+    }
+    .color-pickers {
+      margin-top: 40px;
+    }
+    .color-picker-item {
+      display: inline-block;
+      width: 33%;
+      text-align: center;
+    }
     .apply-button {
       position: absolute;
       bottom: 30px;
@@ -48,6 +59,9 @@
 
   /* Customize pure-random container */
   @media (min-width: 0px) {
+    .other-heatmap {
+      margin-left: 33%;
+    }
     .apply-button {
       width: 40%;
       margin-left: 30%;
@@ -61,12 +75,21 @@
   }
 
   @media (min-width: 768px) {
+    .other-heatmap {
+      margin-left: 40px;
+    }
     .apply-button {
       width: 80%;
       margin-left: 10%;
     }
     .configuration-area {
       margin-bottom: 0;
+
+      .color-picker-item {
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
     }
     .chart-area {
       border: 1px solid rgba(128, 128, 128, 0.50);
@@ -74,6 +97,16 @@
   }
 
   @media (min-width: 992px) {
+    .other-heatmap {
+      margin-left: 80px;
+    }
+    .configuration-area {
+      .color-picker-item {
+        display: inline-block;
+        width: 33%;
+        text-align: center;
+      }
+    }
     .apply-button {
       width: 60%;
       margin-left: 20%;
@@ -81,6 +114,16 @@
   }
 
   @media (min-width: 1200px) {
+    .other-heatmap {
+      margin-left: 110px;
+    }
+    .configuration-area {
+      .color-picker-item {
+        display: inline-block;
+        width: 33%;
+        text-align: center;
+      }
+    }
     .apply-button {
       width: 40%;
       margin-left: 30%;

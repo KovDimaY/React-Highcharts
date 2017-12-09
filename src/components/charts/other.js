@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import Highcharts from 'highcharts'
 
 import Chart from './chart-abstract'
+import SketchColorPicker from '../color-picker'
 
 import {
   heatmap,
@@ -18,7 +19,12 @@ import {
 import {
   modes,
   initialState,
+  optionsHeatmap
 } from '../../constants/other/modes-options-other'
+
+import {
+  generateSeriesForHeatmap
+} from '../../constants/other/data-helpers-other'
 
 
 export default class Other extends Component {
@@ -27,6 +33,9 @@ export default class Other extends Component {
     this.state = initialState;
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
+    this.onHeatmapCheckBoxChange = this.onHeatmapCheckBoxChange.bind(this);
+    this.onChangeColorHeatmap = this.onChangeColorHeatmap.bind(this);
+    this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
   }
 
   componentDidMount() {
@@ -34,7 +43,7 @@ export default class Other extends Component {
   }
 
   initHeatmap() {
-    const options = heatmap;
+    const options = generateSeriesForHeatmap(heatmap, false);
 
     this.setState({ options }, () => {
       this.updateHeatmapConfiguration();
@@ -98,6 +107,46 @@ export default class Other extends Component {
   }
 
   updateHeatmapConfiguration() {
+    const { heatmap } = this.state.configurations;
+    const { options } = this.state;
+    const usualTooltip = {
+        formatter: function () {
+          return `The intersection of <b>${this.series.xAxis.categories[this.point.x]}</b>
+                  and <b>${this.series.yAxis.categories[this.point.y]}</b>
+                  has the value <b>${this.point.value}</b>`;
+        }
+    };
+    const diagonalizedTooltip = {
+        formatter: function () {
+          if (this.point.x === this.point.y) {
+            return false;
+          }
+          return `The correlation between <b>${this.series.xAxis.categories[this.point.x]}</b>
+                  and <b>${this.series.yAxis.categories[this.point.y]}</b>
+                  has the next coefficient <b>${this.point.value}</b>`;
+        }
+    };
+
+    options.tooltip = heatmap.diagonalized
+      ? diagonalizedTooltip
+      : usualTooltip;
+
+    if ((heatmap.diagonalized && !heatmap.alreadyDiagonalized) ||
+       (!heatmap.diagonalized && heatmap.alreadyDiagonalized)) {
+      options.series = generateSeriesForHeatmap(options, heatmap.diagonalized).series;
+    }
+    options.title.text = heatmap.title ? 'Randomly generated data' : null;
+    options.subtitle.text = heatmap.title ? 'This data is not real' : null;
+    options.legend.enabled = heatmap.legend;
+    options.tooltip.enabled = heatmap.tooltip;
+    options.series[0].dataLabels.enabled = heatmap.dataLabels;
+    options.plotOptions.series.animation = heatmap.animation;
+    options.xAxis.labels.enabled = heatmap.axisTitles;
+    options.yAxis.labels.enabled = heatmap.axisTitles;
+    options.colorAxis.minColor = heatmap.minColor;
+    options.colorAxis.maxColor = heatmap.maxColor;
+    options.series[0].borderColor = heatmap.borderColor;
+    heatmap.alreadyDiagonalized = heatmap.diagonalized;
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -188,6 +237,24 @@ export default class Other extends Component {
     this.setState({ currentMode: mode, configurations });
   }
 
+  onHeatmapCheckBoxChange(event) {
+    const { configurations } = this.state;
+    if (configurations.heatmap[event.target.value]) {
+      configurations.heatmap[event.target.value] = false;
+    } else {
+      configurations.heatmap[event.target.value] = true;
+    }
+    this.setState({ configurations })
+  }
+
+  onChangeColorHeatmap(key, color) {
+    const { configurations } = this.state;
+    if (typeof key === "string" && configurations.heatmap[key]) {
+      configurations.heatmap[key] = color.hex;
+    }
+    this.setState({ configurations });
+  }
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -208,11 +275,103 @@ export default class Other extends Component {
     )
   }
 
+  renderHeatmapConfiguration() {
+    const { heatmap } = this.state.configurations;
+    return (
+      <div className="other-heatmap-container">
+        <div className="color-pickers">
+          <div className="color-picker-item">
+            <label>
+              Min Color
+              <SketchColorPicker
+                color={ heatmap.minColor }
+                onChangeColor={this.onChangeColorHeatmap}
+                identificator={optionsHeatmap.minColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+          <div className="color-picker-item">
+            <label>
+              Max Color
+              <SketchColorPicker
+                color={ heatmap.maxColor }
+                onChangeColor={this.onChangeColorHeatmap}
+                identificator={optionsHeatmap.maxColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+          <div className="color-picker-item">
+            <label>
+              Border Color
+              <SketchColorPicker
+                color={ heatmap.borderColor }
+                onChangeColor={this.onChangeColorHeatmap}
+                identificator={optionsHeatmap.borderColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+        </div>
+
+        <div className="checkboxes other-heatmap">
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsHeatmap.title}
+                          checked={heatmap.title}
+                          onChange={this.onHeatmapCheckBoxChange}/>Show Chart Title</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsHeatmap.axisTitles}
+                          checked={heatmap.axisTitles}
+                          onChange={this.onHeatmapCheckBoxChange}/>Show Axis Titles</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsHeatmap.dataLabels}
+                          checked={heatmap.dataLabels}
+                          onChange={this.onHeatmapCheckBoxChange}/>Show Data Labels</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsHeatmap.legend}
+                          checked={heatmap.legend}
+                          onChange={this.onHeatmapCheckBoxChange}/>Show Legend</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsHeatmap.tooltip}
+                          checked={heatmap.tooltip}
+                          onChange={this.onHeatmapCheckBoxChange}/>Enable Tooltip</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsHeatmap.animation}
+                          checked={heatmap.animation}
+                          onChange={this.onHeatmapCheckBoxChange}/>Enable Animation</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsHeatmap.diagonalized}
+                          checked={heatmap.diagonalized}
+                          onChange={this.onHeatmapCheckBoxChange}/>Correlation Mode</label>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateHeatmapConfiguration}>
+          Apply
+        </button>
+      </div>
+    )
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
       case modes.heatmap: {
-        return <div> HEATMAP </div>;
+        return this.renderHeatmapConfiguration();
       }
       case modes.tilemap: {
         return <div> TILEMAP </div>;
