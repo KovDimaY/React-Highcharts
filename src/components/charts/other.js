@@ -130,9 +130,11 @@ export default class Other extends Component {
     options.tooltip = heatmap.diagonalized
       ? diagonalizedTooltip
       : usualTooltip;
-    options.series = heatmap.diagonalized
-      ? generateSeriesForHeatmap(options, heatmap.diagonalized).series
-      : options.series;
+
+    if ((heatmap.diagonalized && !heatmap.alreadyDiagonalized) ||
+       (!heatmap.diagonalized && heatmap.alreadyDiagonalized)) {
+      options.series = generateSeriesForHeatmap(options, heatmap.diagonalized).series;
+    }
     options.title.text = heatmap.title ? 'Randomly generated data' : null;
     options.subtitle.text = heatmap.title ? 'This data is not real' : null;
     options.legend.enabled = heatmap.legend;
@@ -144,6 +146,7 @@ export default class Other extends Component {
     options.colorAxis.minColor = heatmap.minColor;
     options.colorAxis.maxColor = heatmap.maxColor;
     options.series[0].borderColor = heatmap.borderColor;
+    heatmap.alreadyDiagonalized = heatmap.diagonalized;
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
