@@ -293,39 +293,6 @@ export default class Other extends Component {
     const { heatmap } = this.state.configurations;
     return (
       <div className="other-heatmap-container">
-        <div className="color-pickers">
-          <div className="color-picker-item">
-            <label>
-              Min Color
-              <SketchColorPicker
-                color={ heatmap.minColor }
-                onChangeColor={this.onChangeColorHeatmap}
-                identificator={optionsHeatmap.minColor}
-                presetColors={Highcharts.getOptions().colors}/>
-            </label>
-          </div>
-          <div className="color-picker-item">
-            <label>
-              Max Color
-              <SketchColorPicker
-                color={ heatmap.maxColor }
-                onChangeColor={this.onChangeColorHeatmap}
-                identificator={optionsHeatmap.maxColor}
-                presetColors={Highcharts.getOptions().colors}/>
-            </label>
-          </div>
-          <div className="color-picker-item">
-            <label>
-              Border Color
-              <SketchColorPicker
-                color={ heatmap.borderColor }
-                onChangeColor={this.onChangeColorHeatmap}
-                identificator={optionsHeatmap.borderColor}
-                presetColors={Highcharts.getOptions().colors}/>
-            </label>
-          </div>
-        </div>
-
         <div className="checkboxes other-heatmap">
           <div className="checkbox">
             <label><input type="checkbox"
@@ -368,6 +335,39 @@ export default class Other extends Component {
                           value={optionsHeatmap.diagonalized}
                           checked={heatmap.diagonalized}
                           onChange={this.onHeatmapCheckBoxChange}/>Correlation Mode</label>
+          </div>
+        </div>
+
+        <div className="color-pickers">
+          <div className="color-picker-item">
+            <label>
+              Min Color
+              <SketchColorPicker
+                color={ heatmap.minColor }
+                onChangeColor={this.onChangeColorHeatmap}
+                identificator={optionsHeatmap.minColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+          <div className="color-picker-item">
+            <label>
+              Max Color
+              <SketchColorPicker
+                color={ heatmap.maxColor }
+                onChangeColor={this.onChangeColorHeatmap}
+                identificator={optionsHeatmap.maxColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+          <div className="color-picker-item">
+            <label>
+              Border Color
+              <SketchColorPicker
+                color={ heatmap.borderColor }
+                onChangeColor={this.onChangeColorHeatmap}
+                identificator={optionsHeatmap.borderColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
           </div>
         </div>
 
