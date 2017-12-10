@@ -172,7 +172,6 @@ export default class Other extends Component {
     options.colorAxis.dataClasses[1].color = tilemap.lowColor;
     options.colorAxis.dataClasses[2].color = tilemap.highColor;
     options.colorAxis.dataClasses[3].color = tilemap.maxColor;
-    heatmap.alreadyDiagonalized = tilemap.diagonalized;
 
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
