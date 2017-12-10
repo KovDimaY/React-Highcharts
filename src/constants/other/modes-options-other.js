@@ -55,7 +55,16 @@ export const initialState = {
       diagonalized: false,
       alreadyDiagonalized: false
     },
-    tilemap: {},
+    tilemap: {
+      tooltip: true,
+      title: true,
+      dataLabels: true,
+      animation: true,
+      legend: true,
+      axisTitles: true,
+      minColor: "#ffffff",
+      maxColor: "#f45b5b"
+    },
     polar: {},
     boxplot: {},
     gauge: {},

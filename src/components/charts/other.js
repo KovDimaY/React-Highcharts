@@ -254,7 +254,13 @@ export default class Other extends Component {
   }
 
   onTilemapCheckBoxChange(event) {
-    console.log("onTilemapCheckBoxChange");
+    const { configurations } = this.state;
+    if (configurations.tilemap[event.target.value]) {
+      configurations.tilemap[event.target.value] = false;
+    } else {
+      configurations.tilemap[event.target.value] = true;
+    }
+    this.setState({ configurations })
   }
 
   onChangeColorHeatmap(key, color) {
@@ -266,7 +272,11 @@ export default class Other extends Component {
   }
 
   onChangeColorTilemap(key, color) {
-    console.log("onChangeColorTilemap");
+    const { configurations } = this.state;
+    if (typeof key === "string" && configurations.tilemap[key]) {
+      configurations.tilemap[key] = color.hex;
+    }
+    this.setState({ configurations });
   }
 
   renderOptionsDropdown() {
