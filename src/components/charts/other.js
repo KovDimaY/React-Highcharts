@@ -155,13 +155,27 @@ export default class Other extends Component {
     heatmap.alreadyDiagonalized = heatmap.diagonalized;
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
-    })
+    });
   }
 
   updateTilemapConfiguration() {
+    const { tilemap } = this.state.configurations;
+    const { options } = this.state;
+
+    options.title.text = tilemap.title ? 'Randomly generated data' : null;
+    options.subtitle.text = tilemap.title ? 'This data is not real' : null;
+    options.legend.enabled = tilemap.legend;
+    options.tooltip.enabled = tilemap.tooltip;
+    options.plotOptions.series.dataLabels.enabled = tilemap.dataLabels;
+    options.plotOptions.series.animation = tilemap.animation;
+    options.colorAxis.minColor = tilemap.minColor;
+    options.colorAxis.maxColor = tilemap.maxColor;
+    options.series[0].borderColor = tilemap.borderColor;
+    heatmap.alreadyDiagonalized = tilemap.diagonalized;
+
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
-    })
+    });
   }
 
   updatePolarConfiguration() {
@@ -401,12 +415,6 @@ export default class Other extends Component {
                           value={optionsTilemap.title}
                           checked={tilemap.title}
                           onChange={this.onTilemapCheckBoxChange}/>Show Chart Title</label>
-          </div>
-          <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsTilemap.axisTitles}
-                          checked={tilemap.axisTitles}
-                          onChange={this.onTilemapCheckBoxChange}/>Show Axis Titles</label>
           </div>
           <div className="checkbox">
             <label><input type="checkbox"

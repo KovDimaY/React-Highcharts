@@ -60,27 +60,23 @@ export const heatmap = {
 
 export const tilemap = {
     chart: {
-        type: 'tilemap',
-        inverted: true,
-        height: '80%'
+        type: 'tilemap'
     },
-
     title: {
-        text: 'U.S. states by population in 2016'
+        text: ''
     },
-
     subtitle: {
-        text: 'Source:<a href="https://simple.wikipedia.org/wiki/List_of_U.S._states_by_population">Wikipedia</a>'
+        text: ''
     },
-
     xAxis: {
         visible: false
     },
-
     yAxis: {
         visible: false
     },
-
+    legend: {
+        enabled: true,
+    },
     colorAxis: {
         dataClasses: [{
             from: 0,
@@ -103,12 +99,10 @@ export const tilemap = {
             name: '> 20M'
         }]
     },
-
     tooltip: {
         headerFormat: '',
         pointFormat: 'The population of <b> {point.name}</b> is <b>{point.value}</b>'
     },
-
     plotOptions: {
         series: {
             dataLabels: {
