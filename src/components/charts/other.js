@@ -168,9 +168,10 @@ export default class Other extends Component {
     options.tooltip.enabled = tilemap.tooltip;
     options.plotOptions.series.dataLabels.enabled = tilemap.dataLabels;
     options.plotOptions.series.animation = tilemap.animation;
-    options.colorAxis.minColor = tilemap.minColor;
-    options.colorAxis.maxColor = tilemap.maxColor;
-    options.series[0].borderColor = tilemap.borderColor;
+    options.colorAxis.dataClasses[0].color = tilemap.minColor;
+    options.colorAxis.dataClasses[1].color = tilemap.lowColor;
+    options.colorAxis.dataClasses[2].color = tilemap.highColor;
+    options.colorAxis.dataClasses[3].color = tilemap.maxColor;
     heatmap.alreadyDiagonalized = tilemap.diagonalized;
 
     this.setState({ rerenderChart: true }, () => {
@@ -450,6 +451,26 @@ export default class Other extends Component {
                 color={tilemap.minColor}
                 onChangeColor={this.onChangeColorTilemap}
                 identificator={optionsTilemap.minColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+          <div className="color-picker-item-tilemap">
+            <label>
+              Low Color
+              <SketchColorPicker
+                color={tilemap.lowColor}
+                onChangeColor={this.onChangeColorTilemap}
+                identificator={optionsTilemap.lowColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+          <div className="color-picker-item-tilemap">
+            <label>
+              High Color
+              <SketchColorPicker
+                color={tilemap.highColor}
+                onChangeColor={this.onChangeColorTilemap}
+                identificator={optionsTilemap.highColor}
                 presetColors={Highcharts.getOptions().colors}/>
             </label>
           </div>

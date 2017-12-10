@@ -31,6 +31,8 @@ export const optionsTilemap = {
   legend: "legend",
   axisTitles: "axisTitles",
   minColor: "minColor",
+  lowColor: "lowColor",
+  highColor: "highColor",
   maxColor: "maxColor",
 }
 
@@ -62,8 +64,10 @@ export const initialState = {
       animation: true,
       legend: true,
       axisTitles: true,
-      minColor: "#ffffff",
-      maxColor: "#f45b5b"
+      minColor: "#F9EDB3",
+      lowColor: "#FFC428",
+      highColor: "#FF7987",
+      maxColor: "#FF2371"
     },
     polar: {},
     boxplot: {},

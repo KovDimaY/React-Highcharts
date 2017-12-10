@@ -80,35 +80,33 @@ export const tilemap = {
     colorAxis: {
         dataClasses: [{
             from: 0,
-            to: 1000000,
+            to: 25,
             color: '#F9EDB3',
-            name: '< 1M'
+            name: '< 25'
         }, {
-            from: 1000000,
-            to: 5000000,
+            from: 25,
+            to: 50,
             color: '#FFC428',
-            name: '1M - 5M'
+            name: '25 - 50'
         }, {
-            from: 5000000,
-            to: 20000000,
+            from: 50,
+            to: 75,
             color: '#FF7987',
-            name: '5M - 20M'
+            name: '50 - 75'
         }, {
-            from: 20000000,
+            from: 75,
             color: '#FF2371',
-            name: '> 20M'
+            name: '> 75'
         }]
     },
     tooltip: {
         headerFormat: '',
-        pointFormat: 'The population of <b> {point.name}</b> is <b>{point.value}</b>'
+        pointFormat: 'The value of the cell ({point.x};{point.y}) is <b>{point.value}</b> (UOM)'
     },
     plotOptions: {
         series: {
             dataLabels: {
                 enabled: true,
-                format: '{point.hc-a2}',
-                color: '#000000',
                 style: {
                     textOutline: false
                 }
