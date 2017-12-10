@@ -19,11 +19,13 @@ import {
 import {
   modes,
   initialState,
-  optionsHeatmap
+  optionsHeatmap,
+  optionsTilemap
 } from '../../constants/other/modes-options-other'
 
 import {
-  generateSeriesForHeatmap
+  generateSeriesForHeatmap,
+  generateSeriesForTilemap
 } from '../../constants/other/data-helpers-other'
 
 
@@ -34,8 +36,11 @@ export default class Other extends Component {
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.onHeatmapCheckBoxChange = this.onHeatmapCheckBoxChange.bind(this);
+    this.onTilemapCheckBoxChange = this.onTilemapCheckBoxChange.bind(this);
     this.onChangeColorHeatmap = this.onChangeColorHeatmap.bind(this);
+    this.onChangeColorTilemap = this.onChangeColorTilemap.bind(this);
     this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
+    this.updateTilemapConfiguration = this.updateTilemapConfiguration.bind(this);
   }
 
   componentDidMount() {
@@ -52,6 +57,7 @@ export default class Other extends Component {
 
   initTilemap() {
     const options = tilemap;
+    options.series = generateSeriesForTilemap();
 
     this.setState({ options }, () => {
       this.updateTilemapConfiguration();
@@ -149,13 +155,27 @@ export default class Other extends Component {
     heatmap.alreadyDiagonalized = heatmap.diagonalized;
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
-    })
+    });
   }
 
   updateTilemapConfiguration() {
+    const { tilemap } = this.state.configurations;
+    const { options } = this.state;
+
+    options.title.text = tilemap.title ? 'Randomly generated data' : null;
+    options.subtitle.text = tilemap.title ? 'This data is not real' : null;
+    options.legend.enabled = tilemap.legend;
+    options.tooltip.enabled = tilemap.tooltip;
+    options.plotOptions.series.dataLabels.enabled = tilemap.dataLabels;
+    options.plotOptions.series.animation = tilemap.animation;
+    options.colorAxis.dataClasses[0].color = tilemap.minColor;
+    options.colorAxis.dataClasses[1].color = tilemap.lowColor;
+    options.colorAxis.dataClasses[2].color = tilemap.highColor;
+    options.colorAxis.dataClasses[3].color = tilemap.maxColor;
+
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
-    })
+    });
   }
 
   updatePolarConfiguration() {
@@ -247,10 +267,28 @@ export default class Other extends Component {
     this.setState({ configurations })
   }
 
+  onTilemapCheckBoxChange(event) {
+    const { configurations } = this.state;
+    if (configurations.tilemap[event.target.value]) {
+      configurations.tilemap[event.target.value] = false;
+    } else {
+      configurations.tilemap[event.target.value] = true;
+    }
+    this.setState({ configurations })
+  }
+
   onChangeColorHeatmap(key, color) {
     const { configurations } = this.state;
     if (typeof key === "string" && configurations.heatmap[key]) {
       configurations.heatmap[key] = color.hex;
+    }
+    this.setState({ configurations });
+  }
+
+  onChangeColorTilemap(key, color) {
+    const { configurations } = this.state;
+    if (typeof key === "string" && configurations.tilemap[key]) {
+      configurations.tilemap[key] = color.hex;
     }
     this.setState({ configurations });
   }
@@ -279,39 +317,6 @@ export default class Other extends Component {
     const { heatmap } = this.state.configurations;
     return (
       <div className="other-heatmap-container">
-        <div className="color-pickers">
-          <div className="color-picker-item">
-            <label>
-              Min Color
-              <SketchColorPicker
-                color={ heatmap.minColor }
-                onChangeColor={this.onChangeColorHeatmap}
-                identificator={optionsHeatmap.minColor}
-                presetColors={Highcharts.getOptions().colors}/>
-            </label>
-          </div>
-          <div className="color-picker-item">
-            <label>
-              Max Color
-              <SketchColorPicker
-                color={ heatmap.maxColor }
-                onChangeColor={this.onChangeColorHeatmap}
-                identificator={optionsHeatmap.maxColor}
-                presetColors={Highcharts.getOptions().colors}/>
-            </label>
-          </div>
-          <div className="color-picker-item">
-            <label>
-              Border Color
-              <SketchColorPicker
-                color={ heatmap.borderColor }
-                onChangeColor={this.onChangeColorHeatmap}
-                identificator={optionsHeatmap.borderColor}
-                presetColors={Highcharts.getOptions().colors}/>
-            </label>
-          </div>
-        </div>
-
         <div className="checkboxes other-heatmap">
           <div className="checkbox">
             <label><input type="checkbox"
@@ -357,10 +362,133 @@ export default class Other extends Component {
           </div>
         </div>
 
+        <div className="color-pickers">
+          <div className="color-picker-item">
+            <label>
+              Min Color
+              <SketchColorPicker
+                color={ heatmap.minColor }
+                onChangeColor={this.onChangeColorHeatmap}
+                identificator={optionsHeatmap.minColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+          <div className="color-picker-item">
+            <label>
+              Max Color
+              <SketchColorPicker
+                color={ heatmap.maxColor }
+                onChangeColor={this.onChangeColorHeatmap}
+                identificator={optionsHeatmap.maxColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+          <div className="color-picker-item">
+            <label>
+              Border Color
+              <SketchColorPicker
+                color={ heatmap.borderColor }
+                onChangeColor={this.onChangeColorHeatmap}
+                identificator={optionsHeatmap.borderColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+        </div>
+
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
           onClick={this.updateHeatmapConfiguration}>
+          Apply
+        </button>
+      </div>
+    )
+  }
+
+  renderTilemapConfiguration() {
+    const { tilemap } = this.state.configurations;
+    return (
+      <div className="other-tilemap-container">
+        <div className="checkboxes other-tilemap">
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsTilemap.title}
+                          checked={tilemap.title}
+                          onChange={this.onTilemapCheckBoxChange}/>Show Chart Title</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsTilemap.dataLabels}
+                          checked={tilemap.dataLabels}
+                          onChange={this.onTilemapCheckBoxChange}/>Show Data Labels</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsTilemap.legend}
+                          checked={tilemap.legend}
+                          onChange={this.onTilemapCheckBoxChange}/>Show Legend</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsTilemap.tooltip}
+                          checked={tilemap.tooltip}
+                          onChange={this.onTilemapCheckBoxChange}/>Enable Tooltip</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsTilemap.animation}
+                          checked={tilemap.animation}
+                          onChange={this.onTilemapCheckBoxChange}/>Enable Animation</label>
+          </div>
+        </div>
+
+        <div className="color-pickers">
+          <div className="color-picker-item-tilemap">
+            <label>
+              Min Color
+              <SketchColorPicker
+                color={tilemap.minColor}
+                onChangeColor={this.onChangeColorTilemap}
+                identificator={optionsTilemap.minColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+          <div className="color-picker-item-tilemap">
+            <label>
+              Low Color
+              <SketchColorPicker
+                color={tilemap.lowColor}
+                onChangeColor={this.onChangeColorTilemap}
+                identificator={optionsTilemap.lowColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+          <div className="color-picker-item-tilemap">
+            <label>
+              High Color
+              <SketchColorPicker
+                color={tilemap.highColor}
+                onChangeColor={this.onChangeColorTilemap}
+                identificator={optionsTilemap.highColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+          <div className="color-picker-item-tilemap">
+            <label>
+              Max Color
+              <SketchColorPicker
+                color={tilemap.maxColor}
+                onChangeColor={this.onChangeColorTilemap}
+                identificator={optionsTilemap.maxColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateTilemapConfiguration}>
           Apply
         </button>
       </div>
@@ -374,7 +502,7 @@ export default class Other extends Component {
         return this.renderHeatmapConfiguration();
       }
       case modes.tilemap: {
-        return <div> TILEMAP </div>;
+        return this.renderTilemapConfiguration();
       }
       case modes.polar: {
         return <div> POLAR </div>;

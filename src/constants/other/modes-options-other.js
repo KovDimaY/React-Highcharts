@@ -23,6 +23,18 @@ export const optionsHeatmap = {
   alreadyDiagonalized: "alreadyDiagonalized",
 }
 
+export const optionsTilemap = {
+  tooltip: "tooltip",
+  title: "title",
+  dataLabels: "dataLabels",
+  animation: "animation",
+  legend: "legend",
+  minColor: "minColor",
+  lowColor: "lowColor",
+  highColor: "highColor",
+  maxColor: "maxColor",
+}
+
 
 
 
@@ -44,7 +56,17 @@ export const initialState = {
       diagonalized: false,
       alreadyDiagonalized: false
     },
-    tilemap: {},
+    tilemap: {
+      tooltip: true,
+      title: true,
+      dataLabels: true,
+      animation: true,
+      legend: true,
+      minColor: "#F9EDB3",
+      lowColor: "#FFC428",
+      highColor: "#FF7987",
+      maxColor: "#FF2371"
+    },
     polar: {},
     boxplot: {},
     gauge: {},

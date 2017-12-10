@@ -41,3 +41,22 @@ export function generateSeriesForHeatmap(options, diagonalized) {
 
   return options;
 }
+
+export function generateSeriesForTilemap() {
+  const width = Math.round(Math.random() * 10) + 2;
+  const height = Math.round(Math.random() * 7) + 2;
+  const probability = 25 + Math.random() * 25;
+  const result = [];
+
+  for (let i = 0; i < width; i++) {
+    for (let j = 0; j < height; j++) {
+      const randomTry = Math.random() * 100;
+      const value = Math.round(Math.random() * 99) + 1;
+      if (randomTry > probability) {
+        result.push([i, j, value]);
+      }
+    }
+  }
+
+  return [{ data: result }];
+}
