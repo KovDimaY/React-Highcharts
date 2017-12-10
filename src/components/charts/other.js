@@ -19,11 +19,13 @@ import {
 import {
   modes,
   initialState,
-  optionsHeatmap
+  optionsHeatmap,
+  optionsTilemap
 } from '../../constants/other/modes-options-other'
 
 import {
-  generateSeriesForHeatmap
+  generateSeriesForHeatmap,
+  generateSeriesForTilemap
 } from '../../constants/other/data-helpers-other'
 
 
@@ -34,8 +36,11 @@ export default class Other extends Component {
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.onHeatmapCheckBoxChange = this.onHeatmapCheckBoxChange.bind(this);
+    this.onTilemapCheckBoxChange = this.onTilemapCheckBoxChange.bind(this);
     this.onChangeColorHeatmap = this.onChangeColorHeatmap.bind(this);
+    this.onChangeColorTilemap = this.onChangeColorTilemap.bind(this);
     this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
+    this.updateTilemapConfiguration = this.updateTilemapConfiguration.bind(this);
   }
 
   componentDidMount() {
@@ -52,6 +57,7 @@ export default class Other extends Component {
 
   initTilemap() {
     const options = tilemap;
+    options.series = generateSeriesForTilemap();
 
     this.setState({ options }, () => {
       this.updateTilemapConfiguration();
@@ -247,12 +253,20 @@ export default class Other extends Component {
     this.setState({ configurations })
   }
 
+  onTilemapCheckBoxChange(event) {
+    console.log("onTilemapCheckBoxChange");
+  }
+
   onChangeColorHeatmap(key, color) {
     const { configurations } = this.state;
     if (typeof key === "string" && configurations.heatmap[key]) {
       configurations.heatmap[key] = color.hex;
     }
     this.setState({ configurations });
+  }
+
+  onChangeColorTilemap(key, color) {
+    console.log("onChangeColorTilemap");
   }
 
   renderOptionsDropdown() {
@@ -367,6 +381,82 @@ export default class Other extends Component {
     )
   }
 
+  renderTilemapConfiguration() {
+    const { tilemap } = this.state.configurations;
+    return (
+      <div className="other-tilemap-container">
+        <div className="checkboxes other-tilemap">
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsTilemap.title}
+                          checked={tilemap.title}
+                          onChange={this.onTilemapCheckBoxChange}/>Show Chart Title</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsTilemap.axisTitles}
+                          checked={tilemap.axisTitles}
+                          onChange={this.onTilemapCheckBoxChange}/>Show Axis Titles</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsTilemap.dataLabels}
+                          checked={tilemap.dataLabels}
+                          onChange={this.onTilemapCheckBoxChange}/>Show Data Labels</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsTilemap.legend}
+                          checked={tilemap.legend}
+                          onChange={this.onTilemapCheckBoxChange}/>Show Legend</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsTilemap.tooltip}
+                          checked={tilemap.tooltip}
+                          onChange={this.onTilemapCheckBoxChange}/>Enable Tooltip</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsTilemap.animation}
+                          checked={tilemap.animation}
+                          onChange={this.onTilemapCheckBoxChange}/>Enable Animation</label>
+          </div>
+        </div>
+
+        <div className="color-pickers">
+          <div className="color-picker-item-tilemap">
+            <label>
+              Min Color
+              <SketchColorPicker
+                color={tilemap.minColor}
+                onChangeColor={this.onChangeColorTilemap}
+                identificator={optionsTilemap.minColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+          <div className="color-picker-item-tilemap">
+            <label>
+              Max Color
+              <SketchColorPicker
+                color={tilemap.maxColor}
+                onChangeColor={this.onChangeColorTilemap}
+                identificator={optionsTilemap.maxColor}
+                presetColors={Highcharts.getOptions().colors}/>
+            </label>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateTilemapConfiguration}>
+          Apply
+        </button>
+      </div>
+    )
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -374,7 +464,7 @@ export default class Other extends Component {
         return this.renderHeatmapConfiguration();
       }
       case modes.tilemap: {
-        return <div> TILEMAP </div>;
+        return this.renderTilemapConfiguration();
       }
       case modes.polar: {
         return <div> POLAR </div>;

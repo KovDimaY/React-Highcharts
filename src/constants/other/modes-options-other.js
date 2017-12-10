@@ -23,6 +23,17 @@ export const optionsHeatmap = {
   alreadyDiagonalized: "alreadyDiagonalized",
 }
 
+export const optionsTilemap = {
+  tooltip: "tooltip",
+  title: "title",
+  dataLabels: "dataLabels",
+  animation: "animation",
+  legend: "legend",
+  axisTitles: "axisTitles",
+  minColor: "minColor",
+  maxColor: "maxColor",
+}
+
 
 
 

@@ -27,12 +27,20 @@
     .other-heatmap {
       margin-top: 20px;
     }
-    .color-pickers {
+    .other-tilemap {
       margin-top: 40px;
+    }
+    .color-pickers {
+      margin-top: 20px;
     }
     .color-picker-item {
       display: inline-block;
       width: 33%;
+      text-align: center;
+    }
+    .color-picker-item-tilemap {
+      display: inline-block;
+      width: 50%;
       text-align: center;
     }
     .apply-button {
@@ -62,6 +70,9 @@
     .other-heatmap {
       margin-left: 33%;
     }
+    .other-tilemap {
+      margin-left: 33%;
+    }
     .apply-button {
       width: 40%;
       margin-left: 30%;
@@ -76,6 +87,9 @@
 
   @media (min-width: 768px) {
     .other-heatmap {
+      margin-left: 40px;
+    }
+    .other-tilemap {
       margin-left: 40px;
     }
     .apply-button {
@@ -100,6 +114,9 @@
     .other-heatmap {
       margin-left: 80px;
     }
+    .other-tilemap {
+      margin-left: 80px;
+    }
     .configuration-area {
       .color-picker-item {
         display: inline-block;
@@ -115,6 +132,9 @@
 
   @media (min-width: 1200px) {
     .other-heatmap {
+      margin-left: 110px;
+    }
+    .other-tilemap {
       margin-left: 110px;
     }
     .configuration-area {
