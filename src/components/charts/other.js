@@ -38,6 +38,7 @@ export default class Other extends Component {
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.onHeatmapCheckBoxChange = this.onHeatmapCheckBoxChange.bind(this);
     this.onTilemapCheckBoxChange = this.onTilemapCheckBoxChange.bind(this);
+    this.onPolarCheckBoxChange = this.onPolarCheckBoxChange.bind(this);
     this.onChangeColorHeatmap = this.onChangeColorHeatmap.bind(this);
     this.onChangeColorTilemap = this.onChangeColorTilemap.bind(this);
     this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
@@ -275,7 +276,7 @@ export default class Other extends Component {
     } else {
       configurations.tilemap[event.target.value] = true;
     }
-    this.setState({ configurations })
+    this.setState({ configurations });
   }
 
   onChangeColorHeatmap(key, color) {
@@ -294,6 +295,20 @@ export default class Other extends Component {
     this.setState({ configurations });
   }
 
+  onPolarCheckBoxChange(event) {
+    const { configurations } = this.state;
+    if (event.target.name === optionsPolar.chartType) {
+      configurations.polar[event.target.name] = event.target.value;
+    } else {
+      if (configurations.polar[event.target.value]) {
+        configurations.polar[event.target.value] = false;
+      } else {
+        configurations.polar[event.target.value] = true;
+      }
+    }
+    this.setState({ configurations });
+  }
+  
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
