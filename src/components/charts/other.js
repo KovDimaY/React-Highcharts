@@ -500,7 +500,7 @@ export default class Other extends Component {
     const { polar } = this.state.configurations;
     return (
       <div className="other-polar-container">
-        <div className="form-group config-option">
+        <div className="form-group config-option polar-type-selector">
           <label>Type of the Chart:</label>
           <select
             className="form-control"
