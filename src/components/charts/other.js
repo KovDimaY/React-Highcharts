@@ -43,6 +43,7 @@ export default class Other extends Component {
     this.onChangeColorTilemap = this.onChangeColorTilemap.bind(this);
     this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
     this.updateTilemapConfiguration = this.updateTilemapConfiguration.bind(this);
+    this.updatePolarConfiguration = this.updatePolarConfiguration.bind(this);
   }
 
   componentDidMount() {
@@ -181,6 +182,16 @@ export default class Other extends Component {
   }
 
   updatePolarConfiguration() {
+    const { polar } = this.state.configurations;
+    const { options } = this.state;
+
+    options.title.text = polar.title ? 'Randomly generated data' : null;
+    options.subtitle.text = polar.title ? 'This data is not real' : null;
+    options.legend.enabled = polar.legend;
+    options.tooltip.enabled = polar.tooltip;
+    options.plotOptions.series.dataLabels.enabled = polar.dataLabels;
+    options.plotOptions.series.animation = polar.animation;
+
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -308,7 +319,7 @@ export default class Other extends Component {
     }
     this.setState({ configurations });
   }
-  
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">

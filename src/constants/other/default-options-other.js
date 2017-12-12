@@ -118,46 +118,51 @@ export const tilemap = {
 }
 
 export const polar = {
-
     chart: {
         polar: true
     },
-
     title: {
-        text: 'Highcharts Polar Chart'
+        text: ''
     },
-
+    subtitle: {
+        text: ''
+    },
     pane: {
         startAngle: 0,
         endAngle: 360
     },
-
+    legend: {
+        enabled: true,
+    },
+    tooltip: {
+      enabled: true,
+    },
     xAxis: {
         tickInterval: 45,
         min: 0,
         max: 360,
         labels: {
             formatter: function () {
-                return this.value + '°';
+                return this.value + '(UOM)';
             }
         }
     },
-
     yAxis: {
         min: 0
     },
-
     plotOptions: {
         series: {
             pointStart: 0,
-            pointInterval: 45
+            pointInterval: 45,
+            dataLabels: {
+                enabled: true,
+            }
         },
         column: {
             pointPadding: 0,
             groupPadding: 0
         }
     },
-
     series: [{
         type: 'column',
         name: 'Column',
