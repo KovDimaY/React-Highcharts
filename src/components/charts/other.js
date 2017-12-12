@@ -20,7 +20,8 @@ import {
   modes,
   initialState,
   optionsHeatmap,
-  optionsTilemap
+  optionsTilemap,
+  optionsPolar
 } from '../../constants/other/modes-options-other'
 
 import {
@@ -495,6 +496,64 @@ export default class Other extends Component {
     )
   }
 
+  renderPolarConfiguration() {
+    const { polar } = this.state.configurations;
+    return (
+      <div className="other-polar-container">
+        <div className="form-group config-option">
+          <label>Type of the Chart:</label>
+          <select
+            className="form-control"
+            onChange={this.onPolarCheckBoxChange}
+            name={optionsPolar.chartType}>
+            <option>Line</option>
+            <option>Area</option>
+            <option>Column</option>
+          </select>
+        </div>
+        <div className="checkboxes other-polar">
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPolar.title}
+                          checked={polar.title}
+                          onChange={this.onPolarCheckBoxChange}/>Show Chart Title</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPolar.dataLabels}
+                          checked={polar.dataLabels}
+                          onChange={this.onPolarCheckBoxChange}/>Show Data Labels</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPolar.legend}
+                          checked={polar.legend}
+                          onChange={this.onPolarCheckBoxChange}/>Show Legend</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPolar.tooltip}
+                          checked={polar.tooltip}
+                          onChange={this.onPolarCheckBoxChange}/>Enable Tooltip</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPolar.animation}
+                          checked={polar.animation}
+                          onChange={this.onPolarCheckBoxChange}/>Enable Animation</label>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updatePolarConfiguration}>
+          Apply
+        </button>
+      </div>
+    )
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -505,7 +564,7 @@ export default class Other extends Component {
         return this.renderTilemapConfiguration();
       }
       case modes.polar: {
-        return <div> POLAR </div>;
+        return this.renderPolarConfiguration();
       }
       case modes.boxplot: {
         return <div> BOXPLOT </div>;
