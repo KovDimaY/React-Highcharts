@@ -26,7 +26,8 @@ import {
 
 import {
   generateSeriesForHeatmap,
-  generateSeriesForTilemap
+  generateSeriesForTilemap,
+  generateSeriesForPolar
 } from '../../constants/other/data-helpers-other'
 
 
@@ -69,6 +70,7 @@ export default class Other extends Component {
 
   initPolar() {
     const options = polar;
+    options.series = generateSeriesForPolar();
 
     this.setState({ options }, () => {
       this.updatePolarConfiguration();

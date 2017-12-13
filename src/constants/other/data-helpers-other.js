@@ -60,3 +60,25 @@ export function generateSeriesForTilemap() {
 
   return [{ data: result }];
 }
+
+export function generateSeriesForPolar() {
+  const possibleOutcomes = [4, 5, 6, 8, 10, 12];
+  const randomIndex = Math.round(Math.random() * possibleOutcomes.length);
+  const numberOfPoints = possibleOutcomes[randomIndex];
+  const numberOfSeries = Math.round(Math.random() * 4) + 1;
+  const result = [];
+
+  for (let i = 0; i < numberOfSeries; i++) {
+    const data = [];
+    for (let j = 0; j < numberOfPoints; j++) {
+      const value = Math.round(Math.random() * 99) + 1;
+      data.push(value);
+    }
+    result.push({
+        name: `Random serie ${i+1}`,
+        data,
+    });
+  }
+
+  return result;
+}
