@@ -568,6 +568,12 @@ export default class Other extends Component {
                           checked={polar.animation}
                           onChange={this.onPolarCheckBoxChange}/>Enable Animation</label>
           </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPolar.spiderMode}
+                          checked={polar.spiderMode}
+                          onChange={this.onPolarCheckBoxChange}/>Use Spider Net Mode</label>
+          </div>
         </div>
 
         <button

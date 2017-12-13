@@ -41,7 +41,8 @@ export const optionsPolar = {
   title: "title",
   dataLabels: "dataLabels",
   animation: "animation",
-  legend: "legend"
+  legend: "legend",
+  spiderMode: "spiderMode",
 }
 
 
@@ -82,7 +83,8 @@ export const initialState = {
       title: true,
       dataLabels: true,
       animation: true,
-      legend: true
+      legend: true,
+      spiderMode: false,
     },
     boxplot: {},
     gauge: {},
