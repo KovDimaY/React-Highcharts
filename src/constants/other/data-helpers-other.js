@@ -63,7 +63,7 @@ export function generateSeriesForTilemap() {
 
 export function generateSeriesForPolar() {
   const possibleOutcomes = [4, 5, 6, 8, 10, 12];
-  const randomIndex = Math.round(Math.random() * possibleOutcomes.length);
+  const randomIndex = Math.round(Math.random() * (possibleOutcomes.length - 1));
   const numberOfPoints = possibleOutcomes[randomIndex];
   const numberOfSeries = Math.round(Math.random() * 4) + 1;
   const result = [];

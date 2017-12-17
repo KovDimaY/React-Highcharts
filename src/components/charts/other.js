@@ -186,6 +186,11 @@ export default class Other extends Component {
   updatePolarConfiguration() {
     const { polar } = this.state.configurations;
     const { options } = this.state;
+    const circleLableFormatter = {
+      formatter: function () {
+          return this.value + '°';
+      }
+    };
 
     options.title.text = polar.title ? 'Randomly generated data' : null;
     options.subtitle.text = polar.title ? 'This data is not real' : null;
@@ -193,6 +198,20 @@ export default class Other extends Component {
     options.tooltip.enabled = polar.tooltip;
     options.plotOptions.series.dataLabels.enabled = polar.dataLabels;
     options.plotOptions.series.animation = polar.animation;
+    options.plotOptions.series.pointStart = polar.spiderMode ? undefined : 0;
+    options.plotOptions.series.pointInterval = polar.spiderMode
+      ? undefined
+      : 360 / options.series[0].data.length;
+    options.xAxis.tickInterval = polar.spiderMode
+      ? undefined
+      : 360 / options.series[0].data.length;
+    options.xAxis.categories = polar.spiderMode
+      ? options.series[0].data.map((item, i) => `Random Category ${i + 1}`)
+      : undefined;
+    options.xAxis.min = polar.spiderMode ? undefined : 0;
+    options.xAxis.max = polar.spiderMode ? undefined : 360;
+    options.xAxis.labels = polar.spiderMode ? {} : circleLableFormatter;
+    options.yAxis.gridLineInterpolation = polar.spiderMode ? 'polygone' : 'circle';
 
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
