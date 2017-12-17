@@ -212,6 +212,15 @@ export default class Other extends Component {
     options.xAxis.max = polar.spiderMode ? undefined : 360;
     options.xAxis.labels = polar.spiderMode ? {} : circleLableFormatter;
     options.yAxis.gridLineInterpolation = polar.spiderMode ? 'polygone' : 'circle';
+    options.series.forEach((serie) => {
+      if (polar.chartType === 'Line') {
+        serie.type = 'line';
+      } else if (polar.chartType === 'Area') {
+        serie.type = 'area';
+      } else {
+        serie.type = 'column';
+      }
+    });
 
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })

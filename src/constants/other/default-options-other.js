@@ -159,7 +159,11 @@ export const polar = {
         },
         column: {
             pointPadding: 0,
-            groupPadding: 0
+            groupPadding: 0,
+            stacking: 'normal',
+        },
+        area: {
+          stacking: 'normal',
         }
     },
     series: []
