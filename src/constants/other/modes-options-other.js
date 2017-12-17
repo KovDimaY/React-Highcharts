@@ -35,6 +35,16 @@ export const optionsTilemap = {
   maxColor: "maxColor",
 }
 
+export const optionsPolar = {
+  chartType: "chartType",
+  tooltip: "tooltip",
+  title: "title",
+  dataLabels: "dataLabels",
+  animation: "animation",
+  legend: "legend",
+  spiderMode: "spiderMode",
+}
+
 
 
 
@@ -67,7 +77,15 @@ export const initialState = {
       highColor: "#FF7987",
       maxColor: "#FF2371"
     },
-    polar: {},
+    polar: {
+      chartType: "Line",
+      tooltip: true,
+      title: true,
+      dataLabels: true,
+      animation: true,
+      legend: true,
+      spiderMode: false,
+    },
     boxplot: {},
     gauge: {},
     pyramid: {},

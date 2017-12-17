@@ -20,12 +20,14 @@ import {
   modes,
   initialState,
   optionsHeatmap,
-  optionsTilemap
+  optionsTilemap,
+  optionsPolar
 } from '../../constants/other/modes-options-other'
 
 import {
   generateSeriesForHeatmap,
-  generateSeriesForTilemap
+  generateSeriesForTilemap,
+  generateSeriesForPolar
 } from '../../constants/other/data-helpers-other'
 
 
@@ -37,10 +39,12 @@ export default class Other extends Component {
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.onHeatmapCheckBoxChange = this.onHeatmapCheckBoxChange.bind(this);
     this.onTilemapCheckBoxChange = this.onTilemapCheckBoxChange.bind(this);
+    this.onPolarCheckBoxChange = this.onPolarCheckBoxChange.bind(this);
     this.onChangeColorHeatmap = this.onChangeColorHeatmap.bind(this);
     this.onChangeColorTilemap = this.onChangeColorTilemap.bind(this);
     this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
     this.updateTilemapConfiguration = this.updateTilemapConfiguration.bind(this);
+    this.updatePolarConfiguration = this.updatePolarConfiguration.bind(this);
   }
 
   componentDidMount() {
@@ -66,6 +70,7 @@ export default class Other extends Component {
 
   initPolar() {
     const options = polar;
+    options.series = generateSeriesForPolar();
 
     this.setState({ options }, () => {
       this.updatePolarConfiguration();
@@ -179,6 +184,44 @@ export default class Other extends Component {
   }
 
   updatePolarConfiguration() {
+    const { polar } = this.state.configurations;
+    const { options } = this.state;
+    const circleLableFormatter = {
+      formatter: function () {
+          return this.value + '°';
+      }
+    };
+
+    options.title.text = polar.title ? 'Randomly generated data' : null;
+    options.subtitle.text = polar.title ? 'This data is not real' : null;
+    options.legend.enabled = polar.legend;
+    options.tooltip.enabled = polar.tooltip;
+    options.plotOptions.series.dataLabels.enabled = polar.dataLabels;
+    options.plotOptions.series.animation = polar.animation;
+    options.plotOptions.series.pointStart = polar.spiderMode ? undefined : 0;
+    options.plotOptions.series.pointInterval = polar.spiderMode
+      ? undefined
+      : 360 / options.series[0].data.length;
+    options.xAxis.tickInterval = polar.spiderMode
+      ? undefined
+      : 360 / options.series[0].data.length;
+    options.xAxis.categories = polar.spiderMode
+      ? options.series[0].data.map((item, i) => `Random Category ${i + 1}`)
+      : undefined;
+    options.xAxis.min = polar.spiderMode ? undefined : 0;
+    options.xAxis.max = polar.spiderMode ? undefined : 360;
+    options.xAxis.labels = polar.spiderMode ? {} : circleLableFormatter;
+    options.yAxis.gridLineInterpolation = polar.spiderMode ? 'polygone' : 'circle';
+    options.series.forEach((serie) => {
+      if (polar.chartType === 'Line') {
+        serie.type = 'line';
+      } else if (polar.chartType === 'Area') {
+        serie.type = 'area';
+      } else {
+        serie.type = 'column';
+      }
+    });
+
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -274,7 +317,7 @@ export default class Other extends Component {
     } else {
       configurations.tilemap[event.target.value] = true;
     }
-    this.setState({ configurations })
+    this.setState({ configurations });
   }
 
   onChangeColorHeatmap(key, color) {
@@ -289,6 +332,20 @@ export default class Other extends Component {
     const { configurations } = this.state;
     if (typeof key === "string" && configurations.tilemap[key]) {
       configurations.tilemap[key] = color.hex;
+    }
+    this.setState({ configurations });
+  }
+
+  onPolarCheckBoxChange(event) {
+    const { configurations } = this.state;
+    if (event.target.name === optionsPolar.chartType) {
+      configurations.polar[event.target.name] = event.target.value;
+    } else {
+      if (configurations.polar[event.target.value]) {
+        configurations.polar[event.target.value] = false;
+      } else {
+        configurations.polar[event.target.value] = true;
+      }
     }
     this.setState({ configurations });
   }
@@ -495,6 +552,70 @@ export default class Other extends Component {
     )
   }
 
+  renderPolarConfiguration() {
+    const { polar } = this.state.configurations;
+    return (
+      <div className="other-polar-container">
+        <div className="form-group config-option polar-type-selector">
+          <label>Type of the Chart:</label>
+          <select
+            className="form-control"
+            onChange={this.onPolarCheckBoxChange}
+            name={optionsPolar.chartType}>
+            <option>Line</option>
+            <option>Area</option>
+            <option>Column</option>
+          </select>
+        </div>
+        <div className="checkboxes other-polar">
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPolar.title}
+                          checked={polar.title}
+                          onChange={this.onPolarCheckBoxChange}/>Show Chart Title</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPolar.dataLabels}
+                          checked={polar.dataLabels}
+                          onChange={this.onPolarCheckBoxChange}/>Show Data Labels</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPolar.legend}
+                          checked={polar.legend}
+                          onChange={this.onPolarCheckBoxChange}/>Show Legend</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPolar.tooltip}
+                          checked={polar.tooltip}
+                          onChange={this.onPolarCheckBoxChange}/>Enable Tooltip</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPolar.animation}
+                          checked={polar.animation}
+                          onChange={this.onPolarCheckBoxChange}/>Enable Animation</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPolar.spiderMode}
+                          checked={polar.spiderMode}
+                          onChange={this.onPolarCheckBoxChange}/>Use Spider Net Mode</label>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updatePolarConfiguration}>
+          Apply
+        </button>
+      </div>
+    )
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -505,7 +626,7 @@ export default class Other extends Component {
         return this.renderTilemapConfiguration();
       }
       case modes.polar: {
-        return <div> POLAR </div>;
+        return this.renderPolarConfiguration();
       }
       case modes.boxplot: {
         return <div> BOXPLOT </div>;
