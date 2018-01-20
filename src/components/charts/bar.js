@@ -726,7 +726,7 @@ export default class Bar extends Component {
         <div className="form-group config-option">
           <label>Text for analysis</label>
             <textarea className="form-control input-textarea"
-                   name={optionsWordsAnalysis.text}
+                   name={optionsWordcloud.text}
                    value={wordsAnalysis.text}
                    onChange={this.onWordsAnalysisInputChange}/>
         </div>

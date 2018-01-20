@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Highcharts from 'highcharts'
+import TagsInput from 'react-tagsinput'
 
 import Chart from './chart-abstract'
 import SketchColorPicker from '../color-picker'
@@ -21,6 +22,7 @@ import {
   initialState,
   optionsHeatmap,
   optionsTilemap,
+  optionsWordcloud,
   optionsPolar
 } from '../../constants/other/modes-options-other'
 
@@ -350,6 +352,14 @@ export default class Other extends Component {
     this.setState({ configurations });
   }
 
+  onWordcloudInputChange(event) {
+    console.log(event);
+  }
+
+  onWordcloudTagsChange(event) {
+    console.log(event);
+  }
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -616,6 +626,43 @@ export default class Other extends Component {
     )
   }
 
+  renderWordcloudConfiguration() {
+    const { wordcloud } = this.state.configurations;
+    return (
+      <div className="word-cloud">
+        <div className="form-group config-option">
+          <label>Text for plotting</label>
+            <textarea className="form-control input-textarea"
+                   name={optionsWordcloud.text}
+                   value={wordcloud.text}
+                   onChange={this.onWordcloudInputChange}/>
+        </div>
+
+        <div className="form-group config-option">
+          <label>Filter next words</label>
+          <TagsInput value={wordcloud.filter}
+                     onChange={this.onWordcloudTagsChange} />
+        </div>
+
+        <div className="form-group config-option">
+          <label>Number of words</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsWordcloud.limit}
+                   value={wordcloud.limit}
+                   onChange={this.onWordcloudInputChange}/>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateWordcloudConfiguration}>
+          Apply
+        </button>
+      </div>
+    );
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -638,7 +685,7 @@ export default class Other extends Component {
         return <div> PYRAMID </div>;
       }
       case modes.wordcloud: {
-        return <div> WORDCLOUD </div>;
+        return this.renderWordcloudConfiguration();
       }
       case modes.sankey: {
         return <div> SANKEY </div>;
