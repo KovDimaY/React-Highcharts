@@ -32,6 +32,8 @@ import {
   generateSeriesForPolar
 } from '../../constants/other/data-helpers-other'
 
+import { limitNumericalInput } from '../../constants/shared/helpers'
+
 
 export default class Other extends Component {
   constructor(props) {
@@ -44,9 +46,12 @@ export default class Other extends Component {
     this.onPolarCheckBoxChange = this.onPolarCheckBoxChange.bind(this);
     this.onChangeColorHeatmap = this.onChangeColorHeatmap.bind(this);
     this.onChangeColorTilemap = this.onChangeColorTilemap.bind(this);
+    this.onWordcloudInputChange = this.onWordcloudInputChange.bind(this);
+    this.onWordcloudTagsChange = this.onWordcloudTagsChange.bind(this);
     this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
     this.updateTilemapConfiguration = this.updateTilemapConfiguration.bind(this);
     this.updatePolarConfiguration = this.updatePolarConfiguration.bind(this);
+    this.updateWordcloudConfiguration = this.updateWordcloudConfiguration.bind(this);
   }
 
   componentDidMount() {
@@ -353,11 +358,33 @@ export default class Other extends Component {
   }
 
   onWordcloudInputChange(event) {
-    console.log(event);
+    const { configurations } = this.state;
+    if (event.target.name === "limit") {
+      limitNumericalInput(
+        configurations.wordcloud,
+        event.target.name,
+        event.target.value,
+        1,
+        1000,
+        true
+      );
+    } else {
+      configurations.wordcloud[event.target.name] = event.target.value;
+    }
+
+    this.setState({ configurations });
   }
 
-  onWordcloudTagsChange(event) {
-    console.log(event);
+  onWordcloudTagsChange(newTags) {
+    const { configurations } = this.state;
+    const lastTag = newTags[newTags.length - 1];
+    const alreadyExist = configurations.wordcloud.filter.includes(lastTag);
+    const deleted = configurations.wordcloud.filter.length > newTags.length;
+    if (!alreadyExist || deleted) {
+      configurations.wordcloud.filter = newTags;
+    }
+
+    this.setState({ configurations })
   }
 
   renderOptionsDropdown() {
