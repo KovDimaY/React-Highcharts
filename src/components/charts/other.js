@@ -665,7 +665,7 @@ export default class Other extends Component {
   renderWordcloudConfiguration() {
     const { wordcloud } = this.state.configurations;
     return (
-      <div className="word-cloud">
+      <div className="other-wordcloud">
         <div className="form-group config-option">
           <label>Text for plotting</label>
             <textarea className="form-control input-textarea"
