@@ -45,6 +45,12 @@ export const optionsPolar = {
   spiderMode: "spiderMode",
 }
 
+export const optionsWordcloud = {
+  text: "text",
+  limit: "limit",
+  filter: "filter",
+}
+
 
 
 
@@ -89,7 +95,11 @@ export const initialState = {
     boxplot: {},
     gauge: {},
     pyramid: {},
-    wordcloud: {},
+    wordcloud: {
+      text: "Enter here your text to plot its words set on the chart...",
+      limit: 10,
+      filter: [],
+    },
     sankey: {}
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Highcharts from 'highcharts'
+import TagsInput from 'react-tagsinput'
 
 import Chart from './chart-abstract'
 import SketchColorPicker from '../color-picker'
@@ -21,14 +22,19 @@ import {
   initialState,
   optionsHeatmap,
   optionsTilemap,
+  optionsWordcloud,
   optionsPolar
 } from '../../constants/other/modes-options-other'
 
 import {
   generateSeriesForHeatmap,
   generateSeriesForTilemap,
-  generateSeriesForPolar
+  generateSeriesForPolar,
+  countWords,
+  generateSeriesForWordCloud
 } from '../../constants/other/data-helpers-other'
+
+import { limitNumericalInput } from '../../constants/shared/helpers'
 
 
 export default class Other extends Component {
@@ -42,9 +48,12 @@ export default class Other extends Component {
     this.onPolarCheckBoxChange = this.onPolarCheckBoxChange.bind(this);
     this.onChangeColorHeatmap = this.onChangeColorHeatmap.bind(this);
     this.onChangeColorTilemap = this.onChangeColorTilemap.bind(this);
+    this.onWordcloudInputChange = this.onWordcloudInputChange.bind(this);
+    this.onWordcloudTagsChange = this.onWordcloudTagsChange.bind(this);
     this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
     this.updateTilemapConfiguration = this.updateTilemapConfiguration.bind(this);
     this.updatePolarConfiguration = this.updatePolarConfiguration.bind(this);
+    this.updateWordcloudConfiguration = this.updateWordcloudConfiguration.bind(this);
   }
 
   componentDidMount() {
@@ -246,7 +255,14 @@ export default class Other extends Component {
   }
 
   updateWordcloudConfiguration() {
-    this.setState({ rerenderChart: true }, () => {
+    const { options, configurations } = this.state;
+    const { text, limit, filter } = configurations.wordcloud;
+
+    const rawData = countWords(text, filter);
+    options.series = generateSeriesForWordCloud(rawData, limit);
+    options.title.text = 'Word Cloud Chart';
+
+    this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
   }
@@ -348,6 +364,39 @@ export default class Other extends Component {
       }
     }
     this.setState({ configurations });
+  }
+
+  onWordcloudInputChange(event) {
+    const { configurations } = this.state;
+    const newValue = event.target.value === ''
+      ? 'Enter here your text to plot its words set on the chart...'
+      : event.target.value;
+    if (event.target.name === "limit") {
+      limitNumericalInput(
+        configurations.wordcloud,
+        event.target.name,
+        newValue,
+        1,
+        1000,
+        true
+      );
+    } else {
+      configurations.wordcloud[event.target.name] = newValue;
+    }
+
+    this.setState({ configurations });
+  }
+
+  onWordcloudTagsChange(newTags) {
+    const { configurations } = this.state;
+    const lastTag = newTags[newTags.length - 1];
+    const alreadyExist = configurations.wordcloud.filter.includes(lastTag);
+    const deleted = configurations.wordcloud.filter.length > newTags.length;
+    if (!alreadyExist || deleted) {
+      configurations.wordcloud.filter = newTags;
+    }
+
+    this.setState({ configurations })
   }
 
   renderOptionsDropdown() {
@@ -616,6 +665,43 @@ export default class Other extends Component {
     )
   }
 
+  renderWordcloudConfiguration() {
+    const { wordcloud } = this.state.configurations;
+    return (
+      <div className="other-wordcloud">
+        <div className="form-group config-option">
+          <label>Text for plotting</label>
+            <textarea className="form-control input-textarea"
+                   name={optionsWordcloud.text}
+                   value={wordcloud.text}
+                   onChange={this.onWordcloudInputChange}/>
+        </div>
+
+        <div className="form-group config-option">
+          <label>Filter next words</label>
+          <TagsInput value={wordcloud.filter}
+                     onChange={this.onWordcloudTagsChange} />
+        </div>
+
+        <div className="form-group config-option">
+          <label>Number of words</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsWordcloud.limit}
+                   value={wordcloud.limit}
+                   onChange={this.onWordcloudInputChange}/>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateWordcloudConfiguration}>
+          Apply
+        </button>
+      </div>
+    );
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -638,7 +724,7 @@ export default class Other extends Component {
         return <div> PYRAMID </div>;
       }
       case modes.wordcloud: {
-        return <div> WORDCLOUD </div>;
+        return this.renderWordcloudConfiguration();
       }
       case modes.sankey: {
         return <div> SANKEY </div>;
