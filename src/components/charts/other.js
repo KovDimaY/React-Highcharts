@@ -29,7 +29,9 @@ import {
 import {
   generateSeriesForHeatmap,
   generateSeriesForTilemap,
-  generateSeriesForPolar
+  generateSeriesForPolar,
+  countWords,
+  generateSeriesForWordCloud
 } from '../../constants/other/data-helpers-other'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
@@ -253,7 +255,14 @@ export default class Other extends Component {
   }
 
   updateWordcloudConfiguration() {
-    this.setState({ rerenderChart: true }, () => {
+    const { options, configurations } = this.state;
+    const { text, limit, filter } = configurations.wordcloud;
+
+    const rawData = countWords(text, filter);
+    options.series = generateSeriesForWordCloud(rawData, limit);
+    options.title.text = 'Word Cloud Chart';
+
+    this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
   }

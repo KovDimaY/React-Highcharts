@@ -82,3 +82,48 @@ export function generateSeriesForPolar() {
 
   return result;
 }
+
+export function countWords(input, filter) {
+  const object = {};
+  const inputFinal = input;
+  const inputArray = inputFinal.split(/\W+/);
+  const filterFinal = filter;
+
+  for (let i = 0; i < inputArray.length; i++) {
+    const currentWord = inputArray[i];
+
+    if (currentWord.length > 0 && !filterFinal.includes(currentWord)) {
+      if (object[currentWord]) {
+        object[currentWord]++;
+      } else {
+        object[currentWord] = 1;
+      }
+    }
+  }
+
+  const keys = Object.keys(object);
+  const result = [];
+
+  for (let i = 0; i < keys.length; i++) {
+    const value = object[keys[i]];
+    result.push([value, keys[i]]);
+  }
+
+  return result;
+}
+
+export function generateSeriesForWordCloud(data, limit) {
+  data.sort((a, b) => b[0] - a[0]);
+  const result = {
+    type: 'wordcloud',
+    data: []
+  };
+  for (let i = 0; i < Math.min(data.length, limit); i++) {
+    result.data.push({
+      name: data[i][1],
+      weight: data[i][0]
+    });
+  }
+
+  return [result];
+}
