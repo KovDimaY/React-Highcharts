@@ -378,7 +378,7 @@ export const pyramid = {
 export const wordcloud = {
     series: [{
         type: 'wordcloud',
-        data: []
+        data: [{ name: 'init', weight: 1 }]
     }],
     title: {
         text: ''
@@ -387,7 +387,7 @@ export const wordcloud = {
         enabled: false
     },
     tooltip: {
-      enabled: false,
+      enabled: true,
     }
 }
 

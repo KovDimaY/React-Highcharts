@@ -368,17 +368,20 @@ export default class Other extends Component {
 
   onWordcloudInputChange(event) {
     const { configurations } = this.state;
+    const newValue = event.target.value === ''
+      ? 'Enter here your text to plot its words set on the chart...'
+      : event.target.value;
     if (event.target.name === "limit") {
       limitNumericalInput(
         configurations.wordcloud,
         event.target.name,
-        event.target.value,
+        newValue,
         1,
         1000,
         true
       );
     } else {
-      configurations.wordcloud[event.target.name] = event.target.value;
+      configurations.wordcloud[event.target.name] = newValue;
     }
 
     this.setState({ configurations });
