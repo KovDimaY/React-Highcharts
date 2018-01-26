@@ -387,7 +387,7 @@ export const wordcloud = {
         enabled: false
     },
     tooltip: {
-      enabled: true,
+      enabled: false,
     }
 }
 
