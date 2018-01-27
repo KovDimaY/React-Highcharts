@@ -47,7 +47,11 @@ export const optionsConfigurableRandom = {
 }
 
 export const optionsShootingSimulation = {
-  test: "test"
+  minX: "minX",
+  maxX: "maxX",
+  minY: "minY",
+  maxY: "maxY",
+  bins: "bins"
 }
 
 
@@ -94,7 +98,11 @@ export const initialState = {
       pointsNumber: 10
     },
     shootingSimulation: {
-      test: "test"
+      minX: 0,
+      maxX: 100,
+      minY: 0,
+      maxY: 100,
+      bins: 10
     }
   }
 }

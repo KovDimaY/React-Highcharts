@@ -21,7 +21,8 @@ import {
   optionsPureRandom2D,
   optionsPureRandom3D,
   optionsPureRandomBubble,
-  optionsConfigurableRandom
+  optionsConfigurableRandom,
+  optionsShootingSimulation
 } from '../../constants/scatter/modes-options-scatter'
 
 import {
@@ -260,6 +261,32 @@ export default class Scattering extends Component {
       configurations.pureRandomBubble[event.target.value] = true;
     }
     this.setState({ configurations })
+  }
+
+  onConfigurableRandomInputChange(event) {
+    const { configurations } = this.state;
+    if (event.target.dataset.type === "series") {
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        1,
+        20,
+        true
+      );
+    } else if (event.target.dataset.type === "points") {
+      limitNumericalInput(
+        configurations.configurableRandom,
+        event.target.name,
+        event.target.value,
+        1,
+        1000,
+        true
+      );
+    } else {
+      configurations.configurableRandom[event.target.name] = event.target.value;
+    }
+    this.setState({ configurations });
   }
 
   onConfigurableRandomInputChange(event) {
@@ -546,6 +573,107 @@ export default class Scattering extends Component {
     );
   }
 
+  renderShootingSimulationModeConfiguration() {
+    const { shootingSimulation } = this.state.configurations;
+    return (
+      <div className="shooting">
+        <div className="row basic-config">
+          <div className="col-md-6">
+            <div className="form-group config-option">
+              <label>Min X</label>
+                <input type="number"
+                       data-type="min"
+                       className="form-control"
+                       name={optionsShootingSimulation.minX}
+                       value={shootingSimulation.minX}
+                       onChange={this.onPolynomialsInputChange}/>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="form-group config-option">
+              <label>Max X</label>
+                <input type="number"
+                       data-type="max"
+                       className="form-control"
+                       name={optionsShootingSimulation.maxX}
+                       value={shootingSimulation.maxX}
+                       onChange={this.onPolynomialsInputChange}/>
+            </div>
+          </div>
+        </div>
+
+        <div className="row basic-config">
+          <div className="col-md-6">
+            <div className="form-group config-option">
+              <label>Min Y</label>
+                <input type="number"
+                       data-type="min"
+                       className="form-control"
+                       name={optionsShootingSimulation.minY}
+                       value={shootingSimulation.minY}
+                       onChange={this.onPolynomialsInputChange}/>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="form-group config-option">
+              <label>Max Y</label>
+                <input type="number"
+                       data-type="max"
+                       className="form-control"
+                       name={optionsShootingSimulation.maxY}
+                       value={shootingSimulation.maxY}
+                       onChange={this.onPolynomialsInputChange}/>
+            </div>
+          </div>
+        </div>
+
+        <div className="form-group config-option">
+          <label>Number of bins</label>
+            <input type="number"
+                   data-type="max"
+                   className="form-control"
+                   name={optionsShootingSimulation.maxY}
+                   value={shootingSimulation.maxY}
+                   onChange={this.onPolynomialsInputChange}/>
+        </div>
+
+        <div className="row basic-config">
+          <div className="col-md-4">
+            <button
+              type="button"
+              className="btn btn-primary apply-button position-dynamic"
+              onClick={this.updateShootingSimulationConfiguration}>
+              1 shot
+            </button>
+          </div>
+          <div className="col-md-4">
+            <button
+              type="button"
+              className="btn btn-primary apply-button position-dynamic"
+              onClick={this.updateShootingSimulationConfiguration}>
+              10 shots
+            </button>
+          </div>
+          <div className="col-md-4">
+            <button
+              type="button"
+              className="btn btn-primary apply-button position-dynamic"
+              onClick={this.updateShootingSimulationConfiguration}>
+              100 shots
+            </button>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateShootingSimulationConfiguration}>
+          Restart
+        </button>
+      </div>
+    )
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -560,6 +688,9 @@ export default class Scattering extends Component {
       }
       case modes.configurableRandom: {
         return this.renderConfigurableRandomModeConfiguration();
+      }
+      case modes.shootingSimulation: {
+        return this.renderShootingSimulationModeConfiguration();
       }
       default: {
         return null;
