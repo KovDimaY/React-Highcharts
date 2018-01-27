@@ -53,6 +53,7 @@ export default class Scattering extends Component {
     this.onPureRandom3DCheckBoxChange = this.onPureRandom3DCheckBoxChange.bind(this);
     this.onPureRandomBubbleCheckBoxChange = this.onPureRandomBubbleCheckBoxChange.bind(this);
     this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
+    this.onShootingSimulationInputChange = this.onShootingSimulationInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -289,28 +290,53 @@ export default class Scattering extends Component {
     this.setState({ configurations });
   }
 
-  onConfigurableRandomInputChange(event) {
+  onShootingSimulationInputChange(event) {
     const { configurations } = this.state;
-    if (event.target.dataset.type === "series") {
+    if (event.target.name === "minX") {
       limitNumericalInput(
-        configurations.configurableRandom,
+        configurations.shootingSimulation,
+        event.target.name,
+        event.target.value,
+        -1000,
+        configurations.shootingSimulation.maxX,
+        false
+      );
+    } else if (event.target.name === "maxX") {
+      limitNumericalInput(
+        configurations.shootingSimulation,
+        event.target.name,
+        event.target.value,
+        configurations.shootingSimulation.minX,
+        1000,
+        false
+      );
+    } else if (event.target.name === "minY") {
+      limitNumericalInput(
+        configurations.shootingSimulation,
+        event.target.name,
+        event.target.value,
+        -1000,
+        configurations.shootingSimulation.maxY,
+        false
+      );
+    } else if (event.target.name === "maxY") {
+      limitNumericalInput(
+        configurations.shootingSimulation,
+        event.target.name,
+        event.target.value,
+        configurations.shootingSimulation.minY,
+        10000,
+        false
+      );
+    } else if (event.target.name === "bins") {
+      limitNumericalInput(
+        configurations.shootingSimulation,
         event.target.name,
         event.target.value,
         1,
         20,
         true
       );
-    } else if (event.target.dataset.type === "points") {
-      limitNumericalInput(
-        configurations.configurableRandom,
-        event.target.name,
-        event.target.value,
-        1,
-        1000,
-        true
-      );
-    } else {
-      configurations.configurableRandom[event.target.name] = event.target.value;
     }
     this.setState({ configurations });
   }
@@ -582,22 +608,22 @@ export default class Scattering extends Component {
             <div className="form-group config-option">
               <label>Min X</label>
                 <input type="number"
-                       data-type="min"
+                       data-type={optionsShootingSimulation.minX}
                        className="form-control"
                        name={optionsShootingSimulation.minX}
                        value={shootingSimulation.minX}
-                       onChange={this.onPolynomialsInputChange}/>
+                       onChange={this.onShootingSimulationInputChange}/>
             </div>
           </div>
           <div className="col-md-6">
             <div className="form-group config-option">
               <label>Max X</label>
                 <input type="number"
-                       data-type="max"
+                       data-type={optionsShootingSimulation.maxX}
                        className="form-control"
                        name={optionsShootingSimulation.maxX}
                        value={shootingSimulation.maxX}
-                       onChange={this.onPolynomialsInputChange}/>
+                       onChange={this.onShootingSimulationInputChange}/>
             </div>
           </div>
         </div>
@@ -607,22 +633,22 @@ export default class Scattering extends Component {
             <div className="form-group config-option">
               <label>Min Y</label>
                 <input type="number"
-                       data-type="min"
+                       data-type={optionsShootingSimulation.minY}
                        className="form-control"
                        name={optionsShootingSimulation.minY}
                        value={shootingSimulation.minY}
-                       onChange={this.onPolynomialsInputChange}/>
+                       onChange={this.onShootingSimulationInputChange}/>
             </div>
           </div>
           <div className="col-md-6">
             <div className="form-group config-option">
               <label>Max Y</label>
                 <input type="number"
-                       data-type="max"
+                       data-type={optionsShootingSimulation.maxY}
                        className="form-control"
                        name={optionsShootingSimulation.maxY}
                        value={shootingSimulation.maxY}
-                       onChange={this.onPolynomialsInputChange}/>
+                       onChange={this.onShootingSimulationInputChange}/>
             </div>
           </div>
         </div>
@@ -630,11 +656,11 @@ export default class Scattering extends Component {
         <div className="form-group config-option">
           <label>Number of bins</label>
             <input type="number"
-                   data-type="max"
+                   data-type={optionsShootingSimulation.bins}
                    className="form-control"
-                   name={optionsShootingSimulation.maxY}
-                   value={shootingSimulation.maxY}
-                   onChange={this.onPolynomialsInputChange}/>
+                   name={optionsShootingSimulation.bins}
+                   value={shootingSimulation.bins}
+                   onChange={this.onShootingSimulationInputChange}/>
         </div>
 
         <div className="row basic-config">
