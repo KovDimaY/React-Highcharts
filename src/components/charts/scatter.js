@@ -11,7 +11,8 @@ import {
   pureRandomBubble,
   configurableRandom2D,
   configurableRandom3D,
-  configurableRandomBubble
+  configurableRandomBubble,
+  shootingSimulation
 } from '../../constants/scatter/default-options-scatter'
 
 import {
@@ -46,6 +47,7 @@ export default class Scattering extends Component {
     this.updatePureRandom3DConfiguration = this.updatePureRandom3DConfiguration.bind(this);
     this.updatePureRandomBubbleConfiguration = this.updatePureRandomBubbleConfiguration.bind(this);
     this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
+    this.updateShootingSimulationConfiguration = this.updateShootingSimulationConfiguration.bind(this);
     this.onPureRandom2DCheckBoxChange = this.onPureRandom2DCheckBoxChange.bind(this);
     this.onPureRandom3DCheckBoxChange = this.onPureRandom3DCheckBoxChange.bind(this);
     this.onPureRandomBubbleCheckBoxChange = this.onPureRandomBubbleCheckBoxChange.bind(this);
@@ -79,14 +81,21 @@ export default class Scattering extends Component {
       this.updatePureRandomBubbleConfiguration();
     });
   }
-  
+
   initConfigurableRandomMode() {
     const options = configurableRandom2D;
     this.setState({ options }, () => {
       this.updateConfigurableRandomConfiguration();
     });
   }
-  
+
+  initShootingSimulationMode() {
+    const options = shootingSimulation;
+    this.setState({ options }, () => {
+      this.updateShootingSimulationConfiguration();
+    });
+  }
+
   updatePureRandom2DConfiguration() {
     const { pureRandom2D } = this.state.configurations;
     const { options } = this.state;
@@ -151,7 +160,7 @@ export default class Scattering extends Component {
       this.setState({ rerenderChart: false })
     })
   }
-  
+
   updateConfigurableRandomConfiguration() {
     const { configurableRandom } = this.state.configurations;
     const { defaultColors } = this.state;
@@ -168,16 +177,25 @@ export default class Scattering extends Component {
       case "Bubble":
         options = configurableRandomBubble;
         convertColorsToBubbles(defaultColors);
-        break;        
+        break;
     }
     const series = generateSeriesForConfigurableRandom(configurableRandom);
     options.series = series;
 
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
-    })
+    });
   }
-  
+
+  updateShootingSimulationConfiguration() {
+    const { shootingSimulation } = this.state.configurations;
+    const { options } = this.state;
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    });
+  }
+
   dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
     const { configurations, defaultColors } = this.state;
@@ -200,6 +218,11 @@ export default class Scattering extends Component {
       case modes.configurableRandom: {
         convertColorsToFlat(defaultColors);
         this.initConfigurableRandomMode();
+        break;
+      }
+      case modes.shootingSimulation: {
+        convertColorsToFlat(defaultColors);
+        this.initShootingSimulationMode();
         break;
       }
       default: {
@@ -238,7 +261,7 @@ export default class Scattering extends Component {
     }
     this.setState({ configurations })
   }
-  
+
   onConfigurableRandomInputChange(event) {
     const { configurations } = this.state;
     if (event.target.dataset.type === "series") {
@@ -264,18 +287,21 @@ export default class Scattering extends Component {
     }
     this.setState({ configurations });
   }
-  
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
         <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Configurations
         <span className="caret"></span></button>
         <ul className="dropdown-menu">
-          <li className="dropdown-header">Scattering Charts</li>
+          <li className="dropdown-header">Random Data</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom2D}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom3D}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandomBubble}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
+          <li className="divider"></li>
+          <li className="dropdown-header">Process Visualization</li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.shootingSimulation}</a></li>
         </ul>
       </div>
     )
@@ -475,15 +501,15 @@ export default class Scattering extends Component {
       </div>
     )
   }
-  
+
   renderConfigurableRandomModeConfiguration() {
     const { configurableRandom } = this.state.configurations;
     return (
       <div className="configurable-random">
         <div className="form-group config-option">
           <label>Type of the Scattering:</label>
-          <select 
-            className="form-control" 
+          <select
+            className="form-control"
             onChange={this.onConfigurableRandomInputChange}
             name={optionsConfigurableRandom.chartType}>
             <option>2D</option>
@@ -509,7 +535,7 @@ export default class Scattering extends Component {
                    value={configurableRandom.pointsNumber}
                    onChange={this.onConfigurableRandomInputChange}/>
         </div>
-        
+
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
@@ -519,7 +545,7 @@ export default class Scattering extends Component {
       </div>
     );
   }
-  
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {

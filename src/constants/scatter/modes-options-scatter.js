@@ -2,7 +2,8 @@ export const modes = {
   pureRandom2D: "Pure Random 2D",
   pureRandom3D: "Pure Random 3D",
   pureRandomBubble: "Pure Random Bubble",
-  configurableRandom: "Configurable Random"
+  configurableRandom: "Configurable Random",
+  shootingSimulation: "Shooting Simulation"
 }
 
 export const optionsPureRandom2D = {
@@ -45,6 +46,9 @@ export const optionsConfigurableRandom = {
   pointsNumber: "pointsNumber"
 }
 
+export const optionsShootingSimulation = {
+  test: "test"
+}
 
 
 export const initialState = {
@@ -89,5 +93,8 @@ export const initialState = {
       seriesNumber: 3,
       pointsNumber: 10
     },
+    shootingSimulation: {
+      test: "test"
+    }
   }
 }
