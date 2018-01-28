@@ -183,3 +183,22 @@ export function generateShotsByParams(number, minX, maxX, minY, maxY) {
   }
   return result;
 }
+
+export function generateHistogramByParamsAndData(data, bins, minX, maxX, minY, maxY) {
+  const result = [];
+  const step = (maxX - minX) / bins;
+  for (let i = 0; i < bins; i += 1) {
+    const rawX = minX + i * step;
+    const rawX2 = minX + (i + 1) * step;
+    const x = Math.floor(rawX * 100) / 100;
+    const x2 = Math.floor(rawX2 * 100) / 100;
+    result.push({
+      x,
+      x2,
+      y: 0
+    });
+  }
+  debugger;
+  
+  return result;
+}

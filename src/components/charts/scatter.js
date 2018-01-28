@@ -34,7 +34,8 @@ import {
   generateSeriesForPureRandom3D,
   generateSeriesForPureRandomBubble,
   generateSeriesForConfigurableRandom,
-  generateShotsByParams
+  generateShotsByParams,
+  generateHistogramByParamsAndData
 } from '../../constants/scatter/data-helpers-scatter'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
@@ -192,13 +193,17 @@ export default class Scattering extends Component {
 
   updateShootingSimulationConfiguration(event) {
     const { shootingSimulation } = this.state.configurations;
-    const { minX, maxX, minY, maxY } = shootingSimulation;
+    const { minX, maxX, minY, maxY, bins } = shootingSimulation;
     const { options } = this.state;
     if (event) {
       const amount = Number(event.target.dataset.amount);
       
       const newPoints = generateShotsByParams(amount, minX, maxX, minY, maxY);
       const newData = options.series[1].data.concat(newPoints);
+      const newHistogram = generateHistogramByParamsAndData(newPoints, bins, minX, maxX, minY, maxY);
+      
+      
+      // options.series[0].data = newHistogram;
       options.series[1].data = newData;
     }
     

@@ -394,10 +394,8 @@ export const shootingSimulation = {
 
     series: [{
         name: 'Histogram',
-        type: 'histogram',
-        xAxis: 1,
-        yAxis: 1,
-        baseSeries: 's1',
+        type: 'column',
+        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3],
         zIndex: -1
     }, {
         name: 'Shots',
