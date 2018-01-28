@@ -171,3 +171,7 @@ export function generateSeriesForConfigurableRandom(options) {
       return [];
   }
 }
+
+export function generateShotsByParams(number, minX, maxX, minY, maxY) {
+  return [[4, 3]];
+}

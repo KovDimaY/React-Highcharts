@@ -33,7 +33,8 @@ import {
   generateSeriesForPureRandom2D,
   generateSeriesForPureRandom3D,
   generateSeriesForPureRandomBubble,
-  generateSeriesForConfigurableRandom
+  generateSeriesForConfigurableRandom,
+  generateShotsByParams
 } from '../../constants/scatter/data-helpers-scatter'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
@@ -189,10 +190,18 @@ export default class Scattering extends Component {
     });
   }
 
-  updateShootingSimulationConfiguration() {
+  updateShootingSimulationConfiguration(event) {
     const { shootingSimulation } = this.state.configurations;
+    const { minX, maxX, minY, maxY } = shootingSimulation;
     const { options } = this.state;
-
+    if (event) {
+      const amount = Number(event.target.dataset.amount);
+      
+      const newPoints = generateShotsByParams(amount, minX, maxX, minY, maxY);
+      const newData = options.series[1].data.concat(newPoints);
+      options.series[1].data = newData;
+    }
+    
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     });
@@ -668,6 +677,7 @@ export default class Scattering extends Component {
             <button
               type="button"
               className="btn btn-primary shot"
+              data-amount={1}
               onClick={this.updateShootingSimulationConfiguration}>
               1 shot
             </button>
@@ -676,6 +686,7 @@ export default class Scattering extends Component {
             <button
               type="button"
               className="btn btn-primary shot"
+              data-amount={10}
               onClick={this.updateShootingSimulationConfiguration}>
               10 shots
             </button>
@@ -685,7 +696,7 @@ export default class Scattering extends Component {
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateShootingSimulationConfiguration}>
+          onClick={this.initShootingSimulationMode}>
           Restart
         </button>
       </div>
