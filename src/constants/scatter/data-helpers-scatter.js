@@ -173,5 +173,13 @@ export function generateSeriesForConfigurableRandom(options) {
 }
 
 export function generateShotsByParams(number, minX, maxX, minY, maxY) {
-  return [[4, 3]];
+  const result = [];
+  for (let i = 0; i < number; i += 1) {
+    const rawX = minX + Math.random() * (maxX - minX);
+    const rawY = minY + Math.random() * (maxY - minY);
+    const x = Math.floor(rawX * 100) / 100;
+    const y = Math.floor(rawY * 100) / 100;
+    result.push([x, y]);
+  }
+  return result;
 }

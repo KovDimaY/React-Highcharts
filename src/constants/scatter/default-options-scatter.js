@@ -402,9 +402,7 @@ export const shootingSimulation = {
     }, {
         name: 'Shots',
         type: 'scatter',
-        data: [
-          [1,2], [3,4], [5,2]
-        ],
+        data: [],
         id: 's1',
         marker: {
             radius: 1.5
