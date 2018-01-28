@@ -603,8 +603,18 @@ export default class Scattering extends Component {
     const { shootingSimulation } = this.state.configurations;
     return (
       <div className="shooting">
-        <div className="row basic-config">
-          <div className="col-md-6">
+        <div className="form-group config-option bins-input">
+          <label>Number of bins</label>
+            <input type="number"
+                   data-type={optionsShootingSimulation.bins}
+                   className="form-control"
+                   name={optionsShootingSimulation.bins}
+                   value={shootingSimulation.bins}
+                   onChange={this.onShootingSimulationInputChange}/>
+        </div>
+      
+        <div className="row">
+          <div className="col-md-6 special-small">
             <div className="form-group config-option">
               <label>Min X</label>
                 <input type="number"
@@ -615,7 +625,7 @@ export default class Scattering extends Component {
                        onChange={this.onShootingSimulationInputChange}/>
             </div>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 special-small">
             <div className="form-group config-option">
               <label>Max X</label>
                 <input type="number"
@@ -628,8 +638,8 @@ export default class Scattering extends Component {
           </div>
         </div>
 
-        <div className="row basic-config">
-          <div className="col-md-6">
+        <div className="row">
+          <div className="col-md-6 special-small">
             <div className="form-group config-option">
               <label>Min Y</label>
                 <input type="number"
@@ -640,7 +650,7 @@ export default class Scattering extends Component {
                        onChange={this.onShootingSimulationInputChange}/>
             </div>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 special-small">
             <div className="form-group config-option">
               <label>Max Y</label>
                 <input type="number"
@@ -653,39 +663,21 @@ export default class Scattering extends Component {
           </div>
         </div>
 
-        <div className="form-group config-option">
-          <label>Number of bins</label>
-            <input type="number"
-                   data-type={optionsShootingSimulation.bins}
-                   className="form-control"
-                   name={optionsShootingSimulation.bins}
-                   value={shootingSimulation.bins}
-                   onChange={this.onShootingSimulationInputChange}/>
-        </div>
-
-        <div className="row basic-config">
-          <div className="col-md-4">
+        <div className="row basic-config shot-container">
+          <div className="col-md-6 special-small">
             <button
               type="button"
-              className="btn btn-primary apply-button position-dynamic"
+              className="btn btn-primary shot"
               onClick={this.updateShootingSimulationConfiguration}>
               1 shot
             </button>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-6 special-small">
             <button
               type="button"
-              className="btn btn-primary apply-button position-dynamic"
+              className="btn btn-primary shot"
               onClick={this.updateShootingSimulationConfiguration}>
               10 shots
-            </button>
-          </div>
-          <div className="col-md-4">
-            <button
-              type="button"
-              className="btn btn-primary apply-button position-dynamic"
-              onClick={this.updateShootingSimulationConfiguration}>
-              100 shots
             </button>
           </div>
         </div>
