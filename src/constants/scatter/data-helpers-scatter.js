@@ -203,7 +203,5 @@ export function generateHistogramByParamsAndData(data, bins, minX, maxX, minY, m
     values[index] += 1;
   });
 
-  debugger;
-
   return { categories, values };
 }

@@ -56,6 +56,7 @@ export default class Scattering extends Component {
     this.onPureRandomBubbleCheckBoxChange = this.onPureRandomBubbleCheckBoxChange.bind(this);
     this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
     this.onShootingSimulationInputChange = this.onShootingSimulationInputChange.bind(this);
+    this.onAddPointsShootingMode = this.onAddPointsShootingMode.bind(this);
   }
 
   componentDidMount() {
@@ -95,6 +96,7 @@ export default class Scattering extends Component {
 
   initShootingSimulationMode() {
     const options = shootingSimulation;
+
     this.setState({ options }, () => {
       this.updateShootingSimulationConfiguration();
     });
@@ -191,9 +193,30 @@ export default class Scattering extends Component {
     });
   }
 
-  updateShootingSimulationConfiguration(event) {
+  updateShootingSimulationConfiguration() {
     const { shootingSimulation } = this.state.configurations;
     const { minX, maxX, minY, maxY, bins } = shootingSimulation;
+    const { options } = this.state;
+
+    shootingSimulation.activated = true;
+    options.xAxis[1].categories = [];
+    options.xAxis[0].min = minX;
+    options.xAxis[0].max = maxX;
+    options.yAxis[0].min = minY;
+    options.yAxis[0].max = maxY;
+
+    options.series[0].data = [];
+    options.series[1].data = [];
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    });
+  }
+
+  onAddPointsShootingMode(event) {
+    const { shootingSimulation } = this.state.configurations;
+    const { minX, maxX, minY, maxY, bins } = shootingSimulation;
+    shootingSimulation.activated = false;
     const { options } = this.state;
     if (event) {
       const amount = Number(event.target.dataset.amount);
@@ -688,7 +711,7 @@ export default class Scattering extends Component {
               type="button"
               className="btn btn-primary shot"
               data-amount={1}
-              onClick={this.updateShootingSimulationConfiguration}>
+              onClick={this.onAddPointsShootingMode}>
               1 shot
             </button>
           </div>
@@ -697,7 +720,7 @@ export default class Scattering extends Component {
               type="button"
               className="btn btn-primary shot"
               data-amount={10}
-              onClick={this.updateShootingSimulationConfiguration}>
+              onClick={this.onAddPointsShootingMode}>
               10 shots
             </button>
           </div>
@@ -706,7 +729,7 @@ export default class Scattering extends Component {
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.initShootingSimulationMode}>
+          onClick={this.updateShootingSimulationConfiguration}>
           Restart
         </button>
       </div>
