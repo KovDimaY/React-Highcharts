@@ -200,9 +200,14 @@ export default class Scattering extends Component {
 
       const newPoints = generateShotsByParams(amount, minX, maxX, minY, maxY);
       const newData = options.series[1].data.concat(newPoints);
-      const newHistogram = generateHistogramByParamsAndData(newPoints, bins, minX, maxX, minY, maxY);
+      const newHistogram = generateHistogramByParamsAndData(newData, bins, minX, maxX, minY, maxY);
 
       options.xAxis[1].categories = newHistogram.categories;
+      options.xAxis[0].min = minX;
+      options.xAxis[0].max = maxX;
+      options.yAxis[0].min = minY;
+      options.yAxis[0].max = maxY;
+
       options.series[0].data = newHistogram.values;
       options.series[1].data = newData;
     }

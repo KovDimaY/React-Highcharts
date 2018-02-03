@@ -194,8 +194,14 @@ export function generateHistogramByParamsAndData(data, bins, minX, maxX, minY, m
     const x = Math.floor(rawX * 100) / 100;
     const x2 = Math.floor(rawX2 * 100) / 100;
     categories.push(`${x}-${x2}`);
-    values.push(i);
+    values.push(0);
   }
+
+  data.forEach((point) => {
+    const diff = point[0] - minX;
+    const index = Math.floor(diff / step);
+    values[index] += 1;
+  });
 
   debugger;
 

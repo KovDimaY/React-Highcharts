@@ -391,7 +391,9 @@ export const shootingSimulation = {
 
     yAxis: [{
         title: { text: 'Shots' },
-        id: 'y-shots'
+        id: 'y-shots',
+        min: 0,
+        max: 100
     }, {
         title: { text: 'Histogram' },
         opposite: true,
@@ -401,7 +403,7 @@ export const shootingSimulation = {
     series: [{
         name: 'Histogram',
         type: 'column',
-        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3],
+        data: [],
         zIndex: -1,
         xAxis: 'x-histogram',
         yAxis: 'y-histogram'
