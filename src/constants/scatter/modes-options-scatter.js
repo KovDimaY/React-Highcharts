@@ -51,7 +51,8 @@ export const optionsShootingSimulation = {
   maxX: "maxX",
   minY: "minY",
   maxY: "maxY",
-  bins: "bins"
+  bins: "bins",
+  disabled: "disabled"
 }
 
 
@@ -102,7 +103,8 @@ export const initialState = {
       maxX: 100,
       minY: 0,
       maxY: 100,
-      bins: 10
+      bins: 10,
+      disabled: false,
     }
   }
 }

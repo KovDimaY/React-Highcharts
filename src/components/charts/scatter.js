@@ -198,7 +198,7 @@ export default class Scattering extends Component {
     const { minX, maxX, minY, maxY, bins } = shootingSimulation;
     const { options } = this.state;
 
-    shootingSimulation.activated = true;
+    shootingSimulation.disabled = false;
     options.xAxis[1].categories = [];
     options.xAxis[0].min = minX;
     options.xAxis[0].max = maxX;
@@ -216,7 +216,7 @@ export default class Scattering extends Component {
   onAddPointsShootingMode(event) {
     const { shootingSimulation } = this.state.configurations;
     const { minX, maxX, minY, maxY, bins } = shootingSimulation;
-    shootingSimulation.activated = false;
+    shootingSimulation.disabled = true;
     const { options } = this.state;
     if (event) {
       const amount = Number(event.target.dataset.amount);
@@ -652,7 +652,8 @@ export default class Scattering extends Component {
                    className="form-control"
                    name={optionsShootingSimulation.bins}
                    value={shootingSimulation.bins}
-                   onChange={this.onShootingSimulationInputChange}/>
+                   onChange={this.onShootingSimulationInputChange}
+                   disabled={shootingSimulation.disabled}/>
         </div>
 
         <div className="row">
@@ -664,7 +665,8 @@ export default class Scattering extends Component {
                        className="form-control"
                        name={optionsShootingSimulation.minX}
                        value={shootingSimulation.minX}
-                       onChange={this.onShootingSimulationInputChange}/>
+                       onChange={this.onShootingSimulationInputChange}
+                       disabled={shootingSimulation.disabled}/>
             </div>
           </div>
           <div className="col-md-6 special-small">
@@ -675,7 +677,8 @@ export default class Scattering extends Component {
                        className="form-control"
                        name={optionsShootingSimulation.maxX}
                        value={shootingSimulation.maxX}
-                       onChange={this.onShootingSimulationInputChange}/>
+                       onChange={this.onShootingSimulationInputChange}
+                       disabled={shootingSimulation.disabled}/>
             </div>
           </div>
         </div>
@@ -689,7 +692,8 @@ export default class Scattering extends Component {
                        className="form-control"
                        name={optionsShootingSimulation.minY}
                        value={shootingSimulation.minY}
-                       onChange={this.onShootingSimulationInputChange}/>
+                       onChange={this.onShootingSimulationInputChange}
+                       disabled={shootingSimulation.disabled}/>
             </div>
           </div>
           <div className="col-md-6 special-small">
@@ -700,7 +704,8 @@ export default class Scattering extends Component {
                        className="form-control"
                        name={optionsShootingSimulation.maxY}
                        value={shootingSimulation.maxY}
-                       onChange={this.onShootingSimulationInputChange}/>
+                       onChange={this.onShootingSimulationInputChange}
+                       disabled={shootingSimulation.disabled}/>
             </div>
           </div>
         </div>
