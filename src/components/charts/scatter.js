@@ -197,16 +197,16 @@ export default class Scattering extends Component {
     const { options } = this.state;
     if (event) {
       const amount = Number(event.target.dataset.amount);
-      
+
       const newPoints = generateShotsByParams(amount, minX, maxX, minY, maxY);
       const newData = options.series[1].data.concat(newPoints);
       const newHistogram = generateHistogramByParamsAndData(newPoints, bins, minX, maxX, minY, maxY);
-      
-      
-      // options.series[0].data = newHistogram;
+
+      options.xAxis[1].categories = newHistogram.categories;
+      options.series[0].data = newHistogram.values;
       options.series[1].data = newData;
     }
-    
+
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     });
@@ -626,7 +626,7 @@ export default class Scattering extends Component {
                    value={shootingSimulation.bins}
                    onChange={this.onShootingSimulationInputChange}/>
         </div>
-      
+
         <div className="row">
           <div className="col-md-6 special-small">
             <div className="form-group config-option">

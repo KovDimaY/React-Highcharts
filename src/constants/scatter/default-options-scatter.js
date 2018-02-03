@@ -378,32 +378,40 @@ export const shootingSimulation = {
     },
     xAxis: [{
         title: { text: 'Shots' },
-        alignTicks: false
+        alignTicks: false,
+        opposite: true,
+        min: 0,
+        max: 100,
+        id: 'x-shots'
     }, {
         title: { text: 'Histogram' },
         alignTicks: false,
-        opposite: true
+        id: 'x-histogram'
     }],
 
     yAxis: [{
-        title: { text: 'Shots' }
+        title: { text: 'Shots' },
+        id: 'y-shots'
     }, {
         title: { text: 'Histogram' },
-        opposite: true
+        opposite: true,
+        id: 'y-histogram'
     }],
 
     series: [{
         name: 'Histogram',
         type: 'column',
         data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3],
-        zIndex: -1
+        zIndex: -1,
+        xAxis: 'x-histogram',
+        yAxis: 'y-histogram'
     }, {
         name: 'Shots',
         type: 'scatter',
         data: [],
         id: 's1',
         marker: {
-            radius: 1.5
+            radius: 3
         }
     }]
 }
