@@ -11,7 +11,8 @@ import {
   pureRandomBubble,
   configurableRandom2D,
   configurableRandom3D,
-  configurableRandomBubble
+  configurableRandomBubble,
+  shootingSimulation
 } from '../../constants/scatter/default-options-scatter'
 
 import {
@@ -20,7 +21,8 @@ import {
   optionsPureRandom2D,
   optionsPureRandom3D,
   optionsPureRandomBubble,
-  optionsConfigurableRandom
+  optionsConfigurableRandom,
+  optionsShootingSimulation
 } from '../../constants/scatter/modes-options-scatter'
 
 import {
@@ -31,7 +33,9 @@ import {
   generateSeriesForPureRandom2D,
   generateSeriesForPureRandom3D,
   generateSeriesForPureRandomBubble,
-  generateSeriesForConfigurableRandom
+  generateSeriesForConfigurableRandom,
+  generateShotsByParams,
+  generateHistogramByParamsAndData
 } from '../../constants/scatter/data-helpers-scatter'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
@@ -46,10 +50,13 @@ export default class Scattering extends Component {
     this.updatePureRandom3DConfiguration = this.updatePureRandom3DConfiguration.bind(this);
     this.updatePureRandomBubbleConfiguration = this.updatePureRandomBubbleConfiguration.bind(this);
     this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
+    this.updateShootingSimulationConfiguration = this.updateShootingSimulationConfiguration.bind(this);
     this.onPureRandom2DCheckBoxChange = this.onPureRandom2DCheckBoxChange.bind(this);
     this.onPureRandom3DCheckBoxChange = this.onPureRandom3DCheckBoxChange.bind(this);
     this.onPureRandomBubbleCheckBoxChange = this.onPureRandomBubbleCheckBoxChange.bind(this);
     this.onConfigurableRandomInputChange = this.onConfigurableRandomInputChange.bind(this);
+    this.onShootingSimulationInputChange = this.onShootingSimulationInputChange.bind(this);
+    this.onAddPointsShootingMode = this.onAddPointsShootingMode.bind(this);
   }
 
   componentDidMount() {
@@ -79,14 +86,22 @@ export default class Scattering extends Component {
       this.updatePureRandomBubbleConfiguration();
     });
   }
-  
+
   initConfigurableRandomMode() {
     const options = configurableRandom2D;
     this.setState({ options }, () => {
       this.updateConfigurableRandomConfiguration();
     });
   }
-  
+
+  initShootingSimulationMode() {
+    const options = shootingSimulation;
+
+    this.setState({ options }, () => {
+      this.updateShootingSimulationConfiguration();
+    });
+  }
+
   updatePureRandom2DConfiguration() {
     const { pureRandom2D } = this.state.configurations;
     const { options } = this.state;
@@ -151,7 +166,7 @@ export default class Scattering extends Component {
       this.setState({ rerenderChart: false })
     })
   }
-  
+
   updateConfigurableRandomConfiguration() {
     const { configurableRandom } = this.state.configurations;
     const { defaultColors } = this.state;
@@ -168,16 +183,63 @@ export default class Scattering extends Component {
       case "Bubble":
         options = configurableRandomBubble;
         convertColorsToBubbles(defaultColors);
-        break;        
+        break;
     }
     const series = generateSeriesForConfigurableRandom(configurableRandom);
     options.series = series;
 
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
-    })
+    });
   }
-  
+
+  updateShootingSimulationConfiguration() {
+    const { shootingSimulation } = this.state.configurations;
+    const { minX, maxX, minY, maxY, bins } = shootingSimulation;
+    const { options } = this.state;
+
+    shootingSimulation.disabled = false;
+    options.xAxis[1].categories = [];
+    options.xAxis[0].min = minX;
+    options.xAxis[0].max = maxX;
+    options.yAxis[0].min = minY;
+    options.yAxis[0].max = maxY;
+
+    options.series[0].data = [];
+    options.series[1].data = [];
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    });
+  }
+
+  onAddPointsShootingMode(event) {
+    const { shootingSimulation } = this.state.configurations;
+    const { minX, maxX, minY, maxY, bins } = shootingSimulation;
+    shootingSimulation.disabled = true;
+    const { options } = this.state;
+    if (event) {
+      const amount = Number(event.target.dataset.amount);
+
+      const newPoints = generateShotsByParams(amount, minX, maxX, minY, maxY);
+      const newData = options.series[1].data.concat(newPoints);
+      const newHistogram = generateHistogramByParamsAndData(newData, bins, minX, maxX, minY, maxY);
+
+      options.xAxis[1].categories = newHistogram.categories;
+      options.xAxis[0].min = minX;
+      options.xAxis[0].max = maxX;
+      options.yAxis[0].min = minY;
+      options.yAxis[0].max = maxY;
+
+      options.series[0].data = newHistogram.values;
+      options.series[1].data = newData;
+    }
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    });
+  }
+
   dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
     const { configurations, defaultColors } = this.state;
@@ -200,6 +262,11 @@ export default class Scattering extends Component {
       case modes.configurableRandom: {
         convertColorsToFlat(defaultColors);
         this.initConfigurableRandomMode();
+        break;
+      }
+      case modes.shootingSimulation: {
+        convertColorsToFlat(defaultColors);
+        this.initShootingSimulationMode();
         break;
       }
       default: {
@@ -238,7 +305,7 @@ export default class Scattering extends Component {
     }
     this.setState({ configurations })
   }
-  
+
   onConfigurableRandomInputChange(event) {
     const { configurations } = this.state;
     if (event.target.dataset.type === "series") {
@@ -264,18 +331,72 @@ export default class Scattering extends Component {
     }
     this.setState({ configurations });
   }
-  
+
+  onShootingSimulationInputChange(event) {
+    const { configurations } = this.state;
+    if (event.target.name === "minX") {
+      limitNumericalInput(
+        configurations.shootingSimulation,
+        event.target.name,
+        event.target.value,
+        -1000,
+        configurations.shootingSimulation.maxX,
+        false
+      );
+    } else if (event.target.name === "maxX") {
+      limitNumericalInput(
+        configurations.shootingSimulation,
+        event.target.name,
+        event.target.value,
+        configurations.shootingSimulation.minX,
+        1000,
+        false
+      );
+    } else if (event.target.name === "minY") {
+      limitNumericalInput(
+        configurations.shootingSimulation,
+        event.target.name,
+        event.target.value,
+        -1000,
+        configurations.shootingSimulation.maxY,
+        false
+      );
+    } else if (event.target.name === "maxY") {
+      limitNumericalInput(
+        configurations.shootingSimulation,
+        event.target.name,
+        event.target.value,
+        configurations.shootingSimulation.minY,
+        10000,
+        false
+      );
+    } else if (event.target.name === "bins") {
+      limitNumericalInput(
+        configurations.shootingSimulation,
+        event.target.name,
+        event.target.value,
+        1,
+        20,
+        true
+      );
+    }
+    this.setState({ configurations });
+  }
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
         <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Configurations
         <span className="caret"></span></button>
         <ul className="dropdown-menu">
-          <li className="dropdown-header">Scattering Charts</li>
+          <li className="dropdown-header">Random Data</li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom2D}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom3D}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.pureRandomBubble}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
+          <li className="divider"></li>
+          <li className="dropdown-header">Process Visualization</li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.shootingSimulation}</a></li>
         </ul>
       </div>
     )
@@ -475,15 +596,15 @@ export default class Scattering extends Component {
       </div>
     )
   }
-  
+
   renderConfigurableRandomModeConfiguration() {
     const { configurableRandom } = this.state.configurations;
     return (
       <div className="configurable-random">
         <div className="form-group config-option">
           <label>Type of the Scattering:</label>
-          <select 
-            className="form-control" 
+          <select
+            className="form-control"
             onChange={this.onConfigurableRandomInputChange}
             name={optionsConfigurableRandom.chartType}>
             <option>2D</option>
@@ -509,7 +630,7 @@ export default class Scattering extends Component {
                    value={configurableRandom.pointsNumber}
                    onChange={this.onConfigurableRandomInputChange}/>
         </div>
-        
+
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
@@ -519,7 +640,107 @@ export default class Scattering extends Component {
       </div>
     );
   }
-  
+
+  renderShootingSimulationModeConfiguration() {
+    const { shootingSimulation } = this.state.configurations;
+    return (
+      <div className="shooting">
+        <div className="form-group config-option bins-input">
+          <label>Number of bins</label>
+            <input type="number"
+                   data-type={optionsShootingSimulation.bins}
+                   className="form-control"
+                   name={optionsShootingSimulation.bins}
+                   value={shootingSimulation.bins}
+                   onChange={this.onShootingSimulationInputChange}
+                   disabled={shootingSimulation.disabled}/>
+        </div>
+
+        <div className="row">
+          <div className="col-md-6 special-small">
+            <div className="form-group config-option">
+              <label>Min X</label>
+                <input type="number"
+                       data-type={optionsShootingSimulation.minX}
+                       className="form-control"
+                       name={optionsShootingSimulation.minX}
+                       value={shootingSimulation.minX}
+                       onChange={this.onShootingSimulationInputChange}
+                       disabled={shootingSimulation.disabled}/>
+            </div>
+          </div>
+          <div className="col-md-6 special-small">
+            <div className="form-group config-option">
+              <label>Max X</label>
+                <input type="number"
+                       data-type={optionsShootingSimulation.maxX}
+                       className="form-control"
+                       name={optionsShootingSimulation.maxX}
+                       value={shootingSimulation.maxX}
+                       onChange={this.onShootingSimulationInputChange}
+                       disabled={shootingSimulation.disabled}/>
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-md-6 special-small">
+            <div className="form-group config-option">
+              <label>Min Y</label>
+                <input type="number"
+                       data-type={optionsShootingSimulation.minY}
+                       className="form-control"
+                       name={optionsShootingSimulation.minY}
+                       value={shootingSimulation.minY}
+                       onChange={this.onShootingSimulationInputChange}
+                       disabled={shootingSimulation.disabled}/>
+            </div>
+          </div>
+          <div className="col-md-6 special-small">
+            <div className="form-group config-option">
+              <label>Max Y</label>
+                <input type="number"
+                       data-type={optionsShootingSimulation.maxY}
+                       className="form-control"
+                       name={optionsShootingSimulation.maxY}
+                       value={shootingSimulation.maxY}
+                       onChange={this.onShootingSimulationInputChange}
+                       disabled={shootingSimulation.disabled}/>
+            </div>
+          </div>
+        </div>
+
+        <div className="row basic-config shot-container">
+          <div className="col-md-6 special-small">
+            <button
+              type="button"
+              className="btn btn-primary shot"
+              data-amount={1}
+              onClick={this.onAddPointsShootingMode}>
+              1 shot
+            </button>
+          </div>
+          <div className="col-md-6 special-small">
+            <button
+              type="button"
+              className="btn btn-primary shot"
+              data-amount={10}
+              onClick={this.onAddPointsShootingMode}>
+              10 shots
+            </button>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateShootingSimulationConfiguration}>
+          Restart
+        </button>
+      </div>
+    )
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -534,6 +755,9 @@ export default class Scattering extends Component {
       }
       case modes.configurableRandom: {
         return this.renderConfigurableRandomModeConfiguration();
+      }
+      case modes.shootingSimulation: {
+        return this.renderShootingSimulationModeConfiguration();
       }
       default: {
         return null;

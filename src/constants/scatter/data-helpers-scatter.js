@@ -171,3 +171,37 @@ export function generateSeriesForConfigurableRandom(options) {
       return [];
   }
 }
+
+export function generateShotsByParams(number, minX, maxX, minY, maxY) {
+  const result = [];
+  for (let i = 0; i < number; i += 1) {
+    const rawX = minX + Math.random() * (maxX - minX);
+    const rawY = minY + Math.random() * (maxY - minY);
+    const x = Math.floor(rawX * 100) / 100;
+    const y = Math.floor(rawY * 100) / 100;
+    result.push([x, y]);
+  }
+  return result;
+}
+
+export function generateHistogramByParamsAndData(data, bins, minX, maxX, minY, maxY) {
+  const values = [];
+  const categories = [];
+  const step = (maxX - minX) / bins;
+  for (let i = 0; i < bins; i += 1) {
+    const rawX = minX + i * step;
+    const rawX2 = minX + (i + 1) * step;
+    const x = Math.floor(rawX * 100) / 100;
+    const x2 = Math.floor(rawX2 * 100) / 100;
+    categories.push(`${x}-${x2}`);
+    values.push(0);
+  }
+
+  data.forEach((point) => {
+    const diff = point[0] - minX;
+    const index = Math.floor(diff / step);
+    values[index] += 1;
+  });
+
+  return { categories, values };
+}

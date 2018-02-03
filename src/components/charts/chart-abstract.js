@@ -8,6 +8,8 @@ import HighchartsTilemap from 'highcharts/modules/tilemap'
 import HighchartsFunnel from 'highcharts/modules/funnel'
 import HighchartsWordcloud from 'highcharts/modules/wordcloud'
 import HighchartsSankey from 'highcharts/modules/sankey'
+import HighchartsBellcurve from 'highcharts/modules/histogram-bellcurve'
+
 HighchartsMore(Highcharts)
 Highcharts3D(Highcharts)
 HighchartsGauge(Highcharts)
@@ -16,6 +18,7 @@ HighchartsTilemap(Highcharts)
 HighchartsFunnel(Highcharts)
 HighchartsWordcloud(Highcharts)
 HighchartsSankey(Highcharts)
+HighchartsBellcurve(Highcharts)
 
 export default class Chart extends Component {
 

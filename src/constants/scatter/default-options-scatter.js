@@ -371,3 +371,49 @@ export const configurableRandomBubble = {
     },
     series: []
 }
+
+export const shootingSimulation = {
+    title: {
+        text: 'Highcharts Histogram'
+    },
+    xAxis: [{
+        title: { text: 'Shots' },
+        alignTicks: false,
+        opposite: true,
+        min: 0,
+        max: 100,
+        id: 'x-shots'
+    }, {
+        title: { text: 'Histogram' },
+        alignTicks: false,
+        id: 'x-histogram'
+    }],
+
+    yAxis: [{
+        title: { text: 'Shots' },
+        id: 'y-shots',
+        min: 0,
+        max: 100
+    }, {
+        title: { text: 'Histogram' },
+        opposite: true,
+        id: 'y-histogram'
+    }],
+
+    series: [{
+        name: 'Histogram',
+        type: 'column',
+        data: [],
+        zIndex: -1,
+        xAxis: 'x-histogram',
+        yAxis: 'y-histogram'
+    }, {
+        name: 'Shots',
+        type: 'scatter',
+        data: [],
+        id: 's1',
+        marker: {
+            radius: 3
+        }
+    }]
+}
