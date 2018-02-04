@@ -51,6 +51,9 @@ export const optionsWordcloud = {
   filter: "filter",
 }
 
+export const optionsPyramid = {
+  test: "test",
+}
 
 
 
@@ -94,7 +97,9 @@ export const initialState = {
     },
     boxplot: {},
     gauge: {},
-    pyramid: {},
+    pyramid: {
+      test: "lalala"
+    },
     wordcloud: {
       text: "Enter here your text to plot its words set on the chart...",
       limit: 10,

@@ -23,7 +23,8 @@ import {
   optionsHeatmap,
   optionsTilemap,
   optionsWordcloud,
-  optionsPolar
+  optionsPolar,
+  optionsPyramid
 } from '../../constants/other/modes-options-other'
 
 import {
@@ -53,6 +54,7 @@ export default class Other extends Component {
     this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
     this.updateTilemapConfiguration = this.updateTilemapConfiguration.bind(this);
     this.updatePolarConfiguration = this.updatePolarConfiguration.bind(this);
+    this.updatePyramidConfiguration = this.updatePyramidConfiguration.bind(this);
     this.updateWordcloudConfiguration = this.updateWordcloudConfiguration.bind(this);
   }
 
@@ -249,6 +251,10 @@ export default class Other extends Component {
   }
 
   updatePyramidConfiguration() {
+    const { pyramid } = this.state.configurations;
+    const { options } = this.state;
+
+
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -702,6 +708,53 @@ export default class Other extends Component {
     );
   }
 
+  renderPyramidConfiguration() {
+    const { pyramid } = this.state.configurations;
+    return (
+      <div className="other-pyramid-container">
+        <div className="checkboxes other-pyramid">
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPyramid.title}
+                          checked={pyramid.title}
+                          onChange={this.onPolarCheckBoxChange}/>Show Chart Title</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPyramid.dataLabels}
+                          checked={pyramid.dataLabels}
+                          onChange={this.onPolarCheckBoxChange}/>Show Data Labels</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPyramid.legend}
+                          checked={pyramid.legend}
+                          onChange={this.onPolarCheckBoxChange}/>Show Legend</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPyramid.tooltip}
+                          checked={pyramid.tooltip}
+                          onChange={this.onPolarCheckBoxChange}/>Enable Tooltip</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPyramid.animation}
+                          checked={pyramid.animation}
+                          onChange={this.onPolarCheckBoxChange}/>Enable Animation</label>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updatePyramidConfiguration}>
+          Apply
+        </button>
+      </div>
+    )
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -721,7 +774,7 @@ export default class Other extends Component {
         return <div> GAUGE </div>;
       }
       case modes.pyramid: {
-        return <div> PYRAMID </div>;
+        return this.renderPyramidConfiguration();
       }
       case modes.wordcloud: {
         return this.renderWordcloudConfiguration();

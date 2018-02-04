@@ -127,3 +127,7 @@ export function generateSeriesForWordCloud(data, limit) {
 
   return [result];
 }
+
+export function generateSeriesPyramid() {
+  
+}
