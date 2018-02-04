@@ -47,6 +47,7 @@ export default class Other extends Component {
     this.onHeatmapCheckBoxChange = this.onHeatmapCheckBoxChange.bind(this);
     this.onTilemapCheckBoxChange = this.onTilemapCheckBoxChange.bind(this);
     this.onPolarCheckBoxChange = this.onPolarCheckBoxChange.bind(this);
+    this.onPyramidCheckBoxChange = this.onPyramidCheckBoxChange.bind(this);
     this.onChangeColorHeatmap = this.onChangeColorHeatmap.bind(this);
     this.onChangeColorTilemap = this.onChangeColorTilemap.bind(this);
     this.onWordcloudInputChange = this.onWordcloudInputChange.bind(this);
@@ -369,6 +370,17 @@ export default class Other extends Component {
         configurations.polar[event.target.value] = true;
       }
     }
+    this.setState({ configurations });
+  }
+
+  onPyramidCheckBoxChange(event) {
+    const { configurations } = this.state;
+    if (configurations.pyramid[event.target.value]) {
+      configurations.pyramid[event.target.value] = false;
+    } else {
+      configurations.pyramid[event.target.value] = true;
+    }
+
     this.setState({ configurations });
   }
 
@@ -717,31 +729,31 @@ export default class Other extends Component {
             <label><input type="checkbox"
                           value={optionsPyramid.title}
                           checked={pyramid.title}
-                          onChange={this.onPolarCheckBoxChange}/>Show Chart Title</label>
+                          onChange={this.onPyramidCheckBoxChange}/>Show Chart Title</label>
           </div>
           <div className="checkbox">
             <label><input type="checkbox"
                           value={optionsPyramid.dataLabels}
                           checked={pyramid.dataLabels}
-                          onChange={this.onPolarCheckBoxChange}/>Show Data Labels</label>
+                          onChange={this.onPyramidCheckBoxChange}/>Show Data Labels</label>
           </div>
           <div className="checkbox">
             <label><input type="checkbox"
                           value={optionsPyramid.legend}
                           checked={pyramid.legend}
-                          onChange={this.onPolarCheckBoxChange}/>Show Legend</label>
+                          onChange={this.onPyramidCheckBoxChange}/>Show Legend</label>
           </div>
           <div className="checkbox">
             <label><input type="checkbox"
                           value={optionsPyramid.tooltip}
                           checked={pyramid.tooltip}
-                          onChange={this.onPolarCheckBoxChange}/>Enable Tooltip</label>
+                          onChange={this.onPyramidCheckBoxChange}/>Enable Tooltip</label>
           </div>
           <div className="checkbox">
             <label><input type="checkbox"
                           value={optionsPyramid.animation}
                           checked={pyramid.animation}
-                          onChange={this.onPolarCheckBoxChange}/>Enable Animation</label>
+                          onChange={this.onPyramidCheckBoxChange}/>Enable Animation</label>
           </div>
         </div>
 

@@ -345,8 +345,16 @@ export const pyramid = {
         type: 'pyramid'
     },
     title: {
-        text: 'Sales pyramid',
-        x: -50
+        text: ''
+    },
+    subtitle: {
+        text: ''
+    },
+    legend: {
+        enabled: true,
+    },
+    tooltip: {
+      enabled: true,
     },
     plotOptions: {
         series: {
@@ -355,16 +363,12 @@ export const pyramid = {
                 format: '<b>{point.name}</b> ({point.y:,.0f})',
                 color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
                 softConnector: true
-            },
-            center: ['40%', '50%'],
-            width: '80%'
+            }
         }
-    },
-    legend: {
-        enabled: false
     },
     series: [{
         name: 'Unique users',
+        showInLegend: true,
         data: [
             ['Website visits',      15654],
             ['Downloads',            4064],

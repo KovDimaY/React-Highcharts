@@ -52,7 +52,11 @@ export const optionsWordcloud = {
 }
 
 export const optionsPyramid = {
-  test: "test",
+  tooltip: "tooltip",
+  title: "title",
+  dataLabels: "dataLabels",
+  animation: "animation",
+  legend: "legend"
 }
 
 
@@ -98,7 +102,11 @@ export const initialState = {
     boxplot: {},
     gauge: {},
     pyramid: {
-      test: "lalala"
+      tooltip: true,
+      title: true,
+      dataLabels: true,
+      animation: true,
+      legend: true
     },
     wordcloud: {
       text: "Enter here your text to plot its words set on the chart...",
