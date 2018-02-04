@@ -32,7 +32,8 @@ import {
   generateSeriesForTilemap,
   generateSeriesForPolar,
   countWords,
-  generateSeriesForWordCloud
+  generateSeriesForWordCloud,
+  generateSeriesPyramid
 } from '../../constants/other/data-helpers-other'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
@@ -107,6 +108,7 @@ export default class Other extends Component {
 
   initPyramid() {
     const options = pyramid;
+    options.series[0].data = generateSeriesPyramid();
 
     this.setState({ options }, () => {
       this.updatePyramidConfiguration();

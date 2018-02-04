@@ -129,5 +129,15 @@ export function generateSeriesForWordCloud(data, limit) {
 }
 
 export function generateSeriesPyramid() {
-  
+  const result = [];
+  let previous = 1000;
+  const pointsNumber = 3 + Math.floor(Math.random() * 4);
+  for (let i = 0; i < pointsNumber; i += 1) {
+    const name = `Category ${i+1}`;
+    const decrease = 0.2 + Math.random() * 0.8;
+    const value = Math.floor(decrease * previous);
+    previous = value;
+    result.push([name, value]);
+  }
+  return result;
 }

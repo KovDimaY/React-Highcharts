@@ -370,15 +370,9 @@ export const pyramid = {
         }
     },
     series: [{
-        name: 'Unique users',
+        name: 'Pyramid Series',
         showInLegend: true,
-        data: [
-            ['Website visits',      15654],
-            ['Downloads',            4064],
-            ['Requested price list', 1987],
-            ['Invoice sent',          976],
-            ['Finalized',             846]
-        ]
+        data: []
     }]
 }
 
