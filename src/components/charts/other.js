@@ -255,6 +255,13 @@ export default class Other extends Component {
     const { pyramid } = this.state.configurations;
     const { options } = this.state;
 
+    options.title.text = pyramid.title ? 'Randomly generated data' : null;
+    options.subtitle.text = pyramid.title ? 'This data is not real' : null;
+    options.legend.enabled = pyramid.legend;
+    options.tooltip.enabled = pyramid.tooltip;
+    options.plotOptions.series.dataLabels.enabled = pyramid.dataLabels;
+    options.plotOptions.series.animation = pyramid.animation;
+    options.plotOptions.pyramid.allowPointSelect = pyramid.allowPointSelect;
 
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
@@ -754,6 +761,12 @@ export default class Other extends Component {
                           value={optionsPyramid.animation}
                           checked={pyramid.animation}
                           onChange={this.onPyramidCheckBoxChange}/>Enable Animation</label>
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsPyramid.allowPointSelect}
+                          checked={pyramid.allowPointSelect}
+                          onChange={this.onPyramidCheckBoxChange}/>Allow Point Selection</label>
           </div>
         </div>
 

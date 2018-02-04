@@ -56,7 +56,8 @@ export const optionsPyramid = {
   title: "title",
   dataLabels: "dataLabels",
   animation: "animation",
-  legend: "legend"
+  legend: "legend",
+  allowPointSelect: "allowPointSelect"
 }
 
 
@@ -106,7 +107,8 @@ export const initialState = {
       title: true,
       dataLabels: true,
       animation: true,
-      legend: true
+      legend: true,
+      allowPointSelect: true
     },
     wordcloud: {
       text: "Enter here your text to plot its words set on the chart...",

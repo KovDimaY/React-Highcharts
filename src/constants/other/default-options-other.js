@@ -357,6 +357,9 @@ export const pyramid = {
       enabled: true,
     },
     plotOptions: {
+        pyramid: {
+          allowPointSelect: true,
+        },
         series: {
             dataLabels: {
                 enabled: true,
