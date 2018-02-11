@@ -24,7 +24,8 @@ import {
   optionsTilemap,
   optionsWordcloud,
   optionsPolar,
-  optionsPyramid
+  optionsPyramid,
+  optionsGauge
 } from '../../constants/other/modes-options-other'
 
 import {
@@ -728,7 +729,56 @@ export default class Other extends Component {
       </div>
     );
   }
+  
+  renderGaugeConfiguration() {
+    const { gauge } = this.state.configurations;
+    return (
+      <div className="other-gauge">
+        <div className="form-group config-option">
+          <label>Text for plotting</label>
+            <textarea className="form-control input-textarea"
+                   name={optionsGauge.text}
+                   value={gauge.text}
+                   onChange={this.onWordcloudInputChange}/>
+        </div>
 
+        <div className="form-group config-option">
+          <label>Characters goal</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsGauge.chars}
+                   value={gauge.chars}
+                   onChange={this.onWordcloudInputChange}/>
+        </div>
+        
+        <div className="form-group config-option">
+          <label>Digits goal</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsGauge.digits}
+                   value={gauge.digits}
+                   onChange={this.onWordcloudInputChange}/>
+        </div>
+        
+        <div className="form-group config-option">
+          <label>Symbols goal</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsGauge.symbols}
+                   value={gauge.symbols}
+                   onChange={this.onWordcloudInputChange}/>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateWordcloudConfiguration}>
+          Refresh
+        </button>
+      </div>
+    );
+  }
+  
   renderPyramidConfiguration() {
     const { pyramid } = this.state.configurations;
     return (
@@ -798,7 +848,7 @@ export default class Other extends Component {
         return <div> BOXPLOT </div>;
       }
       case modes.gauge: {
-        return <div> GAUGE </div>;
+        return this.renderGaugeConfiguration();
       }
       case modes.pyramid: {
         return this.renderPyramidConfiguration();

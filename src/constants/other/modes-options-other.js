@@ -60,6 +60,13 @@ export const optionsPyramid = {
   allowPointSelect: "allowPointSelect"
 }
 
+export const optionsGauge = {
+  text: "text",
+  chars: "chars",
+  digits: "digits",
+  symbols: "symbols"
+}
+
 
 
 export const initialState = {
@@ -101,7 +108,12 @@ export const initialState = {
       spiderMode: false,
     },
     boxplot: {},
-    gauge: {},
+    gauge: {
+      text: "This is 49 symbols to demonstrate how it works...",
+      chars: 1000,
+      digits: 500,
+      symbols: 300
+    },
     pyramid: {
       tooltip: true,
       title: true,
