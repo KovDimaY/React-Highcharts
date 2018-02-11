@@ -54,11 +54,13 @@ export default class Other extends Component {
     this.onChangeColorTilemap = this.onChangeColorTilemap.bind(this);
     this.onWordcloudInputChange = this.onWordcloudInputChange.bind(this);
     this.onWordcloudTagsChange = this.onWordcloudTagsChange.bind(this);
+    this.onGaugeInputChange = this.onGaugeInputChange.bind(this);
     this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
     this.updateTilemapConfiguration = this.updateTilemapConfiguration.bind(this);
     this.updatePolarConfiguration = this.updatePolarConfiguration.bind(this);
     this.updatePyramidConfiguration = this.updatePyramidConfiguration.bind(this);
     this.updateWordcloudConfiguration = this.updateWordcloudConfiguration.bind(this);
+    this.updateGaugeConfiguration = this.updateGaugeConfiguration.bind(this);
   }
 
   componentDidMount() {
@@ -414,7 +416,28 @@ export default class Other extends Component {
 
     this.setState({ configurations });
   }
+  
+  onGaugeInputChange(event) {
+    const { configurations } = this.state;
+    const newValue = event.target.value === ''
+      ? 'Enter here your text to plot its words set on the chart...'
+      : event.target.value;
+    if (event.target.name !== "text") {
+      limitNumericalInput(
+        configurations.gauge,
+        event.target.name,
+        newValue,
+        1,
+        10000,
+        true
+      );
+    } else {
+      configurations.gauge[event.target.name] = newValue;
+    }
 
+    this.setState({ configurations });
+  }
+  
   onWordcloudTagsChange(newTags) {
     const { configurations } = this.state;
     const lastTag = newTags[newTags.length - 1];
@@ -739,7 +762,7 @@ export default class Other extends Component {
             <textarea className="form-control input-textarea"
                    name={optionsGauge.text}
                    value={gauge.text}
-                   onChange={this.onWordcloudInputChange}/>
+                   onChange={this.onGaugeInputChange}/>
         </div>
 
         <div className="form-group config-option">
@@ -748,7 +771,7 @@ export default class Other extends Component {
                    className="form-control"
                    name={optionsGauge.chars}
                    value={gauge.chars}
-                   onChange={this.onWordcloudInputChange}/>
+                   onChange={this.onGaugeInputChange}/>
         </div>
         
         <div className="form-group config-option">
@@ -757,7 +780,7 @@ export default class Other extends Component {
                    className="form-control"
                    name={optionsGauge.digits}
                    value={gauge.digits}
-                   onChange={this.onWordcloudInputChange}/>
+                   onChange={this.onGaugeInputChange}/>
         </div>
         
         <div className="form-group config-option">
@@ -766,13 +789,13 @@ export default class Other extends Component {
                    className="form-control"
                    name={optionsGauge.symbols}
                    value={gauge.symbols}
-                   onChange={this.onWordcloudInputChange}/>
+                   onChange={this.onGaugeInputChange}/>
         </div>
 
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateWordcloudConfiguration}>
+          onClick={this.updateGaugeConfiguration}>
           Refresh
         </button>
       </div>
