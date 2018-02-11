@@ -141,3 +141,16 @@ export function generateSeriesPyramid() {
   }
   return result;
 }
+
+export function analyzeGaugeText(configs) {
+  const { 
+    text, 
+    chars: charsMax, 
+    digints: digitMax, 
+    symbols: symbolsMax 
+  } = configs;
+  const chars = Math.floor((Math.random() * 200));
+  const digits = Math.floor((Math.random() * 200));
+  const symbols = Math.floor((Math.random() * 200));
+  return { chars, digits, symbols };
+}

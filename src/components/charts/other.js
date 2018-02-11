@@ -34,7 +34,8 @@ import {
   generateSeriesForPolar,
   countWords,
   generateSeriesForWordCloud,
-  generateSeriesPyramid
+  generateSeriesPyramid,
+  analyzeGaugeText
 } from '../../constants/other/data-helpers-other'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
@@ -61,6 +62,7 @@ export default class Other extends Component {
     this.updatePyramidConfiguration = this.updatePyramidConfiguration.bind(this);
     this.updateWordcloudConfiguration = this.updateWordcloudConfiguration.bind(this);
     this.updateGaugeConfiguration = this.updateGaugeConfiguration.bind(this);
+    this.refreshGaugeCongifuration = this.refreshGaugeCongifuration.bind(this);
   }
 
   componentDidMount() {
@@ -105,7 +107,7 @@ export default class Other extends Component {
     const options = gauge;
 
     this.setState({ options }, () => {
-      this.updateGaugeConfiguration();
+      this.refreshGaugeCongifuration();
     });
   }
 
@@ -251,7 +253,32 @@ export default class Other extends Component {
   }
 
   updateGaugeConfiguration() {
+    const { options, configurations } = this.state;
+    
+    const { chars, digits, symbols } = analyzeGaugeText(configurations.gauge);
+    
+    options.series[0].data[0].y = chars > 100 ? 100 : chars;
+    options.series[1].data[0].y = digits > 100 ? 100 : digits;
+    options.series[2].data[0].y = symbols > 100 ? 100 : symbols;
+    
     this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+  
+  refreshGaugeCongifuration() {
+    const { options, configurations } = this.state;
+    
+    configurations.gauge.text = 'Enter here your text to see its char analysis on the chart...';
+    configurations.gauge.chars = 1000;
+    configurations.gauge.digits = 500;
+    configurations.gauge.symbols = 300;  
+    
+    options.series[0].data[0].y = 10;
+    options.series[1].data[0].y = 20;
+    options.series[2].data[0].y = 30;  
+    
+    this.setState({ rerenderChart: true, configurations }, () => {
       this.setState({ rerenderChart: false })
     })
   }
@@ -420,7 +447,7 @@ export default class Other extends Component {
   onGaugeInputChange(event) {
     const { configurations } = this.state;
     const newValue = event.target.value === ''
-      ? 'Enter here your text to plot its words set on the chart...'
+      ? 'Enter here your text to see its char analysis on the chart...'
       : event.target.value;
     if (event.target.name !== "text") {
       limitNumericalInput(
@@ -435,7 +462,9 @@ export default class Other extends Component {
       configurations.gauge[event.target.name] = newValue;
     }
 
-    this.setState({ configurations });
+    this.setState({ configurations }, () => {
+      this.updateGaugeConfiguration()
+    });
   }
   
   onWordcloudTagsChange(newTags) {
@@ -795,7 +824,7 @@ export default class Other extends Component {
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateGaugeConfiguration}>
+          onClick={this.refreshGaugeCongifuration}>
           Refresh
         </button>
       </div>

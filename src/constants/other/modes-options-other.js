@@ -109,7 +109,7 @@ export const initialState = {
     },
     boxplot: {},
     gauge: {
-      text: "This is 49 symbols to demonstrate how it works...",
+      text: "Enter here your text to see its char analysis on the chart...",
       chars: 1000,
       digits: 500,
       symbols: 300
