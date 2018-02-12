@@ -110,9 +110,9 @@ export const initialState = {
     boxplot: {},
     gauge: {
       text: "Enter here your text to see its char analysis on the chart...",
-      chars: 1000,
-      digits: 500,
-      symbols: 300
+      chars: 500,
+      digits: 50,
+      symbols: 100
     },
     pyramid: {
       tooltip: true,

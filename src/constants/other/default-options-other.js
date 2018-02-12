@@ -248,7 +248,7 @@ export const gauge = {
         marginTop: 50
     },
     title: {
-        text: 'Activity',
+        text: 'Text analysis',
         style: {
             fontSize: '24px'
         }
@@ -261,31 +261,31 @@ export const gauge = {
             fontSize: '16px'
         },
         pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}%</span>',
-        positioner: function (labelWidth) {
+        positioner: function (labelWidth, labelHeight) {
             return {
                 x: (this.chart.chartWidth - labelWidth) / 2,
-                y: (this.chart.chartHeight - labelWidth + 40) / 2
+                y: (this.chart.chartHeight - labelHeight + 40) / 2
             };
         }
     },
     pane: {
         startAngle: 0,
         endAngle: 360,
-        background: [{ // Track for Move
+        background: [{ // Track for Letters
             outerRadius: '112%',
             innerRadius: '88%',
             backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
                 .setOpacity(0.3)
                 .get(),
             borderWidth: 0
-        }, { // Track for Exercise
+        }, { // Track for Symbols
             outerRadius: '87%',
             innerRadius: '63%',
             backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[1])
                 .setOpacity(0.3)
                 .get(),
             borderWidth: 0
-        }, { // Track for Stand
+        }, { // Track for Digits
             outerRadius: '62%',
             innerRadius: '38%',
             backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[2])
@@ -317,28 +317,28 @@ export const gauge = {
     },
 
     series: [{
-        name: 'Move',
+        name: 'Letters',
         data: [{
             color: Highcharts.getOptions().colors[0],
             radius: '112%',
             innerRadius: '88%',
-            y: 80
+            y: 0
         }]
     }, {
-        name: 'Exercise',
+        name: 'Symbols',
         data: [{
             color: Highcharts.getOptions().colors[1],
             radius: '87%',
             innerRadius: '63%',
-            y: 65
+            y: 0
         }]
     }, {
-        name: 'Stand',
+        name: 'Digits',
         data: [{
             color: Highcharts.getOptions().colors[2],
             radius: '62%',
             innerRadius: '38%',
-            y: 50
+            y: 0
         }]
     }]
 }

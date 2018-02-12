@@ -254,30 +254,32 @@ export default class Other extends Component {
 
   updateGaugeConfiguration() {
     const { options, configurations } = this.state;
-    
+
     const { chars, digits, symbols } = analyzeGaugeText(configurations.gauge);
-    
+
     options.series[0].data[0].y = chars > 100 ? 100 : chars;
     options.series[1].data[0].y = digits > 100 ? 100 : digits;
     options.series[2].data[0].y = symbols > 100 ? 100 : symbols;
-    
+
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
   }
-  
+
   refreshGaugeCongifuration() {
     const { options, configurations } = this.state;
-    
+
     configurations.gauge.text = 'Enter here your text to see its char analysis on the chart...';
-    configurations.gauge.chars = 1000;
-    configurations.gauge.digits = 500;
-    configurations.gauge.symbols = 300;  
-    
-    options.series[0].data[0].y = 10;
-    options.series[1].data[0].y = 20;
-    options.series[2].data[0].y = 30;  
-    
+    configurations.gauge.chars = 500;
+    configurations.gauge.digits = 50;
+    configurations.gauge.symbols = 100;
+
+    const { chars, digits, symbols } = analyzeGaugeText(configurations.gauge);
+
+    options.series[0].data[0].y = chars > 100 ? 100 : chars;
+    options.series[1].data[0].y = digits > 100 ? 100 : digits;
+    options.series[2].data[0].y = symbols > 100 ? 100 : symbols;
+
     this.setState({ rerenderChart: true, configurations }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -443,7 +445,7 @@ export default class Other extends Component {
 
     this.setState({ configurations });
   }
-  
+
   onGaugeInputChange(event) {
     const { configurations } = this.state;
     const newValue = event.target.value === ''
@@ -466,7 +468,7 @@ export default class Other extends Component {
       this.updateGaugeConfiguration()
     });
   }
-  
+
   onWordcloudTagsChange(newTags) {
     const { configurations } = this.state;
     const lastTag = newTags[newTags.length - 1];
@@ -781,7 +783,7 @@ export default class Other extends Component {
       </div>
     );
   }
-  
+
   renderGaugeConfiguration() {
     const { gauge } = this.state.configurations;
     return (
@@ -802,22 +804,22 @@ export default class Other extends Component {
                    value={gauge.chars}
                    onChange={this.onGaugeInputChange}/>
         </div>
-        
-        <div className="form-group config-option">
-          <label>Digits goal</label>
-            <input type="number"
-                   className="form-control"
-                   name={optionsGauge.digits}
-                   value={gauge.digits}
-                   onChange={this.onGaugeInputChange}/>
-        </div>
-        
+
         <div className="form-group config-option">
           <label>Symbols goal</label>
             <input type="number"
                    className="form-control"
                    name={optionsGauge.symbols}
                    value={gauge.symbols}
+                   onChange={this.onGaugeInputChange}/>
+        </div>
+
+        <div className="form-group config-option">
+          <label>Digits goal</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsGauge.digits}
+                   value={gauge.digits}
                    onChange={this.onGaugeInputChange}/>
         </div>
 
@@ -830,7 +832,7 @@ export default class Other extends Component {
       </div>
     );
   }
-  
+
   renderPyramidConfiguration() {
     const { pyramid } = this.state.configurations;
     return (
