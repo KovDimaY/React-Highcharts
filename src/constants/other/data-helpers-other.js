@@ -143,14 +143,26 @@ export function generateSeriesPyramid() {
 }
 
 export function analyzeGaugeText(configs) {
-  const { 
-    text, 
-    chars: charsMax, 
-    digints: digitMax, 
-    symbols: symbolsMax 
+  const {
+    text,
+    chars: charsMax,
+    digits: digitMax,
+    symbols: symbolsMax
   } = configs;
-  const chars = Math.floor((Math.random() * 200));
-  const digits = Math.floor((Math.random() * 200));
-  const symbols = Math.floor((Math.random() * 200));
+  let rawChars = 0;
+  let rawDigits = 0;
+  let rawSymbols = 0;
+  for (let i = 0; i < text.length; i += 1) {
+    if ((/\d/).test(text[i])) {
+      rawDigits += 1;
+    } else if ((/\w/).test(text[i])) {
+      rawChars += 1;
+    } else {
+      rawSymbols += 1;
+    }
+  }
+  const chars = Math.floor(rawChars * 1000 / charsMax) / 10;
+  const digits = Math.floor(rawDigits * 1000 / digitMax) / 10;
+  const symbols = Math.floor(rawSymbols * 1000 / symbolsMax) / 10;
   return { chars, digits, symbols };
 }

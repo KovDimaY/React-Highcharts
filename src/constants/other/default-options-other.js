@@ -310,6 +310,9 @@ export const gauge = {
             linecap: 'round',
             stickyTracking: false,
             rounded: true
+        },
+        series: {
+            animation: false
         }
     },
 
