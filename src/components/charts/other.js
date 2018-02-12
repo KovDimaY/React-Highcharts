@@ -24,7 +24,8 @@ import {
   optionsTilemap,
   optionsWordcloud,
   optionsPolar,
-  optionsPyramid
+  optionsPyramid,
+  optionsGauge
 } from '../../constants/other/modes-options-other'
 
 import {
@@ -33,7 +34,8 @@ import {
   generateSeriesForPolar,
   countWords,
   generateSeriesForWordCloud,
-  generateSeriesPyramid
+  generateSeriesPyramid,
+  analyzeGaugeText
 } from '../../constants/other/data-helpers-other'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
@@ -53,11 +55,14 @@ export default class Other extends Component {
     this.onChangeColorTilemap = this.onChangeColorTilemap.bind(this);
     this.onWordcloudInputChange = this.onWordcloudInputChange.bind(this);
     this.onWordcloudTagsChange = this.onWordcloudTagsChange.bind(this);
+    this.onGaugeInputChange = this.onGaugeInputChange.bind(this);
     this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
     this.updateTilemapConfiguration = this.updateTilemapConfiguration.bind(this);
     this.updatePolarConfiguration = this.updatePolarConfiguration.bind(this);
     this.updatePyramidConfiguration = this.updatePyramidConfiguration.bind(this);
     this.updateWordcloudConfiguration = this.updateWordcloudConfiguration.bind(this);
+    this.updateGaugeConfiguration = this.updateGaugeConfiguration.bind(this);
+    this.refreshGaugeCongifuration = this.refreshGaugeCongifuration.bind(this);
   }
 
   componentDidMount() {
@@ -102,7 +107,7 @@ export default class Other extends Component {
     const options = gauge;
 
     this.setState({ options }, () => {
-      this.updateGaugeConfiguration();
+      this.refreshGaugeCongifuration();
     });
   }
 
@@ -248,7 +253,34 @@ export default class Other extends Component {
   }
 
   updateGaugeConfiguration() {
+    const { options, configurations } = this.state;
+
+    const { chars, digits, symbols } = analyzeGaugeText(configurations.gauge);
+
+    options.series[0].data[0].y = chars > 100 ? 100 : chars;
+    options.series[1].data[0].y = digits > 100 ? 100 : digits;
+    options.series[2].data[0].y = symbols > 100 ? 100 : symbols;
+
     this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
+  refreshGaugeCongifuration() {
+    const { options, configurations } = this.state;
+
+    configurations.gauge.text = 'Enter here your text to see its char analysis on the chart...';
+    configurations.gauge.chars = 500;
+    configurations.gauge.digits = 50;
+    configurations.gauge.symbols = 100;
+
+    const { chars, digits, symbols } = analyzeGaugeText(configurations.gauge);
+
+    options.series[0].data[0].y = chars > 100 ? 100 : chars;
+    options.series[1].data[0].y = digits > 100 ? 100 : digits;
+    options.series[2].data[0].y = symbols > 100 ? 100 : symbols;
+
+    this.setState({ rerenderChart: true, configurations }, () => {
       this.setState({ rerenderChart: false })
     })
   }
@@ -412,6 +444,29 @@ export default class Other extends Component {
     }
 
     this.setState({ configurations });
+  }
+
+  onGaugeInputChange(event) {
+    const { configurations } = this.state;
+    const newValue = event.target.value === ''
+      ? 'Enter here your text to see its char analysis on the chart...'
+      : event.target.value;
+    if (event.target.name !== "text") {
+      limitNumericalInput(
+        configurations.gauge,
+        event.target.name,
+        newValue,
+        1,
+        10000,
+        true
+      );
+    } else {
+      configurations.gauge[event.target.name] = newValue;
+    }
+
+    this.setState({ configurations }, () => {
+      this.updateGaugeConfiguration()
+    });
   }
 
   onWordcloudTagsChange(newTags) {
@@ -729,6 +784,55 @@ export default class Other extends Component {
     );
   }
 
+  renderGaugeConfiguration() {
+    const { gauge } = this.state.configurations;
+    return (
+      <div className="other-gauge">
+        <div className="form-group config-option">
+          <label>Text for plotting</label>
+            <textarea className="form-control input-textarea"
+                   name={optionsGauge.text}
+                   value={gauge.text}
+                   onChange={this.onGaugeInputChange}/>
+        </div>
+
+        <div className="form-group config-option">
+          <label>Characters goal</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsGauge.chars}
+                   value={gauge.chars}
+                   onChange={this.onGaugeInputChange}/>
+        </div>
+
+        <div className="form-group config-option">
+          <label>Symbols goal</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsGauge.symbols}
+                   value={gauge.symbols}
+                   onChange={this.onGaugeInputChange}/>
+        </div>
+
+        <div className="form-group config-option">
+          <label>Digits goal</label>
+            <input type="number"
+                   className="form-control"
+                   name={optionsGauge.digits}
+                   value={gauge.digits}
+                   onChange={this.onGaugeInputChange}/>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.refreshGaugeCongifuration}>
+          Refresh
+        </button>
+      </div>
+    );
+  }
+
   renderPyramidConfiguration() {
     const { pyramid } = this.state.configurations;
     return (
@@ -798,7 +902,7 @@ export default class Other extends Component {
         return <div> BOXPLOT </div>;
       }
       case modes.gauge: {
-        return <div> GAUGE </div>;
+        return this.renderGaugeConfiguration();
       }
       case modes.pyramid: {
         return this.renderPyramidConfiguration();

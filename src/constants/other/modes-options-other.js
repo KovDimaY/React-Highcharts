@@ -60,6 +60,13 @@ export const optionsPyramid = {
   allowPointSelect: "allowPointSelect"
 }
 
+export const optionsGauge = {
+  text: "text",
+  chars: "chars",
+  digits: "digits",
+  symbols: "symbols"
+}
+
 
 
 export const initialState = {
@@ -101,7 +108,12 @@ export const initialState = {
       spiderMode: false,
     },
     boxplot: {},
-    gauge: {},
+    gauge: {
+      text: "Enter here your text to see its char analysis on the chart...",
+      chars: 500,
+      digits: 50,
+      symbols: 100
+    },
     pyramid: {
       tooltip: true,
       title: true,

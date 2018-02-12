@@ -55,6 +55,20 @@
         text-align: center;
       }
     }
+    .other-gauge {
+      margin-top: 30px;
+      .config-option {
+        width: 80%;
+        margin-left: 10%;
+      }
+      .input-textarea {
+        resize: none;
+        height: 125px;
+      }
+      .checkbox {
+        text-align: center;
+      }
+    }
     .color-pickers {
       margin-top: 20px;
     }
