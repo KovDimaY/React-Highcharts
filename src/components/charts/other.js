@@ -25,7 +25,8 @@ import {
   optionsWordcloud,
   optionsPolar,
   optionsPyramid,
-  optionsGauge
+  optionsGauge,
+  optionsSankey
 } from '../../constants/other/modes-options-other'
 
 import {
@@ -883,7 +884,54 @@ export default class Other extends Component {
           Apply
         </button>
       </div>
-    )
+    );
+  }
+
+  renderSankeyConfiguration() {
+    const { sankey } = this.state.configurations;
+    return (
+      <div className="other-sankey-container">
+        <div className="checkboxes other-sankey">
+          <div className="form-group config-option">
+            <label>Number of nodes: {sankey.numberNodes}</label>
+            <input type="range"
+                   className="slider"
+                   min="2"
+                   max="10"
+                   name={optionsSankey.numberNodes}
+                   value={sankey.numberNodes}
+                   onChange={this.onSankeyInputChange}/>
+          </div>
+          <div className="form-group config-option">
+            <label>Number of levels: {sankey.numberLevels}</label>
+            <input type="range"
+                   className="slider"
+                   min="2"
+                   max="5"
+                   name={optionsSankey.numberLevels}
+                   value={sankey.numberLevels}
+                   onChange={this.onSankeyInputChange}/>
+          </div>
+          <div className="form-group config-option">
+            <label>Density: {sankey.density}%</label>
+            <input type="range"
+                   className="slider"
+                   min="25"
+                   max="100"
+                   name={optionsSankey.density}
+                   value={sankey.density}
+                   onChange={this.onSankeyInputChange}/>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button"
+          onClick={this.updateSankeyConfiguration}>
+          Apply
+        </button>
+      </div>
+    );
   }
 
   renderConfigurationsArea() {
@@ -911,7 +959,7 @@ export default class Other extends Component {
         return this.renderWordcloudConfiguration();
       }
       case modes.sankey: {
-        return <div> SANKEY </div>;
+        return this.renderSankeyConfiguration();
       }
       default: {
         return null;
