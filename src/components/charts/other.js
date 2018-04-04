@@ -36,7 +36,8 @@ import {
   countWords,
   generateSeriesForWordCloud,
   generateSeriesPyramid,
-  analyzeGaugeText
+  analyzeGaugeText,
+  generateDataForSankey
 } from '../../constants/other/data-helpers-other'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
@@ -57,6 +58,7 @@ export default class Other extends Component {
     this.onWordcloudInputChange = this.onWordcloudInputChange.bind(this);
     this.onWordcloudTagsChange = this.onWordcloudTagsChange.bind(this);
     this.onGaugeInputChange = this.onGaugeInputChange.bind(this);
+    this.onSankeyInputChange = this.onSankeyInputChange.bind(this);
     this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
     this.updateTilemapConfiguration = this.updateTilemapConfiguration.bind(this);
     this.updatePolarConfiguration = this.updatePolarConfiguration.bind(this);
@@ -64,6 +66,7 @@ export default class Other extends Component {
     this.updateWordcloudConfiguration = this.updateWordcloudConfiguration.bind(this);
     this.updateGaugeConfiguration = this.updateGaugeConfiguration.bind(this);
     this.refreshGaugeCongifuration = this.refreshGaugeCongifuration.bind(this);
+    this.updateSankeyConfiguration = this.updateSankeyConfiguration.bind(this);
   }
 
   componentDidMount() {
@@ -317,6 +320,10 @@ export default class Other extends Component {
   }
 
   updateSankeyConfiguration() {
+    const { sankey } = this.state.configurations;
+    const { options } = this.state;
+    options.series[0].data = generateDataForSankey(sankey);
+    
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -480,6 +487,13 @@ export default class Other extends Component {
     }
 
     this.setState({ configurations })
+  }
+
+  onSankeyInputChange(event) {
+    const { configurations } = this.state;
+    configurations.sankey[event.target.name] = event.target.value;
+
+    this.setState({ configurations });
   }
 
   renderOptionsDropdown() {
@@ -893,7 +907,7 @@ export default class Other extends Component {
       <div className="other-sankey-container">
         <div className="checkboxes other-sankey">
           <div className="form-group config-option">
-            <label>Number of nodes: {sankey.numberNodes}</label>
+            <label>Number of nodes: <span>{sankey.numberNodes}</span></label>
             <input type="range"
                    className="slider"
                    min="2"
@@ -903,7 +917,7 @@ export default class Other extends Component {
                    onChange={this.onSankeyInputChange}/>
           </div>
           <div className="form-group config-option">
-            <label>Number of levels: {sankey.numberLevels}</label>
+            <label>Number of levels: <span>{sankey.numberLevels}</span></label>
             <input type="range"
                    className="slider"
                    min="2"
@@ -913,7 +927,7 @@ export default class Other extends Component {
                    onChange={this.onSankeyInputChange}/>
           </div>
           <div className="form-group config-option">
-            <label>Density: {sankey.density}%</label>
+            <label>Density: <span>{sankey.density}%</span></label>
             <input type="range"
                    className="slider"
                    min="25"
