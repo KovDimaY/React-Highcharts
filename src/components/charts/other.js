@@ -323,7 +323,7 @@ export default class Other extends Component {
     const { sankey } = this.state.configurations;
     const { options } = this.state;
     options.series[0].data = generateDataForSankey(sankey);
-    
+
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -930,7 +930,7 @@ export default class Other extends Component {
             <label>Density: <span>{sankey.density}%</span></label>
             <input type="range"
                    className="slider"
-                   min="25"
+                   min="10"
                    max="100"
                    name={optionsSankey.density}
                    value={sankey.density}

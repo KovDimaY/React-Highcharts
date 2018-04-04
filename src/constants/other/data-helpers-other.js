@@ -167,53 +167,40 @@ export function analyzeGaugeText(configs) {
   return { chars, digits, symbols };
 }
 
+function updateBasedOnConnections(points) {
+  const helper = {};
+  points.forEach((point) => {
+    if (!helper[point[1]]) {
+      helper[point[1]] = true;
+    }
+  });
+
+  return Object.keys(helper);
+}
+
 export function generateDataForSankey(configs) {
-  return [
-      ['Brazil', 'Portugal', 5 ],
-      ['Brazil', 'France', 1 ],
-      ['Brazil', 'Spain', 1 ],
-      ['Brazil', 'England', 1 ],
-      ['Canada', 'Portugal', 1 ],
-      ['Canada', 'France', 5 ],
-      ['Canada', 'England', 1 ],
-      ['Mexico', 'Portugal', 1 ],
-      ['Mexico', 'France', 1 ],
-      ['Mexico', 'Spain', 5 ],
-      ['Mexico', 'England', 1 ],
-      ['USA', 'Portugal', 1 ],
-      ['USA', 'France', 1 ],
-      ['USA', 'Spain', 1 ],
-      ['USA', 'England', 5 ],
-      ['Portugal', 'Angola', 2 ],
-      ['Portugal', 'Senegal', 1 ],
-      ['Portugal', 'Morocco', 1 ],
-      ['Portugal', 'South Africa', 3 ],
-      ['France', 'Angola', 1 ],
-      ['France', 'Senegal', 3 ],
-      ['France', 'Mali', 3 ],
-      ['France', 'Morocco', 3 ],
-      ['France', 'South Africa', 1 ],
-      ['Spain', 'Senegal', 1 ],
-      ['Spain', 'Morocco', 3 ],
-      ['Spain', 'South Africa', 1 ],
-      ['England', 'Angola', 1 ],
-      ['England', 'Senegal', 1 ],
-      ['England', 'Morocco', 2 ],
-      ['England', 'South Africa', 7 ],
-      ['South Africa', 'China', 5 ],
-      ['South Africa', 'India', 1 ],
-      ['South Africa', 'Japan', 3 ],
-      ['Angola', 'China', 5 ],
-      ['Angola', 'India', 1 ],
-      ['Angola', 'Japan', 3 ],
-      ['Senegal', 'China', 5 ],
-      ['Senegal', 'India', 1 ],
-      ['Senegal', 'Japan', 3 ],
-      ['Mali', 'China', 5 ],
-      ['Mali', 'India', 1 ],
-      ['Mali', 'Japan', 3 ],
-      ['Morocco', 'China', 5 ],
-      ['Morocco', 'India', 1 ],
-      ['Morocco', 'Japan', 3 ]
-  ];
+  const { numberNodes, numberLevels, density } = configs;
+  let count = 1;
+  let result = [];
+  let previousNodes = [];
+  for (let node = 0; node < numberNodes; node += 1) {
+    previousNodes.push(`L1-${node + 1}`);
+  }
+
+  for (let level = 1; level < numberLevels; level += 1) {
+    const connectionsOnLevel = [];
+    previousNodes.forEach((base) => {
+      for (let node = 0; node < numberNodes; node += 1) {
+        const target = `L${level + 1}-${node + 1}`;
+        const weight = Math.floor(1 + Math.random() * 10);
+        if (Math.random() * 100 <= density) {
+          connectionsOnLevel.push([base, target, weight]);
+        }
+      }
+    });
+    previousNodes = updateBasedOnConnections(connectionsOnLevel);
+    result = result.concat(connectionsOnLevel);
+  }
+
+  return result;
 }
