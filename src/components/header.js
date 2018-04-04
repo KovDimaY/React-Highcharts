@@ -1,6 +1,5 @@
 // Node modules import
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 // This component is a simple header for the page
 export default class Header extends Component {
@@ -29,25 +28,25 @@ export default class Header extends Component {
           <nav>
             <ul className="nav nav-justified">
               <li className={this.makeActiveBasedOnPath(path.home)}>
-                <Link to={path.home}>Home</Link>
+                <a href={path.home}>Home</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.line)}>
-                <Link to={path.line}>Line</Link>
+                <a href={path.line}>Line</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.bar)}>
-                <Link to={path.bar}>Bar</Link>
+                <a href={path.bar}>Bar</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.pie)}>
-                <Link to={path.pie}>Pie</Link>
+                <a href={path.pie}>Pie</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.scatter)}>
-                <Link to={path.scatter}>Scattering</Link>
+                <a href={path.scatter}>Scattering</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.other)}>
-                <Link to={path.other}>Other</Link>
+                <a href={path.other}>Other</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.clock)}>
-                <Link to={path.clock}>Clock</Link>
+                <a href={path.clock}>Clock</a>
               </li>
             </ul>
           </nav>
