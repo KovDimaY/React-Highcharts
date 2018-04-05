@@ -324,6 +324,9 @@ export default class Other extends Component {
     const { options } = this.state;
     options.series[0].data = generateDataForSankey(sankey);
 
+    options.plotOptions.sankey.linkOpacity = sankey.linkOpacity;
+    options.plotOptions.sankey.curveFactor = sankey.curveFactor;
+
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -936,11 +939,33 @@ export default class Other extends Component {
                    value={sankey.density}
                    onChange={this.onSankeyInputChange}/>
           </div>
+          <div className="form-group config-option">
+            <label>Link opacity: <span>{sankey.linkOpacity}</span></label>
+            <input type="range"
+                   className="slider"
+                   min="0"
+                   max="1"
+                   step="0.01"
+                   name={optionsSankey.linkOpacity}
+                   value={sankey.linkOpacity}
+                   onChange={this.onSankeyInputChange}/>
+          </div>
+          <div className="form-group config-option">
+            <label>Curve factor: <span>{sankey.curveFactor}</span></label>
+            <input type="range"
+                   className="slider"
+                   min="0"
+                   max="1"
+                   step="0.01"
+                   name={optionsSankey.curveFactor}
+                   value={sankey.curveFactor}
+                   onChange={this.onSankeyInputChange}/>
+          </div>
         </div>
 
         <button
           type="button"
-          className="btn btn-success apply-button"
+          className="btn btn-success apply-button position-dynamic"
           onClick={this.updateSankeyConfiguration}>
           Apply
         </button>

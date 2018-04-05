@@ -70,7 +70,9 @@ export const optionsGauge = {
 export const optionsSankey = {
   numberNodes: "numberNodes",
   numberLevels: "numberLevels",
-  density: "density"
+  density: "density",
+  linkOpacity: "linkOpacity",
+  curveFactor: "curveFactor"
 }
 
 export const initialState = {
@@ -134,7 +136,9 @@ export const initialState = {
     sankey: {
       numberNodes: 5,
       numberLevels: 3,
-      density: 50
+      density: 50,
+      linkOpacity: 0.5,
+      curveFactor: 0.33
     }
   }
 }

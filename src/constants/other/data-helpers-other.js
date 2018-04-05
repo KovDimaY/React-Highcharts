@@ -184,14 +184,14 @@ export function generateDataForSankey(configs) {
   let result = [];
   let previousNodes = [];
   for (let node = 0; node < numberNodes; node += 1) {
-    previousNodes.push(`L1-${node + 1}`);
+    previousNodes.push(`L1-N${node + 1}`);
   }
 
   for (let level = 1; level < numberLevels; level += 1) {
     const connectionsOnLevel = [];
     previousNodes.forEach((base) => {
       for (let node = 0; node < numberNodes; node += 1) {
-        const target = `L${level + 1}-${node + 1}`;
+        const target = `L${level + 1}-N${node + 1}`;
         const weight = Math.floor(1 + Math.random() * 10);
         if (Math.random() * 100 <= density) {
           connectionsOnLevel.push([base, target, weight]);

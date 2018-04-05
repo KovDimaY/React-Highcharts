@@ -396,15 +396,31 @@ export const wordcloud = {
 }
 
 export const sankey = {
-
     title: {
         text: 'Highcharts Sankey Diagram'
+    },
+    plotOptions: {
+      sankey: {
+        linkOpacity: 0.5,
+        curveFactor: 0.33
+      }
+    },
+    tooltip: {
+        enabled: true,
+        formatter: function () {
+          if (this.key) {
+            return `<b>${this.key}</b><br/>
+                    Total weight: <b>${this.point.sum}</b>`;
+          }
+          return `<b style="color:${this.color}">${this.series.name}</b><br/>
+                  From <b>${this.point.from}</b> to <b>${this.point.to}</b><br/>
+                  Weight: <b>${this.point.weight}</b>`;
+        }
     },
     series: [{
         keys: ['from', 'to', 'weight'],
         data: [],
         type: 'sankey',
-        name: 'Sankey demo series'
+        name: 'Random link'
     }]
-
 }
