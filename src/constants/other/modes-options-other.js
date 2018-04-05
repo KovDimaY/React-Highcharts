@@ -67,7 +67,13 @@ export const optionsGauge = {
   symbols: "symbols"
 }
 
-
+export const optionsSankey = {
+  numberNodes: "numberNodes",
+  numberLevels: "numberLevels",
+  density: "density",
+  linkOpacity: "linkOpacity",
+  curveFactor: "curveFactor"
+}
 
 export const initialState = {
   options: {},
@@ -105,7 +111,7 @@ export const initialState = {
       dataLabels: true,
       animation: true,
       legend: true,
-      spiderMode: false,
+      spiderMode: false
     },
     boxplot: {},
     gauge: {
@@ -125,8 +131,14 @@ export const initialState = {
     wordcloud: {
       text: "Enter here your text to plot its words set on the chart...",
       limit: 10,
-      filter: [],
+      filter: []
     },
-    sankey: {}
+    sankey: {
+      numberNodes: 5,
+      numberLevels: 3,
+      density: 50,
+      linkOpacity: 0.5,
+      curveFactor: 0.33
+    }
   }
 }

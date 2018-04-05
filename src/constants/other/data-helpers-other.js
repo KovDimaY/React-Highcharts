@@ -166,3 +166,41 @@ export function analyzeGaugeText(configs) {
   const symbols = Math.floor(rawSymbols * 1000 / symbolsMax) / 10;
   return { chars, digits, symbols };
 }
+
+function updateBasedOnConnections(points) {
+  const helper = {};
+  points.forEach((point) => {
+    if (!helper[point[1]]) {
+      helper[point[1]] = true;
+    }
+  });
+
+  return Object.keys(helper);
+}
+
+export function generateDataForSankey(configs) {
+  const { numberNodes, numberLevels, density } = configs;
+  let count = 1;
+  let result = [];
+  let previousNodes = [];
+  for (let node = 0; node < numberNodes; node += 1) {
+    previousNodes.push(`L1-N${node + 1}`);
+  }
+
+  for (let level = 1; level < numberLevels; level += 1) {
+    const connectionsOnLevel = [];
+    previousNodes.forEach((base) => {
+      for (let node = 0; node < numberNodes; node += 1) {
+        const target = `L${level + 1}-N${node + 1}`;
+        const weight = Math.floor(1 + Math.random() * 10);
+        if (Math.random() * 100 <= density) {
+          connectionsOnLevel.push([base, target, weight]);
+        }
+      }
+    });
+    previousNodes = updateBasedOnConnections(connectionsOnLevel);
+    result = result.concat(connectionsOnLevel);
+  }
+
+  return result;
+}
