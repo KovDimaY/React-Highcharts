@@ -10,7 +10,7 @@ import Bar from './components/charts/bar';
 import Pie from './components/charts/pie';
 import Scattering from './components/charts/scatter';
 import Other from './components/charts/other';
-import Clock from './components/charts/clock';
+import Playground from './components/charts/playground';
 import NotFound from './components/notFound';
 
 // Routes definition
@@ -22,7 +22,7 @@ export default (
     <Router path='/pie' component={Pie} />
     <Router path='/scatter' component={Scattering} />
     <Router path='/other' component={Other} />
-    <Router path='/clock' component={Clock} />
+    <Router path='/clock' component={Playground} />
     <Router path='*' component={NotFound} />
   </Router>
 );

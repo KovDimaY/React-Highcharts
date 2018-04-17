@@ -46,7 +46,7 @@ export default class Header extends Component {
                 <a href={path.other}>Other</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.clock)}>
-                <a href={path.clock}>Clock</a>
+                <a href={path.clock}>Playground</a>
               </li>
             </ul>
           </nav>

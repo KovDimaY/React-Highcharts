@@ -4,11 +4,11 @@ import Highcharts from 'highcharts'
 
 import Chart from './chart-abstract'
 
-export default class Clock extends Component {
+export default class Playground extends Component {
 	render() {
 		return(
 			<div>
-				<Chart container={'clock'} />
+				<Chart container={'clock'} options={{}}/>
 			</div>
 		)
 	}
