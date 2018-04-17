@@ -424,3 +424,75 @@ export const sankey = {
         name: 'Random link'
     }]
 }
+
+export const clock = {
+    chart: {
+        type: 'gauge',
+        plotBackgroundColor: null,
+        plotBackgroundImage: null,
+        plotBorderWidth: 0,
+        plotShadow: false,
+        height: 400
+    },
+    credits: {
+        enabled: false
+    },
+    title: {
+        text: 'The Highcharts clock'
+    },
+    pane: {
+        background: [{
+            // default background
+        }, {
+            // reflex for supported browsers
+            backgroundColor: Highcharts.svg ? {
+                radialGradient: {
+                    cx: 0.5,
+                    cy: -0.4,
+                    r: 1.9
+                },
+                stops: [
+                    [0.5, 'rgba(255, 255, 255, 0.2)'],
+                    [0.5, 'rgba(200, 200, 200, 0.2)']
+                ]
+            } : null
+        }]
+    },
+    yAxis: {
+        labels: {
+            distance: -35,
+            style: { "color": "black", "cursor": "default", "fontSize": "24px", "font-weight": "bold"}
+        },
+        min: 0,
+        max: 12,
+        lineWidth: 0,
+        showFirstLabel: false,
+
+        minorTickInterval: 'auto',
+        minorTickWidth: 2,
+        minorTickLength: 5,
+        minorTickPosition: 'inside',
+        minorGridLineWidth: 0,
+        minorTickColor: '#666',
+
+        tickInterval: 1,
+        tickWidth: 3,
+        tickPosition: 'inside',
+        tickLength: 10,
+        tickColor: '#666',
+        title: {
+            text: 'Powered by<br/>Highcharts<br/>& Dmytro Kovalenko ;)',
+            style: {
+                color: '#BBB',
+                fontWeight: 'normal',
+                fontSize: '12px',
+                lineHeight: '14px'
+            },
+            y: 10
+        }
+    },
+    tooltip: {
+        enabled: false
+    },
+    series: []
+};
