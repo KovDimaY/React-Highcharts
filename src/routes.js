@@ -22,7 +22,7 @@ export default (
     <Router path='/pie' component={Pie} />
     <Router path='/scatter' component={Scattering} />
     <Router path='/other' component={Other} />
-    <Router path='/clock' component={Playground} />
+    <Router path='/playground' component={Playground} />
     <Router path='*' component={NotFound} />
   </Router>
 );
