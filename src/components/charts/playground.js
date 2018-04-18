@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Highcharts from 'highcharts'
+import JSONEditor from 'jsoneditor'
 
 import Chart from './chart-abstract'
 
@@ -42,11 +43,28 @@ export default class Playground extends Component {
 		};
 	}
 
+	componentDidMount() {
+		var container = document.getElementById("jsoneditor");
+		var options = {
+			mode: 'code'
+		};
+		const editor = new JSONEditor(container, options);
+		editor.set({
+			"Array": [1, 2, 3],
+			"Boolean": true,
+			"Null": null,
+			"Number": 123,
+			"Object": {"a": "b", "c": "d"},
+			"String": "Hello World"
+		});
+	}
+
 	renderConfigurationsArea() {
 		return (
 		  <div className="other-clock-container">
 			<div className="checkboxes other-clock">
 			  CLOCK CONFIG
+				<div id="jsoneditor" style={{width: "400px", height: "400px"}}></div>
 			</div>
 			<button
 			  type="button"
