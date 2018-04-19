@@ -1,3 +1,5 @@
+import { move } from './data-helpers-other.js'
+
 export const modes = {
   heatmap: "Heatmap",
   tilemap: "Tilemap",
@@ -6,7 +8,8 @@ export const modes = {
   gauge: "Activity Gauge",
   pyramid: "Pyramid",
   wordcloud: "Word Cloud",
-  sankey: "Sankey Diagram"
+  sankey: "Sankey Diagram",
+  clock: "Clock Simulation"
 }
 
 export const optionsHeatmap = {
@@ -75,6 +78,10 @@ export const optionsSankey = {
   curveFactor: "curveFactor"
 }
 
+export const optionsClock = {
+  speed: "speed"
+}
+
 export const initialState = {
   options: {},
   rerenderChart: false,
@@ -139,6 +146,10 @@ export const initialState = {
       density: 50,
       linkOpacity: 0.5,
       curveFactor: 0.33
+    },
+    clock: {
+      speed: 1000,
+      function: move
     }
   }
 }

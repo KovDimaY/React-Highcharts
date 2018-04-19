@@ -1,0 +1,80 @@
+.playground {
+    margin-top: 30px;
+
+    #jsoneditor{
+      width: 90%;
+      height: 320px;
+      margin-left: 5%;
+      margin-top: 10px;
+    }
+  
+    .configuration-area {
+      background-color: #f2f2f2;
+      height: 405px;
+      overflow:auto;
+      border: 1px solid rgba(128, 128, 128, 0.50);
+  
+      .apply-button {
+        position: absolute;
+        bottom: 30px;
+        left: 0;
+      }
+      .col-md-4 {
+        padding: 0;
+      }
+      .row {
+        margin: 0;
+      }
+      .modified {
+        width: 60px;
+        display: inline-block;
+      }
+      .position-dynamic {
+        position: unset;
+        margin-bottom: 15px;
+        margin-top: 20px;
+      }
+    }
+
+    /* Customize pure-random container */
+    @media (min-width: 0px) {
+        .chart-area {
+            border: none;
+        }
+        .apply-button {
+            width: 40%;
+            margin-left: 30%;
+        }   
+    }
+
+    @media (min-width: 768px) {
+        .chart-area {
+            border: 1px solid rgba(128, 128, 128, 0.50);
+            height: 405px;
+            overflow: auto;
+        }
+        .apply-button {
+            width: 80%;
+            margin-left: 10%;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .apply-button {
+          width: 60%;
+          margin-left: 20%;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .apply-button {
+          width: 40%;
+          margin-left: 30%;
+        }
+    }
+  
+    h3 {
+      text-align: center;
+    }
+  }
+  

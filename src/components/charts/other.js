@@ -14,7 +14,8 @@ import {
   gauge,
   pyramid,
   wordcloud,
-  sankey
+  sankey,
+  clock
 } from '../../constants/other/default-options-other'
 
 import {
@@ -26,7 +27,8 @@ import {
   optionsPolar,
   optionsPyramid,
   optionsGauge,
-  optionsSankey
+  optionsSankey,
+  optionsClock
 } from '../../constants/other/modes-options-other'
 
 import {
@@ -37,7 +39,8 @@ import {
   generateSeriesForWordCloud,
   generateSeriesPyramid,
   analyzeGaugeText,
-  generateDataForSankey
+  generateDataForSankey,
+  generateSeriesForClock,
 } from '../../constants/other/data-helpers-other'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
@@ -137,6 +140,14 @@ export default class Other extends Component {
 
     this.setState({ options }, () => {
       this.updateSankeyConfiguration();
+    });
+  }
+
+  initClock() {
+    const options = clock;
+
+    this.setState({ options }, () => {
+      this.updateClockConfiguration();
     });
   }
 
@@ -332,6 +343,17 @@ export default class Other extends Component {
     })
   }
 
+  updateClockConfiguration() {
+    const { clock } = this.state.configurations;
+    const { options } = this.state;
+    options.series = generateSeriesForClock(clock);
+    options.function = clock.function;
+
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
   dropdownClickHandler(input) {
     const mode = input.target.innerHTML;
     const { configurations } = this.state;
@@ -366,6 +388,10 @@ export default class Other extends Component {
       }
       case modes.sankey: {
         this.initSankey();
+        break;
+      }
+      case modes.clock: {
+        this.initClock();
         break;
       }
       default: {
@@ -514,6 +540,7 @@ export default class Other extends Component {
           <li><a onClick={this.dropdownClickHandler}>{modes.pyramid}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.wordcloud}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.sankey}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.clock}</a></li>
         </ul>
       </div>
     )
@@ -973,6 +1000,23 @@ export default class Other extends Component {
     );
   }
 
+  renderClockConfiguration() {
+    const { sankey } = this.state.configurations;
+    return (
+      <div className="other-clock-container">
+        <div className="checkboxes other-clock">
+          CLOCK CONFIG
+        </div>
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateSankeyConfiguration}>
+          Apply
+        </button>
+      </div>
+    );
+  }
+
   renderConfigurationsArea() {
     const { currentMode } = this.state;
     switch (currentMode) {
@@ -1000,6 +1044,9 @@ export default class Other extends Component {
       case modes.sankey: {
         return this.renderSankeyConfiguration();
       }
+      case modes.clock: {
+        return this.renderClockConfiguration();
+      }
       default: {
         return null;
       }
@@ -1021,7 +1068,8 @@ export default class Other extends Component {
           <div className="col-sm-8 chart-area">
             <Chart container={'others-chart'}
                    options={this.state.options}
-                   update={this.state.rerenderChart}/>
+                   update={this.state.rerenderChart}
+                   function={this.state.options.function}/>
           </div>
         </div>
       </div>
