@@ -1,5 +1,12 @@
 .playground {
     margin-top: 30px;
+
+    #jsoneditor{
+      width: 90%;
+      height: 320px;
+      margin-left: 5%;
+      margin-top: 10px;
+    }
   
     .configuration-area {
       background-color: #f2f2f2;
@@ -24,8 +31,8 @@
       }
       .position-dynamic {
         position: unset;
-        margin-bottom: 30px;
-        margin-top: 30px;
+        margin-bottom: 15px;
+        margin-top: 20px;
       }
     }
 
