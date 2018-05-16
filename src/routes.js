@@ -1,6 +1,6 @@
 // Node modules import
 import React from 'react';
-import { Router, IndexRoute } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 
 // Components import
 import App from './components/app';
@@ -15,14 +15,14 @@ import NotFound from './components/notFound';
 
 // Routes definition
 export default (
-  <Router path='/' component={App}>
+  <Route path='/' component={App}>
     <IndexRoute component={Home} />
-    <Router path='/line' component={Line} />
-    <Router path='/bar' component={Bar} />
-    <Router path='/pie' component={Pie} />
-    <Router path='/scatter' component={Scattering} />
-    <Router path='/other' component={Other} />
-    <Router path='/playground' component={Playground} />
-    <Router path='*' component={NotFound} />
-  </Router>
+    <Route path='/line' component={Line} />
+    <Route path='/bar' component={Bar} />
+    <Route path='/pie' component={Pie} />
+    <Route path='/scatter' component={Scattering} />
+    <Route path='/other' component={Other} />
+    <Route path='/playground' component={Playground} />
+    <Route path='*' component={NotFound} />
+  </Route>
 );
