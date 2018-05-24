@@ -20,7 +20,7 @@ export default class Header extends Component {
       pie: "/pie",
       scatter: "/scatter",
       other: "/other",
-      clock: "/clock"
+      playground: "/playground"
     }
     return (
       <div className='header'>
@@ -46,8 +46,8 @@ export default class Header extends Component {
               <li className={this.makeActiveBasedOnPath(path.other)}>
                 <Link to={path.other}>Other</Link>
               </li>
-              <li className={this.makeActiveBasedOnPath(path.clock)}>
-                <Link to={path.clock}>Clock</Link>
+              <li className={this.makeActiveBasedOnPath(path.playground)}>
+                <Link to={path.playground}>Playground</Link>
               </li>
             </ul>
           </nav>
