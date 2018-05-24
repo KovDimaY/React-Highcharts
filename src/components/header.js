@@ -1,6 +1,6 @@
 // Node modules import
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 // This component is a simple header for the page
 export default class Header extends Component {
