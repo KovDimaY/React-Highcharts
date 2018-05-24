@@ -1,6 +1,9 @@
 // Node modules import
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { Link } from 'react-router';
+=======
+>>>>>>> 64d440062fef8957bd73b4ad5fa1969683b1971a
 
 // This component is a simple header for the page
 export default class Header extends Component {
@@ -20,7 +23,7 @@ export default class Header extends Component {
       pie: "/pie",
       scatter: "/scatter",
       other: "/other",
-      clock: "/clock"
+      playground: "/playground"
     }
     return (
       <div className='header'>
@@ -29,25 +32,25 @@ export default class Header extends Component {
           <nav>
             <ul className="nav nav-justified">
               <li className={this.makeActiveBasedOnPath(path.home)}>
-                <Link to={path.home}>Home</Link>
+                <a href={path.home}>Home</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.line)}>
-                <Link to={path.line}>Line</Link>
+                <a href={path.line}>Line</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.bar)}>
-                <Link to={path.bar}>Bar</Link>
+                <a href={path.bar}>Bar</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.pie)}>
-                <Link to={path.pie}>Pie</Link>
+                <a href={path.pie}>Pie</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.scatter)}>
-                <Link to={path.scatter}>Scattering</Link>
+                <a href={path.scatter}>Scattering</a>
               </li>
               <li className={this.makeActiveBasedOnPath(path.other)}>
-                <Link to={path.other}>Other</Link>
+                <a href={path.other}>Other</a>
               </li>
-              <li className={this.makeActiveBasedOnPath(path.clock)}>
-                <Link to={path.clock}>Clock</Link>
+              <li className={this.makeActiveBasedOnPath(path.playground)}>
+                <a href={path.playground}>Playground</a>
               </li>
             </ul>
           </nav>

@@ -166,3 +166,139 @@ export function analyzeGaugeText(configs) {
   const symbols = Math.floor(rawSymbols * 1000 / symbolsMax) / 10;
   return { chars, digits, symbols };
 }
+
+function updateBasedOnConnections(points) {
+  const helper = {};
+  points.forEach((point) => {
+    if (!helper[point[1]]) {
+      helper[point[1]] = true;
+    }
+  });
+
+  return Object.keys(helper);
+}
+
+export function generateDataForSankey(configs) {
+  const { numberNodes, numberLevels, density } = configs;
+  let count = 1;
+  let result = [];
+  let previousNodes = [];
+  for (let node = 0; node < numberNodes; node += 1) {
+    previousNodes.push(`L1-N${node + 1}`);
+  }
+
+  for (let level = 1; level < numberLevels; level += 1) {
+    const connectionsOnLevel = [];
+    previousNodes.forEach((base) => {
+      for (let node = 0; node < numberNodes; node += 1) {
+        const target = `L${level + 1}-N${node + 1}`;
+        const weight = Math.floor(1 + Math.random() * 10);
+        if (Math.random() * 100 <= density) {
+          connectionsOnLevel.push([base, target, weight]);
+        }
+      }
+    });
+    previousNodes = updateBasedOnConnections(connectionsOnLevel);
+    result = result.concat(connectionsOnLevel);
+  }
+
+  return result;
+}
+
+export function getNow() {
+  var now = new Date();
+
+  return {
+      hours: now.getHours() + now.getMinutes() / 60,
+      minutes: now.getMinutes() * 12 / 60 + now.getSeconds() * 12 / 3600,
+      seconds: now.getSeconds() * 12 / 60
+  };
+}
+
+export function pad(number, length) {
+  // Create an array of the remaining length + 1 and join it with 0's
+  return new Array((length || 2) + 1 - String(number).length).join(0) + number;
+}
+
+// Move cloack arrows
+export function move(chart) {
+  setInterval(function () {
+    const now = getNow();
+
+    if (chart.axes) { // not destroyed
+      var hour = chart.get('hour'),
+        minute = chart.get('minute'),
+        second = chart.get('second'),
+        // run animation unless we're wrapping around from 59 to 0
+        animation = now.seconds === 0
+          ? false
+          : { easing: 'easeOutBounce' };
+
+      // Cache the tooltip text
+      chart.tooltipText =
+        pad(Math.floor(now.hours), 2) + ':' +
+        pad(Math.floor(now.minutes * 5), 2) + ':' +
+        pad(now.seconds * 5, 2);
+
+      hour.update(now.hours, true, animation);
+      minute.update(now.minutes, true, animation);
+      second.update(now.seconds, true, animation);
+    }
+  }, 1000);
+};
+
+/**
+ * Easing function from https://github.com/danro/easing-js/blob/master/easing.js
+ */
+Math.easeOutBounce = function (pos) {
+    if ((pos) < (1 / 2.75)) {
+        return (7.5625 * pos * pos);
+    }
+    if (pos < (2 / 2.75)) {
+        return (7.5625 * (pos -= (1.5 / 2.75)) * pos + 0.75);
+    }
+    if (pos < (2.5 / 2.75)) {
+        return (7.5625 * (pos -= (2.25 / 2.75)) * pos + 0.9375);
+    }
+    return (7.5625 * (pos -= (2.625 / 2.75)) * pos + 0.984375);
+};
+
+
+export function generateSeriesForClock(options) {
+  let now = getNow();
+  return [{
+     data: [{
+         id: 'hour',
+         y: now.hours,
+         dial: {
+             radius: '60%',
+             baseWidth: 12,
+             baseLength: '50%',
+             rearLength: '10%',
+             backgroundColor: "black"
+         },
+     }, {
+         id: 'minute',
+         y: now.minutes,
+         dial: {
+             radius: '95%',
+             baseWidth: 10,
+             baseLength: '50%',
+             rearLength: '10%',
+             backgroundColor: "black"
+         }
+     }, {
+         id: 'second',
+         y: now.seconds,
+         dial: {
+             radius: '100%',
+             baseWidth: 2,
+             rearLength: '20%'
+         }
+     }],
+     animation: false,
+     dataLabels: {
+         enabled: false
+     }
+  }];
+}

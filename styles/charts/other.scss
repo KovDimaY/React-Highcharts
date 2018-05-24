@@ -69,6 +69,17 @@
         text-align: center;
       }
     }
+    .other-sankey {
+      margin-top: 50px;
+      span {
+        font-size: 16px;
+        margin-left: 5px;
+      }
+      .config-option {
+        width: 80%;
+        margin-left: 10%;
+      }
+    }
     .color-pickers {
       margin-top: 20px;
     }

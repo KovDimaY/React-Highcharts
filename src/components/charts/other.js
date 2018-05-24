@@ -14,7 +14,8 @@ import {
   gauge,
   pyramid,
   wordcloud,
-  sankey
+  sankey,
+  clock
 } from '../../constants/other/default-options-other'
 
 import {
@@ -25,7 +26,9 @@ import {
   optionsWordcloud,
   optionsPolar,
   optionsPyramid,
-  optionsGauge
+  optionsGauge,
+  optionsSankey,
+  optionsClock
 } from '../../constants/other/modes-options-other'
 
 import {
@@ -35,7 +38,9 @@ import {
   countWords,
   generateSeriesForWordCloud,
   generateSeriesPyramid,
-  analyzeGaugeText
+  analyzeGaugeText,
+  generateDataForSankey,
+  generateSeriesForClock,
 } from '../../constants/other/data-helpers-other'
 
 import { limitNumericalInput } from '../../constants/shared/helpers'
@@ -56,6 +61,7 @@ export default class Other extends Component {
     this.onWordcloudInputChange = this.onWordcloudInputChange.bind(this);
     this.onWordcloudTagsChange = this.onWordcloudTagsChange.bind(this);
     this.onGaugeInputChange = this.onGaugeInputChange.bind(this);
+    this.onSankeyInputChange = this.onSankeyInputChange.bind(this);
     this.updateHeatmapConfiguration = this.updateHeatmapConfiguration.bind(this);
     this.updateTilemapConfiguration = this.updateTilemapConfiguration.bind(this);
     this.updatePolarConfiguration = this.updatePolarConfiguration.bind(this);
@@ -63,6 +69,7 @@ export default class Other extends Component {
     this.updateWordcloudConfiguration = this.updateWordcloudConfiguration.bind(this);
     this.updateGaugeConfiguration = this.updateGaugeConfiguration.bind(this);
     this.refreshGaugeCongifuration = this.refreshGaugeCongifuration.bind(this);
+    this.updateSankeyConfiguration = this.updateSankeyConfiguration.bind(this);
   }
 
   componentDidMount() {
@@ -133,6 +140,14 @@ export default class Other extends Component {
 
     this.setState({ options }, () => {
       this.updateSankeyConfiguration();
+    });
+  }
+
+  initClock() {
+    const options = clock;
+
+    this.setState({ options }, () => {
+      this.updateClockConfiguration();
     });
   }
 
@@ -316,6 +331,24 @@ export default class Other extends Component {
   }
 
   updateSankeyConfiguration() {
+    const { sankey } = this.state.configurations;
+    const { options } = this.state;
+    options.series[0].data = generateDataForSankey(sankey);
+
+    options.plotOptions.sankey.linkOpacity = sankey.linkOpacity;
+    options.plotOptions.sankey.curveFactor = sankey.curveFactor;
+
+    this.setState({ rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    })
+  }
+
+  updateClockConfiguration() {
+    const { clock } = this.state.configurations;
+    const { options } = this.state;
+    options.series = generateSeriesForClock(clock);
+    options.function = clock.function;
+
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
@@ -355,6 +388,10 @@ export default class Other extends Component {
       }
       case modes.sankey: {
         this.initSankey();
+        break;
+      }
+      case modes.clock: {
+        this.initClock();
         break;
       }
       default: {
@@ -481,6 +518,13 @@ export default class Other extends Component {
     this.setState({ configurations })
   }
 
+  onSankeyInputChange(event) {
+    const { configurations } = this.state;
+    configurations.sankey[event.target.name] = event.target.value;
+
+    this.setState({ configurations });
+  }
+
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
@@ -496,6 +540,7 @@ export default class Other extends Component {
           <li><a onClick={this.dropdownClickHandler}>{modes.pyramid}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.wordcloud}</a></li>
           <li><a onClick={this.dropdownClickHandler}>{modes.sankey}</a></li>
+          <li><a onClick={this.dropdownClickHandler}>{modes.clock}</a></li>
         </ul>
       </div>
     )
@@ -883,7 +928,93 @@ export default class Other extends Component {
           Apply
         </button>
       </div>
-    )
+    );
+  }
+
+  renderSankeyConfiguration() {
+    const { sankey } = this.state.configurations;
+    return (
+      <div className="other-sankey-container">
+        <div className="checkboxes other-sankey">
+          <div className="form-group config-option">
+            <label>Number of nodes: <span>{sankey.numberNodes}</span></label>
+            <input type="range"
+                   className="slider"
+                   min="2"
+                   max="10"
+                   name={optionsSankey.numberNodes}
+                   value={sankey.numberNodes}
+                   onChange={this.onSankeyInputChange}/>
+          </div>
+          <div className="form-group config-option">
+            <label>Number of levels: <span>{sankey.numberLevels}</span></label>
+            <input type="range"
+                   className="slider"
+                   min="2"
+                   max="5"
+                   name={optionsSankey.numberLevels}
+                   value={sankey.numberLevels}
+                   onChange={this.onSankeyInputChange}/>
+          </div>
+          <div className="form-group config-option">
+            <label>Density: <span>{sankey.density}%</span></label>
+            <input type="range"
+                   className="slider"
+                   min="10"
+                   max="100"
+                   name={optionsSankey.density}
+                   value={sankey.density}
+                   onChange={this.onSankeyInputChange}/>
+          </div>
+          <div className="form-group config-option">
+            <label>Link opacity: <span>{sankey.linkOpacity}</span></label>
+            <input type="range"
+                   className="slider"
+                   min="0"
+                   max="1"
+                   step="0.01"
+                   name={optionsSankey.linkOpacity}
+                   value={sankey.linkOpacity}
+                   onChange={this.onSankeyInputChange}/>
+          </div>
+          <div className="form-group config-option">
+            <label>Curve factor: <span>{sankey.curveFactor}</span></label>
+            <input type="range"
+                   className="slider"
+                   min="0"
+                   max="1"
+                   step="0.01"
+                   name={optionsSankey.curveFactor}
+                   value={sankey.curveFactor}
+                   onChange={this.onSankeyInputChange}/>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateSankeyConfiguration}>
+          Apply
+        </button>
+      </div>
+    );
+  }
+
+  renderClockConfiguration() {
+    const { sankey } = this.state.configurations;
+    return (
+      <div className="other-clock-container">
+        <div className="checkboxes other-clock">
+          CLOCK CONFIG
+        </div>
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateSankeyConfiguration}>
+          Apply
+        </button>
+      </div>
+    );
   }
 
   renderConfigurationsArea() {
@@ -911,7 +1042,10 @@ export default class Other extends Component {
         return this.renderWordcloudConfiguration();
       }
       case modes.sankey: {
-        return <div> SANKEY </div>;
+        return this.renderSankeyConfiguration();
+      }
+      case modes.clock: {
+        return this.renderClockConfiguration();
       }
       default: {
         return null;
@@ -934,7 +1068,8 @@ export default class Other extends Component {
           <div className="col-sm-8 chart-area">
             <Chart container={'others-chart'}
                    options={this.state.options}
-                   update={this.state.rerenderChart}/>
+                   update={this.state.rerenderChart}
+                   function={this.state.options.function}/>
           </div>
         </div>
       </div>
