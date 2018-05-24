@@ -1,9 +1,6 @@
 // Node modules import
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import { Link } from 'react-router';
-=======
->>>>>>> 64d440062fef8957bd73b4ad5fa1969683b1971a
 
 // This component is a simple header for the page
 export default class Header extends Component {
@@ -23,7 +20,7 @@ export default class Header extends Component {
       pie: "/pie",
       scatter: "/scatter",
       other: "/other",
-      playground: "/playground"
+      clock: "/clock"
     }
     return (
       <div className='header'>
@@ -32,25 +29,25 @@ export default class Header extends Component {
           <nav>
             <ul className="nav nav-justified">
               <li className={this.makeActiveBasedOnPath(path.home)}>
-                <a href={path.home}>Home</a>
+                <Link to={path.home}>Home</Link>
               </li>
               <li className={this.makeActiveBasedOnPath(path.line)}>
-                <a href={path.line}>Line</a>
+                <Link to={path.line}>Line</Link>
               </li>
               <li className={this.makeActiveBasedOnPath(path.bar)}>
-                <a href={path.bar}>Bar</a>
+                <Link to={path.bar}>Bar</Link>
               </li>
               <li className={this.makeActiveBasedOnPath(path.pie)}>
-                <a href={path.pie}>Pie</a>
+                <Link to={path.pie}>Pie</Link>
               </li>
               <li className={this.makeActiveBasedOnPath(path.scatter)}>
-                <a href={path.scatter}>Scattering</a>
+                <Link to={path.scatter}>Scattering</Link>
               </li>
               <li className={this.makeActiveBasedOnPath(path.other)}>
-                <a href={path.other}>Other</a>
+                <Link to={path.other}>Other</Link>
               </li>
-              <li className={this.makeActiveBasedOnPath(path.playground)}>
-                <a href={path.playground}>Playground</a>
+              <li className={this.makeActiveBasedOnPath(path.clock)}>
+                <Link to={path.clock}>Clock</Link>
               </li>
             </ul>
           </nav>
