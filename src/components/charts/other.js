@@ -25,6 +25,7 @@ import {
   optionsTilemap,
   optionsWordcloud,
   optionsPolar,
+  optionsBoxplot,
   optionsPyramid,
   optionsGauge,
   optionsSankey,
@@ -792,6 +793,94 @@ export default class Other extends Component {
     )
   }
 
+  renderBoxPlotConfiguration () {
+    const { boxplot } = this.state.configurations;
+    return (
+      <div className="other-boxplot">
+        <div className="form-group config-option target-group-selector">
+          <label>Target:</label>
+          <select
+            className="form-control"
+            onChange={false && this.onBoxplotSelectChange}
+            name={optionsBoxplot.target}>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </div>
+
+        <div className="row">
+          <div className="col-md-6 special-small">
+            <div className="form-group config-option">
+              <label>Min</label>
+                <input type="number"
+                       data-type={optionsBoxplot.min}
+                       className="form-control"
+                       name={optionsBoxplot.min}
+                       value={boxplot.min}
+                       onChange={false && this.onBoxplotInputChange}/>
+            </div>
+          </div>
+          <div className="col-md-6 special-small">
+            <div className="form-group config-option">
+              <label>Max</label>
+                <input type="number"
+                       data-type={optionsBoxplot.max}
+                       className="form-control"
+                       name={optionsBoxplot.max}
+                       value={boxplot.max}
+                       onChange={false && this.onBoxplotInputChange}/>
+            </div>
+          </div>
+        </div>
+
+        <div className="row basic-config shot-container">
+          <div className="col-md-6 special-small">
+            <button
+              type="button"
+              className="btn btn-primary shot"
+              data-amount={1}
+              onClick={this.onAddPointsShootingMode}>
+              1 shot
+            </button>
+          </div>
+          <div className="col-md-6 special-small">
+            <button
+              type="button"
+              className="btn btn-primary shot"
+              data-amount={10}
+              onClick={this.onAddPointsShootingMode}>
+              10 shots
+            </button>
+          </div>
+        </div>
+
+        <div className="checkboxes other-heatmap">
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsBoxplot.outliers}
+                          checked={boxplot.outliers}
+                          onChange={false && this.onBoxPlotCheckBoxChange}/>Outliers</label>
+          </div>
+
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsBoxplot.showAverage}
+                          checked={boxplot.showAverage}
+                          onChange={false && this.onBoxPlotCheckBoxChange}/>Global average</label>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.updateShootingSimulationConfiguration}>
+          Restart
+        </button>
+      </div>
+    )
+  }
+
   renderWordcloudConfiguration() {
     const { wordcloud } = this.state.configurations;
     return (
@@ -1030,7 +1119,7 @@ export default class Other extends Component {
         return this.renderPolarConfiguration();
       }
       case modes.boxplot: {
-        return <div> BOXPLOT </div>;
+        return this.renderBoxPlotConfiguration();
       }
       case modes.gauge: {
         return this.renderGaugeConfiguration();
