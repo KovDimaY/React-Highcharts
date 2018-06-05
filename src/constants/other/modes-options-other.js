@@ -49,6 +49,7 @@ export const optionsPolar = {
 }
 
 export const optionsBoxplot = {
+  data: "data",
   target: "target",
   min: "min",
   max: "max",
@@ -129,6 +130,7 @@ export const initialState = {
       spiderMode: false
     },
     boxplot: {
+      data: {},
       target: 1,
       min: 0,
       max: 100,

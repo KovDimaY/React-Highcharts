@@ -36,6 +36,9 @@ import {
   generateSeriesForHeatmap,
   generateSeriesForTilemap,
   generateSeriesForPolar,
+  generateInitialDataBoxplot,
+  generateBoxplotSeries,
+  averageLineBoxplot,
   countWords,
   generateSeriesForWordCloud,
   generateSeriesPyramid,
@@ -108,6 +111,10 @@ export default class Other extends Component {
 
   initBoxplot() {
     const options = boxplot;
+    const { configurations } = this.state;
+    this.boxplotData = generateInitialDataBoxplot(configurations.boxplot);
+    options.series = generateBoxplotSeries(this.boxplotData, configurations.boxplot);
+    options.yAxis.plotLines = configurations.boxplot.showAverage ? averageLineBoxplot(this.boxplotData) : [];
 
     this.setState({ options }, () => {
       this.updateBoxplotConfiguration();

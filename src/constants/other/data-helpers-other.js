@@ -1,3 +1,5 @@
+import Highcharts from 'highcharts'
+
 export function generateSeriesForHeatmap(options, diagonalized) {
   const width = Math.round(Math.random() * 8) + 2;
   const height = diagonalized ? width : Math.round(Math.random() * 8) + 2;
@@ -301,4 +303,88 @@ export function generateSeriesForClock(options) {
          enabled: false
      }
   }];
+}
+
+const generateRandomPointsBoxplot = (min, max, numberOfPoints) => {
+  const result = [];
+  for (let i = 0; i < numberOfPoints; i += 1) {
+    const rawRandValue = min + (Math.random() * (max - min));
+    const randomValue = Math.round(rawRandValue * 100) / 100;
+    result.push(randomValue);
+  }
+  return result;
+}
+
+const calculateStatistics = (data) => {
+  // TODO - implement
+  const result = {};
+  result.statistics = data.sort((a, b) => a - b);
+  result.outliers = [];
+  return result;
+}
+
+export function generateInitialDataBoxplot(options) {
+  const { min, max } = options;
+  const NUMBER_OF_BOXPLOTS = 4;
+  const result = {};
+  for (let i = 0; i < NUMBER_OF_BOXPLOTS; i += 1) {
+    result[i + 1] = generateRandomPointsBoxplot(min, max, 5);
+  }
+  return result;
+}
+
+export function generateBoxplotSeries(data, options) {
+  const result = {};
+  Object.keys(data).forEach((boxplot) => {
+    result[boxplot] = calculateStatistics(data[boxplot]);
+  });
+
+  return [{
+    name: 'Statistics',
+    data: Object.keys(result).map(boxplot => result[boxplot].statistics),
+    tooltip: {
+      headerFormat: '<em>Boxplot {point.key}</em><br/>'
+    }
+  }, {
+    name: 'Outlier',
+    color: Highcharts.getOptions().colors[0],
+    type: 'scatter',
+    data: Object.keys(result).map(boxplot => result[boxplot].outliers),
+    marker: {
+      fillColor: 'white',
+      lineWidth: 2,
+      lineColor: Highcharts.getOptions().colors[0]
+    },
+    tooltip: {
+      pointFormat: 'Value: {point.y}'
+    }
+  }];
+}
+
+export function averageLineBoxplot(data) {
+  let sum = 0;
+  let count = 0;
+  Object.keys(data).forEach((boxplot) => {
+    data[boxplot].forEach((point) => {
+      sum += point;
+      count += 1;
+    });
+  });
+
+  if (count > 0) {
+    const average = Math.round(sum * 100 / count) / 100;
+    return [{
+      value: average,
+      color: 'red',
+      width: 2,
+      label: {
+        text: `Global average: ${average}`,
+        align: 'center',
+        style: {
+          color: 'gray'
+        }
+      }
+    }]
+  }
+  return [];
 }
