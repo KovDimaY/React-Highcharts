@@ -315,10 +315,29 @@ const generateRandomPointsBoxplot = (min, max, numberOfPoints) => {
   return result;
 }
 
-const calculateStatistics = (data) => {
+const getMedianOfDataSet = (data) => {
+  if (data.length % 2 === 0) {
+    const leftCentral = data[data.length / 2 - 1];
+    const rightCentral = data[data.length / 2];
+    return (leftCentral + rightCentral) / 2;
+  }
+  return data[(data.length + 1) / 2 - 1];
+}
+
+const calculateStatistics = (data, outliers) => {
   // TODO - implement
   const result = {};
-  result.statistics = data.sort((a, b) => a - b);
+  const statistics = [];
+  const sortedData = data.sort((a, b) => a - b);
+  const leftMedIndex = Math.floor(sortedData.length / 2);
+  const rightMedIndex = Math.ceil(sortedData.length / 2);
+  statistics.push(sortedData[0]); // min
+  statistics.push(getMedianOfDataSet(sortedData.slice(0, leftMedIndex))); // q1
+  statistics.push(getMedianOfDataSet(sortedData)); // med
+  statistics.push(getMedianOfDataSet(sortedData.slice(rightMedIndex, sortedData.length))); // q75
+  statistics.push(sortedData[sortedData.length - 1]); // max
+
+  result.statistics = statistics;
   result.outliers = [];
   return result;
 }
@@ -333,10 +352,16 @@ export function generateInitialDataBoxplot(options) {
   return result;
 }
 
+export function addNewPointsBoxplot(oldData, target, amount, min, max) {
+  const newPoints = generateRandomPointsBoxplot(min, max, amount);
+  oldData[target] = oldData[target].concat(newPoints);
+  return oldData;
+}
+
 export function generateBoxplotSeries(data, options) {
   const result = {};
   Object.keys(data).forEach((boxplot) => {
-    result[boxplot] = calculateStatistics(data[boxplot]);
+    result[boxplot] = calculateStatistics(data[boxplot], options.outliers);
   });
 
   return [{
@@ -377,6 +402,7 @@ export function averageLineBoxplot(data) {
       value: average,
       color: 'red',
       width: 2,
+      zIndex: 5,
       label: {
         text: `Global average: ${average}`,
         align: 'center',

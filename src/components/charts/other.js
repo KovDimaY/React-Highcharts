@@ -38,6 +38,7 @@ import {
   generateSeriesForPolar,
   generateInitialDataBoxplot,
   generateBoxplotSeries,
+  addNewPointsBoxplot,
   averageLineBoxplot,
   countWords,
   generateSeriesForWordCloud,
@@ -57,6 +58,7 @@ export default class Other extends Component {
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.initBoxplot = this.initBoxplot.bind(this);
+    this.onAddPointsBoxplot = this.onAddPointsBoxplot.bind(this);
     this.onHeatmapCheckBoxChange = this.onHeatmapCheckBoxChange.bind(this);
     this.onTilemapCheckBoxChange = this.onTilemapCheckBoxChange.bind(this);
     this.onPolarCheckBoxChange = this.onPolarCheckBoxChange.bind(this);
@@ -113,8 +115,6 @@ export default class Other extends Component {
     const options = boxplot;
     const { configurations } = this.state;
     this.boxplotData = generateInitialDataBoxplot(configurations.boxplot);
-    options.series = generateBoxplotSeries(this.boxplotData, configurations.boxplot);
-    options.yAxis.plotLines = configurations.boxplot.showAverage ? averageLineBoxplot(this.boxplotData) : [];
 
     this.setState({ options }, () => {
       this.updateBoxplotConfiguration();
@@ -273,9 +273,28 @@ export default class Other extends Component {
   }
 
   updateBoxplotConfiguration() {
+    const { options, configurations } = this.state;
+
+    options.series = generateBoxplotSeries(this.boxplotData, configurations.boxplot);
+    options.yAxis.plotLines = configurations.boxplot.showAverage ? averageLineBoxplot(this.boxplotData) : [];
+
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
+  }
+
+  onAddPointsBoxplot(event) {
+    const { boxplot } = this.state.configurations;
+    const { min, max, target } = boxplot;
+    const { options } = this.state;
+    const amount = Number(event.target.dataset.amount);
+    this.boxplotData = addNewPointsBoxplot(this.boxplotData, target, amount, min, max);
+    options.series = generateBoxplotSeries(this.boxplotData, boxplot);
+    options.yAxis.plotLines = boxplot.showAverage ? averageLineBoxplot(this.boxplotData) : [];
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    });
   }
 
   updateGaugeConfiguration() {
@@ -474,7 +493,7 @@ export default class Other extends Component {
         configurations.boxplot[event.target.value] = true;
       }
       this.setState({ configurations, rerenderChart: true }, () => {
-        this.setState({ rerenderChart: false })
+        this.updateBoxplotConfiguration();
       });
     }
   }
@@ -894,7 +913,7 @@ export default class Other extends Component {
               type="button"
               className="btn btn-primary shot"
               data-amount={1}
-              onClick={this.onAddPointsShootingMode}>
+              onClick={this.onAddPointsBoxplot}>
               1 shot
             </button>
           </div>
@@ -903,7 +922,7 @@ export default class Other extends Component {
               type="button"
               className="btn btn-primary shot"
               data-amount={10}
-              onClick={this.onAddPointsShootingMode}>
+              onClick={this.onAddPointsBoxplot}>
               10 shots
             </button>
           </div>
