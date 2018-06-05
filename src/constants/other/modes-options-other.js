@@ -129,7 +129,7 @@ export const initialState = {
       spiderMode: false
     },
     boxplot: {
-      target: 4,
+      target: 1,
       min: 0,
       max: 100,
       outliers: true,

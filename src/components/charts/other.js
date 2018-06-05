@@ -53,9 +53,12 @@ export default class Other extends Component {
     this.state = initialState;
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
+    this.initBoxplot = this.initBoxplot.bind(this);
     this.onHeatmapCheckBoxChange = this.onHeatmapCheckBoxChange.bind(this);
     this.onTilemapCheckBoxChange = this.onTilemapCheckBoxChange.bind(this);
     this.onPolarCheckBoxChange = this.onPolarCheckBoxChange.bind(this);
+    this.onBoxplotSelectChange = this.onBoxplotSelectChange.bind(this);
+    this.onBoxplotInputChange = this.onBoxplotInputChange.bind(this);
     this.onPyramidCheckBoxChange = this.onPyramidCheckBoxChange.bind(this);
     this.onChangeColorHeatmap = this.onChangeColorHeatmap.bind(this);
     this.onChangeColorTilemap = this.onChangeColorTilemap.bind(this);
@@ -452,6 +455,50 @@ export default class Other extends Component {
     this.setState({ configurations });
   }
 
+  onBoxplotSelectChange(event) {
+    const { configurations } = this.state;
+    if (event.target.name === optionsBoxplot.target) {
+      configurations.boxplot[event.target.name] = Number(event.target.value);
+      this.setState({ configurations });
+    } else {
+      if (configurations.boxplot[event.target.value]) {
+        configurations.boxplot[event.target.value] = false;
+      } else {
+        configurations.boxplot[event.target.value] = true;
+      }
+      this.setState({ configurations, rerenderChart: true }, () => {
+        this.setState({ rerenderChart: false })
+      });
+    }
+  }
+
+  onBoxplotInputChange(event) {
+    const { configurations } = this.state;
+    if (event.target.name === optionsBoxplot.min) {
+      limitNumericalInput(
+        configurations.boxplot,
+        event.target.name,
+        event.target.value,
+        -1000000,
+        configurations.boxplot.max,
+        false
+      );
+    } else if (event.target.name === optionsBoxplot.max) {
+      limitNumericalInput(
+        configurations.boxplot,
+        event.target.name,
+        event.target.value,
+        configurations.boxplot.min,
+        1000000,
+        false
+      );
+    } else {
+      configurations.boxplot[event.target.name] = event.target.value;
+    }
+
+    this.setState({ configurations });
+  }
+
   onPyramidCheckBoxChange(event) {
     const { configurations } = this.state;
     if (configurations.pyramid[event.target.value]) {
@@ -801,7 +848,7 @@ export default class Other extends Component {
           <label>Target:</label>
           <select
             className="form-control"
-            onChange={false && this.onBoxplotSelectChange}
+            onChange={this.onBoxplotSelectChange}
             name={optionsBoxplot.target}>
             <option>1</option>
             <option>2</option>
@@ -818,7 +865,7 @@ export default class Other extends Component {
                        className="form-control"
                        name={optionsBoxplot.min}
                        value={boxplot.min}
-                       onChange={false && this.onBoxplotInputChange}/>
+                       onChange={this.onBoxplotInputChange}/>
             </div>
           </div>
           <div className="col-md-6 special-small">
@@ -829,7 +876,7 @@ export default class Other extends Component {
                        className="form-control"
                        name={optionsBoxplot.max}
                        value={boxplot.max}
-                       onChange={false && this.onBoxplotInputChange}/>
+                       onChange={this.onBoxplotInputChange}/>
             </div>
           </div>
         </div>
@@ -860,21 +907,21 @@ export default class Other extends Component {
             <label><input type="checkbox"
                           value={optionsBoxplot.outliers}
                           checked={boxplot.outliers}
-                          onChange={false && this.onBoxPlotCheckBoxChange}/>Outliers</label>
+                          onChange={this.onBoxplotSelectChange}/>Outliers</label>
           </div>
 
           <div className="checkbox">
             <label><input type="checkbox"
                           value={optionsBoxplot.showAverage}
                           checked={boxplot.showAverage}
-                          onChange={false && this.onBoxPlotCheckBoxChange}/>Global average</label>
+                          onChange={this.onBoxplotSelectChange}/>Global average</label>
           </div>
         </div>
 
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateShootingSimulationConfiguration}>
+          onClick={this.initBoxplot}>
           Restart
         </button>
       </div>
