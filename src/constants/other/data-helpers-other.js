@@ -1,4 +1,5 @@
 import Highcharts from 'highcharts'
+import { limitNumberOfDecimals } from '../shared/helpers' 
 
 export function generateSeriesForHeatmap(options, diagonalized) {
   const width = Math.round(Math.random() * 8) + 2;
@@ -305,7 +306,7 @@ export function generateSeriesForClock(options) {
   }];
 }
 
-const generateRandomPointsBoxplot = (min, max, numberOfPoints) => {
+export function generateRandomPointsBoxplot(min, max, numberOfPoints) {
   const result = [];
   for (let i = 0; i < numberOfPoints; i += 1) {
     const rawRandValue = min + (Math.random() * (max - min));
@@ -343,14 +344,14 @@ const calculateStatistics = (data, target, applyOutliers, additionalParams = {})
   const acceptableMax = q3 + acceptedDistance;
   // skip outliers if not neccesary to apply them
   if (!applyOutliers || lastIteration || (acceptableMin < min && acceptableMax > max)) {
-    statistics.push(min);
-    statistics.push(q1);
-    statistics.push(med);
-    statistics.push(q3);
-    statistics.push(max);
+    statistics.push(limitNumberOfDecimals(min));
+    statistics.push(limitNumberOfDecimals(q1));
+    statistics.push(limitNumberOfDecimals(med));
+    statistics.push(limitNumberOfDecimals(q3));
+    statistics.push(limitNumberOfDecimals(max));
 
     result.statistics = statistics;
-    result.outliers = (outliers || []).map(value => [target, value]);
+    result.outliers = (outliers || []).map(value => [target, limitNumberOfDecimals(value)]);
     return result;
   }
   const rawOutliers = [];
@@ -375,12 +376,6 @@ export function generateInitialDataBoxplot(options) {
   return result;
 }
 
-export function addNewPointsBoxplot(oldData, target, amount, min, max) {
-  const newPoints = generateRandomPointsBoxplot(min, max, amount);
-  oldData[target] = oldData[target].concat(newPoints);
-  return oldData;
-}
-
 export function generateBoxplotSeries(data, options) {
   const result = {};
   Object.keys(data).forEach((boxplot) => {
@@ -396,7 +391,7 @@ export function generateBoxplotSeries(data, options) {
       headerFormat: '<em>Boxplot {point.key}</em><br/>'
     }
   }, {
-    name: 'Outlier',
+    name: 'Outliers',
     color: Highcharts.getOptions().colors[0],
     type: 'scatter',
     data: outliers,

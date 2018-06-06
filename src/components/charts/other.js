@@ -37,8 +37,8 @@ import {
   generateSeriesForTilemap,
   generateSeriesForPolar,
   generateInitialDataBoxplot,
+  generateRandomPointsBoxplot,
   generateBoxplotSeries,
-  addNewPointsBoxplot,
   averageLineBoxplot,
   countWords,
   generateSeriesForWordCloud,
@@ -288,9 +288,13 @@ export default class Other extends Component {
     const { min, max, target } = boxplot;
     const { options } = this.state;
     const amount = Number(event.target.dataset.amount);
-    this.boxplotData = addNewPointsBoxplot(this.boxplotData, target, amount, min, max);
+    const newPoints = generateRandomPointsBoxplot(min, max, amount);
+    this.boxplotData[target] = this.boxplotData[target].concat(newPoints);
+    const message = `Last added values to the boxplot #${target}: ${newPoints.reduce((result, element) => `${result}, ${element}`)}`;
+
     options.series = generateBoxplotSeries(this.boxplotData, boxplot);
     options.yAxis.plotLines = boxplot.showAverage ? averageLineBoxplot(this.boxplotData) : [];
+    options.subtitle.text = message;
 
     this.setState({ options, rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
