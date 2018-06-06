@@ -324,22 +324,45 @@ const getMedianOfDataSet = (data) => {
   return data[(data.length + 1) / 2 - 1];
 }
 
-const calculateStatistics = (data, outliers) => {
-  // TODO - implement
+const calculateStatistics = (data, target, applyOutliers, additionalParams = {}) => {
+  const { lastIteration, outliers, oldQ1, oldMed, oldQ3 } = additionalParams;
   const result = {};
   const statistics = [];
   const sortedData = data.sort((a, b) => a - b);
   const leftMedIndex = Math.floor(sortedData.length / 2);
   const rightMedIndex = Math.ceil(sortedData.length / 2);
-  statistics.push(sortedData[0]); // min
-  statistics.push(getMedianOfDataSet(sortedData.slice(0, leftMedIndex))); // q1
-  statistics.push(getMedianOfDataSet(sortedData)); // med
-  statistics.push(getMedianOfDataSet(sortedData.slice(rightMedIndex, sortedData.length))); // q75
-  statistics.push(sortedData[sortedData.length - 1]); // max
+  // statistics calculation
+  const min = sortedData[0];
+  const q1 = lastIteration ? oldQ1 : getMedianOfDataSet(sortedData.slice(0, leftMedIndex));
+  const med = lastIteration ? oldMed : getMedianOfDataSet(sortedData);
+  const q3 = lastIteration ? oldQ3 : getMedianOfDataSet(sortedData.slice(rightMedIndex, sortedData.length));
+  const max = sortedData[sortedData.length - 1];
+  // outliers helpers
+  const acceptedDistance = (q3 - q1) * 1.5;
+  const acceptableMin = q1 - acceptedDistance;
+  const acceptableMax = q3 + acceptedDistance;
+  // skip outliers if not neccesary to apply them
+  if (!applyOutliers || lastIteration || (acceptableMin < min && acceptableMax > max)) {
+    statistics.push(min);
+    statistics.push(q1);
+    statistics.push(med);
+    statistics.push(q3);
+    statistics.push(max);
 
-  result.statistics = statistics;
-  result.outliers = [];
-  return result;
+    result.statistics = statistics;
+    result.outliers = (outliers || []).map(value => [target, value]);
+    return result;
+  }
+  const rawOutliers = [];
+  const filteredData = sortedData.filter((point) => {
+    if (point > acceptableMin &&  point < acceptableMax) {
+      return true;
+    }
+    rawOutliers.push(point);
+    return false;
+  });
+  const params = { lastIteration: true, outliers: rawOutliers, oldQ1: q1, oldMed: med, oldQ3: q3 };
+  return calculateStatistics(filteredData, target, applyOutliers, params);
 }
 
 export function generateInitialDataBoxplot(options) {
@@ -361,8 +384,10 @@ export function addNewPointsBoxplot(oldData, target, amount, min, max) {
 export function generateBoxplotSeries(data, options) {
   const result = {};
   Object.keys(data).forEach((boxplot) => {
-    result[boxplot] = calculateStatistics(data[boxplot], options.outliers);
+    result[boxplot] = calculateStatistics(data[boxplot], Number(boxplot) - 1, options.outliers);
   });
+  let outliers = [];
+  Object.keys(result).forEach(boxplot => outliers = outliers.concat(result[boxplot].outliers));
 
   return [{
     name: 'Statistics',
@@ -374,7 +399,7 @@ export function generateBoxplotSeries(data, options) {
     name: 'Outlier',
     color: Highcharts.getOptions().colors[0],
     type: 'scatter',
-    data: Object.keys(result).map(boxplot => result[boxplot].outliers),
+    data: outliers,
     marker: {
       fillColor: 'white',
       lineWidth: 2,
