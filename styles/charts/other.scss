@@ -33,10 +33,37 @@
     .other-polar {
       margin-top: 20px;
     }
+    .other-boxplot {
+      margin-top: 20px;
+
+      .row {
+        width: 80%;
+        margin-left: 10%;
+      }
+      .bins-input {
+        width: 70%;
+        margin-left: 15%;
+      }
+      .shot-container {
+        text-align: center;
+      }
+      .special-small {
+        text-align: center;
+      }
+      .shot {
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
     .other-pyramid {
       margin-top: 50px;
     }
     .polar-type-selector {
+      margin-top: 20px;
+      width: 60%;
+      margin-left: 20%;
+    }
+    .target-group-selector {
       margin-top: 20px;
       width: 60%;
       margin-left: 20%;

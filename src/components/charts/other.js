@@ -25,6 +25,7 @@ import {
   optionsTilemap,
   optionsWordcloud,
   optionsPolar,
+  optionsBoxplot,
   optionsPyramid,
   optionsGauge,
   optionsSankey,
@@ -35,6 +36,10 @@ import {
   generateSeriesForHeatmap,
   generateSeriesForTilemap,
   generateSeriesForPolar,
+  generateInitialDataBoxplot,
+  generateRandomPointsBoxplot,
+  generateBoxplotSeries,
+  averageLineBoxplot,
   countWords,
   generateSeriesForWordCloud,
   generateSeriesPyramid,
@@ -52,9 +57,13 @@ export default class Other extends Component {
     this.state = initialState;
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
+    this.initBoxplot = this.initBoxplot.bind(this);
+    this.onAddPointsBoxplot = this.onAddPointsBoxplot.bind(this);
     this.onHeatmapCheckBoxChange = this.onHeatmapCheckBoxChange.bind(this);
     this.onTilemapCheckBoxChange = this.onTilemapCheckBoxChange.bind(this);
     this.onPolarCheckBoxChange = this.onPolarCheckBoxChange.bind(this);
+    this.onBoxplotSelectChange = this.onBoxplotSelectChange.bind(this);
+    this.onBoxplotInputChange = this.onBoxplotInputChange.bind(this);
     this.onPyramidCheckBoxChange = this.onPyramidCheckBoxChange.bind(this);
     this.onChangeColorHeatmap = this.onChangeColorHeatmap.bind(this);
     this.onChangeColorTilemap = this.onChangeColorTilemap.bind(this);
@@ -104,6 +113,8 @@ export default class Other extends Component {
 
   initBoxplot() {
     const options = boxplot;
+    const { configurations } = this.state;
+    this.boxplotData = generateInitialDataBoxplot(configurations.boxplot);
 
     this.setState({ options }, () => {
       this.updateBoxplotConfiguration();
@@ -262,9 +273,32 @@ export default class Other extends Component {
   }
 
   updateBoxplotConfiguration() {
+    const { options, configurations } = this.state;
+
+    options.series = generateBoxplotSeries(this.boxplotData, configurations.boxplot);
+    options.yAxis.plotLines = configurations.boxplot.showAverage ? averageLineBoxplot(this.boxplotData) : [];
+
     this.setState({ rerenderChart: true }, () => {
       this.setState({ rerenderChart: false })
     })
+  }
+
+  onAddPointsBoxplot(event) {
+    const { boxplot } = this.state.configurations;
+    const { min, max, target } = boxplot;
+    const { options } = this.state;
+    const amount = Number(event.target.dataset.amount);
+    const newPoints = generateRandomPointsBoxplot(min, max, amount);
+    this.boxplotData[target] = this.boxplotData[target].concat(newPoints);
+    const message = `Last added values to the boxplot #${target}: ${newPoints.reduce((result, element) => `${result}, ${element}`)}`;
+
+    options.series = generateBoxplotSeries(this.boxplotData, boxplot);
+    options.yAxis.plotLines = boxplot.showAverage ? averageLineBoxplot(this.boxplotData) : [];
+    options.subtitle.text = message;
+
+    this.setState({ options, rerenderChart: true }, () => {
+      this.setState({ rerenderChart: false })
+    });
   }
 
   updateGaugeConfiguration() {
@@ -448,6 +482,50 @@ export default class Other extends Component {
         configurations.polar[event.target.value] = true;
       }
     }
+    this.setState({ configurations });
+  }
+
+  onBoxplotSelectChange(event) {
+    const { configurations } = this.state;
+    if (event.target.name === optionsBoxplot.target) {
+      configurations.boxplot[event.target.name] = Number(event.target.value);
+      this.setState({ configurations });
+    } else {
+      if (configurations.boxplot[event.target.value]) {
+        configurations.boxplot[event.target.value] = false;
+      } else {
+        configurations.boxplot[event.target.value] = true;
+      }
+      this.setState({ configurations, rerenderChart: true }, () => {
+        this.updateBoxplotConfiguration();
+      });
+    }
+  }
+
+  onBoxplotInputChange(event) {
+    const { configurations } = this.state;
+    if (event.target.name === optionsBoxplot.min) {
+      limitNumericalInput(
+        configurations.boxplot,
+        event.target.name,
+        event.target.value,
+        -1000000,
+        configurations.boxplot.max,
+        false
+      );
+    } else if (event.target.name === optionsBoxplot.max) {
+      limitNumericalInput(
+        configurations.boxplot,
+        event.target.name,
+        event.target.value,
+        configurations.boxplot.min,
+        1000000,
+        false
+      );
+    } else {
+      configurations.boxplot[event.target.name] = event.target.value;
+    }
+
     this.setState({ configurations });
   }
 
@@ -792,6 +870,94 @@ export default class Other extends Component {
     )
   }
 
+  renderBoxPlotConfiguration () {
+    const { boxplot } = this.state.configurations;
+    return (
+      <div className="other-boxplot">
+        <div className="form-group config-option target-group-selector">
+          <label>Target:</label>
+          <select
+            className="form-control"
+            onChange={this.onBoxplotSelectChange}
+            name={optionsBoxplot.target}>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </div>
+
+        <div className="row">
+          <div className="col-md-6 special-small">
+            <div className="form-group config-option">
+              <label>Min</label>
+                <input type="number"
+                       data-type={optionsBoxplot.min}
+                       className="form-control"
+                       name={optionsBoxplot.min}
+                       value={boxplot.min}
+                       onChange={this.onBoxplotInputChange}/>
+            </div>
+          </div>
+          <div className="col-md-6 special-small">
+            <div className="form-group config-option">
+              <label>Max</label>
+                <input type="number"
+                       data-type={optionsBoxplot.max}
+                       className="form-control"
+                       name={optionsBoxplot.max}
+                       value={boxplot.max}
+                       onChange={this.onBoxplotInputChange}/>
+            </div>
+          </div>
+        </div>
+
+        <div className="row basic-config shot-container">
+          <div className="col-md-6 special-small">
+            <button
+              type="button"
+              className="btn btn-primary shot"
+              data-amount={1}
+              onClick={this.onAddPointsBoxplot}>
+              1 shot
+            </button>
+          </div>
+          <div className="col-md-6 special-small">
+            <button
+              type="button"
+              className="btn btn-primary shot"
+              data-amount={10}
+              onClick={this.onAddPointsBoxplot}>
+              10 shots
+            </button>
+          </div>
+        </div>
+
+        <div className="checkboxes other-heatmap">
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsBoxplot.outliers}
+                          checked={boxplot.outliers}
+                          onChange={this.onBoxplotSelectChange}/>Outliers</label>
+          </div>
+
+          <div className="checkbox">
+            <label><input type="checkbox"
+                          value={optionsBoxplot.showAverage}
+                          checked={boxplot.showAverage}
+                          onChange={this.onBoxplotSelectChange}/>Global average</label>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-success apply-button position-dynamic"
+          onClick={this.initBoxplot}>
+          Restart
+        </button>
+      </div>
+    )
+  }
+
   renderWordcloudConfiguration() {
     const { wordcloud } = this.state.configurations;
     return (
@@ -1030,7 +1196,7 @@ export default class Other extends Component {
         return this.renderPolarConfiguration();
       }
       case modes.boxplot: {
-        return <div> BOXPLOT </div>;
+        return this.renderBoxPlotConfiguration();
       }
       case modes.gauge: {
         return this.renderGaugeConfiguration();

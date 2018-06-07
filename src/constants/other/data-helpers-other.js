@@ -1,3 +1,6 @@
+import Highcharts from 'highcharts'
+import { limitNumberOfDecimals } from '../shared/helpers' 
+
 export function generateSeriesForHeatmap(options, diagonalized) {
   const width = Math.round(Math.random() * 8) + 2;
   const height = diagonalized ? width : Math.round(Math.random() * 8) + 2;
@@ -301,4 +304,133 @@ export function generateSeriesForClock(options) {
          enabled: false
      }
   }];
+}
+
+export function generateRandomPointsBoxplot(min, max, numberOfPoints) {
+  const result = [];
+  for (let i = 0; i < numberOfPoints; i += 1) {
+    const rawRandValue = min + (Math.random() * (max - min));
+    const randomValue = Math.round(rawRandValue * 100) / 100;
+    result.push(randomValue);
+  }
+  return result;
+}
+
+const getMedianOfDataSet = (data) => {
+  if (data.length % 2 === 0) {
+    const leftCentral = data[data.length / 2 - 1];
+    const rightCentral = data[data.length / 2];
+    return (leftCentral + rightCentral) / 2;
+  }
+  return data[(data.length + 1) / 2 - 1];
+}
+
+const calculateStatistics = (data, target, applyOutliers, additionalParams = {}) => {
+  const { lastIteration, outliers, oldQ1, oldMed, oldQ3 } = additionalParams;
+  const result = {};
+  const statistics = [];
+  const sortedData = data.sort((a, b) => a - b);
+  const leftMedIndex = Math.floor(sortedData.length / 2);
+  const rightMedIndex = Math.ceil(sortedData.length / 2);
+  // statistics calculation
+  const min = sortedData[0];
+  const q1 = lastIteration ? oldQ1 : getMedianOfDataSet(sortedData.slice(0, leftMedIndex));
+  const med = lastIteration ? oldMed : getMedianOfDataSet(sortedData);
+  const q3 = lastIteration ? oldQ3 : getMedianOfDataSet(sortedData.slice(rightMedIndex, sortedData.length));
+  const max = sortedData[sortedData.length - 1];
+  // outliers helpers
+  const acceptedDistance = (q3 - q1) * 1.5;
+  const acceptableMin = q1 - acceptedDistance;
+  const acceptableMax = q3 + acceptedDistance;
+  // skip outliers if not neccesary to apply them
+  if (!applyOutliers || lastIteration || (acceptableMin < min && acceptableMax > max)) {
+    statistics.push(limitNumberOfDecimals(min));
+    statistics.push(limitNumberOfDecimals(q1));
+    statistics.push(limitNumberOfDecimals(med));
+    statistics.push(limitNumberOfDecimals(q3));
+    statistics.push(limitNumberOfDecimals(max));
+
+    result.statistics = statistics;
+    result.outliers = (outliers || []).map(value => [target, limitNumberOfDecimals(value)]);
+    return result;
+  }
+  const rawOutliers = [];
+  const filteredData = sortedData.filter((point) => {
+    if (point > acceptableMin &&  point < acceptableMax) {
+      return true;
+    }
+    rawOutliers.push(point);
+    return false;
+  });
+  const params = { lastIteration: true, outliers: rawOutliers, oldQ1: q1, oldMed: med, oldQ3: q3 };
+  return calculateStatistics(filteredData, target, applyOutliers, params);
+}
+
+export function generateInitialDataBoxplot(options) {
+  const { min, max } = options;
+  const NUMBER_OF_BOXPLOTS = 4;
+  const result = {};
+  for (let i = 0; i < NUMBER_OF_BOXPLOTS; i += 1) {
+    result[i + 1] = generateRandomPointsBoxplot(min, max, 5);
+  }
+  return result;
+}
+
+export function generateBoxplotSeries(data, options) {
+  const result = {};
+  Object.keys(data).forEach((boxplot) => {
+    result[boxplot] = calculateStatistics(data[boxplot], Number(boxplot) - 1, options.outliers);
+  });
+  let outliers = [];
+  Object.keys(result).forEach(boxplot => outliers = outliers.concat(result[boxplot].outliers));
+
+  return [{
+    name: 'Statistics',
+    data: Object.keys(result).map(boxplot => result[boxplot].statistics),
+    tooltip: {
+      headerFormat: '<em>Boxplot {point.key}</em><br/>'
+    }
+  }, {
+    name: 'Outliers',
+    color: Highcharts.getOptions().colors[0],
+    type: 'scatter',
+    data: outliers,
+    marker: {
+      fillColor: 'white',
+      lineWidth: 2,
+      lineColor: Highcharts.getOptions().colors[0]
+    },
+    tooltip: {
+      pointFormat: 'Value: {point.y}'
+    }
+  }];
+}
+
+export function averageLineBoxplot(data) {
+  let sum = 0;
+  let count = 0;
+  Object.keys(data).forEach((boxplot) => {
+    data[boxplot].forEach((point) => {
+      sum += point;
+      count += 1;
+    });
+  });
+
+  if (count > 0) {
+    const average = Math.round(sum * 100 / count) / 100;
+    return [{
+      value: average,
+      color: 'red',
+      width: 2,
+      zIndex: 5,
+      label: {
+        text: `Global average: ${average}`,
+        align: 'center',
+        style: {
+          color: 'gray'
+        }
+      }
+    }]
+  }
+  return [];
 }

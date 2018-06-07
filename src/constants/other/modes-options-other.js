@@ -48,6 +48,15 @@ export const optionsPolar = {
   spiderMode: "spiderMode",
 }
 
+export const optionsBoxplot = {
+  data: "data",
+  target: "target",
+  min: "min",
+  max: "max",
+  outliers: "outliers",
+  showAverage: "showAverage",
+}
+
 export const optionsWordcloud = {
   text: "text",
   limit: "limit",
@@ -120,7 +129,14 @@ export const initialState = {
       legend: true,
       spiderMode: false
     },
-    boxplot: {},
+    boxplot: {
+      data: {},
+      target: 1,
+      min: 0,
+      max: 100,
+      outliers: true,
+      showAverage: true,
+    },
     gauge: {
       text: "Enter here your text to see its char analysis on the chart...",
       chars: 500,

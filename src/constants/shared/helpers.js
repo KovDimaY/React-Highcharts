@@ -9,3 +9,7 @@ export function limitNumericalInput(input, key, value, min, max, integer) {
     input[key] = integer ? Math.floor(Number(value)) : Number(value);
   }
 }
+
+export function limitNumberOfDecimals(number) {
+  return Math.round(number * 100) / 100;
+}
