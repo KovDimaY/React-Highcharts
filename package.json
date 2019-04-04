@@ -9,6 +9,9 @@
     "postinstall": "webpack -p",
     "start": "node server.js"
   },
+  "engines": {
+    "node": "8.6.0"
+  },
   "dependencies": {
     "babel-core": "6.21.0",
     "babel-loader": "6.2.10",
