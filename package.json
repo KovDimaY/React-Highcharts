@@ -7,10 +7,14 @@
     "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "webpack -p",
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "pretty-quick --check",
+    "lint:all": "prettier --check src",
+    "format": "pretty-quick",
+    "format:all": "prettier --write src"
   },
   "engines": {
-    "node": "10.0.0"
+    "node": "10.13.0"
   },
   "dependencies": {
     "babel-core": "6.21.0",
