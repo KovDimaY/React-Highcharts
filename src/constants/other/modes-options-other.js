@@ -1,95 +1,95 @@
-import { move } from './data-helpers-other.js'
+import { move } from './data-helpers-other.js';
 
 export const modes = {
-  heatmap: "Heatmap",
-  tilemap: "Tilemap",
-  polar: "Polar",
-  boxplot: "Box Plot",
-  gauge: "Activity Gauge",
-  pyramid: "Pyramid",
-  wordcloud: "Word Cloud",
-  sankey: "Sankey Diagram",
-  clock: "Clock Simulation"
-}
+  heatmap: 'Heatmap',
+  tilemap: 'Tilemap',
+  polar: 'Polar',
+  boxplot: 'Box Plot',
+  gauge: 'Activity Gauge',
+  pyramid: 'Pyramid',
+  wordcloud: 'Word Cloud',
+  sankey: 'Sankey Diagram',
+  clock: 'Clock Simulation',
+};
 
 export const optionsHeatmap = {
-  tooltip: "tooltip",
-  title: "title",
-  dataLabels: "dataLabels",
-  animation: "animation",
-  legend: "legend",
-  axisTitles: "axisTitles",
-  minColor: "minColor",
-  maxColor: "maxColor",
-  borderColor: "borderColor",
-  diagonalized: "diagonalized",
-  alreadyDiagonalized: "alreadyDiagonalized",
-}
+  tooltip: 'tooltip',
+  title: 'title',
+  dataLabels: 'dataLabels',
+  animation: 'animation',
+  legend: 'legend',
+  axisTitles: 'axisTitles',
+  minColor: 'minColor',
+  maxColor: 'maxColor',
+  borderColor: 'borderColor',
+  diagonalized: 'diagonalized',
+  alreadyDiagonalized: 'alreadyDiagonalized',
+};
 
 export const optionsTilemap = {
-  tooltip: "tooltip",
-  title: "title",
-  dataLabels: "dataLabels",
-  animation: "animation",
-  legend: "legend",
-  minColor: "minColor",
-  lowColor: "lowColor",
-  highColor: "highColor",
-  maxColor: "maxColor",
-}
+  tooltip: 'tooltip',
+  title: 'title',
+  dataLabels: 'dataLabels',
+  animation: 'animation',
+  legend: 'legend',
+  minColor: 'minColor',
+  lowColor: 'lowColor',
+  highColor: 'highColor',
+  maxColor: 'maxColor',
+};
 
 export const optionsPolar = {
-  chartType: "chartType",
-  tooltip: "tooltip",
-  title: "title",
-  dataLabels: "dataLabels",
-  animation: "animation",
-  legend: "legend",
-  spiderMode: "spiderMode",
-}
+  chartType: 'chartType',
+  tooltip: 'tooltip',
+  title: 'title',
+  dataLabels: 'dataLabels',
+  animation: 'animation',
+  legend: 'legend',
+  spiderMode: 'spiderMode',
+};
 
 export const optionsBoxplot = {
-  data: "data",
-  target: "target",
-  min: "min",
-  max: "max",
-  outliers: "outliers",
-  showAverage: "showAverage",
-}
+  data: 'data',
+  target: 'target',
+  min: 'min',
+  max: 'max',
+  outliers: 'outliers',
+  showAverage: 'showAverage',
+};
 
 export const optionsWordcloud = {
-  text: "text",
-  limit: "limit",
-  filter: "filter",
-}
+  text: 'text',
+  limit: 'limit',
+  filter: 'filter',
+};
 
 export const optionsPyramid = {
-  tooltip: "tooltip",
-  title: "title",
-  dataLabels: "dataLabels",
-  animation: "animation",
-  legend: "legend",
-  allowPointSelect: "allowPointSelect"
-}
+  tooltip: 'tooltip',
+  title: 'title',
+  dataLabels: 'dataLabels',
+  animation: 'animation',
+  legend: 'legend',
+  allowPointSelect: 'allowPointSelect',
+};
 
 export const optionsGauge = {
-  text: "text",
-  chars: "chars",
-  digits: "digits",
-  symbols: "symbols"
-}
+  text: 'text',
+  chars: 'chars',
+  digits: 'digits',
+  symbols: 'symbols',
+};
 
 export const optionsSankey = {
-  numberNodes: "numberNodes",
-  numberLevels: "numberLevels",
-  density: "density",
-  linkOpacity: "linkOpacity",
-  curveFactor: "curveFactor"
-}
+  numberNodes: 'numberNodes',
+  numberLevels: 'numberLevels',
+  density: 'density',
+  linkOpacity: 'linkOpacity',
+  curveFactor: 'curveFactor',
+};
 
 export const optionsClock = {
-  speed: "speed"
-}
+  speed: 'speed',
+};
 
 export const initialState = {
   options: {},
@@ -103,11 +103,11 @@ export const initialState = {
       animation: true,
       legend: true,
       axisTitles: true,
-      minColor: "#ffffff",
-      maxColor: "#f45b5b",
-      borderColor: "#f45b5b",
+      minColor: '#ffffff',
+      maxColor: '#f45b5b',
+      borderColor: '#f45b5b',
       diagonalized: false,
-      alreadyDiagonalized: false
+      alreadyDiagonalized: false,
     },
     tilemap: {
       tooltip: true,
@@ -115,19 +115,19 @@ export const initialState = {
       dataLabels: true,
       animation: true,
       legend: true,
-      minColor: "#F9EDB3",
-      lowColor: "#FFC428",
-      highColor: "#FF7987",
-      maxColor: "#FF2371"
+      minColor: '#F9EDB3',
+      lowColor: '#FFC428',
+      highColor: '#FF7987',
+      maxColor: '#FF2371',
     },
     polar: {
-      chartType: "Line",
+      chartType: 'Line',
       tooltip: true,
       title: true,
       dataLabels: true,
       animation: true,
       legend: true,
-      spiderMode: false
+      spiderMode: false,
     },
     boxplot: {
       data: {},
@@ -138,10 +138,10 @@ export const initialState = {
       showAverage: true,
     },
     gauge: {
-      text: "Enter here your text to see its char analysis on the chart...",
+      text: 'Enter here your text to see its char analysis on the chart...',
       chars: 500,
       digits: 50,
-      symbols: 100
+      symbols: 100,
     },
     pyramid: {
       tooltip: true,
@@ -149,23 +149,23 @@ export const initialState = {
       dataLabels: true,
       animation: true,
       legend: true,
-      allowPointSelect: true
+      allowPointSelect: true,
     },
     wordcloud: {
-      text: "Enter here your text to plot its words set on the chart...",
+      text: 'Enter here your text to plot its words set on the chart...',
       limit: 10,
-      filter: []
+      filter: [],
     },
     sankey: {
       numberNodes: 5,
       numberLevels: 3,
       density: 50,
       linkOpacity: 0.5,
-      curveFactor: 0.33
+      curveFactor: 0.33,
     },
     clock: {
       speed: 1000,
-      function: move
-    }
-  }
-}
+      function: move,
+    },
+  },
+};

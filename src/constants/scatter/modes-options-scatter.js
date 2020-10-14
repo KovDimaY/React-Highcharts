@@ -1,60 +1,59 @@
 export const modes = {
-  pureRandom2D: "Pure Random 2D",
-  pureRandom3D: "Pure Random 3D",
-  pureRandomBubble: "Pure Random Bubble",
-  configurableRandom: "Configurable Random",
-  shootingSimulation: "Shooting Simulation"
-}
+  pureRandom2D: 'Pure Random 2D',
+  pureRandom3D: 'Pure Random 3D',
+  pureRandomBubble: 'Pure Random Bubble',
+  configurableRandom: 'Configurable Random',
+  shootingSimulation: 'Shooting Simulation',
+};
 
 export const optionsPureRandom2D = {
-  tooltip: "tooltip",
-  zoom: "zoom",
-  legend: "legend",
-  title: "title",
-  dataLabels: "dataLabels",
-  animation: "animation",
-  axisTitle: "axisTitle",
-  smallMarkers: "smallMarkers",
-  colors: "colors"
-}
+  tooltip: 'tooltip',
+  zoom: 'zoom',
+  legend: 'legend',
+  title: 'title',
+  dataLabels: 'dataLabels',
+  animation: 'animation',
+  axisTitle: 'axisTitle',
+  smallMarkers: 'smallMarkers',
+  colors: 'colors',
+};
 
 export const optionsPureRandom3D = {
-  tooltip: "tooltip",
-  legend: "legend",
-  title: "title",
-  dataLabels: "dataLabels",
-  animation: "animation",
-  axisTitle: "axisTitle",
-  smallMarkers: "smallMarkers",
-  colors: "colors"
+  tooltip: 'tooltip',
+  legend: 'legend',
+  title: 'title',
+  dataLabels: 'dataLabels',
+  animation: 'animation',
+  axisTitle: 'axisTitle',
+  smallMarkers: 'smallMarkers',
+  colors: 'colors',
 };
 
 export const optionsPureRandomBubble = {
-  tooltip: "tooltip",
-  zoom: "zoom",
-  legend: "legend",
-  title: "title",
-  dataLabels: "dataLabels",
-  animation: "animation",
-  axisTitle: "axisTitle",
-  colors: "colors"
-}
+  tooltip: 'tooltip',
+  zoom: 'zoom',
+  legend: 'legend',
+  title: 'title',
+  dataLabels: 'dataLabels',
+  animation: 'animation',
+  axisTitle: 'axisTitle',
+  colors: 'colors',
+};
 
 export const optionsConfigurableRandom = {
-  chartType: "chartType",
-  seriesNumber: "seriesNumber",
-  pointsNumber: "pointsNumber"
-}
+  chartType: 'chartType',
+  seriesNumber: 'seriesNumber',
+  pointsNumber: 'pointsNumber',
+};
 
 export const optionsShootingSimulation = {
-  minX: "minX",
-  maxX: "maxX",
-  minY: "minY",
-  maxY: "maxY",
-  bins: "bins",
-  disabled: "disabled"
-}
-
+  minX: 'minX',
+  maxX: 'maxX',
+  minY: 'minY',
+  maxY: 'maxY',
+  bins: 'bins',
+  disabled: 'disabled',
+};
 
 export const initialState = {
   options: {},
@@ -71,7 +70,7 @@ export const initialState = {
       animation: true,
       axisTitle: true,
       smallMarkers: true,
-      colors: false
+      colors: false,
     },
     pureRandom3D: {
       tooltip: true,
@@ -81,7 +80,7 @@ export const initialState = {
       animation: true,
       axisTitle: true,
       smallMarkers: true,
-      colors: false
+      colors: false,
     },
     pureRandomBubble: {
       tooltip: true,
@@ -91,12 +90,12 @@ export const initialState = {
       dataLabels: true,
       animation: true,
       axisTitle: true,
-      colors: false
+      colors: false,
     },
     configurableRandom: {
-      chartType: "2D",
+      chartType: '2D',
       seriesNumber: 3,
-      pointsNumber: 10
+      pointsNumber: 10,
     },
     shootingSimulation: {
       minX: 0,
@@ -105,6 +104,6 @@ export const initialState = {
       maxY: 100,
       bins: 10,
       disabled: false,
-    }
-  }
-}
+    },
+  },
+};
