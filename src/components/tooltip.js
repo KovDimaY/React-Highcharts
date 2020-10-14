@@ -12,10 +12,10 @@ export default function Tooltip(props) {
     text,
     addClass,
     position = BOTTOM,
-    hoverElement = <span className="help__icon">?</span>
+    hoverElement = <span className="help__icon">?</span>,
   } = props;
 
-  const defaultWrapperClass = ["help"];
+  const defaultWrapperClass = ['help'];
   defaultWrapperClass.push(position);
 
   if (addClass) {
@@ -31,12 +31,12 @@ export default function Tooltip(props) {
         <span className="help__text">{text}</span>
       </div>
     </div>
-  )
+  );
 }
 
 Tooltip.propTypes = {
   text: PropTypes.node.isRequired,
   hoverElem: PropTypes.node,
   addClass: PropTypes.string,
-  position: PropTypes.oneOf([TOP, RIGHT, BOTTOM, LEFT])
+  position: PropTypes.oneOf([TOP, RIGHT, BOTTOM, LEFT]),
 };
