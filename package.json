@@ -7,10 +7,14 @@
     "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "webpack -p",
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "pretty-quick --check",
+    "lint:all": "prettier --check src",
+    "format": "pretty-quick",
+    "format:all": "prettier --write src"
   },
   "engines": {
-    "node": "8.6.0"
+    "node": "10.13.0"
   },
   "dependencies": {
     "babel-core": "6.21.0",
@@ -38,5 +42,15 @@
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
     "webpack-dev-server": "1.16.2"
+  },
+  "devDependencies": {
+    "prettier": "2.1.2",
+    "pretty-quick": "3.0.2",
+    "husky": "4.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
