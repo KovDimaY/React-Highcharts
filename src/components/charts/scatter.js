@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import Highcharts from 'highcharts'
-import $ from 'jquery'
+import React, { Component } from 'react';
+import Highcharts from 'highcharts';
 
-import Chart from './chart-abstract'
+import Chart from './chart-abstract';
 
 import {
   pureRandom2D,
@@ -12,8 +10,8 @@ import {
   configurableRandom2D,
   configurableRandom3D,
   configurableRandomBubble,
-  shootingSimulation
-} from '../../constants/scatter/default-options-scatter'
+  shootingSimulation,
+} from '../../constants/scatter/default-options-scatter';
 
 import {
   modes,
@@ -22,8 +20,8 @@ import {
   optionsPureRandom3D,
   optionsPureRandomBubble,
   optionsConfigurableRandom,
-  optionsShootingSimulation
-} from '../../constants/scatter/modes-options-scatter'
+  optionsShootingSimulation,
+} from '../../constants/scatter/modes-options-scatter';
 
 import {
   move,
@@ -35,10 +33,10 @@ import {
   generateSeriesForPureRandomBubble,
   generateSeriesForConfigurableRandom,
   generateShotsByParams,
-  generateHistogramByParamsAndData
-} from '../../constants/scatter/data-helpers-scatter'
+  generateHistogramByParamsAndData,
+} from '../../constants/scatter/data-helpers-scatter';
 
-import { limitNumericalInput } from '../../constants/shared/helpers'
+import { limitNumericalInput } from '../../constants/shared/helpers';
 
 export default class Scattering extends Component {
   constructor(props) {
@@ -49,8 +47,12 @@ export default class Scattering extends Component {
     this.updatePureRandom2DConfiguration = this.updatePureRandom2DConfiguration.bind(this);
     this.updatePureRandom3DConfiguration = this.updatePureRandom3DConfiguration.bind(this);
     this.updatePureRandomBubbleConfiguration = this.updatePureRandomBubbleConfiguration.bind(this);
-    this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
-    this.updateShootingSimulationConfiguration = this.updateShootingSimulationConfiguration.bind(this);
+    this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(
+      this
+    );
+    this.updateShootingSimulationConfiguration = this.updateShootingSimulationConfiguration.bind(
+      this
+    );
     this.onPureRandom2DCheckBoxChange = this.onPureRandom2DCheckBoxChange.bind(this);
     this.onPureRandom3DCheckBoxChange = this.onPureRandom3DCheckBoxChange.bind(this);
     this.onPureRandomBubbleCheckBoxChange = this.onPureRandomBubbleCheckBoxChange.bind(this);
@@ -115,20 +117,22 @@ export default class Scattering extends Component {
     options.plotOptions.scatter.dataLabels.enabled = pureRandom2D.dataLabels;
     options.tooltip.enabled = pureRandom2D.tooltip;
     options.plotOptions.series.animation = pureRandom2D.animation;
-    options.series.forEach((serie) => {
+    options.series.forEach(serie => {
       serie.colorByPoint = pureRandom2D.colors;
     });
 
     this.setState({ rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   updatePureRandom3DConfiguration() {
     const { pureRandom3D } = this.state.configurations;
     const { options } = this.state;
     options.title.text = pureRandom3D.title ? 'Randomly generated data' : null;
-    options.subtitle.text = pureRandom3D.title ? 'Click and drag the plot area to rotate in space' : null;
+    options.subtitle.text = pureRandom3D.title
+      ? 'Click and drag the plot area to rotate in space'
+      : null;
     options.legend.enabled = pureRandom3D.legend;
     options.yAxis.title.text = pureRandom3D.axisTitle ? 'Random Value (UOM)' : null;
     options.xAxis.title.text = pureRandom3D.axisTitle ? 'Random Value (UOM)' : null;
@@ -142,8 +146,8 @@ export default class Scattering extends Component {
     });
 
     this.setState({ rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   updatePureRandomBubbleConfiguration() {
@@ -163,8 +167,8 @@ export default class Scattering extends Component {
     });
 
     this.setState({ rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   updateConfigurableRandomConfiguration() {
@@ -172,15 +176,15 @@ export default class Scattering extends Component {
     const { defaultColors } = this.state;
     let options;
     switch (configurableRandom.chartType) {
-      case "2D":
+      case '2D':
         options = configurableRandom2D;
         convertColorsToFlat(defaultColors);
         break;
-      case "3D":
+      case '3D':
         options = configurableRandom3D;
         convertColorsTo3D(defaultColors);
         break;
-      case "Bubble":
+      case 'Bubble':
         options = configurableRandomBubble;
         convertColorsToBubbles(defaultColors);
         break;
@@ -189,7 +193,7 @@ export default class Scattering extends Component {
     options.series = series;
 
     this.setState({ options, rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
+      this.setState({ rerenderChart: false });
     });
   }
 
@@ -209,7 +213,7 @@ export default class Scattering extends Component {
     options.series[1].data = [];
 
     this.setState({ options, rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
+      this.setState({ rerenderChart: false });
     });
   }
 
@@ -236,7 +240,7 @@ export default class Scattering extends Component {
     }
 
     this.setState({ options, rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
+      this.setState({ rerenderChart: false });
     });
   }
 
@@ -270,7 +274,7 @@ export default class Scattering extends Component {
         break;
       }
       default: {
-        console.log("This mode is not implemented yet");
+        console.log('This mode is not implemented yet');
       }
     }
     this.setState({ currentMode: mode, configurations });
@@ -283,7 +287,7 @@ export default class Scattering extends Component {
     } else {
       configurations.pureRandom2D[event.target.value] = true;
     }
-    this.setState({ configurations })
+    this.setState({ configurations });
   }
 
   onPureRandom3DCheckBoxChange(event) {
@@ -293,7 +297,7 @@ export default class Scattering extends Component {
     } else {
       configurations.pureRandom3D[event.target.value] = true;
     }
-    this.setState({ configurations })
+    this.setState({ configurations });
   }
 
   onPureRandomBubbleCheckBoxChange(event) {
@@ -303,12 +307,12 @@ export default class Scattering extends Component {
     } else {
       configurations.pureRandomBubble[event.target.value] = true;
     }
-    this.setState({ configurations })
+    this.setState({ configurations });
   }
 
   onConfigurableRandomInputChange(event) {
     const { configurations } = this.state;
-    if (event.target.dataset.type === "series") {
+    if (event.target.dataset.type === 'series') {
       limitNumericalInput(
         configurations.configurableRandom,
         event.target.name,
@@ -317,7 +321,7 @@ export default class Scattering extends Component {
         20,
         true
       );
-    } else if (event.target.dataset.type === "points") {
+    } else if (event.target.dataset.type === 'points') {
       limitNumericalInput(
         configurations.configurableRandom,
         event.target.name,
@@ -334,7 +338,7 @@ export default class Scattering extends Component {
 
   onShootingSimulationInputChange(event) {
     const { configurations } = this.state;
-    if (event.target.name === "minX") {
+    if (event.target.name === 'minX') {
       limitNumericalInput(
         configurations.shootingSimulation,
         event.target.name,
@@ -343,7 +347,7 @@ export default class Scattering extends Component {
         configurations.shootingSimulation.maxX,
         false
       );
-    } else if (event.target.name === "maxX") {
+    } else if (event.target.name === 'maxX') {
       limitNumericalInput(
         configurations.shootingSimulation,
         event.target.name,
@@ -352,7 +356,7 @@ export default class Scattering extends Component {
         1000,
         false
       );
-    } else if (event.target.name === "minY") {
+    } else if (event.target.name === 'minY') {
       limitNumericalInput(
         configurations.shootingSimulation,
         event.target.name,
@@ -361,7 +365,7 @@ export default class Scattering extends Component {
         configurations.shootingSimulation.maxY,
         false
       );
-    } else if (event.target.name === "maxY") {
+    } else if (event.target.name === 'maxY') {
       limitNumericalInput(
         configurations.shootingSimulation,
         event.target.name,
@@ -370,7 +374,7 @@ export default class Scattering extends Component {
         10000,
         false
       );
-    } else if (event.target.name === "bins") {
+    } else if (event.target.name === 'bins') {
       limitNumericalInput(
         configurations.shootingSimulation,
         event.target.name,
@@ -386,20 +390,32 @@ export default class Scattering extends Component {
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
-        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Configurations
-        <span className="caret"></span></button>
+        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          Configurations
+          <span className="caret"></span>
+        </button>
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom2D}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.pureRandom3D}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.pureRandomBubble}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a></li>
+          <li>
+            <a onClick={this.dropdownClickHandler}>{modes.pureRandom2D}</a>
+          </li>
+          <li>
+            <a onClick={this.dropdownClickHandler}>{modes.pureRandom3D}</a>
+          </li>
+          <li>
+            <a onClick={this.dropdownClickHandler}>{modes.pureRandomBubble}</a>
+          </li>
+          <li>
+            <a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a>
+          </li>
           <li className="divider"></li>
           <li className="dropdown-header">Process Visualization</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.shootingSimulation}</a></li>
+          <li>
+            <a onClick={this.dropdownClickHandler}>{modes.shootingSimulation}</a>
+          </li>
         </ul>
       </div>
-    )
+    );
   }
 
   renderPureRandom2DModeConfiguration() {
@@ -407,68 +423,114 @@ export default class Scattering extends Component {
     return (
       <div className="pure-random">
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom2D.title}
-                        checked={pureRandom2D.title}
-                        onChange={this.onPureRandom2DCheckBoxChange}/>Show Chart Title</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom2D.title}
+              checked={pureRandom2D.title}
+              onChange={this.onPureRandom2DCheckBoxChange}
+            />
+            Show Chart Title
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom2D.axisTitle}
-                        checked={pureRandom2D.axisTitle}
-                        onChange={this.onPureRandom2DCheckBoxChange}/>Show Axis Titles</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom2D.axisTitle}
+              checked={pureRandom2D.axisTitle}
+              onChange={this.onPureRandom2DCheckBoxChange}
+            />
+            Show Axis Titles
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom2D.dataLabels}
-                        checked={pureRandom2D.dataLabels}
-                        onChange={this.onPureRandom2DCheckBoxChange}/>Show Data Labels</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom2D.dataLabels}
+              checked={pureRandom2D.dataLabels}
+              onChange={this.onPureRandom2DCheckBoxChange}
+            />
+            Show Data Labels
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom2D.legend}
-                        checked={pureRandom2D.legend}
-                        onChange={this.onPureRandom2DCheckBoxChange}/>Show Legend</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom2D.legend}
+              checked={pureRandom2D.legend}
+              onChange={this.onPureRandom2DCheckBoxChange}
+            />
+            Show Legend
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom2D.tooltip}
-                        checked={pureRandom2D.tooltip}
-                        onChange={this.onPureRandom2DCheckBoxChange}/>Enable Tooltip</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom2D.tooltip}
+              checked={pureRandom2D.tooltip}
+              onChange={this.onPureRandom2DCheckBoxChange}
+            />
+            Enable Tooltip
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom2D.zoom}
-                        checked={pureRandom2D.zoom}
-                        onChange={this.onPureRandom2DCheckBoxChange}/>Enable Zoom</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom2D.zoom}
+              checked={pureRandom2D.zoom}
+              onChange={this.onPureRandom2DCheckBoxChange}
+            />
+            Enable Zoom
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom2D.animation}
-                        checked={pureRandom2D.animation}
-                        onChange={this.onPureRandom2DCheckBoxChange}/>Enable Animation</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom2D.animation}
+              checked={pureRandom2D.animation}
+              onChange={this.onPureRandom2DCheckBoxChange}
+            />
+            Enable Animation
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom2D.smallMarkers}
-                        checked={pureRandom2D.smallMarkers}
-                        onChange={this.onPureRandom2DCheckBoxChange}/>Small Markers</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom2D.smallMarkers}
+              checked={pureRandom2D.smallMarkers}
+              onChange={this.onPureRandom2DCheckBoxChange}
+            />
+            Small Markers
+          </label>
         </div>
-    		<div className="checkbox">
-    		  <label><input type="checkbox"
-                        value={optionsPureRandom2D.colors}
-                        checked={pureRandom2D.colors}
-                        onChange={this.onPureRandom2DCheckBoxChange}/>Color Per Point</label>
-    		</div>
+        <div className="checkbox">
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom2D.colors}
+              checked={pureRandom2D.colors}
+              onChange={this.onPureRandom2DCheckBoxChange}
+            />
+            Color Per Point
+          </label>
+        </div>
 
         <button
           type="button"
           className="btn btn-success apply-button"
-          onClick={this.updatePureRandom2DConfiguration}>
+          onClick={this.updatePureRandom2DConfiguration}
+        >
           Apply
         </button>
       </div>
-    )
+    );
   }
 
   renderPureRandom3DModeConfiguration() {
@@ -476,62 +538,103 @@ export default class Scattering extends Component {
     return (
       <div className="pure-random">
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom3D.title}
-                        checked={pureRandom3D.title}
-                        onChange={this.onPureRandom3DCheckBoxChange}/>Show Chart Title</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom3D.title}
+              checked={pureRandom3D.title}
+              onChange={this.onPureRandom3DCheckBoxChange}
+            />
+            Show Chart Title
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom3D.axisTitle}
-                        checked={pureRandom3D.axisTitle}
-                        onChange={this.onPureRandom3DCheckBoxChange}/>Show Axis Titles</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom3D.axisTitle}
+              checked={pureRandom3D.axisTitle}
+              onChange={this.onPureRandom3DCheckBoxChange}
+            />
+            Show Axis Titles
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom3D.dataLabels}
-                        checked={pureRandom3D.dataLabels}
-                        onChange={this.onPureRandom3DCheckBoxChange}/>Show Data Labels</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom3D.dataLabels}
+              checked={pureRandom3D.dataLabels}
+              onChange={this.onPureRandom3DCheckBoxChange}
+            />
+            Show Data Labels
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom3D.legend}
-                        checked={pureRandom3D.legend}
-                        onChange={this.onPureRandom3DCheckBoxChange}/>Show Legend</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom3D.legend}
+              checked={pureRandom3D.legend}
+              onChange={this.onPureRandom3DCheckBoxChange}
+            />
+            Show Legend
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom3D.tooltip}
-                        checked={pureRandom3D.tooltip}
-                        onChange={this.onPureRandom3DCheckBoxChange}/>Enable Tooltip</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom3D.tooltip}
+              checked={pureRandom3D.tooltip}
+              onChange={this.onPureRandom3DCheckBoxChange}
+            />
+            Enable Tooltip
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom3D.animation}
-                        checked={pureRandom3D.animation}
-                        onChange={this.onPureRandom3DCheckBoxChange}/>Enable Animation</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom3D.animation}
+              checked={pureRandom3D.animation}
+              onChange={this.onPureRandom3DCheckBoxChange}
+            />
+            Enable Animation
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom3D.smallMarkers}
-                        checked={pureRandom3D.smallMarkers}
-                        onChange={this.onPureRandom3DCheckBoxChange}/>Small Markers</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom3D.smallMarkers}
+              checked={pureRandom3D.smallMarkers}
+              onChange={this.onPureRandom3DCheckBoxChange}
+            />
+            Small Markers
+          </label>
         </div>
-    		<div className="checkbox">
-    		  <label><input type="checkbox"
-                        value={optionsPureRandom3D.colors}
-                        checked={pureRandom3D.colors}
-                        onChange={this.onPureRandom3DCheckBoxChange}/>Color Per Point</label>
-    		</div>
+        <div className="checkbox">
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom3D.colors}
+              checked={pureRandom3D.colors}
+              onChange={this.onPureRandom3DCheckBoxChange}
+            />
+            Color Per Point
+          </label>
+        </div>
 
         <button
           type="button"
           className="btn btn-success apply-button"
-          onClick={this.updatePureRandom3DConfiguration}>
+          onClick={this.updatePureRandom3DConfiguration}
+        >
           Apply
         </button>
       </div>
-    )
+    );
   }
 
   renderPureRandomBubbleModeConfiguration() {
@@ -539,62 +642,103 @@ export default class Scattering extends Component {
     return (
       <div className="pure-random">
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandomBubble.title}
-                        checked={pureRandomBubble.title}
-                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Show Chart Title</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandomBubble.title}
+              checked={pureRandomBubble.title}
+              onChange={this.onPureRandomBubbleCheckBoxChange}
+            />
+            Show Chart Title
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandomBubble.axisTitle}
-                        checked={pureRandomBubble.axisTitle}
-                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Show Axis Titles</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandomBubble.axisTitle}
+              checked={pureRandomBubble.axisTitle}
+              onChange={this.onPureRandomBubbleCheckBoxChange}
+            />
+            Show Axis Titles
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandomBubble.dataLabels}
-                        checked={pureRandomBubble.dataLabels}
-                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Show Data Labels</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandomBubble.dataLabels}
+              checked={pureRandomBubble.dataLabels}
+              onChange={this.onPureRandomBubbleCheckBoxChange}
+            />
+            Show Data Labels
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandomBubble.legend}
-                        checked={pureRandomBubble.legend}
-                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Show Legend</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandomBubble.legend}
+              checked={pureRandomBubble.legend}
+              onChange={this.onPureRandomBubbleCheckBoxChange}
+            />
+            Show Legend
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandomBubble.tooltip}
-                        checked={pureRandomBubble.tooltip}
-                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Enable Tooltip</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandomBubble.tooltip}
+              checked={pureRandomBubble.tooltip}
+              onChange={this.onPureRandomBubbleCheckBoxChange}
+            />
+            Enable Tooltip
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandomBubble.zoom}
-                        checked={pureRandomBubble.zoom}
-                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Enable Zoom</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandomBubble.zoom}
+              checked={pureRandomBubble.zoom}
+              onChange={this.onPureRandomBubbleCheckBoxChange}
+            />
+            Enable Zoom
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandomBubble.animation}
-                        checked={pureRandomBubble.animation}
-                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Enable Animation</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandomBubble.animation}
+              checked={pureRandomBubble.animation}
+              onChange={this.onPureRandomBubbleCheckBoxChange}
+            />
+            Enable Animation
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandomBubble.colors}
-                        checked={pureRandomBubble.colors}
-                        onChange={this.onPureRandomBubbleCheckBoxChange}/>Color Per Bubble</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandomBubble.colors}
+              checked={pureRandomBubble.colors}
+              onChange={this.onPureRandomBubbleCheckBoxChange}
+            />
+            Color Per Bubble
+          </label>
         </div>
 
         <button
           type="button"
           className="btn btn-success apply-button"
-          onClick={this.updatePureRandomBubbleConfiguration}>
+          onClick={this.updatePureRandomBubbleConfiguration}
+        >
           Apply
         </button>
       </div>
-    )
+    );
   }
 
   renderConfigurableRandomModeConfiguration() {
@@ -606,7 +750,8 @@ export default class Scattering extends Component {
           <select
             className="form-control"
             onChange={this.onConfigurableRandomInputChange}
-            name={optionsConfigurableRandom.chartType}>
+            name={optionsConfigurableRandom.chartType}
+          >
             <option>2D</option>
             <option>3D</option>
             <option>Bubble</option>
@@ -614,27 +759,32 @@ export default class Scattering extends Component {
         </div>
         <div className="form-group config-option">
           <label>Number of series</label>
-            <input type="number"
-                   data-type="series"
-                   className="form-control"
-                   name={optionsConfigurableRandom.seriesNumber}
-                   value={configurableRandom.seriesNumber}
-                   onChange={this.onConfigurableRandomInputChange}/>
+          <input
+            type="number"
+            data-type="series"
+            className="form-control"
+            name={optionsConfigurableRandom.seriesNumber}
+            value={configurableRandom.seriesNumber}
+            onChange={this.onConfigurableRandomInputChange}
+          />
         </div>
         <div className="form-group config-option">
           <label>Number of points</label>
-            <input type="number"
-                   data-type="points"
-                   className="form-control"
-                   name={optionsConfigurableRandom.pointsNumber}
-                   value={configurableRandom.pointsNumber}
-                   onChange={this.onConfigurableRandomInputChange}/>
+          <input
+            type="number"
+            data-type="points"
+            className="form-control"
+            name={optionsConfigurableRandom.pointsNumber}
+            value={configurableRandom.pointsNumber}
+            onChange={this.onConfigurableRandomInputChange}
+          />
         </div>
 
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateConfigurableRandomConfiguration}>
+          onClick={this.updateConfigurableRandomConfiguration}
+        >
           Apply
         </button>
       </div>
@@ -647,38 +797,44 @@ export default class Scattering extends Component {
       <div className="shooting">
         <div className="form-group config-option bins-input">
           <label>Number of bins</label>
-            <input type="number"
-                   data-type={optionsShootingSimulation.bins}
-                   className="form-control"
-                   name={optionsShootingSimulation.bins}
-                   value={shootingSimulation.bins}
-                   onChange={this.onShootingSimulationInputChange}
-                   disabled={shootingSimulation.disabled}/>
+          <input
+            type="number"
+            data-type={optionsShootingSimulation.bins}
+            className="form-control"
+            name={optionsShootingSimulation.bins}
+            value={shootingSimulation.bins}
+            onChange={this.onShootingSimulationInputChange}
+            disabled={shootingSimulation.disabled}
+          />
         </div>
 
         <div className="row">
           <div className="col-md-6 special-small">
             <div className="form-group config-option">
               <label>Min X</label>
-                <input type="number"
-                       data-type={optionsShootingSimulation.minX}
-                       className="form-control"
-                       name={optionsShootingSimulation.minX}
-                       value={shootingSimulation.minX}
-                       onChange={this.onShootingSimulationInputChange}
-                       disabled={shootingSimulation.disabled}/>
+              <input
+                type="number"
+                data-type={optionsShootingSimulation.minX}
+                className="form-control"
+                name={optionsShootingSimulation.minX}
+                value={shootingSimulation.minX}
+                onChange={this.onShootingSimulationInputChange}
+                disabled={shootingSimulation.disabled}
+              />
             </div>
           </div>
           <div className="col-md-6 special-small">
             <div className="form-group config-option">
               <label>Max X</label>
-                <input type="number"
-                       data-type={optionsShootingSimulation.maxX}
-                       className="form-control"
-                       name={optionsShootingSimulation.maxX}
-                       value={shootingSimulation.maxX}
-                       onChange={this.onShootingSimulationInputChange}
-                       disabled={shootingSimulation.disabled}/>
+              <input
+                type="number"
+                data-type={optionsShootingSimulation.maxX}
+                className="form-control"
+                name={optionsShootingSimulation.maxX}
+                value={shootingSimulation.maxX}
+                onChange={this.onShootingSimulationInputChange}
+                disabled={shootingSimulation.disabled}
+              />
             </div>
           </div>
         </div>
@@ -687,25 +843,29 @@ export default class Scattering extends Component {
           <div className="col-md-6 special-small">
             <div className="form-group config-option">
               <label>Min Y</label>
-                <input type="number"
-                       data-type={optionsShootingSimulation.minY}
-                       className="form-control"
-                       name={optionsShootingSimulation.minY}
-                       value={shootingSimulation.minY}
-                       onChange={this.onShootingSimulationInputChange}
-                       disabled={shootingSimulation.disabled}/>
+              <input
+                type="number"
+                data-type={optionsShootingSimulation.minY}
+                className="form-control"
+                name={optionsShootingSimulation.minY}
+                value={shootingSimulation.minY}
+                onChange={this.onShootingSimulationInputChange}
+                disabled={shootingSimulation.disabled}
+              />
             </div>
           </div>
           <div className="col-md-6 special-small">
             <div className="form-group config-option">
               <label>Max Y</label>
-                <input type="number"
-                       data-type={optionsShootingSimulation.maxY}
-                       className="form-control"
-                       name={optionsShootingSimulation.maxY}
-                       value={shootingSimulation.maxY}
-                       onChange={this.onShootingSimulationInputChange}
-                       disabled={shootingSimulation.disabled}/>
+              <input
+                type="number"
+                data-type={optionsShootingSimulation.maxY}
+                className="form-control"
+                name={optionsShootingSimulation.maxY}
+                value={shootingSimulation.maxY}
+                onChange={this.onShootingSimulationInputChange}
+                disabled={shootingSimulation.disabled}
+              />
             </div>
           </div>
         </div>
@@ -716,7 +876,8 @@ export default class Scattering extends Component {
               type="button"
               className="btn btn-primary shot"
               data-amount={1}
-              onClick={this.onAddPointsShootingMode}>
+              onClick={this.onAddPointsShootingMode}
+            >
               1 shot
             </button>
           </div>
@@ -725,7 +886,8 @@ export default class Scattering extends Component {
               type="button"
               className="btn btn-primary shot"
               data-amount={10}
-              onClick={this.onAddPointsShootingMode}>
+              onClick={this.onAddPointsShootingMode}
+            >
               10 shots
             </button>
           </div>
@@ -734,15 +896,16 @@ export default class Scattering extends Component {
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateShootingSimulationConfiguration}>
+          onClick={this.updateShootingSimulationConfiguration}
+        >
           Restart
         </button>
       </div>
-    )
+    );
   }
 
   renderConfigurationsArea() {
-    const { currentMode } = this.state;
+    const { currentMode } = this.state;
     switch (currentMode) {
       case modes.pureRandom2D: {
         return this.renderPureRandom2DModeConfiguration();
@@ -765,25 +928,25 @@ export default class Scattering extends Component {
     }
   }
 
-	render() {
-    console.log("scatter state: ", this.state);
-    return(
-			<div className="scatter-page" key={`scatter-chart-${this.state.currentMode}`}>
+  render() {
+    console.log('scatter state: ', this.state);
+    return (
+      <div className="scatter-page" key={`scatter-chart-${this.state.currentMode}`}>
         <div className="row">
           <div className="col-sm-4">
             {this.renderOptionsDropdown()}
-            <div className="configuration-area">
-              {this.renderConfigurationsArea()}
-            </div>
+            <div className="configuration-area">{this.renderConfigurationsArea()}</div>
           </div>
           <div className="col-sm-8 chart-area">
-            <Chart container={'scattering-chart'}
-                   options={this.state.options}
-                   update={this.state.rerenderChart}
-                   function={move}/>
+            <Chart
+              container={'scattering-chart'}
+              options={this.state.options}
+              update={this.state.rerenderChart}
+              function={move}
+            />
           </div>
         </div>
-			</div>
-		)
-	}
+      </div>
+    );
+  }
 }

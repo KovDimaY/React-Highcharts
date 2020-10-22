@@ -5,7 +5,7 @@ export function generateSeriesForPureRandom() {
   let result = [];
   for (let i = 0; i < numberOfSeries; i++) {
     let currentData = [];
-    const currentName = `Random Serie ${i + 1}`
+    const currentName = `Random Serie ${i + 1}`;
     const min = Math.random() * 1000 - 500;
     const max = Math.random() * 1000 + min;
     for (let j = 0; j < 5; j++) {
@@ -15,7 +15,7 @@ export function generateSeriesForPureRandom() {
     }
     result.push({
       name: currentName,
-      data: currentData
+      data: currentData,
     });
   }
 
@@ -23,12 +23,7 @@ export function generateSeriesForPureRandom() {
 }
 
 export function generateSeriesForConfigurableRandom(params) {
-  const {
-    seriesNumber,
-    categoriesNumber,
-    min,
-    max
-  } = params;
+  const { seriesNumber, categoriesNumber, min, max } = params;
   let result = [];
   for (let i = 0; i < seriesNumber; i++) {
     let currentData = [];
@@ -40,7 +35,7 @@ export function generateSeriesForConfigurableRandom(params) {
     }
     result.push({
       name: currentName,
-      data: currentData
+      data: currentData,
     });
   }
 
@@ -50,26 +45,29 @@ export function generateSeriesForConfigurableRandom(params) {
 export function generateCategoriesConfigurableRandom(number) {
   let result = [];
   for (let i = 0; i < number; i++) {
-    result.push(`Category ${i+1}`);
+    result.push(`Category ${i + 1}`);
   }
   return result;
 }
 
 export function generateSeriesForBalanceSimulation(income, expenses) {
-  console.log("generateSeriesForBalanceSimulation", income, expenses);
-  let result = [{
-      name: "Income",
+  console.log('generateSeriesForBalanceSimulation', income, expenses);
+  let result = [
+    {
+      name: 'Income',
       data: [income],
-      color: Highcharts.getOptions().colors[7]
-    }, {
-        name: "Expenses",
-        data: [expenses],
-        color: Highcharts.getOptions().colors[3]
-    }, {
-        name: "Result",
-        data: [income - expenses],
-        color: Highcharts.getOptions().colors[1]
-    }
+      color: Highcharts.getOptions().colors[7],
+    },
+    {
+      name: 'Expenses',
+      data: [expenses],
+      color: Highcharts.getOptions().colors[3],
+    },
+    {
+      name: 'Result',
+      data: [income - expenses],
+      color: Highcharts.getOptions().colors[1],
+    },
   ];
 
   return result;
@@ -134,8 +132,8 @@ export function sortAndCutPoints(data, limit) {
   data.sort((a, b) => b[0] - a[0]);
   const result = {
     categories: [],
-    points: []
-  }
+    points: [],
+  };
   for (let i = 0; i < Math.min(data.length, limit); i++) {
     result.points.push(data[i][0]);
     result.categories.push(data[i][1]);
@@ -145,19 +143,19 @@ export function sortAndCutPoints(data, limit) {
 }
 
 export function generateSeriesForSymbolsAnalysis(points) {
-  return [{
-            name: "The most frequent characters",
-            data: points
-          }];
+  return [
+    {
+      name: 'The most frequent characters',
+      data: points,
+    },
+  ];
 }
 
 export function collectWordsAndCategories(input, caseSensitive, filter) {
   const object = {};
   const inputFinal = caseSensitive ? input : input.toUpperCase();
   const inputArray = inputFinal.split(/\W+/);
-  const filterFinal = caseSensitive
-    ? filter
-    : filter.map(element => element.toUpperCase());
+  const filterFinal = caseSensitive ? filter : filter.map(element => element.toUpperCase());
 
   for (let i = 0; i < inputArray.length; i++) {
     const currentWord = inputArray[i];
@@ -183,18 +181,20 @@ export function collectWordsAndCategories(input, caseSensitive, filter) {
 }
 
 export function generateSeriesForWordsAnalysis(words) {
-  return [{
-            name: "The most frequent words",
-            data: words
-          }];
+  return [
+    {
+      name: 'The most frequent words',
+      data: words,
+    },
+  ];
 }
 
 export function sortAndCutWords(data, limit) {
   data.sort((a, b) => b[0] - a[0]);
   const result = {
     categories: [],
-    words: []
-  }
+    words: [],
+  };
   for (let i = 0; i < Math.min(data.length, limit); i++) {
     result.words.push(data[i][0]);
     result.categories.push(data[i][1]);

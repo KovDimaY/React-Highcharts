@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import Highcharts from 'highcharts'
-import TagsInput from 'react-tagsinput'
+import React, { Component } from 'react';
+import Highcharts from 'highcharts';
+import TagsInput from 'react-tagsinput';
 
-import Chart from './chart-abstract'
-import SketchColorPicker from '../color-picker'
+import Chart from './chart-abstract';
+import SketchColorPicker from '../color-picker';
 
 import {
   heatmap,
@@ -15,8 +14,8 @@ import {
   pyramid,
   wordcloud,
   sankey,
-  clock
-} from '../../constants/other/default-options-other'
+  clock,
+} from '../../constants/other/default-options-other';
 
 import {
   modes,
@@ -29,8 +28,7 @@ import {
   optionsPyramid,
   optionsGauge,
   optionsSankey,
-  optionsClock
-} from '../../constants/other/modes-options-other'
+} from '../../constants/other/modes-options-other';
 
 import {
   generateSeriesForHeatmap,
@@ -46,10 +44,9 @@ import {
   analyzeGaugeText,
   generateDataForSankey,
   generateSeriesForClock,
-} from '../../constants/other/data-helpers-other'
+} from '../../constants/other/data-helpers-other';
 
-import { limitNumericalInput } from '../../constants/shared/helpers'
-
+import { limitNumericalInput } from '../../constants/shared/helpers';
 
 export default class Other extends Component {
   constructor(props) {
@@ -166,29 +163,29 @@ export default class Other extends Component {
     const { heatmap } = this.state.configurations;
     const { options } = this.state;
     const usualTooltip = {
-        formatter: function () {
-          return `The intersection of <b>${this.series.xAxis.categories[this.point.x]}</b>
+      formatter: function () {
+        return `The intersection of <b>${this.series.xAxis.categories[this.point.x]}</b>
                   and <b>${this.series.yAxis.categories[this.point.y]}</b>
                   has the value <b>${this.point.value}</b>`;
-        }
+      },
     };
     const diagonalizedTooltip = {
-        formatter: function () {
-          if (this.point.x === this.point.y) {
-            return false;
-          }
-          return `The correlation between <b>${this.series.xAxis.categories[this.point.x]}</b>
+      formatter: function () {
+        if (this.point.x === this.point.y) {
+          return false;
+        }
+        return `The correlation between <b>${this.series.xAxis.categories[this.point.x]}</b>
                   and <b>${this.series.yAxis.categories[this.point.y]}</b>
                   has the next coefficient <b>${this.point.value}</b>`;
-        }
+      },
     };
 
-    options.tooltip = heatmap.diagonalized
-      ? diagonalizedTooltip
-      : usualTooltip;
+    options.tooltip = heatmap.diagonalized ? diagonalizedTooltip : usualTooltip;
 
-    if ((heatmap.diagonalized && !heatmap.alreadyDiagonalized) ||
-       (!heatmap.diagonalized && heatmap.alreadyDiagonalized)) {
+    if (
+      (heatmap.diagonalized && !heatmap.alreadyDiagonalized) ||
+      (!heatmap.diagonalized && heatmap.alreadyDiagonalized)
+    ) {
       options.series = generateSeriesForHeatmap(options, heatmap.diagonalized).series;
     }
     options.title.text = heatmap.title ? 'Randomly generated data' : null;
@@ -204,7 +201,7 @@ export default class Other extends Component {
     options.series[0].borderColor = heatmap.borderColor;
     heatmap.alreadyDiagonalized = heatmap.diagonalized;
     this.setState({ rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
+      this.setState({ rerenderChart: false });
     });
   }
 
@@ -224,7 +221,7 @@ export default class Other extends Component {
     options.colorAxis.dataClasses[3].color = tilemap.maxColor;
 
     this.setState({ rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
+      this.setState({ rerenderChart: false });
     });
   }
 
@@ -233,8 +230,8 @@ export default class Other extends Component {
     const { options } = this.state;
     const circleLableFormatter = {
       formatter: function () {
-          return this.value + '°';
-      }
+        return this.value + '°';
+      },
     };
 
     options.title.text = polar.title ? 'Randomly generated data' : null;
@@ -247,9 +244,7 @@ export default class Other extends Component {
     options.plotOptions.series.pointInterval = polar.spiderMode
       ? undefined
       : 360 / options.series[0].data.length;
-    options.xAxis.tickInterval = polar.spiderMode
-      ? undefined
-      : 360 / options.series[0].data.length;
+    options.xAxis.tickInterval = polar.spiderMode ? undefined : 360 / options.series[0].data.length;
     options.xAxis.categories = polar.spiderMode
       ? options.series[0].data.map((item, i) => `Random Category ${i + 1}`)
       : undefined;
@@ -257,7 +252,7 @@ export default class Other extends Component {
     options.xAxis.max = polar.spiderMode ? undefined : 360;
     options.xAxis.labels = polar.spiderMode ? {} : circleLableFormatter;
     options.yAxis.gridLineInterpolation = polar.spiderMode ? 'polygone' : 'circle';
-    options.series.forEach((serie) => {
+    options.series.forEach(serie => {
       if (polar.chartType === 'Line') {
         serie.type = 'line';
       } else if (polar.chartType === 'Area') {
@@ -268,19 +263,21 @@ export default class Other extends Component {
     });
 
     this.setState({ rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   updateBoxplotConfiguration() {
     const { options, configurations } = this.state;
 
     options.series = generateBoxplotSeries(this.boxplotData, configurations.boxplot);
-    options.yAxis.plotLines = configurations.boxplot.showAverage ? averageLineBoxplot(this.boxplotData) : [];
+    options.yAxis.plotLines = configurations.boxplot.showAverage
+      ? averageLineBoxplot(this.boxplotData)
+      : [];
 
     this.setState({ rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   onAddPointsBoxplot(event) {
@@ -290,14 +287,16 @@ export default class Other extends Component {
     const amount = Number(event.target.dataset.amount);
     const newPoints = generateRandomPointsBoxplot(min, max, amount);
     this.boxplotData[target] = this.boxplotData[target].concat(newPoints);
-    const message = `Last added values to the boxplot #${target}: ${newPoints.reduce((result, element) => `${result}, ${element}`)}`;
+    const message = `Last added values to the boxplot #${target}: ${newPoints.reduce(
+      (result, element) => `${result}, ${element}`
+    )}`;
 
     options.series = generateBoxplotSeries(this.boxplotData, boxplot);
     options.yAxis.plotLines = boxplot.showAverage ? averageLineBoxplot(this.boxplotData) : [];
     options.subtitle.text = message;
 
     this.setState({ options, rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
+      this.setState({ rerenderChart: false });
     });
   }
 
@@ -311,8 +310,8 @@ export default class Other extends Component {
     options.series[2].data[0].y = symbols > 100 ? 100 : symbols;
 
     this.setState({ rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   refreshGaugeCongifuration() {
@@ -330,8 +329,8 @@ export default class Other extends Component {
     options.series[2].data[0].y = symbols > 100 ? 100 : symbols;
 
     this.setState({ rerenderChart: true, configurations }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   updatePyramidConfiguration() {
@@ -347,8 +346,8 @@ export default class Other extends Component {
     options.plotOptions.pyramid.allowPointSelect = pyramid.allowPointSelect;
 
     this.setState({ rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   updateWordcloudConfiguration() {
@@ -360,8 +359,8 @@ export default class Other extends Component {
     options.title.text = 'Word Cloud Chart';
 
     this.setState({ options, rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   updateSankeyConfiguration() {
@@ -373,8 +372,8 @@ export default class Other extends Component {
     options.plotOptions.sankey.curveFactor = sankey.curveFactor;
 
     this.setState({ rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   updateClockConfiguration() {
@@ -384,8 +383,8 @@ export default class Other extends Component {
     options.function = clock.function;
 
     this.setState({ rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   dropdownClickHandler(input) {
@@ -429,7 +428,7 @@ export default class Other extends Component {
         break;
       }
       default: {
-        console.log("This mode is not implemented yet");
+        console.log('This mode is not implemented yet');
       }
     }
     this.setState({ currentMode: mode, configurations });
@@ -442,7 +441,7 @@ export default class Other extends Component {
     } else {
       configurations.heatmap[event.target.value] = true;
     }
-    this.setState({ configurations })
+    this.setState({ configurations });
   }
 
   onTilemapCheckBoxChange(event) {
@@ -457,7 +456,7 @@ export default class Other extends Component {
 
   onChangeColorHeatmap(key, color) {
     const { configurations } = this.state;
-    if (typeof key === "string" && configurations.heatmap[key]) {
+    if (typeof key === 'string' && configurations.heatmap[key]) {
       configurations.heatmap[key] = color.hex;
     }
     this.setState({ configurations });
@@ -465,7 +464,7 @@ export default class Other extends Component {
 
   onChangeColorTilemap(key, color) {
     const { configurations } = this.state;
-    if (typeof key === "string" && configurations.tilemap[key]) {
+    if (typeof key === 'string' && configurations.tilemap[key]) {
       configurations.tilemap[key] = color.hex;
     }
     this.setState({ configurations });
@@ -542,18 +541,12 @@ export default class Other extends Component {
 
   onWordcloudInputChange(event) {
     const { configurations } = this.state;
-    const newValue = event.target.value === ''
-      ? 'Enter here your text to plot its words set on the chart...'
-      : event.target.value;
-    if (event.target.name === "limit") {
-      limitNumericalInput(
-        configurations.wordcloud,
-        event.target.name,
-        newValue,
-        1,
-        1000,
-        true
-      );
+    const newValue =
+      event.target.value === ''
+        ? 'Enter here your text to plot its words set on the chart...'
+        : event.target.value;
+    if (event.target.name === 'limit') {
+      limitNumericalInput(configurations.wordcloud, event.target.name, newValue, 1, 1000, true);
     } else {
       configurations.wordcloud[event.target.name] = newValue;
     }
@@ -563,24 +556,18 @@ export default class Other extends Component {
 
   onGaugeInputChange(event) {
     const { configurations } = this.state;
-    const newValue = event.target.value === ''
-      ? 'Enter here your text to see its char analysis on the chart...'
-      : event.target.value;
-    if (event.target.name !== "text") {
-      limitNumericalInput(
-        configurations.gauge,
-        event.target.name,
-        newValue,
-        1,
-        10000,
-        true
-      );
+    const newValue =
+      event.target.value === ''
+        ? 'Enter here your text to see its char analysis on the chart...'
+        : event.target.value;
+    if (event.target.name !== 'text') {
+      limitNumericalInput(configurations.gauge, event.target.name, newValue, 1, 10000, true);
     } else {
       configurations.gauge[event.target.name] = newValue;
     }
 
     this.setState({ configurations }, () => {
-      this.updateGaugeConfiguration()
+      this.updateGaugeConfiguration();
     });
   }
 
@@ -593,7 +580,7 @@ export default class Other extends Component {
       configurations.wordcloud.filter = newTags;
     }
 
-    this.setState({ configurations })
+    this.setState({ configurations });
   }
 
   onSankeyInputChange(event) {
@@ -606,22 +593,42 @@ export default class Other extends Component {
   renderOptionsDropdown() {
     return (
       <div className="dropdown">
-        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Configurations
-        <span className="caret"></span></button>
+        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          Configurations
+          <span className="caret"></span>
+        </button>
         <ul className="dropdown-menu">
           <li className="dropdown-header">Other Charts</li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.heatmap}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.tilemap}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.polar}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.boxplot}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.gauge}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.pyramid}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.wordcloud}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.sankey}</a></li>
-          <li><a onClick={this.dropdownClickHandler}>{modes.clock}</a></li>
+          <li>
+            <a onClick={this.dropdownClickHandler}>{modes.heatmap}</a>
+          </li>
+          <li>
+            <a onClick={this.dropdownClickHandler}>{modes.tilemap}</a>
+          </li>
+          <li>
+            <a onClick={this.dropdownClickHandler}>{modes.polar}</a>
+          </li>
+          <li>
+            <a onClick={this.dropdownClickHandler}>{modes.boxplot}</a>
+          </li>
+          <li>
+            <a onClick={this.dropdownClickHandler}>{modes.gauge}</a>
+          </li>
+          <li>
+            <a onClick={this.dropdownClickHandler}>{modes.pyramid}</a>
+          </li>
+          <li>
+            <a onClick={this.dropdownClickHandler}>{modes.wordcloud}</a>
+          </li>
+          <li>
+            <a onClick={this.dropdownClickHandler}>{modes.sankey}</a>
+          </li>
+          <li>
+            <a onClick={this.dropdownClickHandler}>{modes.clock}</a>
+          </li>
         </ul>
       </div>
-    )
+    );
   }
 
   renderHeatmapConfiguration() {
@@ -630,46 +637,81 @@ export default class Other extends Component {
       <div className="other-heatmap-container">
         <div className="checkboxes other-heatmap">
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsHeatmap.title}
-                          checked={heatmap.title}
-                          onChange={this.onHeatmapCheckBoxChange}/>Show Chart Title</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsHeatmap.title}
+                checked={heatmap.title}
+                onChange={this.onHeatmapCheckBoxChange}
+              />
+              Show Chart Title
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsHeatmap.axisTitles}
-                          checked={heatmap.axisTitles}
-                          onChange={this.onHeatmapCheckBoxChange}/>Show Axis Titles</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsHeatmap.axisTitles}
+                checked={heatmap.axisTitles}
+                onChange={this.onHeatmapCheckBoxChange}
+              />
+              Show Axis Titles
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsHeatmap.dataLabels}
-                          checked={heatmap.dataLabels}
-                          onChange={this.onHeatmapCheckBoxChange}/>Show Data Labels</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsHeatmap.dataLabels}
+                checked={heatmap.dataLabels}
+                onChange={this.onHeatmapCheckBoxChange}
+              />
+              Show Data Labels
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsHeatmap.legend}
-                          checked={heatmap.legend}
-                          onChange={this.onHeatmapCheckBoxChange}/>Show Legend</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsHeatmap.legend}
+                checked={heatmap.legend}
+                onChange={this.onHeatmapCheckBoxChange}
+              />
+              Show Legend
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsHeatmap.tooltip}
-                          checked={heatmap.tooltip}
-                          onChange={this.onHeatmapCheckBoxChange}/>Enable Tooltip</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsHeatmap.tooltip}
+                checked={heatmap.tooltip}
+                onChange={this.onHeatmapCheckBoxChange}
+              />
+              Enable Tooltip
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsHeatmap.animation}
-                          checked={heatmap.animation}
-                          onChange={this.onHeatmapCheckBoxChange}/>Enable Animation</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsHeatmap.animation}
+                checked={heatmap.animation}
+                onChange={this.onHeatmapCheckBoxChange}
+              />
+              Enable Animation
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsHeatmap.diagonalized}
-                          checked={heatmap.diagonalized}
-                          onChange={this.onHeatmapCheckBoxChange}/>Correlation Mode</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsHeatmap.diagonalized}
+                checked={heatmap.diagonalized}
+                onChange={this.onHeatmapCheckBoxChange}
+              />
+              Correlation Mode
+            </label>
           </div>
         </div>
 
@@ -678,30 +720,33 @@ export default class Other extends Component {
             <label>
               Min Color
               <SketchColorPicker
-                color={ heatmap.minColor }
+                color={heatmap.minColor}
                 onChangeColor={this.onChangeColorHeatmap}
                 identificator={optionsHeatmap.minColor}
-                presetColors={Highcharts.getOptions().colors}/>
+                presetColors={Highcharts.getOptions().colors}
+              />
             </label>
           </div>
           <div className="color-picker-item">
             <label>
               Max Color
               <SketchColorPicker
-                color={ heatmap.maxColor }
+                color={heatmap.maxColor}
                 onChangeColor={this.onChangeColorHeatmap}
                 identificator={optionsHeatmap.maxColor}
-                presetColors={Highcharts.getOptions().colors}/>
+                presetColors={Highcharts.getOptions().colors}
+              />
             </label>
           </div>
           <div className="color-picker-item">
             <label>
               Border Color
               <SketchColorPicker
-                color={ heatmap.borderColor }
+                color={heatmap.borderColor}
                 onChangeColor={this.onChangeColorHeatmap}
                 identificator={optionsHeatmap.borderColor}
-                presetColors={Highcharts.getOptions().colors}/>
+                presetColors={Highcharts.getOptions().colors}
+              />
             </label>
           </div>
         </div>
@@ -709,11 +754,12 @@ export default class Other extends Component {
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateHeatmapConfiguration}>
+          onClick={this.updateHeatmapConfiguration}
+        >
           Apply
         </button>
       </div>
-    )
+    );
   }
 
   renderTilemapConfiguration() {
@@ -722,34 +768,59 @@ export default class Other extends Component {
       <div className="other-tilemap-container">
         <div className="checkboxes other-tilemap">
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsTilemap.title}
-                          checked={tilemap.title}
-                          onChange={this.onTilemapCheckBoxChange}/>Show Chart Title</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsTilemap.title}
+                checked={tilemap.title}
+                onChange={this.onTilemapCheckBoxChange}
+              />
+              Show Chart Title
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsTilemap.dataLabels}
-                          checked={tilemap.dataLabels}
-                          onChange={this.onTilemapCheckBoxChange}/>Show Data Labels</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsTilemap.dataLabels}
+                checked={tilemap.dataLabels}
+                onChange={this.onTilemapCheckBoxChange}
+              />
+              Show Data Labels
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsTilemap.legend}
-                          checked={tilemap.legend}
-                          onChange={this.onTilemapCheckBoxChange}/>Show Legend</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsTilemap.legend}
+                checked={tilemap.legend}
+                onChange={this.onTilemapCheckBoxChange}
+              />
+              Show Legend
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsTilemap.tooltip}
-                          checked={tilemap.tooltip}
-                          onChange={this.onTilemapCheckBoxChange}/>Enable Tooltip</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsTilemap.tooltip}
+                checked={tilemap.tooltip}
+                onChange={this.onTilemapCheckBoxChange}
+              />
+              Enable Tooltip
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsTilemap.animation}
-                          checked={tilemap.animation}
-                          onChange={this.onTilemapCheckBoxChange}/>Enable Animation</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsTilemap.animation}
+                checked={tilemap.animation}
+                onChange={this.onTilemapCheckBoxChange}
+              />
+              Enable Animation
+            </label>
           </div>
         </div>
 
@@ -761,7 +832,8 @@ export default class Other extends Component {
                 color={tilemap.minColor}
                 onChangeColor={this.onChangeColorTilemap}
                 identificator={optionsTilemap.minColor}
-                presetColors={Highcharts.getOptions().colors}/>
+                presetColors={Highcharts.getOptions().colors}
+              />
             </label>
           </div>
           <div className="color-picker-item-tilemap">
@@ -771,7 +843,8 @@ export default class Other extends Component {
                 color={tilemap.lowColor}
                 onChangeColor={this.onChangeColorTilemap}
                 identificator={optionsTilemap.lowColor}
-                presetColors={Highcharts.getOptions().colors}/>
+                presetColors={Highcharts.getOptions().colors}
+              />
             </label>
           </div>
           <div className="color-picker-item-tilemap">
@@ -781,7 +854,8 @@ export default class Other extends Component {
                 color={tilemap.highColor}
                 onChangeColor={this.onChangeColorTilemap}
                 identificator={optionsTilemap.highColor}
-                presetColors={Highcharts.getOptions().colors}/>
+                presetColors={Highcharts.getOptions().colors}
+              />
             </label>
           </div>
           <div className="color-picker-item-tilemap">
@@ -791,7 +865,8 @@ export default class Other extends Component {
                 color={tilemap.maxColor}
                 onChangeColor={this.onChangeColorTilemap}
                 identificator={optionsTilemap.maxColor}
-                presetColors={Highcharts.getOptions().colors}/>
+                presetColors={Highcharts.getOptions().colors}
+              />
             </label>
           </div>
         </div>
@@ -799,11 +874,12 @@ export default class Other extends Component {
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateTilemapConfiguration}>
+          onClick={this.updateTilemapConfiguration}
+        >
           Apply
         </button>
       </div>
-    )
+    );
   }
 
   renderPolarConfiguration() {
@@ -815,7 +891,8 @@ export default class Other extends Component {
           <select
             className="form-control"
             onChange={this.onPolarCheckBoxChange}
-            name={optionsPolar.chartType}>
+            name={optionsPolar.chartType}
+          >
             <option>Line</option>
             <option>Area</option>
             <option>Column</option>
@@ -823,54 +900,85 @@ export default class Other extends Component {
         </div>
         <div className="checkboxes other-polar">
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsPolar.title}
-                          checked={polar.title}
-                          onChange={this.onPolarCheckBoxChange}/>Show Chart Title</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsPolar.title}
+                checked={polar.title}
+                onChange={this.onPolarCheckBoxChange}
+              />
+              Show Chart Title
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsPolar.dataLabels}
-                          checked={polar.dataLabels}
-                          onChange={this.onPolarCheckBoxChange}/>Show Data Labels</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsPolar.dataLabels}
+                checked={polar.dataLabels}
+                onChange={this.onPolarCheckBoxChange}
+              />
+              Show Data Labels
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsPolar.legend}
-                          checked={polar.legend}
-                          onChange={this.onPolarCheckBoxChange}/>Show Legend</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsPolar.legend}
+                checked={polar.legend}
+                onChange={this.onPolarCheckBoxChange}
+              />
+              Show Legend
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsPolar.tooltip}
-                          checked={polar.tooltip}
-                          onChange={this.onPolarCheckBoxChange}/>Enable Tooltip</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsPolar.tooltip}
+                checked={polar.tooltip}
+                onChange={this.onPolarCheckBoxChange}
+              />
+              Enable Tooltip
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsPolar.animation}
-                          checked={polar.animation}
-                          onChange={this.onPolarCheckBoxChange}/>Enable Animation</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsPolar.animation}
+                checked={polar.animation}
+                onChange={this.onPolarCheckBoxChange}
+              />
+              Enable Animation
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsPolar.spiderMode}
-                          checked={polar.spiderMode}
-                          onChange={this.onPolarCheckBoxChange}/>Use Spider Net Mode</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsPolar.spiderMode}
+                checked={polar.spiderMode}
+                onChange={this.onPolarCheckBoxChange}
+              />
+              Use Spider Net Mode
+            </label>
           </div>
         </div>
 
         <button
           type="button"
           className="btn btn-success apply-button"
-          onClick={this.updatePolarConfiguration}>
+          onClick={this.updatePolarConfiguration}
+        >
           Apply
         </button>
       </div>
-    )
+    );
   }
 
-  renderBoxPlotConfiguration () {
+  renderBoxPlotConfiguration() {
     const { boxplot } = this.state.configurations;
     return (
       <div className="other-boxplot">
@@ -879,7 +987,8 @@ export default class Other extends Component {
           <select
             className="form-control"
             onChange={this.onBoxplotSelectChange}
-            name={optionsBoxplot.target}>
+            name={optionsBoxplot.target}
+          >
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -890,23 +999,27 @@ export default class Other extends Component {
           <div className="col-md-6 special-small">
             <div className="form-group config-option">
               <label>Min</label>
-                <input type="number"
-                       data-type={optionsBoxplot.min}
-                       className="form-control"
-                       name={optionsBoxplot.min}
-                       value={boxplot.min}
-                       onChange={this.onBoxplotInputChange}/>
+              <input
+                type="number"
+                data-type={optionsBoxplot.min}
+                className="form-control"
+                name={optionsBoxplot.min}
+                value={boxplot.min}
+                onChange={this.onBoxplotInputChange}
+              />
             </div>
           </div>
           <div className="col-md-6 special-small">
             <div className="form-group config-option">
               <label>Max</label>
-                <input type="number"
-                       data-type={optionsBoxplot.max}
-                       className="form-control"
-                       name={optionsBoxplot.max}
-                       value={boxplot.max}
-                       onChange={this.onBoxplotInputChange}/>
+              <input
+                type="number"
+                data-type={optionsBoxplot.max}
+                className="form-control"
+                name={optionsBoxplot.max}
+                value={boxplot.max}
+                onChange={this.onBoxplotInputChange}
+              />
             </div>
           </div>
         </div>
@@ -917,7 +1030,8 @@ export default class Other extends Component {
               type="button"
               className="btn btn-primary shot"
               data-amount={1}
-              onClick={this.onAddPointsBoxplot}>
+              onClick={this.onAddPointsBoxplot}
+            >
               1 shot
             </button>
           </div>
@@ -926,7 +1040,8 @@ export default class Other extends Component {
               type="button"
               className="btn btn-primary shot"
               data-amount={10}
-              onClick={this.onAddPointsBoxplot}>
+              onClick={this.onAddPointsBoxplot}
+            >
               10 shots
             </button>
           </div>
@@ -934,28 +1049,39 @@ export default class Other extends Component {
 
         <div className="checkboxes other-heatmap">
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsBoxplot.outliers}
-                          checked={boxplot.outliers}
-                          onChange={this.onBoxplotSelectChange}/>Outliers</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsBoxplot.outliers}
+                checked={boxplot.outliers}
+                onChange={this.onBoxplotSelectChange}
+              />
+              Outliers
+            </label>
           </div>
 
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsBoxplot.showAverage}
-                          checked={boxplot.showAverage}
-                          onChange={this.onBoxplotSelectChange}/>Global average</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsBoxplot.showAverage}
+                checked={boxplot.showAverage}
+                onChange={this.onBoxplotSelectChange}
+              />
+              Global average
+            </label>
           </div>
         </div>
 
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.initBoxplot}>
+          onClick={this.initBoxplot}
+        >
           Restart
         </button>
       </div>
-    )
+    );
   }
 
   renderWordcloudConfiguration() {
@@ -964,31 +1090,35 @@ export default class Other extends Component {
       <div className="other-wordcloud">
         <div className="form-group config-option">
           <label>Text for plotting</label>
-            <textarea className="form-control input-textarea"
-                   name={optionsWordcloud.text}
-                   value={wordcloud.text}
-                   onChange={this.onWordcloudInputChange}/>
+          <textarea
+            className="form-control input-textarea"
+            name={optionsWordcloud.text}
+            value={wordcloud.text}
+            onChange={this.onWordcloudInputChange}
+          />
         </div>
 
         <div className="form-group config-option">
           <label>Filter next words</label>
-          <TagsInput value={wordcloud.filter}
-                     onChange={this.onWordcloudTagsChange} />
+          <TagsInput value={wordcloud.filter} onChange={this.onWordcloudTagsChange} />
         </div>
 
         <div className="form-group config-option">
           <label>Number of words</label>
-            <input type="number"
-                   className="form-control"
-                   name={optionsWordcloud.limit}
-                   value={wordcloud.limit}
-                   onChange={this.onWordcloudInputChange}/>
+          <input
+            type="number"
+            className="form-control"
+            name={optionsWordcloud.limit}
+            value={wordcloud.limit}
+            onChange={this.onWordcloudInputChange}
+          />
         </div>
 
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateWordcloudConfiguration}>
+          onClick={this.updateWordcloudConfiguration}
+        >
           Apply
         </button>
       </div>
@@ -1001,43 +1131,52 @@ export default class Other extends Component {
       <div className="other-gauge">
         <div className="form-group config-option">
           <label>Text for plotting</label>
-            <textarea className="form-control input-textarea"
-                   name={optionsGauge.text}
-                   value={gauge.text}
-                   onChange={this.onGaugeInputChange}/>
+          <textarea
+            className="form-control input-textarea"
+            name={optionsGauge.text}
+            value={gauge.text}
+            onChange={this.onGaugeInputChange}
+          />
         </div>
 
         <div className="form-group config-option">
           <label>Characters goal</label>
-            <input type="number"
-                   className="form-control"
-                   name={optionsGauge.chars}
-                   value={gauge.chars}
-                   onChange={this.onGaugeInputChange}/>
+          <input
+            type="number"
+            className="form-control"
+            name={optionsGauge.chars}
+            value={gauge.chars}
+            onChange={this.onGaugeInputChange}
+          />
         </div>
 
         <div className="form-group config-option">
           <label>Symbols goal</label>
-            <input type="number"
-                   className="form-control"
-                   name={optionsGauge.symbols}
-                   value={gauge.symbols}
-                   onChange={this.onGaugeInputChange}/>
+          <input
+            type="number"
+            className="form-control"
+            name={optionsGauge.symbols}
+            value={gauge.symbols}
+            onChange={this.onGaugeInputChange}
+          />
         </div>
 
         <div className="form-group config-option">
           <label>Digits goal</label>
-            <input type="number"
-                   className="form-control"
-                   name={optionsGauge.digits}
-                   value={gauge.digits}
-                   onChange={this.onGaugeInputChange}/>
+          <input
+            type="number"
+            className="form-control"
+            name={optionsGauge.digits}
+            value={gauge.digits}
+            onChange={this.onGaugeInputChange}
+          />
         </div>
 
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.refreshGaugeCongifuration}>
+          onClick={this.refreshGaugeCongifuration}
+        >
           Refresh
         </button>
       </div>
@@ -1050,47 +1189,78 @@ export default class Other extends Component {
       <div className="other-pyramid-container">
         <div className="checkboxes other-pyramid">
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsPyramid.title}
-                          checked={pyramid.title}
-                          onChange={this.onPyramidCheckBoxChange}/>Show Chart Title</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsPyramid.title}
+                checked={pyramid.title}
+                onChange={this.onPyramidCheckBoxChange}
+              />
+              Show Chart Title
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsPyramid.dataLabels}
-                          checked={pyramid.dataLabels}
-                          onChange={this.onPyramidCheckBoxChange}/>Show Data Labels</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsPyramid.dataLabels}
+                checked={pyramid.dataLabels}
+                onChange={this.onPyramidCheckBoxChange}
+              />
+              Show Data Labels
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsPyramid.legend}
-                          checked={pyramid.legend}
-                          onChange={this.onPyramidCheckBoxChange}/>Show Legend</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsPyramid.legend}
+                checked={pyramid.legend}
+                onChange={this.onPyramidCheckBoxChange}
+              />
+              Show Legend
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsPyramid.tooltip}
-                          checked={pyramid.tooltip}
-                          onChange={this.onPyramidCheckBoxChange}/>Enable Tooltip</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsPyramid.tooltip}
+                checked={pyramid.tooltip}
+                onChange={this.onPyramidCheckBoxChange}
+              />
+              Enable Tooltip
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsPyramid.animation}
-                          checked={pyramid.animation}
-                          onChange={this.onPyramidCheckBoxChange}/>Enable Animation</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsPyramid.animation}
+                checked={pyramid.animation}
+                onChange={this.onPyramidCheckBoxChange}
+              />
+              Enable Animation
+            </label>
           </div>
           <div className="checkbox">
-            <label><input type="checkbox"
-                          value={optionsPyramid.allowPointSelect}
-                          checked={pyramid.allowPointSelect}
-                          onChange={this.onPyramidCheckBoxChange}/>Allow Point Selection</label>
+            <label>
+              <input
+                type="checkbox"
+                value={optionsPyramid.allowPointSelect}
+                checked={pyramid.allowPointSelect}
+                onChange={this.onPyramidCheckBoxChange}
+              />
+              Allow Point Selection
+            </label>
           </div>
         </div>
 
         <button
           type="button"
           className="btn btn-success apply-button"
-          onClick={this.updatePyramidConfiguration}>
+          onClick={this.updatePyramidConfiguration}
+        >
           Apply
         </button>
       </div>
@@ -1103,63 +1273,84 @@ export default class Other extends Component {
       <div className="other-sankey-container">
         <div className="checkboxes other-sankey">
           <div className="form-group config-option">
-            <label>Number of nodes: <span>{sankey.numberNodes}</span></label>
-            <input type="range"
-                   className="slider"
-                   min="2"
-                   max="10"
-                   name={optionsSankey.numberNodes}
-                   value={sankey.numberNodes}
-                   onChange={this.onSankeyInputChange}/>
+            <label>
+              Number of nodes: <span>{sankey.numberNodes}</span>
+            </label>
+            <input
+              type="range"
+              className="slider"
+              min="2"
+              max="10"
+              name={optionsSankey.numberNodes}
+              value={sankey.numberNodes}
+              onChange={this.onSankeyInputChange}
+            />
           </div>
           <div className="form-group config-option">
-            <label>Number of levels: <span>{sankey.numberLevels}</span></label>
-            <input type="range"
-                   className="slider"
-                   min="2"
-                   max="5"
-                   name={optionsSankey.numberLevels}
-                   value={sankey.numberLevels}
-                   onChange={this.onSankeyInputChange}/>
+            <label>
+              Number of levels: <span>{sankey.numberLevels}</span>
+            </label>
+            <input
+              type="range"
+              className="slider"
+              min="2"
+              max="5"
+              name={optionsSankey.numberLevels}
+              value={sankey.numberLevels}
+              onChange={this.onSankeyInputChange}
+            />
           </div>
           <div className="form-group config-option">
-            <label>Density: <span>{sankey.density}%</span></label>
-            <input type="range"
-                   className="slider"
-                   min="10"
-                   max="100"
-                   name={optionsSankey.density}
-                   value={sankey.density}
-                   onChange={this.onSankeyInputChange}/>
+            <label>
+              Density: <span>{sankey.density}%</span>
+            </label>
+            <input
+              type="range"
+              className="slider"
+              min="10"
+              max="100"
+              name={optionsSankey.density}
+              value={sankey.density}
+              onChange={this.onSankeyInputChange}
+            />
           </div>
           <div className="form-group config-option">
-            <label>Link opacity: <span>{sankey.linkOpacity}</span></label>
-            <input type="range"
-                   className="slider"
-                   min="0"
-                   max="1"
-                   step="0.01"
-                   name={optionsSankey.linkOpacity}
-                   value={sankey.linkOpacity}
-                   onChange={this.onSankeyInputChange}/>
+            <label>
+              Link opacity: <span>{sankey.linkOpacity}</span>
+            </label>
+            <input
+              type="range"
+              className="slider"
+              min="0"
+              max="1"
+              step="0.01"
+              name={optionsSankey.linkOpacity}
+              value={sankey.linkOpacity}
+              onChange={this.onSankeyInputChange}
+            />
           </div>
           <div className="form-group config-option">
-            <label>Curve factor: <span>{sankey.curveFactor}</span></label>
-            <input type="range"
-                   className="slider"
-                   min="0"
-                   max="1"
-                   step="0.01"
-                   name={optionsSankey.curveFactor}
-                   value={sankey.curveFactor}
-                   onChange={this.onSankeyInputChange}/>
+            <label>
+              Curve factor: <span>{sankey.curveFactor}</span>
+            </label>
+            <input
+              type="range"
+              className="slider"
+              min="0"
+              max="1"
+              step="0.01"
+              name={optionsSankey.curveFactor}
+              value={sankey.curveFactor}
+              onChange={this.onSankeyInputChange}
+            />
           </div>
         </div>
 
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateSankeyConfiguration}>
+          onClick={this.updateSankeyConfiguration}
+        >
           Apply
         </button>
       </div>
@@ -1170,13 +1361,12 @@ export default class Other extends Component {
     const { sankey } = this.state.configurations;
     return (
       <div className="other-clock-container">
-        <div className="checkboxes other-clock">
-          CLOCK CONFIG
-        </div>
+        <div className="checkboxes other-clock">CLOCK CONFIG</div>
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateSankeyConfiguration}>
+          onClick={this.updateSankeyConfiguration}
+        >
           Apply
         </button>
       </div>
@@ -1184,7 +1374,7 @@ export default class Other extends Component {
   }
 
   renderConfigurationsArea() {
-    const { currentMode } = this.state;
+    const { currentMode } = this.state;
     switch (currentMode) {
       case modes.heatmap: {
         return this.renderHeatmapConfiguration();
@@ -1220,25 +1410,25 @@ export default class Other extends Component {
   }
 
   render() {
-    console.log("other state: ", this.state);
+    console.log('other state: ', this.state);
     return (
       <div className="other-page" key={`other-chart-${this.state.currentMode}`}>
         <div className="row">
           <div className="col-sm-4">
             {this.renderOptionsDropdown()}
-            <div className="configuration-area">
-              {this.renderConfigurationsArea()}
-            </div>
+            <div className="configuration-area">{this.renderConfigurationsArea()}</div>
           </div>
 
           <div className="col-sm-8 chart-area">
-            <Chart container={'others-chart'}
-                   options={this.state.options}
-                   update={this.state.rerenderChart}
-                   function={this.state.options.function}/>
+            <Chart
+              container={'others-chart'}
+              options={this.state.options}
+              update={this.state.rerenderChart}
+              function={this.state.options.function}
+            />
           </div>
         </div>
       </div>
-    )
+    );
   }
 }

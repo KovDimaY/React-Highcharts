@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component } from 'react';
 
-import Chart from './chart-abstract'
-import Stock from './stock-abstract'
-import Tooltip from "../tooltip";
+import Chart from './chart-abstract';
+import Stock from './stock-abstract';
+import Tooltip from '../tooltip';
 
 import {
   pureRandom,
@@ -12,8 +11,7 @@ import {
   functions,
   interestingFactsTemperature,
   interestingFactsPopulation,
-  interestingFactsITGiants
-} from '../../constants/line/default-options-line'
+} from '../../constants/line/default-options-line';
 
 import {
   modes,
@@ -24,8 +22,8 @@ import {
   optionsStockSimulation,
   optionsPolynomials,
   optionsTrigonometric,
-  optionsInterestingFacts
-} from '../../constants/line/modes-options-line'
+  optionsInterestingFacts,
+} from '../../constants/line/modes-options-line';
 
 import {
   generateSeriesForPureRandom,
@@ -33,11 +31,10 @@ import {
   generateSeriesForStockSimulation,
   newPointToStockSimulation,
   generateSeriesForPolynomials,
-  generateSeriesForTrigonometric
-} from '../../constants/line/data-helpers-line'
+  generateSeriesForTrigonometric,
+} from '../../constants/line/data-helpers-line';
 
-import { limitNumericalInput } from '../../constants/shared/helpers'
-
+import { limitNumericalInput } from '../../constants/shared/helpers';
 
 export default class Line extends Component {
   constructor(props) {
@@ -46,7 +43,9 @@ export default class Line extends Component {
 
     this.dropdownClickHandler = this.dropdownClickHandler.bind(this);
     this.updatePureRandomConfiguration = this.updatePureRandomConfiguration.bind(this);
-    this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(this);
+    this.updateConfigurableRandomConfiguration = this.updateConfigurableRandomConfiguration.bind(
+      this
+    );
     this.updateStockSimulationConfiguration = this.updateStockSimulationConfiguration.bind(this);
     this.updatePolynomialsConfiguration = this.updatePolynomialsConfiguration.bind(this);
     this.updateTrigonometricConfiguration = this.updateTrigonometricConfiguration.bind(this);
@@ -109,15 +108,15 @@ export default class Line extends Component {
   initInterestingFactsMode() {
     let options = interestingFactsTemperature;
     this.setState({ options, rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   updatePureRandomConfiguration() {
     const { pureRandom } = this.state.configurations;
     const { options } = this.state;
     options.chart.zoomType = pureRandom.zoom ? 'xy' : null;
-    options.chart.type = pureRandom.area ? 'area'  : 'line';
+    options.chart.type = pureRandom.area ? 'area' : 'line';
     options.title.text = pureRandom.title ? 'Randomly generated data' : null;
     options.subtitle.text = pureRandom.title ? 'Randomly generated data' : null;
     options.legend.enabled = pureRandom.legend;
@@ -130,8 +129,8 @@ export default class Line extends Component {
     options.plotOptions.series.marker.enabled = pureRandom.markers;
 
     this.setState({ options, rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   updateConfigurableRandomConfiguration() {
@@ -142,18 +141,14 @@ export default class Line extends Component {
     options.series = series;
 
     this.setState({ options, rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   updateStockSimulationConfiguration(event) {
     const { configurations, options } = this.state;
-    const {
-      name,
-      isRunning,
-      price
-    } = configurations.stockSimulation;
-    options.title.text = name ? "Stock price of " + name : null;
+    const { name, isRunning, price } = configurations.stockSimulation;
+    options.title.text = name ? 'Stock price of ' + name : null;
     if (event) {
       if (isRunning) {
         options.navigator.enabled = true;
@@ -180,11 +175,7 @@ export default class Line extends Component {
 
   addPointToStockSimulation() {
     const { configurations, options } = this.state;
-    const {
-      isRunning,
-      oscillation,
-      frequency
-    } = configurations.stockSimulation;
+    const { isRunning, oscillation, frequency } = configurations.stockSimulation;
     if (isRunning) {
       options.series = newPointToStockSimulation(options.series, oscillation);
       setTimeout(() => this.addPointToStockSimulation(), frequency * 1000);
@@ -203,8 +194,8 @@ export default class Line extends Component {
     options.series = series;
 
     this.setState({ options, rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   updateTrigonometricConfiguration() {
@@ -216,8 +207,8 @@ export default class Line extends Component {
     options.series = series;
 
     this.setState({ options, rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   dropdownClickHandler(mode) {
@@ -249,7 +240,7 @@ export default class Line extends Component {
         break;
       }
       default: {
-        console.log("This is impossible to achieve");
+        console.log('This is impossible to achieve');
       }
     }
     this.setState({ currentMode: mode, configurations });
@@ -267,28 +258,19 @@ export default class Line extends Component {
           <li className="dropdown-menu__item">
             <a onClick={() => this.dropdownClickHandler(modes.pureRandom)}>
               {modes.pureRandom}
-              <Tooltip
-                text={tooltips.pureRandom}
-                addClass="dropdown-menu__help"
-              />
+              <Tooltip text={tooltips.pureRandom} addClass="dropdown-menu__help" />
             </a>
           </li>
           <li className="dropdown-menu__item">
             <a onClick={() => this.dropdownClickHandler(modes.configurableRandom)}>
               {modes.configurableRandom}
-              <Tooltip
-                text={tooltips.configurableRandom}
-                addClass="dropdown-menu__help"
-              />
+              <Tooltip text={tooltips.configurableRandom} addClass="dropdown-menu__help" />
             </a>
           </li>
           <li className="dropdown-menu__item">
             <a onClick={() => this.dropdownClickHandler(modes.stockSimulation)}>
               {modes.stockSimulation}
-              <Tooltip
-                text={tooltips.stockSimulation}
-                addClass="dropdown-menu__help"
-              />
+              <Tooltip text={tooltips.stockSimulation} addClass="dropdown-menu__help" />
             </a>
           </li>
           <li className="divider"></li>
@@ -296,19 +278,13 @@ export default class Line extends Component {
           <li className="dropdown-menu__item">
             <a onClick={() => this.dropdownClickHandler(modes.polynomials)}>
               {modes.polynomials}
-              <Tooltip
-                text={tooltips.polynomials}
-                addClass="dropdown-menu__help"
-              />
+              <Tooltip text={tooltips.polynomials} addClass="dropdown-menu__help" />
             </a>
           </li>
           <li className="dropdown-menu__item">
             <a onClick={() => this.dropdownClickHandler(modes.trigonometric)}>
               {modes.trigonometric}
-              <Tooltip
-                text={tooltips.trigonometric}
-                addClass="dropdown-menu__help"
-              />
+              <Tooltip text={tooltips.trigonometric} addClass="dropdown-menu__help" />
             </a>
           </li>
           <li className="divider"></li>
@@ -316,15 +292,12 @@ export default class Line extends Component {
           <li className="dropdown-menu__item">
             <a onClick={() => this.dropdownClickHandler(modes.interestingFacts)}>
               {modes.interestingFacts}
-              <Tooltip
-                text={tooltips.interestingFacts}
-                addClass="dropdown-menu__help"
-              />
+              <Tooltip text={tooltips.interestingFacts} addClass="dropdown-menu__help" />
             </a>
           </li>
         </ul>
       </div>
-    )
+    );
   }
 
   onPureRandomCheckBoxChange(event) {
@@ -334,12 +307,12 @@ export default class Line extends Component {
     } else {
       configurations.pureRandom[event.target.value] = true;
     }
-    this.setState({ configurations })
+    this.setState({ configurations });
   }
 
   onConfigurableRandomInputChange(event) {
     const { configurations } = this.state;
-    if (event.target.dataset.type === "series") {
+    if (event.target.dataset.type === 'series') {
       limitNumericalInput(
         configurations.configurableRandom,
         event.target.name,
@@ -348,7 +321,7 @@ export default class Line extends Component {
         20,
         true
       );
-    } else if (event.target.dataset.type === "points") {
+    } else if (event.target.dataset.type === 'points') {
       limitNumericalInput(
         configurations.configurableRandom,
         event.target.name,
@@ -357,7 +330,7 @@ export default class Line extends Component {
         1000,
         true
       );
-    } else if (event.target.dataset.type === "min") {
+    } else if (event.target.dataset.type === 'min') {
       limitNumericalInput(
         configurations.configurableRandom,
         event.target.name,
@@ -366,7 +339,7 @@ export default class Line extends Component {
         configurations.configurableRandom.max,
         false
       );
-    } else if (event.target.dataset.type === "max") {
+    } else if (event.target.dataset.type === 'max') {
       limitNumericalInput(
         configurations.configurableRandom,
         event.target.name,
@@ -383,7 +356,7 @@ export default class Line extends Component {
 
   onStockSimulationInputChange(event) {
     const { configurations } = this.state;
-    if (event.target.type === "number") {
+    if (event.target.type === 'number') {
       limitNumericalInput(
         configurations.stockSimulation,
         event.target.name,
@@ -400,7 +373,7 @@ export default class Line extends Component {
 
   onPolynomialsInputChange(event) {
     const { configurations } = this.state;
-    if (event.target.dataset.type === "integer") {
+    if (event.target.dataset.type === 'integer') {
       limitNumericalInput(
         configurations.polynomials,
         event.target.name,
@@ -409,7 +382,7 @@ export default class Line extends Component {
         1000,
         true
       );
-    } else if (event.target.dataset.type === "min") {
+    } else if (event.target.dataset.type === 'min') {
       limitNumericalInput(
         configurations.polynomials,
         event.target.name,
@@ -418,7 +391,7 @@ export default class Line extends Component {
         configurations.polynomials.max,
         false
       );
-    } else if (event.target.dataset.type === "max") {
+    } else if (event.target.dataset.type === 'max') {
       limitNumericalInput(
         configurations.polynomials,
         event.target.name,
@@ -435,7 +408,7 @@ export default class Line extends Component {
 
   onTrigonometricInputChange(event) {
     const { configurations } = this.state;
-    if (event.target.dataset.type === "integer") {
+    if (event.target.dataset.type === 'integer') {
       limitNumericalInput(
         configurations.trigonometric,
         event.target.name,
@@ -444,7 +417,7 @@ export default class Line extends Component {
         1000,
         true
       );
-    } else if (event.target.dataset.type === "min") {
+    } else if (event.target.dataset.type === 'min') {
       limitNumericalInput(
         configurations.trigonometric,
         event.target.name,
@@ -453,7 +426,7 @@ export default class Line extends Component {
         configurations.trigonometric.max,
         false
       );
-    } else if (event.target.dataset.type === "max") {
+    } else if (event.target.dataset.type === 'max') {
       limitNumericalInput(
         configurations.trigonometric,
         event.target.name,
@@ -473,8 +446,8 @@ export default class Line extends Component {
     let options = configurations.interestingFacts[event.target.name];
     configurations.interestingFacts.current = event.target.name;
     this.setState({ configurations, options, rerenderChart: true }, () => {
-      this.setState({ rerenderChart: false })
-    })
+      this.setState({ rerenderChart: false });
+    });
   }
 
   renderPureRandomModeConfiguration() {
@@ -482,68 +455,114 @@ export default class Line extends Component {
     return (
       <div className="pure-random">
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom.title}
-                        checked={pureRandom.title}
-                        onChange={this.onPureRandomCheckBoxChange}/>Show Chart Title</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom.title}
+              checked={pureRandom.title}
+              onChange={this.onPureRandomCheckBoxChange}
+            />
+            Show Chart Title
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom.yAxisTitle}
-                        checked={pureRandom.yAxisTitle}
-                        onChange={this.onPureRandomCheckBoxChange}/>Show Y-Axis Title</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom.yAxisTitle}
+              checked={pureRandom.yAxisTitle}
+              onChange={this.onPureRandomCheckBoxChange}
+            />
+            Show Y-Axis Title
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom.markers}
-                        checked={pureRandom.markers}
-                        onChange={this.onPureRandomCheckBoxChange}/>Show Point Markers</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom.markers}
+              checked={pureRandom.markers}
+              onChange={this.onPureRandomCheckBoxChange}
+            />
+            Show Point Markers
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom.dataLabels}
-                        checked={pureRandom.dataLabels}
-                        onChange={this.onPureRandomCheckBoxChange}/>Show Data Labels</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom.dataLabels}
+              checked={pureRandom.dataLabels}
+              onChange={this.onPureRandomCheckBoxChange}
+            />
+            Show Data Labels
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom.legend}
-                        checked={pureRandom.legend}
-                        onChange={this.onPureRandomCheckBoxChange}/>Show Legend</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom.legend}
+              checked={pureRandom.legend}
+              onChange={this.onPureRandomCheckBoxChange}
+            />
+            Show Legend
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom.tooltip}
-                        checked={pureRandom.tooltip}
-                        onChange={this.onPureRandomCheckBoxChange}/>Enable Tooltip</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom.tooltip}
+              checked={pureRandom.tooltip}
+              onChange={this.onPureRandomCheckBoxChange}
+            />
+            Enable Tooltip
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom.zoom}
-                        checked={pureRandom.zoom}
-                        onChange={this.onPureRandomCheckBoxChange}/>Enable Zoom</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom.zoom}
+              checked={pureRandom.zoom}
+              onChange={this.onPureRandomCheckBoxChange}
+            />
+            Enable Zoom
+          </label>
         </div>
         <div className="checkbox">
-          <label><input type="checkbox"
-                        value={optionsPureRandom.animation}
-                        checked={pureRandom.animation}
-                        onChange={this.onPureRandomCheckBoxChange}/>Enable Animation</label>
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom.animation}
+              checked={pureRandom.animation}
+              onChange={this.onPureRandomCheckBoxChange}
+            />
+            Enable Animation
+          </label>
         </div>
-		<div className="checkbox">
-		  <label><input type="checkbox"
-						value={optionsPureRandom.area}
-						checked={pureRandom.area}
-						onChange={this.onPureRandomCheckBoxChange}/>Use Areas</label>
-		</div>
+        <div className="checkbox">
+          <label>
+            <input
+              type="checkbox"
+              value={optionsPureRandom.area}
+              checked={pureRandom.area}
+              onChange={this.onPureRandomCheckBoxChange}
+            />
+            Use Areas
+          </label>
+        </div>
 
         <button
           type="button"
           className="btn btn-success apply-button"
-          onClick={this.updatePureRandomConfiguration}>
+          onClick={this.updatePureRandomConfiguration}
+        >
           Apply
         </button>
       </div>
-    )
+    );
   }
 
   renderConfigurableRandomModeConfiguration() {
@@ -552,45 +571,54 @@ export default class Line extends Component {
       <div className="configurable-random">
         <div className="form-group config-option">
           <label>Number of series</label>
-            <input type="number"
-                   data-type="series"
-                   className="form-control"
-                   name={optionsConfigurableRandom.seriesNumber}
-                   value={configurableRandom.seriesNumber}
-                   onChange={this.onConfigurableRandomInputChange}/>
+          <input
+            type="number"
+            data-type="series"
+            className="form-control"
+            name={optionsConfigurableRandom.seriesNumber}
+            value={configurableRandom.seriesNumber}
+            onChange={this.onConfigurableRandomInputChange}
+          />
         </div>
         <div className="form-group config-option">
           <label>Max number of points</label>
-            <input type="number"
-                   data-type="points"
-                   className="form-control"
-                   name={optionsConfigurableRandom.pointsNumber}
-                   value={configurableRandom.pointsNumber}
-                   onChange={this.onConfigurableRandomInputChange}/>
+          <input
+            type="number"
+            data-type="points"
+            className="form-control"
+            name={optionsConfigurableRandom.pointsNumber}
+            value={configurableRandom.pointsNumber}
+            onChange={this.onConfigurableRandomInputChange}
+          />
         </div>
         <div className="form-group config-option">
           <label>Min value</label>
-            <input type="number"
-                   data-type="min"
-                   className="form-control"
-                   name={optionsConfigurableRandom.min}
-                   value={configurableRandom.min}
-                   onChange={this.onConfigurableRandomInputChange}/>
+          <input
+            type="number"
+            data-type="min"
+            className="form-control"
+            name={optionsConfigurableRandom.min}
+            value={configurableRandom.min}
+            onChange={this.onConfigurableRandomInputChange}
+          />
         </div>
         <div className="form-group config-option">
           <label>Max value</label>
-            <input type="number"
-                   data-type="max"
-                   className="form-control"
-                   name={optionsConfigurableRandom.max}
-                   value={configurableRandom.max}
-                   onChange={this.onConfigurableRandomInputChange}/>
+          <input
+            type="number"
+            data-type="max"
+            className="form-control"
+            name={optionsConfigurableRandom.max}
+            value={configurableRandom.max}
+            onChange={this.onConfigurableRandomInputChange}
+          />
         </div>
 
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateConfigurableRandomConfiguration}>
+          onClick={this.updateConfigurableRandomConfiguration}
+        >
           Apply
         </button>
       </div>
@@ -603,83 +631,93 @@ export default class Line extends Component {
       <div className="stock-simulation">
         <div className="form-group">
           <label>Name of the Stock</label>
-          <input type="text"
-                 className="form-control"
-                 name={optionsStockSimulation.name}
-                 value={stockSimulation.name}
-                 onChange={this.onStockSimulationInputChange}/>
+          <input
+            type="text"
+            className="form-control"
+            name={optionsStockSimulation.name}
+            value={stockSimulation.name}
+            onChange={this.onStockSimulationInputChange}
+          />
         </div>
         <div className="form-group">
-          <label data-toggle="tooltip"
-                 ref="priceTooltip"
-                 title="This is a starting price of the stock (in $).">
-                 � Start Price
+          <label
+            data-toggle="tooltip"
+            ref="priceTooltip"
+            title="This is a starting price of the stock (in $)."
+          >
+            � Start Price
           </label>
-          <input type="number"
-                 className="form-control"
-                 name={optionsStockSimulation.price}
-                 value={stockSimulation.price}
-                 onChange={this.onStockSimulationInputChange}/>
+          <input
+            type="number"
+            className="form-control"
+            name={optionsStockSimulation.price}
+            value={stockSimulation.price}
+            onChange={this.onStockSimulationInputChange}
+          />
         </div>
         <div className="row">
           <div className="col-xs-6">
             <div className="form-group config-option">
-              <label data-toggle="tooltip"
-                     ref="oscilationTooltip"
-                     title="This number means the maximum difference (in $) between the old price and the new one.">
-                     � Oscillation
+              <label
+                data-toggle="tooltip"
+                ref="oscilationTooltip"
+                title="This number means the maximum difference (in $) between the old price and the new one."
+              >
+                � Oscillation
               </label>
-              <input type="number"
-                     className="form-control"
-                     name={optionsStockSimulation.oscillation}
-                     value={stockSimulation.oscillation}
-                     onChange={this.onStockSimulationInputChange}/>
+              <input
+                type="number"
+                className="form-control"
+                name={optionsStockSimulation.oscillation}
+                value={stockSimulation.oscillation}
+                onChange={this.onStockSimulationInputChange}
+              />
             </div>
           </div>
           <div className="col-xs-6">
             <div className="form-group config-option">
-              <label data-toggle="tooltip"
-                     ref="frequencyTooltip"
-                     title="This number means how often (in seconds) the new price will appear.">
-                     � Frequency
+              <label
+                data-toggle="tooltip"
+                ref="frequencyTooltip"
+                title="This number means how often (in seconds) the new price will appear."
+              >
+                � Frequency
               </label>
-              <input type="number"
-                     className="form-control"
-                     name={optionsStockSimulation.frequency}
-                     value={stockSimulation.frequency}
-                     onChange={this.onStockSimulationInputChange}/>
+              <input
+                type="number"
+                className="form-control"
+                name={optionsStockSimulation.frequency}
+                value={stockSimulation.frequency}
+                onChange={this.onStockSimulationInputChange}
+              />
             </div>
           </div>
         </div>
-        {
-          stockSimulation.isRunning ?
-          (
-            <button
-              type="button"
-              className="btn btn-danger apply-button"
-              onClick={this.updateStockSimulationConfiguration}>
-              Stop Simulation
-            </button>
-          )
-          :
-          (
-            <button
-              type="button"
-              className="btn btn-success apply-button"
-              onClick={this.updateStockSimulationConfiguration}>
-              Start Simulation
-            </button>
-          )
-        }
+        {stockSimulation.isRunning ? (
+          <button
+            type="button"
+            className="btn btn-danger apply-button"
+            onClick={this.updateStockSimulationConfiguration}
+          >
+            Stop Simulation
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="btn btn-success apply-button"
+            onClick={this.updateStockSimulationConfiguration}
+          >
+            Start Simulation
+          </button>
+        )}
       </div>
-    )
+    );
   }
 
   renderPolynomialsModeConfiguration() {
     const { polynomials } = this.state.configurations;
     return (
       <div className="functions">
-
         {this.renderBasicConfigPolynomials(polynomials)}
 
         <h3>Functions:</h3>
@@ -691,11 +729,12 @@ export default class Line extends Component {
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updatePolynomialsConfiguration}>
+          onClick={this.updatePolynomialsConfiguration}
+        >
           Apply
         </button>
       </div>
-    )
+    );
   }
 
   renderBasicConfigPolynomials(polynomials) {
@@ -704,34 +743,40 @@ export default class Line extends Component {
         <div className="col-md-4">
           <div className="form-group config-option">
             <label>Min X</label>
-              <input type="number"
-                     data-type="min"
-                     className="form-control"
-                     name={optionsPolynomials.min}
-                     value={polynomials.min}
-                     onChange={this.onPolynomialsInputChange}/>
+            <input
+              type="number"
+              data-type="min"
+              className="form-control"
+              name={optionsPolynomials.min}
+              value={polynomials.min}
+              onChange={this.onPolynomialsInputChange}
+            />
           </div>
         </div>
         <div className="col-md-4">
           <div className="form-group config-option">
             <label>Max X</label>
-              <input type="number"
-                     data-type="max"
-                     className="form-control"
-                     name={optionsPolynomials.max}
-                     value={polynomials.max}
-                     onChange={this.onPolynomialsInputChange}/>
+            <input
+              type="number"
+              data-type="max"
+              className="form-control"
+              name={optionsPolynomials.max}
+              value={polynomials.max}
+              onChange={this.onPolynomialsInputChange}
+            />
           </div>
         </div>
         <div className="col-md-4">
           <div className="form-group config-option">
             <label>Count X</label>
-              <input type="number"
-                     data-type="integer"
-                     className="form-control"
-                     name={optionsPolynomials.number}
-                     value={polynomials.number}
-                     onChange={this.onPolynomialsInputChange}/>
+            <input
+              type="number"
+              data-type="integer"
+              className="form-control"
+              name={optionsPolynomials.number}
+              value={polynomials.number}
+              onChange={this.onPolynomialsInputChange}
+            />
           </div>
         </div>
       </div>
@@ -742,22 +787,30 @@ export default class Line extends Component {
     return (
       <div className="function-config">
         <div>
-          <p><i>y</i> = <b>A</b> · <i>x</i> + <b>B</b></p>
+          <p>
+            <i>y</i> = <b>A</b> · <i>x</i> + <b>B</b>
+          </p>
         </div>
         <div>
           <span className="coefficient">
-            A = <input type="number"
-                       className="form-control modified"
-                       name={optionsPolynomials.linearA}
-                       value={polynomials.linearA}
-                       onChange={this.onPolynomialsInputChange}/>
+            A ={' '}
+            <input
+              type="number"
+              className="form-control modified"
+              name={optionsPolynomials.linearA}
+              value={polynomials.linearA}
+              onChange={this.onPolynomialsInputChange}
+            />
           </span>
           <span className="coefficient">
-            B = <input type="number"
-                       className="form-control modified"
-                       name={optionsPolynomials.linearB}
-                       value={polynomials.linearB}
-                       onChange={this.onPolynomialsInputChange}/>
+            B ={' '}
+            <input
+              type="number"
+              className="form-control modified"
+              name={optionsPolynomials.linearB}
+              value={polynomials.linearB}
+              onChange={this.onPolynomialsInputChange}
+            />
           </span>
         </div>
       </div>
@@ -767,28 +820,40 @@ export default class Line extends Component {
   renderQuadraticConfigPolynomials(polynomials) {
     return (
       <div className="function-config">
-        <p><i>y</i> = <b>A</b> · <i>x</i><sup>2</sup> + <b>B</b> · <i>x</i> + <b>C</b></p>
+        <p>
+          <i>y</i> = <b>A</b> · <i>x</i>
+          <sup>2</sup> + <b>B</b> · <i>x</i> + <b>C</b>
+        </p>
         <div>
           <span className="coefficient">
-            A = <input type="number"
-                       className="form-control modified"
-                       name={optionsPolynomials.quadraticA}
-                       value={polynomials.quadraticA}
-                       onChange={this.onPolynomialsInputChange}/>
+            A ={' '}
+            <input
+              type="number"
+              className="form-control modified"
+              name={optionsPolynomials.quadraticA}
+              value={polynomials.quadraticA}
+              onChange={this.onPolynomialsInputChange}
+            />
           </span>
           <span className="coefficient">
-            B = <input type="number"
-                       className="form-control modified"
-                       name={optionsPolynomials.quadraticB}
-                       value={polynomials.quadraticB}
-                       onChange={this.onPolynomialsInputChange}/>
+            B ={' '}
+            <input
+              type="number"
+              className="form-control modified"
+              name={optionsPolynomials.quadraticB}
+              value={polynomials.quadraticB}
+              onChange={this.onPolynomialsInputChange}
+            />
           </span>
           <span className="coefficient">
-            C = <input type="number"
-                       className="form-control modified"
-                       name={optionsPolynomials.quadraticC}
-                       value={polynomials.quadraticC}
-                       onChange={this.onPolynomialsInputChange}/>
+            C ={' '}
+            <input
+              type="number"
+              className="form-control modified"
+              name={optionsPolynomials.quadraticC}
+              value={polynomials.quadraticC}
+              onChange={this.onPolynomialsInputChange}
+            />
           </span>
         </div>
       </div>
@@ -798,37 +863,53 @@ export default class Line extends Component {
   renderCubicConfigPolynomials(polynomials) {
     return (
       <div className="function-config">
-        <p><i>y</i> = <b>A</b> · <i>x</i><sup>3</sup> + <b>B</b> · <i>x</i><sup>2</sup> + <b>C</b> · <i>x</i> + <b>D</b></p>
+        <p>
+          <i>y</i> = <b>A</b> · <i>x</i>
+          <sup>3</sup> + <b>B</b> · <i>x</i>
+          <sup>2</sup> + <b>C</b> · <i>x</i> + <b>D</b>
+        </p>
         <div>
           <span className="coefficient">
-            A = <input type="number"
-                       className="form-control modified"
-                       name={optionsPolynomials.cubicA}
-                       value={polynomials.cubicA}
-                       onChange={this.onPolynomialsInputChange}/>
+            A ={' '}
+            <input
+              type="number"
+              className="form-control modified"
+              name={optionsPolynomials.cubicA}
+              value={polynomials.cubicA}
+              onChange={this.onPolynomialsInputChange}
+            />
           </span>
           <span className="coefficient">
-            B = <input type="number"
-                       className="form-control modified"
-                       name={optionsPolynomials.cubicB}
-                       value={polynomials.cubicB}
-                       onChange={this.onPolynomialsInputChange}/>
+            B ={' '}
+            <input
+              type="number"
+              className="form-control modified"
+              name={optionsPolynomials.cubicB}
+              value={polynomials.cubicB}
+              onChange={this.onPolynomialsInputChange}
+            />
           </span>
         </div>
         <div>
           <span className="coefficient">
-            C = <input type="number"
-                       className="form-control modified"
-                       name={optionsPolynomials.cubicC}
-                       value={polynomials.cubicC}
-                       onChange={this.onPolynomialsInputChange}/>
+            C ={' '}
+            <input
+              type="number"
+              className="form-control modified"
+              name={optionsPolynomials.cubicC}
+              value={polynomials.cubicC}
+              onChange={this.onPolynomialsInputChange}
+            />
           </span>
           <span className="coefficient">
-            D = <input type="number"
-                       className="form-control modified"
-                       name={optionsPolynomials.cubicD}
-                       value={polynomials.cubicD}
-                       onChange={this.onPolynomialsInputChange}/>
+            D ={' '}
+            <input
+              type="number"
+              className="form-control modified"
+              name={optionsPolynomials.cubicD}
+              value={polynomials.cubicD}
+              onChange={this.onPolynomialsInputChange}
+            />
           </span>
         </div>
       </div>
@@ -839,36 +920,48 @@ export default class Line extends Component {
     const { trigonometric } = this.state.configurations;
     return (
       <div className="functions">
-
         {this.renderBasicConfigTrigonometric(trigonometric)}
 
         <h3>Functions:</h3>
 
-        {this.renderConfigTrigonometric("cos", optionsTrigonometric.cosA,
-                                               optionsTrigonometric.cosB,
-                                               trigonometric.cosA,
-                                               trigonometric.cosB)}
-        {this.renderConfigTrigonometric("sin", optionsTrigonometric.sinA,
-                                               optionsTrigonometric.sinB,
-                                               trigonometric.sinA,
-                                               trigonometric.sinB)}
-        {this.renderConfigTrigonometric("tg", optionsTrigonometric.tanA,
-                                              optionsTrigonometric.tanB,
-                                              trigonometric.tanA,
-                                              trigonometric.tanB)}
-        {this.renderConfigTrigonometric("ctg", optionsTrigonometric.ctanA,
-                                               optionsTrigonometric.ctanB,
-                                               trigonometric.ctanA,
-                                               trigonometric.ctanB)}
+        {this.renderConfigTrigonometric(
+          'cos',
+          optionsTrigonometric.cosA,
+          optionsTrigonometric.cosB,
+          trigonometric.cosA,
+          trigonometric.cosB
+        )}
+        {this.renderConfigTrigonometric(
+          'sin',
+          optionsTrigonometric.sinA,
+          optionsTrigonometric.sinB,
+          trigonometric.sinA,
+          trigonometric.sinB
+        )}
+        {this.renderConfigTrigonometric(
+          'tg',
+          optionsTrigonometric.tanA,
+          optionsTrigonometric.tanB,
+          trigonometric.tanA,
+          trigonometric.tanB
+        )}
+        {this.renderConfigTrigonometric(
+          'ctg',
+          optionsTrigonometric.ctanA,
+          optionsTrigonometric.ctanB,
+          trigonometric.ctanA,
+          trigonometric.ctanB
+        )}
 
         <button
           type="button"
           className="btn btn-success apply-button position-dynamic"
-          onClick={this.updateTrigonometricConfiguration}>
+          onClick={this.updateTrigonometricConfiguration}
+        >
           Apply
         </button>
       </div>
-    )
+    );
   }
 
   renderBasicConfigTrigonometric(trigonometric) {
@@ -877,34 +970,40 @@ export default class Line extends Component {
         <div className="col-md-4">
           <div className="form-group config-option">
             <label>Min X</label>
-              <input type="number"
-                     data-type="min"
-                     className="form-control"
-                     name={optionsTrigonometric.min}
-                     value={trigonometric.min}
-                     onChange={this.onTrigonometricInputChange}/>
+            <input
+              type="number"
+              data-type="min"
+              className="form-control"
+              name={optionsTrigonometric.min}
+              value={trigonometric.min}
+              onChange={this.onTrigonometricInputChange}
+            />
           </div>
         </div>
         <div className="col-md-4">
           <div className="form-group config-option">
             <label>Max X</label>
-              <input type="number"
-                     data-type="max"
-                     className="form-control"
-                     name={optionsTrigonometric.max}
-                     value={trigonometric.max}
-                     onChange={this.onTrigonometricInputChange}/>
+            <input
+              type="number"
+              data-type="max"
+              className="form-control"
+              name={optionsTrigonometric.max}
+              value={trigonometric.max}
+              onChange={this.onTrigonometricInputChange}
+            />
           </div>
         </div>
         <div className="col-md-4">
           <div className="form-group config-option">
             <label>Count X</label>
-              <input type="number"
-                     data-type="integer"
-                     className="form-control"
-                     name={optionsTrigonometric.number}
-                     value={trigonometric.number}
-                     onChange={this.onTrigonometricInputChange}/>
+            <input
+              type="number"
+              data-type="integer"
+              className="form-control"
+              name={optionsTrigonometric.number}
+              value={trigonometric.number}
+              onChange={this.onTrigonometricInputChange}
+            />
           </div>
         </div>
       </div>
@@ -915,22 +1014,30 @@ export default class Line extends Component {
     return (
       <div className="function-config">
         <div>
-          <p><i>y</i> = <b>A</b> · <i>{func}</i>(<b>B</b>·<i>x</i>)</p>
+          <p>
+            <i>y</i> = <b>A</b> · <i>{func}</i>(<b>B</b>·<i>x</i>)
+          </p>
         </div>
         <div>
           <span className="coefficient">
-            A = <input type="number"
-                       className="form-control modified"
-                       name={optionsA}
-                       value={coefA}
-                       onChange={this.onTrigonometricInputChange}/>
+            A ={' '}
+            <input
+              type="number"
+              className="form-control modified"
+              name={optionsA}
+              value={coefA}
+              onChange={this.onTrigonometricInputChange}
+            />
           </span>
           <span className="coefficient">
-            B = <input type="number"
-                       className="form-control modified"
-                       name={optionsB}
-                       value={coefB}
-                       onChange={this.onTrigonometricInputChange}/>
+            B ={' '}
+            <input
+              type="number"
+              className="form-control modified"
+              name={optionsB}
+              value={coefB}
+              onChange={this.onTrigonometricInputChange}
+            />
           </span>
         </div>
       </div>
@@ -942,33 +1049,44 @@ export default class Line extends Component {
     return (
       <div className="interesting-facts">
         <div className="radio">
-          <label><input type="radio"
-                        name={optionsInterestingFacts.temperature}
-                        checked={interestingFacts.current === optionsInterestingFacts.temperature}
-                        onChange={this.onInterestingFactsRadioChange}
-                        />Temperature</label>
+          <label>
+            <input
+              type="radio"
+              name={optionsInterestingFacts.temperature}
+              checked={interestingFacts.current === optionsInterestingFacts.temperature}
+              onChange={this.onInterestingFactsRadioChange}
+            />
+            Temperature
+          </label>
         </div>
         <div className="radio">
-          <label><input type="radio"
-                        name={optionsInterestingFacts.population}
-                        checked={interestingFacts.current === optionsInterestingFacts.population}
-                        onChange={this.onInterestingFactsRadioChange}
-                        />Population</label>
+          <label>
+            <input
+              type="radio"
+              name={optionsInterestingFacts.population}
+              checked={interestingFacts.current === optionsInterestingFacts.population}
+              onChange={this.onInterestingFactsRadioChange}
+            />
+            Population
+          </label>
         </div>
         <div className="radio">
-          <label><input type="radio"
-                        name={optionsInterestingFacts.itGiants}
-                        checked={interestingFacts.current === optionsInterestingFacts.itGiants}
-                        onChange={this.onInterestingFactsRadioChange}
-                        />IT Giants</label>
+          <label>
+            <input
+              type="radio"
+              name={optionsInterestingFacts.itGiants}
+              checked={interestingFacts.current === optionsInterestingFacts.itGiants}
+              onChange={this.onInterestingFactsRadioChange}
+            />
+            IT Giants
+          </label>
         </div>
-
       </div>
-    )
+    );
   }
 
   renderConfigurationsArea() {
-    const { currentMode } = this.state;
+    const { currentMode } = this.state;
     switch (currentMode) {
       case modes.pureRandom: {
         return this.renderPureRandomModeConfiguration();
@@ -994,35 +1112,32 @@ export default class Line extends Component {
     }
   }
 
-	render() {
-    console.log("line state: ", this.state);
-		return(
-			<div className="line-page" key={`line-chart-${this.state.currentMode}`}>
+  render() {
+    console.log('line state: ', this.state);
+    return (
+      <div className="line-page" key={`line-chart-${this.state.currentMode}`}>
         <div className="row">
           <div className="col-sm-4">
             {this.renderOptionsDropdown()}
-            <div className="configuration-area">
-              {this.renderConfigurationsArea()}
-            </div>
+            <div className="configuration-area">{this.renderConfigurationsArea()}</div>
           </div>
           <div className="col-sm-8 chart-area">
-            {
-              this.state.currentMode === modes.stockSimulation ?
-              (
-                <Stock container={'line-stock'}
-                       options={this.state.options}
-                       update={this.state.rerenderChart}/>
-              )
-              :
-              (
-                <Chart container={'line-chart'}
-                       options={this.state.options}
-                       update={this.state.rerenderChart}/>
-              )
-            }
+            {this.state.currentMode === modes.stockSimulation ? (
+              <Stock
+                container={'line-stock'}
+                options={this.state.options}
+                update={this.state.rerenderChart}
+              />
+            ) : (
+              <Chart
+                container={'line-chart'}
+                options={this.state.options}
+                update={this.state.rerenderChart}
+              />
+            )}
           </div>
         </div>
-			</div>
-		)
-	}
+      </div>
+    );
+  }
 }

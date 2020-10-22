@@ -16,7 +16,7 @@
   background-color: #f5f7f9;
   color: #777;
   border: 1px solid #d0d4dc;
-  transition: background-color .2s linear;
+  transition: background-color 0.2s linear;
 }
 
 .help__icon:hover {
@@ -34,7 +34,7 @@
   width: 250px;
   visibility: hidden;
   opacity: 0;
-  transition: all .2s linear;
+  transition: all 0.2s linear;
 }
 
 .help__text {
@@ -47,7 +47,7 @@
   font-size: 14px;
   text-align: left;
   white-space: normal;
-  transition: opacify .2s linear, visibility .2s linear;
+  transition: opacify 0.2s linear, visibility 0.2s linear;
 }
 
 .help__content:before {

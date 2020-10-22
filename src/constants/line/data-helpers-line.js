@@ -3,7 +3,7 @@ export function generateSeriesForPureRandom() {
   let result = [];
   for (let i = 0; i < numberOfSeries; i++) {
     let currentData = [];
-    const currentName = `Random Serie ${i + 1}`
+    const currentName = `Random Serie ${i + 1}`;
     const min = Math.random() * 1000;
     const max = Math.random() * 1000 + min;
     for (let j = 0; j < 12; j++) {
@@ -13,7 +13,7 @@ export function generateSeriesForPureRandom() {
     }
     result.push({
       name: currentName,
-      data: currentData
+      data: currentData,
     });
   }
 
@@ -21,12 +21,7 @@ export function generateSeriesForPureRandom() {
 }
 
 export function generateSeriesForConfigurableRandom(params) {
-  const {
-    seriesNumber,
-    pointsNumber,
-    min,
-    max
-  } = params;
+  const { seriesNumber, pointsNumber, min, max } = params;
   let result = [];
   for (let i = 0; i < seriesNumber; i++) {
     let currentData = [];
@@ -34,11 +29,11 @@ export function generateSeriesForConfigurableRandom(params) {
     for (let j = 0; j < pointsNumber; j++) {
       const randValue = Math.random() * (max - min) + min;
       const shortValue = Math.round(randValue * 1000) / 1000;
-      currentData.push([j+1, shortValue]);
+      currentData.push([j + 1, shortValue]);
     }
     result.push({
       name: currentName,
-      data: currentData
+      data: currentData,
     });
   }
 
@@ -47,15 +42,15 @@ export function generateSeriesForConfigurableRandom(params) {
 
 export function generateSeriesForStockSimulation(price) {
   const now = Date.now();
-  let result = [{
-      name: "Price",
-      data: [
-        [now, price]
-      ],
+  let result = [
+    {
+      name: 'Price',
+      data: [[now, price]],
       tooltip: {
-          valueDecimals: 2
-      }
-  }];
+        valueDecimals: 2,
+      },
+    },
+  ];
 
   return result;
 }
@@ -95,7 +90,7 @@ export function generateSeriesForPolynomials(params) {
   let linearData = [];
   let quadraticData = [];
   let cubicData = [];
-  const step = (params.max - params.min)/params.number;
+  const step = (params.max - params.min) / params.number;
 
   for (let i = 0; i < params.number + 1; i++) {
     let x = params.min + step * i;
@@ -117,36 +112,29 @@ export function generateSeriesForPolynomials(params) {
     cubicData.push([x, cubicY]);
   }
 
-  return [{
-    name: 'Linear',
-    data: linearData
-  },
-  {
-    name: 'Quadratic',
-    data: quadraticData
-  },
-  {
-    name: 'Cubic',
-    data: cubicData
-  }];
+  return [
+    {
+      name: 'Linear',
+      data: linearData,
+    },
+    {
+      name: 'Quadratic',
+      data: quadraticData,
+    },
+    {
+      name: 'Cubic',
+      data: cubicData,
+    },
+  ];
 }
 
 export function generateSeriesForTrigonometric(params) {
-  const {
-    cosA,
-    cosB,
-    sinA,
-    sinB,
-    tanA,
-    tanB,
-    ctanA,
-    ctanB
-  } = params;
+  const { cosA, cosB, sinA, sinB, tanA, tanB, ctanA, ctanB } = params;
   let cosData = [];
   let sinData = [];
   let tanData = [];
   let ctanData = [];
-  const step = (params.max - params.min)/params.number;
+  const step = (params.max - params.min) / params.number;
 
   for (let i = 0; i < params.number + 1; i++) {
     let x = params.min + step * i;
@@ -170,20 +158,22 @@ export function generateSeriesForTrigonometric(params) {
     tanData.push([x, tanY]);
     ctanData.push([x, ctanY]);
   }
-  return [{
-    name: 'Cos(x)',
-    data: cosData
-  },
-  {
-    name: 'Sin(x)',
-    data: sinData
-  },
-  {
-    name: 'Tg(x)',
-    data: tanData
-  },
-  {
-    name: 'Ctg(x)',
-    data: ctanData
-  }];
+  return [
+    {
+      name: 'Cos(x)',
+      data: cosData,
+    },
+    {
+      name: 'Sin(x)',
+      data: sinData,
+    },
+    {
+      name: 'Tg(x)',
+      data: tanData,
+    },
+    {
+      name: 'Ctg(x)',
+      data: ctanData,
+    },
+  ];
 }
