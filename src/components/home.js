@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 
+import BarChartImage from "../images/charts/bar-chart.png";
+import BubbleChartImage from "../images/charts/bubble-chart.png";
+import GaugeChartImage from "../images/charts/gauge-chart.png";
+import LineChartImage from "../images/charts/line-chart.png";
+import PieChartImage from "../images/charts/pie-chart.JPG";
+import ScatterChartImage from "../images/charts/scatter-plot.png";
+
 export default class Home extends Component {
   render() {
     return (
@@ -34,7 +41,7 @@ export default class Home extends Component {
         <div id="charts-info" className="row">
           <div className="col-sm-4">
             <h2>Line Chart</h2>
-            <img src={'images/charts/line-chart.png'} alt="Line Chart" />
+            <img src={LineChartImage} alt="Line Chart" />
             <p>
               A line chart or line graph is a type of chart which displays information as a series
               of data points called 'markers' connected by straight line segments. It is a basic
@@ -55,7 +62,7 @@ export default class Home extends Component {
           </div>
           <div className="col-sm-4">
             <h2>Bar Chart</h2>
-            <img src={'images/charts/bar-chart.png'} alt="Bar Chart" />
+            <img src={BarChartImage} alt="Bar Chart" />
             <p>
               A bar chart or bar graph is a chart or graph that presents grouped data with
               rectangular bars with lengths proportional to the values that they represent. The bars
@@ -76,7 +83,7 @@ export default class Home extends Component {
           </div>
           <div className="col-sm-4">
             <h2>Pie Chart</h2>
-            <img src={'images/charts/pie-chart.JPG'} alt="Pie Chart" />
+            <img src={PieChartImage} alt="Pie Chart" />
             <p>
               A pie chart (or a circle chart) is a circular statistical graphic which is divided
               into slices to illustrate numerical proportion. In a pie chart, the arc length of each
@@ -101,7 +108,7 @@ export default class Home extends Component {
         <div className="row">
           <div className="col-sm-4">
             <h2>Bubble Chart</h2>
-            <img src={'images/charts/bubble-chart.png'} alt="Bubble Chart" />
+            <img src={BubbleChartImage} alt="Bubble Chart" />
             <p className="text-danger">
               Notice that{' '}
               <a href="https://www.npmjs.com/package/highcharts-more">highcharts-more</a> module is
@@ -130,7 +137,7 @@ export default class Home extends Component {
           </div>
           <div className="col-sm-4">
             <h2>Scatter Plot</h2>
-            <img src={'images/charts/scatter-plot.png'} alt="Scatter Plot" />
+            <img src={ScatterChartImage} alt="Scatter Plot" />
             <p className="text-danger">
               Notice that <a href="https://www.npmjs.com/package/highcharts-3d">highcharts-3d</a>{' '}
               module is required for 3D version of this chart!
@@ -154,7 +161,7 @@ export default class Home extends Component {
           </div>
           <div className="col-sm-4">
             <h2>Gauge Chart</h2>
-            <img src={'images/charts/gauge-chart.png'} alt="Gauge Chart" />
+            <img src={GaugeChartImage} alt="Gauge Chart" />
             <p className="text-danger">
               Notice that{' '}
               <a href="https://www.npmjs.com/package/highcharts-more">highcharts-more</a> and

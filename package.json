@@ -1,54 +1,40 @@
 {
-  "name": "highcharts-test",
-  "version": "0.0.0",
+  "name": "highcharts-practice",
+  "version": "2.0.0",
   "private": true,
-  "main": "index.js",
-  "scripts": {
-    "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "webpack -p",
-    "start": "node server.js",
-    "lint": "pretty-quick --check",
-    "lint:all": "prettier --check src",
-    "format": "pretty-quick",
-    "format:all": "prettier --write src"
-  },
-  "engines": {
-    "node": "10.13.0"
-  },
   "dependencies": {
-    "babel-core": "6.21.0",
-    "babel-loader": "6.2.10",
-    "babel-preset-es2015": "6.18.0",
-    "babel-preset-react": "6.16.0",
-    "babel-preset-stage-1": "6.16.0",
-    "colors": "1.1.2",
-    "css-loader": "0.26.1",
-    "express": "4.14.0",
-    "file-loader": "0.9.0",
+    "@testing-library/jest-dom": "5.14.1",
+    "@testing-library/react": "11.2.7",
+    "@testing-library/user-event": "12.8.3",
     "highcharts": "6.1.4",
-    "jquery": "3.2.1",
-    "node-sass": "4.1.1",
-    "path": "0.12.7",
-    "prop-types": "15.6.0",
-    "react": "15.4.1",
+    "node-sass": "6.0.1",
+    "react": "17.0.2",
     "react-color": "2.13.8",
-    "react-dom": "15.4.1",
-    "react-router": "3.0.0",
+    "react-dom": "17.0.2",
+    "react-router": "3.2.0",
+    "react-scripts": "4.0.3",
     "react-tagsinput": "3.18.0",
-    "sass-loader": "4.1.0",
-    "style-loader": "0.13.1",
-    "url-loader": "0.5.7",
-    "webpack": "1.14.0"
+    "web-vitals": "1.1.2"
   },
   "devDependencies": {
-    "prettier": "2.1.2",
-    "pretty-quick": "3.0.2",
-    "husky": "4.3.0"
+    "prettier": "2.1.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

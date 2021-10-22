@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 //possible position of tooltip
 const TOP = 'top';
@@ -33,10 +32,3 @@ export default function Tooltip(props) {
     </div>
   );
 }
-
-Tooltip.propTypes = {
-  text: PropTypes.node.isRequired,
-  hoverElem: PropTypes.node,
-  addClass: PropTypes.string,
-  position: PropTypes.oneOf([TOP, RIGHT, BOTTOM, LEFT]),
-};

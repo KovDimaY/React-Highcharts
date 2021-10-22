@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Highstock from 'highcharts/highstock';
-import $ from 'jquery';
 
 export default class Stock extends Component {
   componentDidMount() {
