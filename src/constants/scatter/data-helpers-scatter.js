@@ -32,7 +32,6 @@ export function convertColorsToFlat(colors) {
 
 export function move(chart) {
   // Add mouse events for rotation
-  // eslint-disable-next-line no-undef
   $(chart.container).on('mousedown.hc touchstart.hc', function (eStart) {
     eStart = chart.pointer.normalize(eStart);
 
@@ -44,7 +43,6 @@ export function move(chart) {
       newBeta,
       sensitivity = 5; // lower is more sensitive
 
-    // eslint-disable-next-line no-undef
     $(document).on({
       'mousemove.hc touchdrag.hc': function (e) {
         // Run beta
@@ -58,7 +56,7 @@ export function move(chart) {
         chart.redraw(false);
       },
       'mouseup touchend': function () {
-        $(document).off('.hc'); // eslint-disable-line no-undef
+        $(document).off('.hc');
       },
     });
   });

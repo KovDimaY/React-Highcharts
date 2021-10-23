@@ -61,9 +61,9 @@ export default class Line extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    $(this.refs.priceTooltip).tooltip(); // eslint-disable-line no-undef
-    $(this.refs.oscilationTooltip).tooltip(); // eslint-disable-line no-undef
-    $(this.refs.frequencyTooltip).tooltip(); // eslint-disable-line no-undef
+    $(this.refs.priceTooltip).tooltip();
+    $(this.refs.oscilationTooltip).tooltip();
+    $(this.refs.frequencyTooltip).tooltip();
   }
 
   initPureRandomeMode() {

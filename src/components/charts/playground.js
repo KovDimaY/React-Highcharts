@@ -49,7 +49,7 @@ export default class Playground extends Component {
     var options = {
       mode: 'code',
     };
-    this.editor = new JSONEditor(container, options); // eslint-disable-line no-undef
+    this.editor = new JSONEditor(container, options);
     this.editor.set(this.state.options);
   }
 

@@ -1,0 +1,7 @@
+{
+  "extends": ["react-app", "react-app/jest"],
+  "globals": {
+    "$": true,
+    "JSONEditor": true
+  }
+}

@@ -3,12 +3,12 @@ import Highstock from 'highcharts/highstock';
 
 export default class Stock extends Component {
   componentDidMount() {
-    const copyOfOptions = $.extend(true, {}, this.props.options); // eslint-disable-line no-undef
+    const copyOfOptions = $.extend(true, {}, this.props.options);
     this.chart = new Highstock.StockChart(this.refs.stock, copyOfOptions);
   }
 
   componentWillUpdate(nextProps, nextState) {
-    const copyOfOptions = $.extend(true, {}, nextProps.options); // eslint-disable-line no-undef
+    const copyOfOptions = $.extend(true, {}, nextProps.options);
     this.chart = new Highstock.StockChart(this.refs.stock, copyOfOptions);
   }
 
