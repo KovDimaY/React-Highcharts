@@ -10,7 +10,6 @@ import {
   stockSimulation,
   functions,
   interestingFactsTemperature,
-  interestingFactsPopulation,
 } from '../../constants/line/default-options-line';
 
 import {
