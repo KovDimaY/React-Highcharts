@@ -83,7 +83,7 @@ export default class Line extends Component {
 
   initStockSimulationMode() {
     let options = stockSimulation;
-    const { name, price } = this.state.configurations.stockSimulation;
+    const { price } = this.state.configurations.stockSimulation;
     options.series = generateSeriesForStockSimulation(price);
     this.setState({ options }, () => {
       this.updateStockSimulationConfiguration();
@@ -255,44 +255,44 @@ export default class Line extends Component {
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
           <li className="dropdown-menu__item">
-            <a onClick={() => this.dropdownClickHandler(modes.pureRandom)}>
+            <span onClick={() => this.dropdownClickHandler(modes.pureRandom)}>
               {modes.pureRandom}
               <Tooltip text={tooltips.pureRandom} addClass="dropdown-menu__help" />
-            </a>
+            </span>
           </li>
           <li className="dropdown-menu__item">
-            <a onClick={() => this.dropdownClickHandler(modes.configurableRandom)}>
+            <span onClick={() => this.dropdownClickHandler(modes.configurableRandom)}>
               {modes.configurableRandom}
               <Tooltip text={tooltips.configurableRandom} addClass="dropdown-menu__help" />
-            </a>
+            </span>
           </li>
           <li className="dropdown-menu__item">
-            <a onClick={() => this.dropdownClickHandler(modes.stockSimulation)}>
+            <span onClick={() => this.dropdownClickHandler(modes.stockSimulation)}>
               {modes.stockSimulation}
               <Tooltip text={tooltips.stockSimulation} addClass="dropdown-menu__help" />
-            </a>
+            </span>
           </li>
           <li className="divider"></li>
           <li className="dropdown-header">Functions Visualization</li>
           <li className="dropdown-menu__item">
-            <a onClick={() => this.dropdownClickHandler(modes.polynomials)}>
+            <span onClick={() => this.dropdownClickHandler(modes.polynomials)}>
               {modes.polynomials}
               <Tooltip text={tooltips.polynomials} addClass="dropdown-menu__help" />
-            </a>
+            </span>
           </li>
           <li className="dropdown-menu__item">
-            <a onClick={() => this.dropdownClickHandler(modes.trigonometric)}>
+            <span onClick={() => this.dropdownClickHandler(modes.trigonometric)}>
               {modes.trigonometric}
               <Tooltip text={tooltips.trigonometric} addClass="dropdown-menu__help" />
-            </a>
+            </span>
           </li>
           <li className="divider"></li>
           <li className="dropdown-header">Real World Data</li>
           <li className="dropdown-menu__item">
-            <a onClick={() => this.dropdownClickHandler(modes.interestingFacts)}>
+            <span onClick={() => this.dropdownClickHandler(modes.interestingFacts)}>
               {modes.interestingFacts}
               <Tooltip text={tooltips.interestingFacts} addClass="dropdown-menu__help" />
-            </a>
+            </span>
           </li>
         </ul>
       </div>

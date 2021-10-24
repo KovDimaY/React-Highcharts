@@ -181,7 +181,6 @@ function updateBasedOnConnections(points) {
 
 export function generateDataForSankey(configs) {
   const { numberNodes, numberLevels, density } = configs;
-  let count = 1;
   let result = [];
   let previousNodes = [];
   for (let node = 0; node < numberNodes; node += 1) {

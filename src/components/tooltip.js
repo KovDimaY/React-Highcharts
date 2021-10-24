@@ -1,10 +1,10 @@
 import React from 'react';
 
 //possible position of tooltip
-const TOP = 'top';
-const RIGHT = 'right';
-const BOTTOM = 'bottom';
-const LEFT = 'left';
+export const TOP = 'top';
+export const RIGHT = 'right';
+export const BOTTOM = 'bottom';
+export const LEFT = 'left';
 
 export default function Tooltip(props) {
   const {

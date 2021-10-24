@@ -121,9 +121,6 @@ export const configurableRandom = {
 };
 
 export const stockSimulation = {
-  rangeSelector: {
-    selected: 1,
-  },
   title: {
     text: 'Simulation',
   },
@@ -131,6 +128,7 @@ export const stockSimulation = {
     enabled: true,
   },
   rangeSelector: {
+    selected: 1,
     enabled: true,
     buttons: [
       {

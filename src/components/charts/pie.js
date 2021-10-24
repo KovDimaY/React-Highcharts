@@ -352,44 +352,44 @@ export default class Pie extends Component {
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
           <li className="dropdown-menu__item">
-            <a onClick={() => this.dropdownClickHandler(modes.pureRandom)}>
+            <span onClick={() => this.dropdownClickHandler(modes.pureRandom)}>
               {modes.pureRandom}
               <Tooltip text={tooltips.pureRandom} addClass="dropdown-menu__help" />
-            </a>
+            </span>
           </li>
           <li className="dropdown-menu__item">
-            <a onClick={() => this.dropdownClickHandler(modes.configurableRandom)}>
+            <span onClick={() => this.dropdownClickHandler(modes.configurableRandom)}>
               {modes.configurableRandom}
               <Tooltip text={tooltips.configurableRandom} addClass="dropdown-menu__help" />
-            </a>
+            </span>
           </li>
           <li className="dropdown-menu__item">
-            <a onClick={() => this.dropdownClickHandler(modes.clusteringSimulation)}>
+            <span onClick={() => this.dropdownClickHandler(modes.clusteringSimulation)}>
               {modes.clusteringSimulation}
               <Tooltip text={tooltips.clusteringSimulation} addClass="dropdown-menu__help" />
-            </a>
+            </span>
           </li>
           <li className="divider"></li>
           <li className="dropdown-header">Analysis Section</li>
           <li className="dropdown-menu__item">
-            <a onClick={() => this.dropdownClickHandler(modes.primeFactorization)}>
+            <span onClick={() => this.dropdownClickHandler(modes.primeFactorization)}>
               {modes.primeFactorization}
               <Tooltip text={tooltips.primeFactorization} addClass="dropdown-menu__help" />
-            </a>
+            </span>
           </li>
           <li className="dropdown-menu__item">
-            <a onClick={() => this.dropdownClickHandler(modes.irrationalAnalysis)}>
+            <span onClick={() => this.dropdownClickHandler(modes.irrationalAnalysis)}>
               {modes.irrationalAnalysis}
               <Tooltip text={tooltips.irrationalAnalysis} addClass="dropdown-menu__help" />
-            </a>
+            </span>
           </li>
           <li className="divider"></li>
           <li className="dropdown-header">Real World Data</li>
           <li className="dropdown-menu__item">
-            <a onClick={() => this.dropdownClickHandler(modes.interestingFacts)}>
+            <span onClick={() => this.dropdownClickHandler(modes.interestingFacts)}>
               {modes.interestingFacts}
               <Tooltip text={tooltips.interestingFacts} addClass="dropdown-menu__help" />
-            </a>
+            </span>
           </li>
         </ul>
       </div>
