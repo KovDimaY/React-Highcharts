@@ -57,7 +57,7 @@ export const configurableRandom = {
   },
   tooltip: {
     enabled: true,
-    pointFormat: 'Value: <b>{point.y:.1f}</b><br/>' + 'Percent: <b>{point.percentage:.1f}%</b>',
+    pointFormat: 'Value: <b>{point.y:.1f}</b><br/>Percent: <b>{point.percentage:.1f}%</b>',
   },
   legend: {
     enabled: true,
@@ -93,7 +93,7 @@ export const clusteringSimulation = {
   },
   tooltip: {
     enabled: true,
-    pointFormat: 'Count: <b>{point.y}</b><br/>' + 'Percent: <b>{point.percentage:.1f}%</b>',
+    pointFormat: 'Count: <b>{point.y}</b><br/>Percent: <b>{point.percentage:.1f}%</b>',
   },
   legend: {
     enabled: true,
@@ -148,7 +148,7 @@ export const primeFactorization = {
   },
   tooltip: {
     enabled: true,
-    pointFormat: 'Count: <b>{point.y}</b><br/>' + 'Percent: <b>{point.percentage:.1f}%</b>',
+    pointFormat: 'Count: <b>{point.y}</b><br/>Percent: <b>{point.percentage:.1f}%</b>',
   },
   legend: {
     enabled: true,
@@ -184,7 +184,7 @@ export const irrationalAnalysis = {
   },
   tooltip: {
     enabled: true,
-    pointFormat: 'Count: <b>{point.y}</b><br/>' + 'Percent: <b>{point.percentage:.1f}%</b>',
+    pointFormat: 'Count: <b>{point.y}</b><br/>Percent: <b>{point.percentage:.1f}%</b>',
   },
   legend: {
     enabled: true,

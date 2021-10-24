@@ -600,31 +600,31 @@ export default class Other extends Component {
         <ul className="dropdown-menu">
           <li className="dropdown-header">Other Charts</li>
           <li>
-            <a onClick={this.dropdownClickHandler}>{modes.heatmap}</a>
+            <span onClick={this.dropdownClickHandler}>{modes.heatmap}</span>
           </li>
           <li>
-            <a onClick={this.dropdownClickHandler}>{modes.tilemap}</a>
+            <span onClick={this.dropdownClickHandler}>{modes.tilemap}</span>
           </li>
           <li>
-            <a onClick={this.dropdownClickHandler}>{modes.polar}</a>
+            <span onClick={this.dropdownClickHandler}>{modes.polar}</span>
           </li>
           <li>
-            <a onClick={this.dropdownClickHandler}>{modes.boxplot}</a>
+            <span onClick={this.dropdownClickHandler}>{modes.boxplot}</span>
           </li>
           <li>
-            <a onClick={this.dropdownClickHandler}>{modes.gauge}</a>
+            <span onClick={this.dropdownClickHandler}>{modes.gauge}</span>
           </li>
           <li>
-            <a onClick={this.dropdownClickHandler}>{modes.pyramid}</a>
+            <span onClick={this.dropdownClickHandler}>{modes.pyramid}</span>
           </li>
           <li>
-            <a onClick={this.dropdownClickHandler}>{modes.wordcloud}</a>
+            <span onClick={this.dropdownClickHandler}>{modes.wordcloud}</span>
           </li>
           <li>
-            <a onClick={this.dropdownClickHandler}>{modes.sankey}</a>
+            <span onClick={this.dropdownClickHandler}>{modes.sankey}</span>
           </li>
           <li>
-            <a onClick={this.dropdownClickHandler}>{modes.clock}</a>
+            <span onClick={this.dropdownClickHandler}>{modes.clock}</span>
           </li>
         </ul>
       </div>
@@ -1358,7 +1358,6 @@ export default class Other extends Component {
   }
 
   renderClockConfiguration() {
-    const { sankey } = this.state.configurations;
     return (
       <div className="other-clock-container">
         <div className="checkboxes other-clock">CLOCK CONFIG</div>

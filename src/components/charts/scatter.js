@@ -184,7 +184,8 @@ export default class Scattering extends Component {
         options = configurableRandom3D;
         convertColorsTo3D(defaultColors);
         break;
-      case 'Bubble':
+      default:
+        // only 'Bubble' type is possible in this case
         options = configurableRandomBubble;
         convertColorsToBubbles(defaultColors);
         break;
@@ -199,7 +200,7 @@ export default class Scattering extends Component {
 
   updateShootingSimulationConfiguration() {
     const { shootingSimulation } = this.state.configurations;
-    const { minX, maxX, minY, maxY, bins } = shootingSimulation;
+    const { minX, maxX, minY, maxY } = shootingSimulation;
     const { options } = this.state;
 
     shootingSimulation.disabled = false;
@@ -397,21 +398,21 @@ export default class Scattering extends Component {
         <ul className="dropdown-menu">
           <li className="dropdown-header">Random Data</li>
           <li>
-            <a onClick={this.dropdownClickHandler}>{modes.pureRandom2D}</a>
+            <span onClick={this.dropdownClickHandler}>{modes.pureRandom2D}</span>
           </li>
           <li>
-            <a onClick={this.dropdownClickHandler}>{modes.pureRandom3D}</a>
+            <span onClick={this.dropdownClickHandler}>{modes.pureRandom3D}</span>
           </li>
           <li>
-            <a onClick={this.dropdownClickHandler}>{modes.pureRandomBubble}</a>
+            <span onClick={this.dropdownClickHandler}>{modes.pureRandomBubble}</span>
           </li>
           <li>
-            <a onClick={this.dropdownClickHandler}>{modes.configurableRandom}</a>
+            <span onClick={this.dropdownClickHandler}>{modes.configurableRandom}</span>
           </li>
           <li className="divider"></li>
           <li className="dropdown-header">Process Visualization</li>
           <li>
-            <a onClick={this.dropdownClickHandler}>{modes.shootingSimulation}</a>
+            <span onClick={this.dropdownClickHandler}>{modes.shootingSimulation}</span>
           </li>
         </ul>
       </div>
