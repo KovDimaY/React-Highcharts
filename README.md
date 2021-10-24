@@ -1,49 +1,10 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
 # React-Highcharts
 
 This project was created to practice my knowledge of React.js and to integrate highcharts as react components in application with Express.js back-end. Also I tried to collect all my knowledge about Highcharts and how to work with them in one place, where it will be not only useful but also interesting to see results.
 
-You can try it here: https://react-highcharts-practice.herokuapp.com/
+You can try it here: https://kovdimay.github.io/react-highcharts
+
+After some point, when the code started to be too much outdated I decided to migrate the project to CRA architecture ([Create React App](https://github.com/facebook/create-react-app)).
 
 ### Content
 
@@ -52,6 +13,8 @@ There are several Highcharts converted from pure Javascript to React.js componen
 1. Line Chart
 2. Bar Chart
 3. Pie Chart
+4. Scattering Chart
+5. Other Unusual Charts
 
 Each chart has a page where the user can try different modes to play with representation. The modes have 3 global sections united by common behavior:
 
@@ -97,41 +60,39 @@ cd React-Highcharts
 npm install
 ```
 
-##### Compile React.js components:
+## Available Scripts
 
-```
-webpack -w
-```
+In the project directory, you can run:
 
-##### Run the application:
+#### `npm start`
 
-```
-npm run start
-```
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-##### Open in browser http://localhost:3000/
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-<br>
+#### `npm test`
 
-### Deployment to Heroku
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-Make sure you have Node.js and the Heroku CLI installed amd write the next commands:
+#### `npm run build`
 
-```
-$ git clone git@github.com:###-your app-###
-$ cd ###-your app-###
-$ npm install
-$ npm start
-```
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-After this step your app should be running locally, it means that everything is ok and the app is ready for deployment. So to deploy it to Heroku, write the next commands:
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-```
-$ heroku create
-$ git push heroku master
-$ heroku open
-```
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-Congratulations, your app is deployed! :D
+#### `npm run eject`
 
-For more details, visit https://devcenter.heroku.com/articles/getting-started-with-nodejs
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
