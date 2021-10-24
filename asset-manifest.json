@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/React-Highcharts/static/css/main.d3e37ff9.chunk.css",
-    "main.js": "/React-Highcharts/static/js/main.d951a143.chunk.js",
-    "main.js.map": "/React-Highcharts/static/js/main.d951a143.chunk.js.map",
+    "main.js": "/React-Highcharts/static/js/main.8298ff59.chunk.js",
+    "main.js.map": "/React-Highcharts/static/js/main.8298ff59.chunk.js.map",
     "runtime-main.js": "/React-Highcharts/static/js/runtime-main.ce43c318.js",
     "runtime-main.js.map": "/React-Highcharts/static/js/runtime-main.ce43c318.js.map",
     "static/js/2.da05724e.chunk.js": "/React-Highcharts/static/js/2.da05724e.chunk.js",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.ce43c318.js",
     "static/js/2.da05724e.chunk.js",
     "static/css/main.d3e37ff9.chunk.css",
-    "static/js/main.d951a143.chunk.js"
+    "static/js/main.8298ff59.chunk.js"
   ]
 }
