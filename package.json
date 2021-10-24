@@ -2,7 +2,7 @@
   "name": "highcharts-practice",
   "version": "2.0.0",
   "private": false,
-  "homepage": "https://kovdimay.github.io/react-highcharts",
+  "homepage": "https://kovdimay.github.io/React-Highcharts",
   "dependencies": {
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "11.2.7",

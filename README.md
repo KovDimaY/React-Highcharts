@@ -2,7 +2,7 @@
 
 This project was created to practice my knowledge of React.js and to integrate highcharts as react components in application with Express.js back-end. Also I tried to collect all my knowledge about Highcharts and how to work with them in one place, where it will be not only useful but also interesting to see results.
 
-You can try it here: https://kovdimay.github.io/react-highcharts
+You can try it here: [https://kovdimay.github.io/React-Highcharts](https://kovdimay.github.io/React-Highcharts)
 
 After some point, when the code started to be too much outdated I decided to migrate the project to CRA architecture ([Create React App](https://github.com/facebook/create-react-app)).
 
@@ -84,6 +84,11 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
+
+#### `npm run deploy`
+
+Builds the current code and deploys it to production.\
+Only maintainers are allowed to deploy code, please respect that
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
