@@ -5,7 +5,7 @@ import App from './components/app';
 import Bar from './components/charts/bar';
 import Home from './components/home';
 import Line from './components/charts/line';
-import NotFound from './components/notFound';
+// import NotFound from './components/notFound'; // TODO: fix router and use 404 instead of index
 import Other from './components/charts/other';
 import Pie from './components/charts/pie';
 import Playground from './components/charts/playground';
@@ -20,6 +20,7 @@ export default (
     <Route path="/scatter" component={Scattering} />
     <Route path="/other" component={Other} />
     <Route path="/playground" component={Playground} />
-    <Route path="*" component={NotFound} />
+    <Route path="*" component={Home} />
+    {/* <Route path="*" component={NotFound} /> */}
   </Route>
 );
